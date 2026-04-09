@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentazione - dennytieghi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .divider {
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            margin: 20px auto 30px;
+        }
+        
+        .bio {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 30px 0;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .skill-tag {
+            background: #f0f0f0;
+            color: #667eea;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .contact {
+            margin-top: 40px;
+        }
+        
+        .contact-link {
+            display: inline-block;
+            margin: 0 15px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .contact-link:hover {
+            color: #764ba2;
+        }
+        
+        .github-link {
+            margin-top: 30px;
+        }
+        
+        .github-link a {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+        
+        .github-link a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Denny Tieghi</h1>
+        <div class="subtitle">Sviluppatore Web & Progettista</div>
+        <div class="divider"></div>
+        
+        <div class="bio">
+            <p>Benvenuto nel mio portfolio digitale. Sono uno sviluppatore appassionato di tecnologie web moderne e soluzioni innovative.</p>
+        </div>
+        
+        <h2 style="color: #333; margin: 40px 0 20px; font-size: 1.5em;">Competenze</h2>
+        <div class="skills">
+            <div class="skill-tag">HTML5</div>
+            <div class="skill-tag">CSS3</div>
+            <div class="skill-tag">JavaScript</div>
+            <div class="skill-tag">Web Design</div>
+            <div class="skill-tag">Git & GitHub</div>
+            <div class="skill-tag">Responsive Design</div>
+        </div>
+        
+        <div class="contact">
+            <h2 style="color: #333; margin-bottom: 20px; font-size: 1.5em;">Contatti</h2>
+            <a href="mailto:denny.tieghi@gmail.com" class="contact-link">📧 Email</a>
+            <a href="https://github.com/dennytieghi" class="contact-link">🐙 GitHub</a>
+        </div>
+        
+        <div class="github-link">
+            <a href="https://github.com/dennytieghi/Progetti" target="_blank">Visualizza il Progetto su GitHub</a>
+        </div>
+    </div>
+</body>
+</html>
