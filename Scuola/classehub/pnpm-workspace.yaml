@@ -1,0 +1,4 @@
+# Impostazioni pnpm (v11+): autorizziamo solo sharp a eseguire script di build
+# (serve a Next.js per ottimizzare le immagini).
+allowBuilds:
+  sharp: true
