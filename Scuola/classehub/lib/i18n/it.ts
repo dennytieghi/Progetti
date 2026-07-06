@@ -241,6 +241,11 @@ export const it = {
     archiviaRichiesta: "Archivia",
     gestita: "Gestita",
     tueRichieste: "Le tue richieste inviate",
+    statoInviata: "Inviata",
+    statoGestita: "Pubblicata in bacheca",
+    statoArchiviata: "Letta e archiviata",
+    vediPost: "Vedi in bacheca",
+    richiesteGestite: "Richieste già gestite",
   },
 
   approvazioni: {
