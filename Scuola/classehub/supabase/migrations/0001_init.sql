@@ -4,7 +4,10 @@
 -- Ogni tabella ha RLS ATTIVA: nessuna tabella pubblica (CLAUDE.md §7).
 -- ============================================================
 
-create extension if not exists pgcrypto;
+-- Su Supabase pgcrypto è preinstallata nello schema `extensions`.
+-- Le chiamate qui sotto sono qualificate (extensions.digest, …) perché
+-- le funzioni con `set search_path = public` non vedono quello schema.
+create extension if not exists pgcrypto with schema extensions;
 
 -- ------------------------------------------------------------ CLASSES
 create table classes (
@@ -70,7 +73,7 @@ create table polls (
   closed_manually boolean default false,
   -- Salt per l'hash anonimo dei votanti (ADR-003). Mai esposto ai client:
   -- il voto passa dalla funzione cast_poll_vote qui sotto.
-  salt text not null default encode(gen_random_bytes(16), 'hex')
+  salt text not null default encode(extensions.gen_random_bytes(16), 'hex')
 );
 
 create table poll_options (
@@ -219,7 +222,7 @@ create policy poll_votes_select_voted on poll_votes
           exists (
             select 1 from poll_votes v2
             where v2.post_id = p.post_id
-              and v2.voter_hash = encode(digest(auth.uid()::text || ':' || p.salt, 'sha256'), 'hex')
+              and v2.voter_hash = encode(extensions.digest(auth.uid()::text || ':' || p.salt, 'sha256'), 'hex')
           )
           -- oppure il sondaggio è chiuso
           or p.closed_manually
@@ -277,7 +280,7 @@ begin
     return false;
   end if;
 
-  my_hash := encode(digest(auth.uid()::text || ':' || poll_row.salt, 'sha256'), 'hex');
+  my_hash := encode(extensions.digest(auth.uid()::text || ':' || poll_row.salt, 'sha256'), 'hex');
 
   -- Un solo voto a testa.
   if exists (select 1 from poll_votes where post_id = target_post and voter_hash = my_hash) then
