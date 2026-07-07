@@ -4,13 +4,15 @@ Ogni riga: esegui il passo e spunta se il risultato corrisponde.
 Ambiente: `corepack pnpm dev`, dati puliti (cancella `.data/` prima di iniziare).
 Usa due browser (normale + incognito) per i due ruoli.
 
-> **Esito verifica del 7 luglio 2026** (eseguita con browser automatizzato
-> su `localhost:3000`, dati puliti): tutti i passi spuntati `[x]` sono
-> verificati e passano. I passi lasciati `[ ]` restano da fare a mano
-> (stampa, upload foto, test con persona vera). Nota: il PoC non ha un
-> login per utenti già registrati, quindi il cambio di ruolo è stato
-> fatto generando nuovi magic link nello store locale — stesso percorso
-> di codice del callback reale.
+> **Esito verifica del 7 luglio 2026**: tutti i passi `[x]` passano
+> (verifica con browser automatizzato su `localhost:3000` con dati
+> puliti + test manuali di Denny per stampa, foto, filtri e archivio
+> richieste). Resta solo il §10 (test con una persona vera).
+> Il test manuale ha trovato un bug reale sull'upload foto, corretto
+> in `855fb8c`. Nota: il PoC non ha un login per utenti già registrati,
+> quindi il cambio di ruolo è stato fatto con `scripts/dev-login.js`,
+> che genera magic link nello store locale — stesso percorso di codice
+> del callback reale.
 
 ## 1. Onboarding rappresentante
 
@@ -22,8 +24,8 @@ Usa due browser (normale + incognito) per i due ruoli.
       senza 0/O/1/I/l) e codice di emergenza (12 caratteri).
 - [x] Ricaricando la pagina, il codice di emergenza NON compare più
       (avviso "mostrato una volta sola").
-- [ ] "Stampa questo foglio" apre l'anteprima di stampa senza header/nav.
-      *(da provare a mano: l'anteprima di stampa non si automatizza)*
+- [x] "Stampa questo foglio" apre l'anteprima di stampa senza header/nav.
+      *(verificato a mano da Denny, 7/7/2026)*
 
 ## 2. Onboarding genitore (browser incognito)
 
@@ -52,15 +54,19 @@ Usa due browser (normale + incognito) per i due ruoli.
       con testo WhatsApp e pulsante Copia (il testo contiene il link corto).
 - [x] Scadenza: data nel passato → errore; data futura → in bacheca compare
       in cima sotto "Prossime scadenze" con "Entro venerdì...".
-- [ ] Materiale: foto JPG < 5MB → visibile nel dettaglio; file > 5MB → errore.
-      *(da provare a mano: upload file)*
+- [x] Materiale: foto JPG < 5MB → visibile nel dettaglio; file > 5MB → errore
+      chiaro nel form, tipo sbagliato → errore chiaro, campo svuotato.
+      *(il test manuale del 7/7/2026 ha trovato un bug: qualsiasi invio
+      sopra 1 MB crashava con errore grezzo — corretto in `855fb8c` e
+      riverificato: 2 MB pubblica e la foto si vede, 6 MB dà il
+      messaggio gentile senza nemmeno partire)*
 - [x] Sondaggio: meno di 2 opzioni → errore ("Servono almeno 2 opzioni");
       con 3 opzioni + data → ok. Anche data mancante → errore chiaro.
 
 ## 5. Bacheca e dettaglio
 
 - [x] Scadenze future in alto, resto sotto in ordine di data.
-- [ ] Filtri per tipo funzionano. *(visibili, non cliccati — da provare a mano)*
+- [x] Filtri per tipo funzionano. *(verificato a mano da Denny, 7/7/2026)*
 - [x] "Metti in evidenza" → post in cima con etichetta; "Togli" lo rimuove.
 - [x] "Archivia" → modal "Sì, archivia / No, torna indietro" → sparisce dalla
       bacheca; il rappresentante lo ritrova con "Mostra archiviati"
@@ -84,7 +90,7 @@ Usa due browser (normale + incognito) per i due ruoli.
 - [x] (Rappresentante) Coda con nome autore e testo.
 - [x] "Trasforma in avviso" → form precompilato col testo → pubblicando,
       la richiesta risulta "Pubblicata in bacheca" per il genitore, con link.
-- [ ] "Archivia" → finisce tra le gestite. *(non provato)*
+- [x] "Archivia" → finisce tra le gestite. *(verificato a mano da Denny, 7/7/2026)*
 
 ## 8. Silenzia / Rimuovi
 
