@@ -1,0 +1,10 @@
+[
+  { "controllo": "Errore utile con codice classe sbagliato: frase completa + rimedio", "punti": 4, "esito": true, "prova": "'Il codice classe che hai scritto non esiste. Controlla che sia esatto o chiedilo al rappresentante.'" },
+  { "controllo": "Viewport 390px: nessuno scroll orizzontale su nessuna delle 8 schermate", "punti": 4, "esito": true, "prova": "scrollOrizzontale=false in tutte le misure" },
+  { "controllo": "Zoom testo 200% (viewport 195px): layout regge", "punti": 2, "esito": false, "prova": "La bacheca sviluppa scroll orizzontale: la voce di menu 'Scrivi al rappresentante' ha whitespace-nowrap (220px). /entra regge." },
+  { "controllo": "Label sempre visibili sopra gli input (mai solo placeholder)", "punti": 2, "esito": true, "prova": "Tutti i campi di /entra e dei form di pubblicazione hanno label associata; le opzioni sondaggio hanno l'etichetta di gruppo 'Opzioni di risposta'." },
+  { "controllo": "Bottoni principali con testo, mai icona sola", "punti": 2, "esito": true, "prova": "0 bottoni/link senza testo né aria-label sulle schermate misurate." },
+  { "controllo": "Un'unica azione primaria in evidenza per schermata", "punti": 2, "esito": true, "prova": "ctaEvidenti ≤ 1 su tutte le 8 schermate misurate." },
+  { "controllo": "Niente hamburger / feature nascoste", "punti": 2, "esito": true, "prova": "Menu con massimo 4 voci sempre visibili (Bacheca, Pubblica, Richieste, Impostazioni / lato genitore: Bacheca, Scrivi al rappresentante, Il tuo account)." },
+  { "controllo": "Focus visibile navigando con TAB", "punti": 2, "esito": true, "prova": "Nessuna regola CSS tocca 'outline' né ':focus-visible': l'anello di default del browser resta attivo. Nota: è il default, non un focus disegnato." }
+]

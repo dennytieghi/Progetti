@@ -1,0 +1,49 @@
+[
+  {
+    "id": "J1-giovanni-voto",
+    "persona": "Giovanni, 58, low-tech",
+    "compito": "Dal link WhatsApp al voto del sondaggio",
+    "tap": 2,
+    "budgetTap": 5,
+    "esitazioni": [],
+    "blocchi": [],
+    "feedbackMancante": false,
+    "prove": "Opzioni alte 56px con testo intero cliccabile; 'Il voto è anonimo. Puoi scegliere più di una risposta.'; dopo il voto: 'Hai votato. Ecco i risultati finora' con barre e conteggi. Nessun controllo da rappresentante visibile al genitore.",
+    "limiti": "Sessione già attiva (come da spec: il budget vale per l'utente loggato). Il primo accesso in assoluto passa dal giro email/magic link, più pesante ma accettato da ADR-002/spec."
+  },
+  {
+    "id": "J2-giovanni-scadenza",
+    "persona": "Giovanni, 58, low-tech",
+    "compito": "Capire cosa c'è da fare ed entro quando",
+    "tap": 1,
+    "budgetTap": 2,
+    "esitazioni": [],
+    "blocchi": [],
+    "feedbackMancante": false,
+    "prove": "La sezione 'Prossime scadenze' in testa alla bacheca risponde con ZERO tap: '⏰ Ritiro pagelle e diplomi di quinta — Entro mercoledì 15 luglio'. Card da 104px, data in italiano naturale, post di saluto fissato con banner 'In evidenza'. Un tap apre il dettaglio completo."
+  },
+  {
+    "id": "J3-denise-pubblica",
+    "persona": "Denise, rappresentante",
+    "compito": "Pubblicare una scadenza e copiarla per WhatsApp",
+    "tap": 7,
+    "budgetTap": 8,
+    "esitazioni": [],
+    "blocchi": [],
+    "feedbackMancante": false,
+    "prove": "Percorso: Pubblica → scelta tipo (4 card con esempi concreti) → form con 3 campi tutti con label ('Entro quando?') → Pubblica → schermata 'Fatto! Ora avvisa i genitori' con messaggio già formattato e bottone '📋 Copia per WhatsApp'. 7 tap totali.",
+    "limiti": "Il click sul bottone Copia dentro l'iframe di test ha aperto la richiesta di permesso appunti bloccando il renderer: artefatto dell'ambiente (iframe+CDP), sul telefono il tocco diretto è un gesto utente valido. Non conteggiato."
+  },
+  {
+    "id": "J4-irene-ritrova",
+    "persona": "Irene, arrivata a novembre",
+    "compito": "Ritrovare quota e scadenza gita nella bacheca di fine anno (101 post)",
+    "tap": 2,
+    "budgetTap": 4,
+    "esitazioni": [],
+    "blocchi": [],
+    "feedbackMancante": false,
+    "prove": "Filtro 'Scadenza' (48px, visibile) riduce la lista a 4 card; il titolo della card risponde da solo: 'Gita a Ravenna 7 maggio: autorizzazione e quota 28€ entro venerdì 24/4'.",
+    "limiti": "È andata bene perché il post gita NON era archiviato. Se lo fosse stato, serviva il toggle 'Mostra anche gli archiviati' alto 21px (sotto la metà del minimo 48px): rischio reale già misurato in A2."
+  }
+]

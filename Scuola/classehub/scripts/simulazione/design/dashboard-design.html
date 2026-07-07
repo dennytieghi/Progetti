@@ -1,0 +1,154 @@
+<title>ClasseHub — test di design 5B</title>
+<style>
+  :root {
+    --piano: #f9f9f7; --superficie: #fcfcfb;
+    --inchiostro: #0b0b0b; --secondario: #52514e; --muto: #898781;
+    --griglia: #e1e0d9; --bordo: rgba(11,11,11,0.10);
+    --serie: #2a78d6; --traccia: #e1e0d9;
+    --ok: #006300; --ok-chip: #0ca30c; --allerta: #b4502e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --piano: #0d0d0d; --superficie: #1a1a19; --inchiostro: #fff; --secondario: #c3c2b7; --muto: #898781; --griglia: #2c2c2a; --bordo: rgba(255,255,255,0.10); --serie: #3987e5; --traccia: #2c2c2a; --ok: #0ca30c; --allerta: #ec835a; }
+  }
+  :root[data-theme="dark"] { --piano: #0d0d0d; --superficie: #1a1a19; --inchiostro: #fff; --secondario: #c3c2b7; --muto: #898781; --griglia: #2c2c2a; --bordo: rgba(255,255,255,0.10); --serie: #3987e5; --traccia: #2c2c2a; --ok: #0ca30c; --allerta: #ec835a; }
+  :root[data-theme="light"] { --piano: #f9f9f7; --superficie: #fcfcfb; --inchiostro: #0b0b0b; --secondario: #52514e; --muto: #898781; --griglia: #e1e0d9; --bordo: rgba(11,11,11,0.10); --serie: #2a78d6; --traccia: #e1e0d9; --ok: #006300; --allerta: #b4502e; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--piano); color: var(--inchiostro); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 880px; margin: 0 auto; padding: 40px 20px 72px; }
+  .occhiello { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muto); font-weight: 600; }
+  h1 { font-size: clamp(26px, 4.5vw, 34px); line-height: 1.15; margin: 6px 0 10px; letter-spacing: -0.015em; text-wrap: balance; }
+  .sotto { color: var(--secondario); max-width: 64ch; margin: 0; }
+  section { margin-top: 36px; }
+  h2 { font-size: 19px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .spiega { color: var(--secondario); font-size: 14px; margin: 0 0 14px; max-width: 68ch; }
+  .carta { background: var(--superficie); border: 1px solid var(--bordo); border-radius: 10px; padding: 18px; }
+
+  .verdetto { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 700px) { .verdetto { grid-template-columns: 220px 1fr; } }
+  .megascore { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .megascore .n { font-size: 56px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+  .megascore .n small { font-size: 22px; color: var(--secondario); font-weight: 600; }
+  .megascore .esito { margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--ok); background: color-mix(in srgb, var(--ok-chip) 12%, transparent); border-radius: 99px; padding: 3px 12px; }
+  .blocchi { display: grid; gap: 12px; }
+  .blocco { display: grid; grid-template-columns: 1fr 90px; gap: 10px; align-items: center; }
+  .blocco .nome { font-size: 14px; }
+  .blocco .nome small { display: block; color: var(--muto); font-size: 12.5px; }
+  .blocco .num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .traccia { height: 12px; background: var(--traccia); border-radius: 4px; overflow: hidden; grid-column: 1 / -1; }
+  .pieno { height: 100%; background: var(--serie); border-radius: 4px 0 0 4px; }
+
+  .viaggi { display: grid; gap: 14px; }
+  .viaggio { display: grid; gap: 6px; }
+  .viaggio .chi { font-size: 14.5px; }
+  .viaggio .chi strong { font-weight: 600; }
+  .tapbar { position: relative; height: 22px; background: var(--traccia); border-radius: 5px; overflow: hidden; }
+  .tapbar .usati { position: absolute; inset: 0 auto 0 0; background: var(--serie); border-radius: 5px 0 0 5px; }
+  .tapbar .budget { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--inchiostro); opacity: .55; }
+  .tapbar span { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); font-size: 12px; font-weight: 700; color: #fff; }
+  .viaggio .esito { font-size: 13px; color: var(--secondario); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th { text-align: left; color: var(--muto); font-weight: 600; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+  th, td { padding: 8px 10px; border-bottom: 1px solid var(--griglia); }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr:last-child td { border-bottom: none; }
+  .scroll { overflow-x: auto; }
+  .pill { display: inline-block; font-size: 12px; font-weight: 600; border-radius: 99px; padding: 2px 9px; }
+  .pill.ok { color: var(--ok); background: color-mix(in srgb, var(--ok-chip) 12%, transparent); }
+  .pill.no { color: var(--allerta); background: color-mix(in srgb, var(--allerta) 14%, transparent); }
+
+  ol.fix { margin: 10px 0 0; padding-left: 22px; display: grid; gap: 10px; font-size: 14.5px; }
+  ol.fix li::marker { font-weight: 700; color: var(--allerta); }
+  ol.fix .dove { color: var(--muto); font-size: 12.5px; }
+  footer { margin-top: 44px; color: var(--muto); font-size: 13px; border-top: 1px solid var(--griglia); padding-top: 16px; }
+  footer code { font-size: 12px; background: var(--superficie); border: 1px solid var(--bordo); border-radius: 4px; padding: 1px 5px; }
+</style>
+<main>
+  <header>
+    <div class="occhiello">Test di design · UI/UX esperienziale · app vera con 101 post</div>
+    <h1>Semplice anche per chi ha 58 anni? Sì: 94,1 su 100</h1>
+    <p class="sotto">Otto schermate misurate pixel per pixel dal DOM su viewport da telefono (390px),
+    quattro percorsi vissuti nei panni dei genitori, una checklist d'inclusione. Le regole non le abbiamo
+    inventate: sono le promesse di UX_PRINCIPLES (corpo ≥17px, bersagli ≥48px, contrasto AAA, zero gergo),
+    qui verificate una per una.</p>
+  </header>
+
+  <section class="verdetto">
+    <div class="carta megascore">
+      <div class="n">94,1<small>/100</small></div>
+      <div class="esito">✓ pronto per il pilota (soglia 85)</div>
+    </div>
+    <div class="carta blocchi">
+      <div class="blocco"><div class="nome">A · Conformità misurata<small>tipografia 7,2 · bersagli 9,4 · contrasto 9,6 · sobrietà 10</small></div><div class="num">36,1 / 40</div><div class="traccia"><div class="pieno" style="width:90.3%"></div></div></div>
+      <div class="blocco"><div class="nome">B · Percorsi vissuti<small>4 viaggi, tutti dentro budget, zero esitazioni</small></div><div class="num">40 / 40</div><div class="traccia"><div class="pieno" style="width:100%"></div></div></div>
+      <div class="blocco"><div class="nome">C · Prova d'inclusione<small>cede solo lo zoom testo al 200%</small></div><div class="num">18 / 20</div><div class="traccia"><div class="pieno" style="width:90%"></div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>I quattro viaggi, tap contati</h2>
+    <p class="spiega">La barra blu sono i tap usati; la tacca nera è il budget massimo previsto dalle specifiche.</p>
+    <div class="carta viaggi">
+      <div class="viaggio">
+        <div class="chi"><strong>Giovanni, 58, low-tech</strong> — dal link WhatsApp al voto</div>
+        <div class="tapbar"><div class="usati" style="width:28%"><span style="position:static"></span></div><div class="budget" style="left:70%"></div><span>2 tap (budget 5)</span></div>
+        <div class="esito">Opzioni alte 56px · "Il voto è anonimo" · dopo il voto: "Hai votato. Ecco i risultati finora" con le barre.</div>
+      </div>
+      <div class="viaggio">
+        <div class="chi"><strong>Giovanni</strong> — capire una scadenza (cosa fare, entro quando)</div>
+        <div class="tapbar"><div class="usati" style="width:14%"></div><div class="budget" style="left:28%"></div><span>0-1 tap</span></div>
+        <div class="esito">"Prossime scadenze" in testa alla bacheca risponde senza aprire nulla: "⏰ Ritiro pagelle — Entro mercoledì 15 luglio".</div>
+      </div>
+      <div class="viaggio">
+        <div class="chi"><strong>Denise, rappresentante</strong> — pubblicare una scadenza e copiarla per WhatsApp</div>
+        <div class="tapbar"><div class="usati" style="width:62%"></div><div class="budget" style="left:71%"></div><span>7 tap (budget 8)</span></div>
+        <div class="esito">Scelta tipo con esempi concreti → 3 campi con label → "Fatto! Ora avvisa i genitori" col messaggio già pronto.</div>
+      </div>
+      <div class="viaggio">
+        <div class="chi"><strong>Irene, arrivata a novembre</strong> — ritrovare la quota gita tra 101 post</div>
+        <div class="tapbar"><div class="usati" style="width:36%"></div><div class="budget" style="left:71%"></div><span>2 tap (budget 4)</span></div>
+        <div class="esito">Filtro "Scadenza" → 4 card → il titolo risponde da solo: "…quota 28€ entro venerdì 24/4".</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Le otto schermate al microscopio</h2>
+    <p class="spiega">Quota di testo a corpo pieno (≥17px), bersagli tattili ≥48px e contrasto AAA misurati sul rendering reale.</p>
+    <div class="carta scroll">
+      <table>
+        <thead><tr><th>Schermata</th><th class="num">Testo ≥17px</th><th class="num">Bersagli ≥48px</th><th class="num">Contrasto AAA</th><th>Nota</th></tr></thead>
+        <tbody>
+          <tr><td>Landing</td><td class="num">76%</td><td class="num">2/3</td><td class="num">94%</td><td>logo-link 32px</td></tr>
+          <tr><td>Entra in classe</td><td class="num">67%</td><td class="num">5/6</td><td class="num">92%</td><td><span class="pill ok">errore utile ✓</span></td></tr>
+          <tr><td>Bacheca (101 post)</td><td class="num">56%</td><td class="num">49/50</td><td class="num">98%</td><td><span class="pill no">toggle archiviati 21px</span></td></tr>
+          <tr><td>Dettaglio avviso</td><td class="num">50%</td><td class="num">7/7</td><td class="num">81%</td><td></td></tr>
+          <tr><td>Dettaglio sondaggio</td><td class="num">42%</td><td class="num">7/7</td><td class="num">92%</td><td>opzioni voto 56px</td></tr>
+          <tr><td>Nuovo post</td><td class="num">50%</td><td class="num">8/8</td><td class="num">94%</td><td>4 scelte con esempi</td></tr>
+          <tr><td>Richieste</td><td class="num">8%</td><td class="num">7/7</td><td class="num">97%</td><td><span class="pill no">corpo a 15-16px</span></td></tr>
+          <tr><td>Approvazioni</td><td class="num">40%</td><td class="num">6/6</td><td class="num">80%</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cosa sistemare</h2>
+    <p class="spiega">Quattro ritocchi concreti, in ordine di importanza. Nessuno blocca il pilota.</p>
+    <div class="carta">
+      <ol class="fix">
+        <li>Toggle <strong>"Mostra anche gli archiviati": 21px di altezza</strong>, meno della metà del minimo. È l'unica porta verso l'archivio — il percorso che il primo stress test ha già indicato come critico. <span class="dove">bacheca</span></li>
+        <li>Pagina <strong>Richieste: il testo è a 15-16px</strong> invece dei 17-18 promessi (84 nodi su 91 sotto soglia). <span class="dove">/richieste</span></li>
+        <li><strong>Zoom testo 200%</strong>: la bacheca sviluppa scroll orizzontale per la voce di menu "Scrivi al rappresentante" in nowrap. <span class="dove">header</span></li>
+        <li>Logo-link "ClasseHub" nell'header: bersaglio da 32px. <span class="dove">header</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    Metodo e formula: <code>scripts/simulazione/design/METODO-DESIGN.md</code> ·
+    misure grezze: <code>design/misure/*.json</code> ·
+    punteggio riproducibile: <code>node scripts/simulazione/design/punteggio-design.js</code> ·
+    limiti dichiarati (viewport emulato in iframe, tap via DOM, screenshot bloccati su localhost) in <code>REPORT-DESIGN.md</code>
+  </footer>
+</main>
