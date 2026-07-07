@@ -1,0 +1,69 @@
+{
+  "_commento": "Calendario dell'anno simulato 2025/26, primaria in Emilia-Romagna (inizio 15/9, fine 6/6). Volumi calibrati sulla ricerca in dati/ricerca-pattern.md: ~45 comunicazioni ufficiali/anno, 6-10 sondaggi, 6-10 collette, ~14 compleanni festeggiati, rumore chat 60-80%.",
+  "annoScolastico": {
+    "inizio": "2025-09-15",
+    "fine": "2026-06-06",
+    "vacanze": [
+      { "nome": "Natale", "dal": "2025-12-23", "al": "2026-01-06" },
+      { "nome": "Pasqua", "dal": "2026-04-02", "al": "2026-04-07" },
+      { "nome": "Ponte 25 aprile", "dal": "2026-04-25", "al": "2026-04-26" },
+      { "nome": "Ponte 1 maggio", "dal": "2026-05-01", "al": "2026-05-03" },
+      { "nome": "Festa 2 giugno", "dal": "2026-06-02", "al": "2026-06-02" }
+    ]
+  },
+  "eventiFissi": [
+    { "id": "orario-provvisorio", "quando": "2025-09-15", "cosa": "Inizio scuola con orario provvisorio (solo mattina) per 2 settimane" },
+    { "id": "mensa-avvio", "quando": "2025-09-22", "cosa": "Partenza mensa e orario pieno: iscrizioni, diete speciali, rette" },
+    { "id": "assicurazione", "quando": "2025-09-25", "cosa": "Circolare assicurazione + contributo volontario, scadenza pagamento 15/10" },
+    { "id": "assemblea-inizio", "quando": "2025-10-07", "cosa": "Assemblea di classe di inizio anno" },
+    { "id": "elezione-rappresentanti", "quando": "2025-10-23", "cosa": "Elezione rappresentanti di classe (Denise riconfermata)" },
+    { "id": "sciopero-1", "quando": "2025-10-03", "cosa": "Sciopero comparto scuola: servizio non garantito" },
+    { "id": "uscita-biblioteca", "quando": "2025-11-06", "cosa": "Uscita didattica mezza giornata in biblioteca Salaborsa (gratuita, serve autorizzazione)" },
+    { "id": "sciopero-2", "quando": "2025-11-28", "cosa": "Sciopero generale: campanella non garantita" },
+    { "id": "colloqui-1", "quando": "2025-12-01", "cosa": "Colloqui individuali dicembre (prenotazione slot 1-5/12)" },
+    { "id": "recita-natale", "quando": "2025-12-19", "cosa": "Recita di Natale: costumi, prove, orari ingresso genitori" },
+    { "id": "colletta-maestre-natale", "quando": "2025-12-05", "cosa": "Colletta regalo maestre di Natale (5 maestre, 7€ a famiglia)" },
+    { "id": "pagelle-1", "quando": "2026-02-05", "cosa": "Apertura pagelle primo quadrimestre sul registro" },
+    { "id": "progetto-piscina", "quando": "2026-01-12", "cosa": "Progetto piscina gennaio-marzo: 10 lezioni il giovedì, quota 45€, borsone da preparare" },
+    { "id": "uscita-teatro", "quando": "2026-01-29", "cosa": "Spettacolo al Teatro Testoni, quota 8€" },
+    { "id": "carnevale", "quando": "2026-02-13", "cosa": "Festa di carnevale in classe (venerdì prima di martedì grasso): travestimenti ma niente coriandoli" },
+    { "id": "sciopero-3", "quando": "2026-02-27", "cosa": "Sciopero: uscita anticipata ore 12" },
+    { "id": "uscita-museo", "quando": "2026-03-12", "cosa": "Uscita al Museo della Scienza, quota 6€ + pranzo al sacco" },
+    { "id": "assemblea-primavera", "quando": "2026-03-24", "cosa": "Seconda assemblea di classe: si decide la meta della gita" },
+    { "id": "colloqui-2", "quando": "2026-04-13", "cosa": "Colloqui individuali aprile (prenotazione slot 13-17/4)" },
+    { "id": "foto-classe", "quando": "2026-04-22", "cosa": "Foto di classe: autorizzazione, poi ordini e pagamento (12€ kit)" },
+    { "id": "gita-primavera", "quando": "2026-05-07", "cosa": "Gita di un giorno intero a Ravenna (mosaici + spiaggia), quota 28€, 2 accompagnatori genitori" },
+    { "id": "colletta-maestre-fine", "quando": "2026-05-20", "cosa": "Colletta regalo maestre di fine anno + regalo speciale (la classe finisce il ciclo: quinta)" },
+    { "id": "festa-fine-anno", "quando": "2026-06-05", "cosa": "Festa di fine anno in giardino scuola: torte, gazebo, saluti (fine ciclo primaria)" },
+    { "id": "cena-genitori", "quando": "2026-06-11", "cosa": "Cena di classe genitori+maestre in pizzeria (dopo la fine della scuola)" }
+  ],
+  "compleanniFesteggiati": [
+    { "figlio": "Tommaso", "genitore": "paolo.ferrari", "quando": "2025-09-27" },
+    { "figlio": "Sofia", "genitore": "laura.bianchi", "quando": "2025-10-10" },
+    { "figlio": "Aurora", "genitore": "rosa.marino", "quando": "2025-10-29" },
+    { "figlio": "Marco", "genitore": "giovanni.neri", "quando": "2025-11-14" },
+    { "figlio": "Giulia", "genitore": "federica.russo", "quando": "2025-12-03" },
+    { "figlio": "Leonardo", "genitore": "martina.colombo", "quando": "2026-01-20" },
+    { "figlio": "Riccardo", "genitore": "stefano.gallo", "quando": "2026-01-28", "nota": "festa condivisa con Leonardo, con discussione sulla quota regalo" },
+    { "figlio": "Matilde", "genitore": "sara.greco", "quando": "2026-02-11" },
+    { "figlio": "Greta", "genitore": "giulia.esposito", "quando": "2026-03-05" },
+    { "figlio": "Diego", "genitore": "luca.bruno", "quando": "2026-03-19" },
+    { "figlio": "Alessandro", "genitore": "marco.rizzo", "quando": "2026-04-09" },
+    { "figlio": "Emma", "genitore": "denise.fabbri", "quando": "2026-05-15" },
+    { "figlio": "Bianca", "genitore": "elena.gatti", "quando": "2026-05-26" },
+    { "figlio": "Pietro", "genitore": "anna.ricci", "quando": "2026-06-03" }
+  ],
+  "volumiMensili": {
+    "_nota": "post = pubblicazioni ClasseHub del rappresentante; chatSignificativi = messaggi WhatsApp con contenuto reale scritti dagli agenti (il rumore viene aggiunto dopo, dai template, per arrivare al totale); richieste = richieste dei genitori nella zona dedicata dell'app.",
+    "2025-09": { "post": 13, "chatSignificativi": 90, "chatTotaleCirca": 520, "richieste": 5, "clima": "caos rientro: orari, mensa, moduli, chi è chi, scetticismo iniziale sull'app" },
+    "2025-10": { "post": 10, "chatSignificativi": 70, "chatTotaleCirca": 420, "richieste": 4, "clima": "elezioni rappresentanti, assicurazione, primi compleanni, sciopero" },
+    "2025-11": { "post": 9, "chatSignificativi": 60, "chatTotaleCirca": 380, "richieste": 4, "clima": "uscita biblioteca, arrivo di Irene (recupero info), pidocchi" },
+    "2025-12": { "post": 12, "chatSignificativi": 85, "chatTotaleCirca": 560, "richieste": 4, "clima": "PICCO: colloqui, recita, colletta regalo, auguri a raffica" },
+    "2026-01": { "post": 7, "chatSignificativi": 55, "chatTotaleCirca": 330, "richieste": 3, "clima": "ripresa lenta, piscina, teatro, compleanni condivisi con polemica quota" },
+    "2026-02": { "post": 9, "chatSignificativi": 65, "chatTotaleCirca": 400, "richieste": 4, "clima": "pagelle, carnevale, sciopero, influenza che decima la classe" },
+    "2026-03": { "post": 9, "chatSignificativi": 65, "chatTotaleCirca": 400, "richieste": 4, "clima": "museo, assemblea gita, discussione meta e costi" },
+    "2026-04": { "post": 10, "chatSignificativi": 70, "chatTotaleCirca": 430, "richieste": 4, "clima": "colloqui, foto di classe, Pasqua, preparazione gita" },
+    "2026-05": { "post": 14, "chatSignificativi": 95, "chatTotaleCirca": 620, "richieste": 5, "clima": "PICCO: gita, colletta fine ciclo, organizzazione festa, nostalgia quinta" },
+    "2026-06": { "post": 8, "chatSignificativi": 70, "chatTotaleCirca": 450, "richieste": 3, "clima": "festa fine anno, pagelle, cena, saluti e commozione (fine ciclo)" }
+  }
+}

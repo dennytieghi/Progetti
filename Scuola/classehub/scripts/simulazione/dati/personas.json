@@ -1,0 +1,258 @@
+{
+  "_commento": "Classe simulata 5B, anno 2025/26. I parametri comportamento guidano la generazione dei messaggi: rumore = probabilità di rispondere 'grazie/ok' a un avviso; buongiornista = manda buongiorno/auguri/catene; prontezzaVoto = subito | dopo-sollecito | quasi-mai; usaApp = 0-1 quanto cerca le info nell'app invece di chiederle in chat; domandeRipetute = chiede cose già scritte.",
+  "rappresentante": {
+    "id": "denise.fabbri",
+    "nome": "Denise Fabbri",
+    "eta": 42,
+    "figlio": "Emma",
+    "archetipo": "rappresentante-organizzata",
+    "iscrittoIl": "2025-09-08",
+    "descrizione": "Lavora part-time, organizzata, stanca di ripetere le cose. Pubblica tutto su ClasseHub e incolla il messaggio pronto nel gruppo. Ogni tanto sbotta educatamente quando le chiedono cose già pubblicate."
+  },
+  "genitori": [
+    {
+      "id": "laura.bianchi",
+      "nome": "Laura Bianchi",
+      "eta": 39,
+      "figlio": "Sofia",
+      "archetipo": "vice-organizzatrice",
+      "iscrittoIl": "2025-09-10",
+      "comportamento": { "rumore": 0.7, "buongiornista": false, "prontezzaVoto": "subito", "usaApp": 0.9, "domandeRipetute": false, "messaggiSettimana": 4 },
+      "descrizione": "Braccio destro di Denise. Rilancia i link dell'app quando qualcuno chiede cose già pubblicate."
+    },
+    {
+      "id": "giovanni.neri",
+      "nome": "Giovanni Neri",
+      "eta": 58,
+      "figlio": "Marco",
+      "archetipo": "low-tech",
+      "iscrittoIl": "2025-09-14",
+      "comportamento": { "rumore": 0.5, "buongiornista": false, "prontezzaVoto": "dopo-sollecito", "usaApp": 0.3, "domandeRipetute": true, "messaggiSettimana": 1.5 },
+      "descrizione": "Fatica con le app nuove. All'inizio chiede in chat come si apre il link, poi impara. Ogni tanto risponde a un messaggio vecchio di tre giorni."
+    },
+    {
+      "id": "stefano.gallo",
+      "nome": "Stefano Gallo",
+      "eta": 45,
+      "figlio": "Riccardo",
+      "archetipo": "polemico",
+      "iscrittoIl": "2025-09-11",
+      "comportamento": { "rumore": 0.2, "buongiornista": false, "prontezzaVoto": "subito", "usaApp": 0.5, "domandeRipetute": false, "messaggiSettimana": 3 },
+      "descrizione": "Contesta i costi (gita, regalo maestre), apre discussioni lunghe, vota sempre l'opzione più economica e lo fa sapere."
+    },
+    {
+      "id": "federica.russo",
+      "nome": "Federica Russo",
+      "eta": 41,
+      "figlio": "Giulia",
+      "archetipo": "ansiosa",
+      "iscrittoIl": "2025-09-10",
+      "comportamento": { "rumore": 0.8, "buongiornista": false, "prontezzaVoto": "subito", "usaApp": 0.6, "domandeRipetute": true, "messaggiSettimana": 5 },
+      "descrizione": "Chiede conferme su tutto: 'quindi domani niente zaino giusto?', 'qualcuna mi conferma l'orario?'. Doppia domanda se nessuno risponde entro un'ora."
+    },
+    {
+      "id": "martina.colombo",
+      "nome": "Martina Colombo",
+      "eta": 36,
+      "figlio": "Leonardo",
+      "archetipo": "sparita",
+      "iscrittoIl": "2025-09-20",
+      "comportamento": { "rumore": 0.05, "buongiornista": false, "prontezzaVoto": "quasi-mai", "usaApp": 0.2, "domandeRipetute": false, "messaggiSettimana": 0.2 },
+      "descrizione": "Non risponde mai. Vota solo dopo il secondo sollecito, a volte a sondaggio già chiuso. A giugno chiede informazioni su una cosa di ottobre."
+    },
+    {
+      "id": "rosa.marino",
+      "nome": "Rosa Marino",
+      "eta": 63,
+      "figlio": "Aurora",
+      "archetipo": "nonna-delegata",
+      "iscrittoIl": "2025-09-16",
+      "comportamento": { "rumore": 0.9, "buongiornista": true, "prontezzaVoto": "dopo-sollecito", "usaApp": 0.15, "domandeRipetute": true, "messaggiSettimana": 6 },
+      "descrizione": "Nonna che segue la nipote per i genitori che lavorano. Buongiorno con immagini di fiori, auguri a tutti, grazie con tre emoji. Il link dell'app lo apre la figlia per lei."
+    },
+    {
+      "id": "paolo.ferrari",
+      "nome": "Paolo Ferrari",
+      "eta": 44,
+      "figlio": "Tommaso",
+      "archetipo": "buongiornista-offtopic",
+      "iscrittoIl": "2025-09-12",
+      "comportamento": { "rumore": 0.6, "buongiornista": true, "prontezzaVoto": "dopo-sollecito", "usaApp": 0.4, "domandeRipetute": false, "messaggiSettimana": 4 },
+      "descrizione": "Buongiorno quotidiano, meme, ogni tanto parte con il calcio del sabato dei bambini. Simpatico ma intasa."
+    },
+    {
+      "id": "giulia.esposito",
+      "nome": "Giulia Esposito",
+      "eta": 38,
+      "figlio": "Greta",
+      "archetipo": "chiede-cose-gia-scritte",
+      "iscrittoIl": "2025-09-13",
+      "comportamento": { "rumore": 0.4, "buongiornista": false, "prontezzaVoto": "dopo-sollecito", "usaApp": 0.25, "domandeRipetute": true, "messaggiSettimana": 3 },
+      "descrizione": "'A che ora dobbiamo essere a scuola per la gita?' — chiesto due ore dopo l'avviso con l'orario. Non apre quasi mai il link, chiede direttamente in chat."
+    },
+    {
+      "id": "marco.rizzo",
+      "nome": "Marco Rizzo",
+      "eta": 47,
+      "figlio": "Alessandro",
+      "archetipo": "lurker-app-fan",
+      "iscrittoIl": "2025-09-10",
+      "comportamento": { "rumore": 0.05, "buongiornista": false, "prontezzaVoto": "subito", "usaApp": 0.95, "domandeRipetute": false, "messaggiSettimana": 0.3 },
+      "descrizione": "Non scrive mai in chat ma vota tutti i sondaggi entro un'ora e paga sempre puntuale. L'utente ideale dell'app: silenzioso ed efficiente."
+    },
+    {
+      "id": "sara.greco",
+      "nome": "Sara Greco",
+      "eta": 40,
+      "figlio": "Matilde",
+      "archetipo": "precisa-cita-link",
+      "iscrittoIl": "2025-09-11",
+      "comportamento": { "rumore": 0.5, "buongiornista": false, "prontezzaVoto": "subito", "usaApp": 0.9, "domandeRipetute": false, "messaggiSettimana": 2.5 },
+      "descrizione": "Quando qualcuno chiede una cosa già pubblicata risponde con il link giusto dell'app. Alleata naturale di Denise."
+    },
+    {
+      "id": "luca.bruno",
+      "nome": "Luca Bruno",
+      "eta": 42,
+      "figlio": "Diego",
+      "archetipo": "turnista-notturno",
+      "iscrittoIl": "2025-09-18",
+      "comportamento": { "rumore": 0.3, "buongiornista": false, "prontezzaVoto": "dopo-sollecito", "usaApp": 0.5, "domandeRipetute": true, "messaggiSettimana": 1.5 },
+      "descrizione": "Fa i turni: legge e risponde alle 23:30, alle riunioni non c'è mai. Ogni tanto perde una scadenza e chiede se si può ancora pagare."
+    },
+    {
+      "id": "elena.gatti",
+      "nome": "Elena Gatti",
+      "eta": 37,
+      "figlio": "Bianca",
+      "archetipo": "mamma-social",
+      "iscrittoIl": "2025-09-10",
+      "comportamento": { "rumore": 0.8, "buongiornista": true, "prontezzaVoto": "subito", "usaApp": 0.6, "domandeRipetute": false, "messaggiSettimana": 5 },
+      "descrizione": "Foto della recita, cuoricini, auguri con gif. Partecipa a tutto con entusiasmo, produce tanto volume."
+    },
+    {
+      "id": "andrea.fontana",
+      "nome": "Andrea Fontana",
+      "eta": 50,
+      "figlio": "Lorenzo",
+      "archetipo": "scettico-tecnologico",
+      "iscrittoIl": "2025-10-02",
+      "comportamento": { "rumore": 0.2, "buongiornista": false, "prontezzaVoto": "dopo-sollecito", "usaApp": 0.3, "domandeRipetute": false, "messaggiSettimana": 1 },
+      "descrizione": "'Un'altra app? Non bastava la chat?'. Si iscrive per ultimo tra i regolari, brontola, ma a marzo ammette che i sondaggi sono comodi."
+    },
+    {
+      "id": "chiara.leone",
+      "nome": "Chiara Leone",
+      "eta": 35,
+      "figlio": "Nicolò",
+      "archetipo": "frettolosa",
+      "iscrittoIl": "2025-09-12",
+      "comportamento": { "rumore": 0.5, "buongiornista": false, "prontezzaVoto": "subito", "usaApp": 0.55, "domandeRipetute": true, "messaggiSettimana": 3 },
+      "descrizione": "Messaggi telegrafici con refusi ('ok x me', 'qlcn ha i compiti?'). Legge in diagonale e ogni tanto capisce male le date."
+    },
+    {
+      "id": "davide.longo",
+      "nome": "Davide Longo",
+      "eta": 43,
+      "figlio": "Camilla",
+      "archetipo": "papa-volontario",
+      "iscrittoIl": "2025-09-15",
+      "comportamento": { "rumore": 0.4, "buongiornista": false, "prontezzaVoto": "subito", "usaApp": 0.7, "domandeRipetute": false, "messaggiSettimana": 2 },
+      "descrizione": "Si offre sempre: accompagnatore in gita, montaggio palco recita, trasporto torte. Concreto e apprezzato."
+    },
+    {
+      "id": "anna.ricci",
+      "nome": "Anna Ricci",
+      "eta": 48,
+      "figlio": "Pietro",
+      "archetipo": "tesoriera",
+      "iscrittoIl": "2025-09-10",
+      "comportamento": { "rumore": 0.4, "buongiornista": false, "prontezzaVoto": "subito", "usaApp": 0.8, "domandeRipetute": false, "messaggiSettimana": 3 },
+      "descrizione": "Gestisce la cassa comune: raccoglie le quote, tiene i conti, pubblica i solleciti di pagamento tramite Denise. Precisa al centesimo."
+    },
+    {
+      "id": "simone.moretti",
+      "nome": "Simone Moretti",
+      "eta": 39,
+      "figlio": "Anita",
+      "archetipo": "smemorato",
+      "iscrittoIl": "2025-09-17",
+      "comportamento": { "rumore": 0.3, "buongiornista": false, "prontezzaVoto": "dopo-sollecito", "usaApp": 0.4, "domandeRipetute": true, "messaggiSettimana": 2 },
+      "descrizione": "Paga sempre all'ultimo giorno o dopo. Chiede l'IBAN della tesoriera due volte a distanza di un mese. 'Scusate, era oggi la scadenza?'"
+    },
+    {
+      "id": "valentina.barbieri",
+      "nome": "Valentina Barbieri",
+      "eta": 41,
+      "figlio": "Edoardo",
+      "archetipo": "organizzatrice-feste",
+      "iscrittoIl": "2025-09-11",
+      "comportamento": { "rumore": 0.6, "buongiornista": false, "prontezzaVoto": "subito", "usaApp": 0.7, "domandeRipetute": false, "messaggiSettimana": 4 },
+      "descrizione": "Coordina i compleanni condivisi e la festa di fine anno. Manda a Denise le richieste di sondaggio per date e location."
+    },
+    {
+      "id": "fatima.hassan",
+      "nome": "Fatima Hassan",
+      "eta": 38,
+      "figlio": "Youssef",
+      "archetipo": "gentile-riservata",
+      "iscrittoIl": "2025-09-19",
+      "comportamento": { "rumore": 0.3, "buongiornista": false, "prontezzaVoto": "subito", "usaApp": 0.65, "domandeRipetute": false, "messaggiSettimana": 0.8 },
+      "descrizione": "Scrive poco, sempre gentile. Ogni tanto chiede chiarimenti sui documenti scolastici. Usa l'app volentieri perché può rileggere con calma."
+    },
+    {
+      "id": "roberto.villa",
+      "nome": "Roberto Villa",
+      "eta": 55,
+      "figlio": "Beatrice",
+      "archetipo": "prolisso",
+      "iscrittoIl": "2025-09-22",
+      "comportamento": { "rumore": 0.4, "buongiornista": false, "prontezzaVoto": "dopo-sollecito", "usaApp": 0.35, "domandeRipetute": false, "messaggiSettimana": 1.5 },
+      "descrizione": "Nella chat vera manderebbe vocali da 4 minuti: qui scrive messaggi lunghissimi con premesse, excursus e post scriptum, per dire una cosa sola."
+    },
+    {
+      "id": "cristina.pagani",
+      "nome": "Cristina Pagani",
+      "eta": 46,
+      "figlio": "Filippo",
+      "archetipo": "critica-costruttiva",
+      "iscrittoIl": "2025-09-13",
+      "comportamento": { "rumore": 0.3, "buongiornista": false, "prontezzaVoto": "subito", "usaApp": 0.85, "domandeRipetute": false, "messaggiSettimana": 1.5 },
+      "descrizione": "Usa bene l'app e suggerisce miglioramenti ('si potrebbe fissare in alto il post della gita?'). Feedback prezioso ma pungente."
+    },
+    {
+      "id": "irene.sala",
+      "nome": "Irene Sala",
+      "eta": 40,
+      "figlio": "Gabriele",
+      "archetipo": "arrivata-a-novembre",
+      "iscrittoIl": "2025-11-10",
+      "comportamento": { "rumore": 0.4, "buongiornista": false, "prontezzaVoto": "subito", "usaApp": 0.6, "domandeRipetute": true, "messaggiSettimana": 2 },
+      "descrizione": "Figlio trasferito a novembre. Deve recuperare due mesi di informazioni: banco di prova perfetto per capire se l'app aiuta chi arriva dopo."
+    },
+    {
+      "id": "sconosciuto.rifiutato",
+      "nome": "Account Sconosciuto",
+      "eta": null,
+      "figlio": null,
+      "archetipo": "estraneo-rifiutato",
+      "iscrittoIl": "2026-01-20",
+      "statoFinale": "rejected",
+      "motivoRifiuto": "Non ti riconosco tra i genitori della 5B. Se sono io a sbagliarmi, scrivimi in chat e riprova.",
+      "comportamento": { "rumore": 0, "buongiornista": false, "prontezzaVoto": "quasi-mai", "usaApp": 0, "domandeRipetute": false, "messaggiSettimana": 0 },
+      "descrizione": "Qualcuno trova il codice classe in uno screenshot e prova a entrare. Denise non lo riconosce e rifiuta (ADR-001 alla prova)."
+    },
+    {
+      "id": "michele.ferri",
+      "nome": "Michele Ferri",
+      "eta": 42,
+      "figlio": "Sofia",
+      "archetipo": "secondo-genitore-pending",
+      "iscrittoIl": "2026-05-28",
+      "statoFinale": "pending",
+      "notaPerRep": "Ciao Denise, sono il papà di Sofia (il marito di Laura). Vorrei vedere anch'io gli avvisi, se si può.",
+      "comportamento": { "rumore": 0, "buongiornista": false, "prontezzaVoto": "quasi-mai", "usaApp": 0, "domandeRipetute": false, "messaggiSettimana": 0 },
+      "descrizione": "Secondo genitore che chiede accesso a fine anno: resta in coda approvazioni, caso limite realistico."
+    }
+  ]
+}

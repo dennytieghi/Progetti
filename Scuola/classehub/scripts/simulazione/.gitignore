@@ -1,0 +1,4 @@
+# Rigenerabili dagli script: non vanno in git.
+dati/registro-classe.json
+dati/registro-post.json
+uscite/
