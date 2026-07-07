@@ -1,0 +1,528 @@
+{
+  "mese": "2026-01",
+  "post": [
+    {
+      "rif": "p-2026-01-01",
+      "tipo": "notice",
+      "titolo": "Si torna a scuola mercoledì 7 gennaio",
+      "corpo": "Bentornati e buon anno a tutti! Si riparte mercoledì 7 gennaio con orario normale fin dal primo giorno: ingresso solito e mensa attiva. Niente di particolare da portare, solo lo zaino di sempre. Nei prossimi giorni pubblico gli avvisi su piscina e teatro, tenete d'occhio la bacheca.",
+      "creatoIl": "2026-01-06T10:00:00+01:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2026-01-02",
+      "tipo": "deadline",
+      "titolo": "Progetto piscina: quota 45€ entro martedì 20 gennaio",
+      "corpo": "Parte il progetto piscina: 10 lezioni, ogni giovedì da gennaio a marzo, alla piscina comunale con istruttori. Prima lezione giovedì 15 gennaio. La quota è di 45€ a bambino e si paga ALLA SCUOLA tramite avviso pagoPA che trovate sul registro elettronico, entro martedì 20 gennaio. Attenzione: NON si consegna nulla alla tesoriera, questa quota non passa dalla cassa comune. Chi ha bisogno di un esonero per motivi medici deve consegnare il certificato in segreteria.",
+      "creatoIl": "2026-01-08T17:30:00+01:00",
+      "dueDate": "2026-01-20",
+      "pinned": false,
+      "archiviatoIl": "2026-04-20T09:12:00+02:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2026-01-03",
+      "tipo": "material",
+      "titolo": "Borsone piscina: cosa serve ogni giovedì",
+      "corpo": "Da giovedì 15 gennaio e fino a fine marzo, OGNI GIOVEDÌ i bambini devono avere il borsone della piscina con: costume, cuffia (va bene anche di stoffa), ciabatte antiscivolo, accappatoio o telo grande, un sacchetto per la roba bagnata. Per chi ha i capelli lunghi: elastico. Scrivete il nome su tutto, l'anno scorso in quarta sono spariti tre accappatoi. Il borsone torna a casa il giovedì pomeriggio con la roba bagnata da stendere.",
+      "creatoIl": "2026-01-09T13:00:00+01:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-04-20T09:14:00+02:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2026-01-04",
+      "tipo": "notice",
+      "titolo": "Mensa: nuovo gestore e nuovo menu da lunedì 12 gennaio",
+      "corpo": "Da lunedì 12 gennaio cambia l'appaltatore della mensa e con lui cambia tutto il menu. Il nuovo menu (invernale, 4 settimane a rotazione) è allegato alla circolare sul registro elettronico. Il menu pubblicato a settembre NON vale più. Le diete speciali e le esigenze religiose già comunicate restano valide e sono state passate al nuovo gestore: in fondo al menu c'è la legenda dei piatti alternativi. Se nei primi giorni notate problemi (porzioni, qualità), segnalatemeli: raccolgo tutto per la commissione mensa di fine mese.",
+      "creatoIl": "2026-01-10T10:00:00+01:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2026-01-05",
+      "tipo": "deadline",
+      "titolo": "Uscita al Teatro Testoni giovedì 29 gennaio: autorizzazione entro venerdì 23",
+      "corpo": "Giovedì 29 gennaio la classe va al Teatro Testoni per lo spettacolo della rassegna scuole. Si va e si torna in mattinata con lo scuolabus, rientro per pranzo. Il biglietto costa 8€ a bambino e lo paghiamo con la CASSA COMUNE: non dovete consegnare soldi. Serve però l'autorizzazione firmata (modulo nel diario) da riconsegnare alle maestre entro venerdì 23 gennaio. Attenzione: quel giovedì la lezione di piscina SALTA e si recupera a marzo, quindi il 29 niente borsone.",
+      "creatoIl": "2026-01-16T17:00:00+01:00",
+      "dueDate": "2026-01-23",
+      "pinned": false,
+      "archiviatoIl": "2026-04-20T09:16:00+02:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2026-01-06",
+      "tipo": "poll",
+      "titolo": "Quota regalo per la festa condivisa di Leonardo e Riccardo",
+      "corpo": "Per chiudere la discussione in chat: sabato 31 gennaio festeggiamo insieme Leonardo e Riccardo. Dobbiamo decidere la quota per CIASCUNO dei due regali (quindi il totale a famiglia è il doppio). Votate entro martedì 27 gennaio alle 20: vale l'opzione con più voti. La raccolta la fa Valentina in contanti, come sempre per i compleanni.",
+      "creatoIl": "2026-01-23T13:30:00+01:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-04-20T09:18:00+02:00",
+      "condivisoInChat": true,
+      "sondaggio": {
+        "chiudeIl": "2026-01-27T20:00:00+01:00",
+        "opzioni": ["5€ a regalo", "7€ a regalo", "10€ a regalo"],
+        "voti": [
+          { "persona": "stefano.gallo", "opzioni": [0] },
+          { "persona": "marco.rizzo", "opzioni": [0] },
+          { "persona": "chiara.leone", "opzioni": [0] },
+          { "persona": "davide.longo", "opzioni": [0] },
+          { "persona": "paolo.ferrari", "opzioni": [0] },
+          { "persona": "giovanni.neri", "opzioni": [0] },
+          { "persona": "luca.bruno", "opzioni": [0] },
+          { "persona": "andrea.fontana", "opzioni": [0] },
+          { "persona": "simone.moretti", "opzioni": [0] },
+          { "persona": "laura.bianchi", "opzioni": [1] },
+          { "persona": "sara.greco", "opzioni": [1] },
+          { "persona": "anna.ricci", "opzioni": [1] },
+          { "persona": "federica.russo", "opzioni": [1] },
+          { "persona": "cristina.pagani", "opzioni": [1] },
+          { "persona": "giulia.esposito", "opzioni": [1] },
+          { "persona": "roberto.villa", "opzioni": [1] },
+          { "persona": "valentina.barbieri", "opzioni": [2] },
+          { "persona": "elena.gatti", "opzioni": [2] },
+          { "persona": "rosa.marino", "opzioni": [2] },
+          { "persona": "fatima.hassan", "opzioni": [2] },
+          { "persona": "irene.sala", "opzioni": [2] }
+        ]
+      }
+    },
+    {
+      "rif": "p-2026-01-07",
+      "tipo": "notice",
+      "titolo": "Festa condivisa di Leonardo e Riccardo: sabato 31 gennaio, ore 16",
+      "corpo": "Riepilogo per la festa di compleanno condivisa di Leonardo e Riccardo: sabato 31 gennaio dalle 16 alle 19 alla ludoteca vicino alla scuola. Merenda e torta offerte dalle famiglie dei festeggiati. REGALO: come deciso con il sondaggio, la quota è di 5€ a regalo, quindi 10€ in totale a famiglia. Si consegnano in CONTANTI a Valentina (all'uscita da scuola giovedì o venerdì, oppure direttamente alla festa). Va bene una busta unica da 10€. Non serve confermare la presenza, ma se il vostro bambino non viene avvisate Valentina per la merenda.",
+      "creatoIl": "2026-01-27T20:20:00+01:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-04-20T09:20:00+02:00",
+      "condivisoInChat": true
+    }
+  ],
+  "richieste": [
+    {
+      "persona": "fatima.hassan",
+      "testo": "Buongiorno Denise. Youssef ha un'otite e il pediatra ha detto niente piscina per almeno due settimane. Ho visto nell'avviso che serve un certificato per l'esonero: lo consegno in segreteria o direttamente alle maestre? Grazie mille, preferisco chiedere qui che in chat.",
+      "creatoIl": "2026-01-13T09:40:00+01:00",
+      "esito": "handled",
+      "convertitaIn": null
+    },
+    {
+      "persona": "cristina.pagani",
+      "testo": "Suggerimento: si potrebbe fissare in alto il post del borsone piscina fino a fine marzo? Ogni mercoledì sera qualcuno lo richiede in chat, così invece sarebbe la prima cosa che si vede aprendo l'app. E già che ci sei, il menu mensa di settembre è ancora in bacheca: archivialo, fa confusione col nuovo.",
+      "creatoIl": "2026-01-16T08:20:00+01:00",
+      "esito": "open",
+      "convertitaIn": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "testo": "Denise, potresti aprire un sondaggio sull'app per la quota regalo della festa condivisa di Leonardo e Riccardo? In chat non ne usciamo più. Opzioni: 5€, 7€ o 10€ a regalo. Chiusura entro martedì così ho il tempo di comprare i regali per sabato.",
+      "creatoIl": "2026-01-23T09:05:00+01:00",
+      "esito": "handled",
+      "convertitaIn": "p-2026-01-06"
+    }
+  ],
+  "chat": [
+    {
+      "persona": "federica.russo",
+      "quando": "2026-01-05T18:12:00+01:00",
+      "testo": "Scusate, mercoledì 7 si rientra già con orario normale e mensa dal primo giorno, giusto? Qualcuna mi conferma? Non vorrei sbagliare proprio il primo giorno",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2026-01-05T18:30:00+01:00",
+      "testo": "Sì Federica, orario pieno e mensa già da mercoledì 7, tutto normale.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-06T10:02:00+01:00",
+      "testo": "",
+      "rifPost": "p-2026-01-01"
+    },
+    {
+      "persona": "chiara.leone",
+      "quando": "2026-01-06T15:47:00+01:00",
+      "testo": "grz! qlcn sa se c'erano compiti di mate x le vacanze? nicolò giura di no ma nn mi fido 😅",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2026-01-06T16:10:00+01:00",
+      "testo": "Solo la lettura del libro e le due schede di grammatica, l'avevano segnato sul diario l'ultimo giorno. Di matematica niente.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-08T17:30:00+01:00",
+      "testo": "",
+      "rifPost": "p-2026-01-02"
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-08T17:33:00+01:00",
+      "testo": "Mi raccomando sulla piscina: si paga alla SCUOLA con l'avviso pagoPA che trovate sul registro, NON ad Anna. Scadenza martedì 20 gennaio.",
+      "rifPost": null
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2026-01-08T21:02:00+01:00",
+      "testo": "Ma quindi quanto si paga per la piscina? E i soldi a chi si danno?",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2026-01-08T21:15:00+01:00",
+      "testo": "Giulia è tutto qui sopra 🙂 45€ con pagoPA entro il 20, non si danno soldi a nessuno di persona.",
+      "rifPost": "p-2026-01-02"
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2026-01-09T08:40:00+01:00",
+      "testo": "Scusate la domanda, il pagoPA si può fare a qualche sportello o serve per forza il telefono? Con lo SPID io litigo sempre.",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-01-09T09:05:00+01:00",
+      "testo": "Giovanni puoi pagarlo anche in tabaccheria o in banca portando il codice dell'avviso stampato, non serve SPID. Se hai problemi scrivimi in privato che ti mando i passaggi. E confermo quello che ha scritto Denise: questa quota non passa dalla cassa comune.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-09T13:02:00+01:00",
+      "testo": "",
+      "rifPost": "p-2026-01-03"
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2026-01-09T13:20:00+01:00",
+      "testo": "Quindi il borsone serve già da giovedì prossimo 15 o la prima lezione è solo di presentazione? Qualcuna mi conferma gentilmente?",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-09T13:34:00+01:00",
+      "testo": "Prima lezione giovedì 15 e borsone da quel giorno, Federica. Questa settimana niente piscina.",
+      "rifPost": null
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2026-01-09T18:50:00+01:00",
+      "testo": "GRAZIE DENISE 🙏🌸 UNA DOMANDA MA LA CUFFIA VA BENE ANCHE DI STOFFA?? AURORA CE L'HA DI STOFFA 😊🩱",
+      "rifPost": null
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2026-01-09T19:12:00+01:00",
+      "testo": "Rosa sì, di stoffa va benissimo, c'è scritto anche nell'avviso 😊 Bianca ha quella",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-10T09:31:00+01:00",
+      "testo": "Ho approfittato del sabato per fare ordine in bacheca: ho archiviato gli avvisi vecchi di novembre e dicembre (colloqui, recita, colletta). Quello che è ancora attuale lo trovate in alto.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-10T10:05:00+01:00",
+      "testo": "",
+      "rifPost": "p-2026-01-04"
+    },
+    {
+      "persona": "cristina.pagani",
+      "quando": "2026-01-10T11:40:00+01:00",
+      "testo": "Utile, grazie. Segnalo solo che in bacheca c'è ancora il menu di settembre: da lunedì fa fede questo nuovo. Denise quando riesci archivia il vecchio, così nessuno si confonde.",
+      "rifPost": "p-2026-01-04"
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-10T12:02:00+01:00",
+      "testo": "Vero Cristina, appena ho un attimo sistemo anche quello 👍",
+      "rifPost": null
+    },
+    {
+      "persona": "paolo.ferrari",
+      "quando": "2026-01-12T13:38:00+01:00",
+      "testo": "Primo giorno di menu nuovo: Tommaso riferisce \"pasta scotta e una cosa arancione non identificata\". Partenza col botto 😅",
+      "rifPost": null
+    },
+    {
+      "persona": "fatima.hassan",
+      "quando": "2026-01-12T14:00:00+01:00",
+      "testo": "Il nuovo gestore ha confermato le diete speciali? Con quello vecchio per Youssef era tutto segnato bene.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-12T14:25:00+01:00",
+      "testo": "Fatima sì, le diete già comunicate restano valide, in fondo al menu allegato c'è la legenda dei piatti alternativi. Per le lamentele sul cibo: segnatemele pure, porto tutto alla commissione mensa a fine mese.",
+      "rifPost": "p-2026-01-04"
+    },
+    {
+      "persona": "irene.sala",
+      "quando": "2026-01-12T15:30:00+01:00",
+      "testo": "Domanda da ultima arrivata: il progetto piscina si fa tutti gli anni? Gabriele non ha mai fatto un corso, parte proprio da zero, devo avvisare qualcuno?",
+      "rifPost": null
+    },
+    {
+      "persona": "davide.longo",
+      "quando": "2026-01-12T16:01:00+01:00",
+      "testo": "Tranquilla Irene, lo fanno ogni anno in quinta e il primo giorno li dividono per livelli, i principianti ci sono sempre. Non serve avvisare nessuno.",
+      "rifPost": null
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2026-01-14T20:15:00+01:00",
+      "testo": "Promemoria per domani: primo giorno di borsone! Cuffia, ciabatte, accappatoio, sacchetto. Ci siamo tutte? 😊",
+      "rifPost": null
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2026-01-15T07:35:00+01:00",
+      "testo": "Oggi c'è piscina giusto? E il borsone poi lo riportano a casa o resta a scuola?",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2026-01-15T07:48:00+01:00",
+      "testo": "Sì Giulia, ogni giovedì fino a marzo 🙂 il borsone torna a casa il pomeriggio con la roba bagnata. Qui c'è tutto.",
+      "rifPost": "p-2026-01-03"
+    },
+    {
+      "persona": "luca.bruno",
+      "quando": "2026-01-15T23:32:00+01:00",
+      "testo": "scusate l'ora, sono appena smontato dal turno. ho fatto adesso il pagopa della piscina, se non risulta subito è normale? non vorrei passare per moroso",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-01-16T08:05:00+01:00",
+      "testo": "Luca tranquillo, il registro ci mette un giorno o due ad aggiornarsi, fa fede la data del pagamento.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-16T17:00:00+01:00",
+      "testo": "",
+      "rifPost": "p-2026-01-05"
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-01-16T17:26:00+01:00",
+      "testo": "Confermo: gli 8€ del teatro li paga la cassa comune, non dovete consegnare nulla. Dopo questa spesa restiamo intorno ai 160€ di cassa, i conti precisi ve li do a febbraio come sempre.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-19T18:00:00+01:00",
+      "testo": "Promemoria: domani martedì 20 è l'ultimo giorno per la quota piscina su pagoPA. Dal registro risultano ancora alcuni pagamenti mancanti.",
+      "rifPost": "p-2026-01-02"
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2026-01-19T21:00:00+01:00",
+      "testo": "Genitori! Domani compie gli anni Leonardo 🎂 e il 28 tocca a Riccardo. Con Martina e Stefano abbiamo pensato a una festa unica per tutti e due: sabato 31 gennaio ore 16 alla ludoteca vicino alla scuola. Per il regalo proporrei 10€ a regalo, così prendiamo i due Lego grandi che desiderano. Che dite?",
+      "rifPost": null
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2026-01-19T21:24:00+01:00",
+      "testo": "La festa insieme è un'ottima idea, e parlo anche da papà di uno dei festeggiati. Sulla quota però no: 10€ a regalo per due regali fa 20€ a famiglia. Abbiamo sempre messo 5€ a festa, e non è questione di portafoglio ma di principio: se ogni volta si alza, a maggio stiamo a 15. Per me 5 a regalo e basta.",
+      "rifPost": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2026-01-19T21:40:00+01:00",
+      "testo": "Stefano però con 5€, tolti carta e biglietto, resta poco per il regalo vero e proprio... facciamo 7 come via di mezzo?",
+      "rifPost": null
+    },
+    {
+      "persona": "roberto.villa",
+      "quando": "2026-01-20T08:15:00+01:00",
+      "testo": "Buongiorno a tutti. Premesso che trovo bellissima l'idea della festa condivisa, che tra l'altro ai miei tempi non si usava e si facevano quindici feste separate con quindici regali, con aggravio notevole per le famiglie, e aperta e chiusa la parentesi sul fatto che la ludoteca mi sembra una scelta azzeccatissima perché al chiuso e a gennaio non si rischia il meteo, volevo solo dire che per me vanno bene sia 5 che 7 che 10 euro, l'importante è deciderlo presto e in modo chiaro, perché l'anno scorso per la festa di un compagno di nuoto di Beatrice si andò avanti una settimana senza decidere e alla fine tre famiglie portarono un regalo a parte, con imbarazzo generale. Scusate la lunghezza. P.S. Tanti auguri a Leonardo!",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-20T13:05:00+01:00",
+      "testo": "Avviso di servizio: stamattina è arrivata sull'app una richiesta di accesso da un account che non riconosco e l'ho rifiutata. Se per caso era un nonno o uno zio di qualcuno di voi, scrivetemi che lo facciamo entrare.",
+      "rifPost": null
+    },
+    {
+      "persona": "martina.colombo",
+      "quando": "2026-01-20T22:40:00+01:00",
+      "testo": "Grazie a tutti per gli auguri a Leonardo, era felicissimo. E grazie Valentina che organizzi 🙏 per noi va bene qualsiasi cifra decidiate.",
+      "rifPost": null
+    },
+    {
+      "persona": "simone.moretti",
+      "quando": "2026-01-21T08:50:00+01:00",
+      "testo": "Scusate, la scadenza della piscina era ieri vero? Me ne sono accorto solo adesso. Si può ancora pagare o Anita resta fuori dal corso?",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2026-01-21T09:10:00+01:00",
+      "testo": "Sì Simone, l'avviso pagoPA resta pagabile ancora per qualche giorno, fallo appena puoi così la segreteria non deve sollecitare.",
+      "rifPost": null
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2026-01-22T07:55:00+01:00",
+      "testo": "Io domenica avevo già preparato la busta con 10 euro come aveva scritto Valentina, adesso leggo che non è ancora deciso. La lascio aperta e aspetto istruzioni.",
+      "rifPost": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2026-01-23T09:12:00+01:00",
+      "testo": "Visto che non ne usciamo, ho chiesto a Denise di aprire un sondaggio sull'app: votiamo lì e chiudiamo la questione una volta per tutte 🙂",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-23T13:30:00+01:00",
+      "testo": "",
+      "rifPost": "p-2026-01-06"
+    },
+    {
+      "persona": "andrea.fontana",
+      "quando": "2026-01-23T19:02:00+01:00",
+      "testo": "Votato. Lo dico a denti stretti: per decidere ste cose il sondaggio fa meno danni di cinquanta messaggi.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-26T12:00:00+01:00",
+      "testo": "Dal registro manca ancora UN pagamento della piscina. Il diretto interessato si senta gentilmente chiamato in causa 🙂 oggi, per favore, che la segreteria mi ha già scritto due volte.",
+      "rifPost": null
+    },
+    {
+      "persona": "simone.moretti",
+      "quando": "2026-01-26T14:20:00+01:00",
+      "testo": "Fatto ADESSO, giuro. Scusate ancora, la prossima scadenza me la scrivo sul frigo 🙏",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-27T20:25:00+01:00",
+      "testo": "Sondaggio chiuso: vince 5€ a regalo, quindi 10€ a famiglia in tutto per Leonardo e Riccardo. Si consegnano in contanti a Valentina entro sabato. Tutti i dettagli della festa in bacheca ⬇️",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-27T20:26:00+01:00",
+      "testo": "",
+      "rifPost": "p-2026-01-07"
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2026-01-27T20:45:00+01:00",
+      "testo": "Grazie a tutti! Raccolgo io all'uscita da scuola giovedì e venerdì, oppure direttamente alla festa. Va benissimo una busta unica da 10€.",
+      "rifPost": null
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2026-01-28T08:10:00+01:00",
+      "testo": "Per il teatro di domani bisogna portare gli 8 euro?",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2026-01-28T08:25:00+01:00",
+      "testo": "No Giulia, paga la cassa comune, non serve portare nulla 🙂 qui i dettagli.",
+      "rifPost": "p-2026-01-05"
+    },
+    {
+      "persona": "paolo.ferrari",
+      "quando": "2026-01-28T09:02:00+01:00",
+      "testo": "Auguri a Riccardo! 🎂 Tommaso conta le ore per sabato, non parlava così tanto di una cosa dal derby (e ho detto tutto).",
+      "rifPost": null
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2026-01-28T20:30:00+01:00",
+      "testo": "Domani per il teatro: i bambini devono avere anche il borsone piscina o la lezione salta? Sono in confusione, qualcuna conferma?",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-01-28T20:41:00+01:00",
+      "testo": "Domani NIENTE piscina Federica, la lezione si recupera a marzo: c'è solo il teatro, quindi niente borsone. Si va in mattinata con lo scuolabus e si rientra per pranzo.",
+      "rifPost": null
+    },
+    {
+      "persona": "chiara.leone",
+      "quando": "2026-01-29T07:50:00+01:00",
+      "testo": "quindi oggi borsone sì o no?? scusate ho letto d fretta 😅",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2026-01-29T08:01:00+01:00",
+      "testo": "No borsone Chiara, oggi solo teatro! 🙂",
+      "rifPost": null
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2026-01-29T16:45:00+01:00",
+      "testo": "Tornati entusiasti dal Testoni! Bianca ha rifatto mezzo spettacolo in salotto 🎭❤️ Grazie a chi ha organizzato",
+      "rifPost": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2026-01-31T19:30:00+01:00",
+      "testo": "Festa riuscitissima 🎉 i regali sono piaciuti tantissimo, i bambini si sono divertiti come matti! Tra carta e biglietto sono avanzati 12€: li giro ad Anna per la cassa comune.",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-01-31T19:55:00+01:00",
+      "testo": "Ricevuti e segnati in cassa: +12€. Grazie Valentina, organizzazione perfetta.",
+      "rifPost": null
+    }
+  ],
+  "fatti": [
+    {
+      "id": "f-mensa-menu-nuovo",
+      "domanda": "Qual è il menu della mensa in vigore?",
+      "risposta": "Dal 12 gennaio 2026 la mensa ha un nuovo gestore e vale solo il nuovo menu invernale a 4 settimane (allegato alla circolare sul registro); il menu pubblicato a settembre non è più valido. Le diete speciali restano confermate.",
+      "rifPost": "p-2026-01-04",
+      "pubblicatoIl": "2026-01-10T10:00:00+01:00",
+      "sostituisce": "f-mensa-menu"
+    },
+    {
+      "id": "f-piscina-quota",
+      "domanda": "Quanto costa il progetto piscina e come/entro quando si paga?",
+      "risposta": "45€ a bambino, da pagare alla scuola tramite avviso pagoPA sul registro elettronico entro martedì 20 gennaio 2026. Non si consegna nulla alla tesoriera: non passa dalla cassa comune.",
+      "rifPost": "p-2026-01-02",
+      "pubblicatoIl": "2026-01-08T17:30:00+01:00",
+      "sostituisce": null
+    },
+    {
+      "id": "f-borsone-giorno",
+      "domanda": "In quale giorno serve il borsone della piscina e cosa deve contenere?",
+      "risposta": "Ogni giovedì dal 15 gennaio a fine marzo: costume, cuffia (anche di stoffa), ciabatte antiscivolo, accappatoio o telo, sacchetto per la roba bagnata. Unica eccezione: giovedì 29 gennaio la piscina salta per l'uscita a teatro.",
+      "rifPost": "p-2026-01-03",
+      "pubblicatoIl": "2026-01-09T13:00:00+01:00",
+      "sostituisce": null
+    },
+    {
+      "id": "f-regalo-condiviso-quota",
+      "domanda": "Quanto si dà per il regalo dei compleanni condivisi di Leonardo e Riccardo, e a chi?",
+      "risposta": "5€ a regalo, quindi 10€ in totale a famiglia, in contanti a Valentina Barbieri entro la festa di sabato 31 gennaio (raccolta all'uscita da scuola giovedì e venerdì o alla festa).",
+      "rifPost": "p-2026-01-07",
+      "pubblicatoIl": "2026-01-27T20:20:00+01:00",
+      "sostituisce": null
+    }
+  ]
+}

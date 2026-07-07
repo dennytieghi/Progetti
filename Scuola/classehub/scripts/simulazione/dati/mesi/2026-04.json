@@ -1,0 +1,772 @@
+{
+  "mese": "2026-04",
+  "post": [
+    {
+      "rif": "p-2026-04-01",
+      "tipo": "notice",
+      "titolo": "Vacanze di Pasqua: si rientra mercoledì 8 aprile",
+      "corpo": "La scuola resta chiusa da giovedì 2 a martedì 7 aprile per le vacanze di Pasqua. Si rientra mercoledì 8 aprile con orario pieno e mensa regolare. Buone vacanze a tutte le famiglie!",
+      "creatoIl": "2026-04-01T13:00:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-04-20T21:30:00+02:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2026-04-02",
+      "tipo": "deadline",
+      "titolo": "Colloqui 13-17 aprile: prenota lo slot entro venerdì 10",
+      "corpo": "La prossima settimana ci sono i colloqui individuali con le maestre, in aula 5B, dalle 16:00 alle 18:00, slot da 20 minuti. Scegli il tuo slot entro venerdì 10 aprile: scrivimi qui o in privato con giorno e orario preferito. Chi non sceglie entro venerdì riceve uno slot assegnato d'ufficio. Pubblico la tabella completa sabato.",
+      "creatoIl": "2026-04-08T13:25:00+02:00",
+      "dueDate": "2026-04-10T23:59:00+02:00",
+      "pinned": false,
+      "archiviatoIl": "2026-04-20T21:32:00+02:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2026-04-03",
+      "tipo": "deadline",
+      "titolo": "Foto di classe mercoledì 22/4: autorizzazione entro venerdì 17",
+      "corpo": "Mercoledì 22 aprile il fotografo viene a scuola per la foto di classe (è la quinta: l'ultima della primaria!). Oggi le maestre hanno messo nel diario il modulo di autorizzazione: va firmato e riconsegnato alla maestra entro venerdì 17 aprile. Senza autorizzazione il bambino non può comparire nella foto di gruppo. Dopo la foto arriveranno le istruzioni per ordinare le stampe.",
+      "creatoIl": "2026-04-09T18:00:00+02:00",
+      "dueDate": "2026-04-17T13:00:00+02:00",
+      "pinned": false,
+      "archiviatoIl": "2026-04-20T21:33:00+02:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2026-04-04",
+      "tipo": "material",
+      "titolo": "Tabella slot colloqui 13-17 aprile",
+      "corpo": "Ecco la tabella definitiva degli slot per i colloqui della prossima settimana, con giorno e orario per ogni famiglia. Controllate il vostro: se avete bisogno di scambiare lo slot con un altro genitore, mettetevi d'accordo tra voi e avvisatemi, così aggiorno la tabella e le maestre hanno l'elenco giusto.",
+      "creatoIl": "2026-04-10T13:10:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-04-20T21:35:00+02:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2026-04-05",
+      "tipo": "deadline",
+      "titolo": "Gita a Ravenna 7 maggio: autorizzazione e quota 28€ entro venerdì 24/4",
+      "corpo": "Come deciso in assemblea, la gita di fine anno è giovedì 7 maggio a Ravenna: mattina ai mosaici con guida, pomeriggio in spiaggia a Marina di Ravenna, viaggio in pullman. Entro venerdì 24 aprile servono due cose: 1) l'autorizzazione firmata, da riconsegnare alla maestra (modulo nel diario); 2) la quota di 28€ ad Anna Ricci, la nostra tesoriera. Si può pagare con bonifico (IBAN: IT60 X054 2811 1010 0000 0123 456, causale: gita Ravenna + nome del bambino) oppure in contanti in busta chiusa con il nome, direttamente ad Anna all'uscita da scuola. Cerchiamo anche 2 genitori accompagnatori: chi è disponibile lo scriva in chat. I dettagli su orari e ritrovo arriveranno a inizio maggio.",
+      "creatoIl": "2026-04-13T12:55:00+02:00",
+      "dueDate": "2026-04-24T18:00:00+02:00",
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2026-04-06",
+      "tipo": "poll",
+      "titolo": "Sondaggio: pranzo in gita a Ravenna",
+      "corpo": "Per la gita del 7 maggio dobbiamo decidere il pranzo: sacco da casa (ognuno porta il suo nello zainetto) oppure struttura convenzionata vicino alla spiaggia, con 6€ in più a bambino da aggiungere alla quota. Votate entro martedì 21 sera, così confermo la scelta alla scuola.",
+      "creatoIl": "2026-04-14T08:55:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true,
+      "sondaggio": {
+        "chiudeIl": "2026-04-21T20:00:00+02:00",
+        "opzioni": [
+          "Pranzo al sacco portato da casa",
+          "Pranzo in struttura convenzionata (+6€ a bambino)"
+        ],
+        "voti": [
+          {
+            "persona": "marco.rizzo",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "laura.bianchi",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "chiara.leone",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "stefano.gallo",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "federica.russo",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "sara.greco",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "elena.gatti",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "davide.longo",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "anna.ricci",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "valentina.barbieri",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "fatima.hassan",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "cristina.pagani",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "irene.sala",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "denise.fabbri",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "paolo.ferrari",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "giulia.esposito",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "giovanni.neri",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "rosa.marino",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "luca.bruno",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "andrea.fontana",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "roberto.villa",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "simone.moretti",
+            "opzioni": [
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "rif": "p-2026-04-07",
+      "tipo": "notice",
+      "titolo": "Promemoria quota gita: mancano 6 famiglie",
+      "corpo": "Promemoria gentile: entro venerdì 24 aprile vanno consegnati ad Anna la quota di 28€ e l'autorizzazione firmata per la gita a Ravenna. Al momento hanno pagato 16 famiglie su 22. E già che ci siete: il sondaggio sul pranzo chiude domani sera, chi non ha ancora votato lo faccia oggi. Grazie!",
+      "creatoIl": "2026-04-20T08:55:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2026-04-08",
+      "tipo": "notice",
+      "titolo": "Gita: accompagnatori confermati",
+      "corpo": "Gli accompagnatori genitori per la gita del 7 maggio sono Davide Longo e Valentina Barbieri. Grazie a entrambi per la disponibilità! Nel sondaggio ha vinto il pranzo al sacco, quindi la quota resta 28€. I dettagli su orario di ritrovo e pullman arrivano a inizio maggio.",
+      "creatoIl": "2026-04-21T12:55:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2026-04-09",
+      "tipo": "material",
+      "titolo": "Foto di classe: kit da 12€ e come ordinare",
+      "corpo": "La foto di classe è stata scattata stamattina! Il fotografo propone un kit da 12€ che contiene: foto di gruppo 20x30, 2 stampe singole del bambino e un portafoto ricordo della quinta. Per ordinare: compilate il modulo che le maestre mettono nel diario domani, indicando la quantità di kit (se ne può ordinare più di uno, ad esempio per i nonni), e riconsegnatelo entro martedì 5 maggio con i soldi esatti in busta chiusa. Le stampe arriveranno a fine maggio.",
+      "creatoIl": "2026-04-22T17:25:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2026-04-10",
+      "tipo": "notice",
+      "titolo": "Ultimo giorno per la quota gita: domani venerdì 24",
+      "corpo": "Ultimo promemoria: domani, venerdì 24 aprile, è l'ultimo giorno per consegnare ad Anna la quota di 28€ e l'autorizzazione per la gita a Ravenna. Mancano poche famiglie: chi non riesce entro domani scriva ad Anna in privato per accordarsi, così non blocchiamo la conferma del pullman.",
+      "creatoIl": "2026-04-23T08:25:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true
+    }
+  ],
+  "richieste": [
+    {
+      "persona": "cristina.pagani",
+      "testo": "La tabella degli slot dei colloqui sta girando come screenshot in chat e ognuno ha una versione diversa. Si potrebbe pubblicarla come post in bacheca, così dopo gli scambi resta una sola versione aggiornata?",
+      "creatoIl": "2026-04-09T21:15:00+02:00",
+      "esito": "handled",
+      "convertitaIn": "p-2026-04-04"
+    },
+    {
+      "persona": "fatima.hassan",
+      "testo": "Una domanda sul modulo di autorizzazione per la foto di classe: basta la firma di un solo genitore o servono tutte e due? Vorrei compilarlo giusto la prima volta, grazie.",
+      "creatoIl": "2026-04-10T14:40:00+02:00",
+      "esito": "handled",
+      "convertitaIn": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "testo": "Denise, per la gita facciamo un sondaggio pranzo al sacco vs struttura convenzionata? Così chiudiamo la questione prima che la scuola debba confermare i numeri.",
+      "creatoIl": "2026-04-13T20:30:00+02:00",
+      "esito": "handled",
+      "convertitaIn": "p-2026-04-06"
+    },
+    {
+      "persona": "giovanni.neri",
+      "testo": "Per la quota della gita si può pagare in contanti dandoli a mano ad Anna? Io con i bonifici dal telefono mi perdo sempre, preferisco la busta come per la biblioteca.",
+      "creatoIl": "2026-04-18T11:05:00+02:00",
+      "esito": "handled",
+      "convertitaIn": null
+    }
+  ],
+  "chat": [
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-01T13:02:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-04-01"
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2026-04-01T13:22:00+02:00",
+      "testo": "Quindi confermate che si rientra mercoledì 8, giusto? Non giovedì? Chiedo perché l'anno scorso avevano aggiunto un giorno",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2026-04-01T13:40:00+02:00",
+      "testo": "Sì Federica, mercoledì 8, è scritto nel post di Denise 🙂",
+      "rifPost": null
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2026-04-01T14:05:00+02:00",
+      "testo": "GRAZIE DENISE BUONA PASQUA A TUTTI ❤️🐣🌸",
+      "rifPost": null
+    },
+    {
+      "persona": "paolo.ferrari",
+      "quando": "2026-04-01T18:30:00+02:00",
+      "testo": "Buona Pasqua famiglie! Chi resta a Bologna: sabato c'è il torneo dei bimbi al parco, Tommaso gioca alle 10 se qualcuno vuole passare ⚽",
+      "rifPost": null
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2026-04-03T10:15:00+02:00",
+      "testo": "Scusate ma quando si rientra a scuola dopo Pasqua?",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2026-04-03T10:28:00+02:00",
+      "testo": "Ciao Giulia, si rientra mercoledì 8, trovi tutto qui 👇",
+      "rifPost": "p-2026-04-01"
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2026-04-05T09:12:00+02:00",
+      "testo": "BUONA PASQUA A TUTTE LE FAMIGLIE DELLA 5B ❤️❤️🐣🌷🙏",
+      "rifPost": null
+    },
+    {
+      "persona": "luca.bruno",
+      "quando": "2026-04-06T23:31:00+02:00",
+      "testo": "scusate l'orario, sto facendo i turni. confermo che si rientra l'8 vero? e la mensa è normale o solo mattina?",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-07T09:05:00+02:00",
+      "testo": "Sì Luca, domani si rientra con orario pieno e mensa regolare 🙂 Buona ultima giornata di vacanza a tutti!",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-08T13:27:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-04-02"
+    },
+    {
+      "persona": "marco.rizzo",
+      "quando": "2026-04-08T19:45:00+02:00",
+      "testo": "Ciao a tutti, scusate se scrivo poco qui, leggo sempre ma sono più da app che da chat. Domani Alessandro compie 10 anni e sabato 11 festeggiamo al parco Lunetta Gamberini, dalle 15:30 vicino al chiosco: sono invitati tutti i bambini della classe, merenda offerta da noi. Niente regali impegnativi, davvero: gli fa piacere avere i compagni, il resto non serve. Se potete confermarmi entro venerdì per regolarmi con la merenda mi fate un favore. Grazie, Marco",
+      "rifPost": null
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2026-04-08T19:52:00+02:00",
+      "testo": "Che bello Marco!! Bianca c'è sicuro 🎉❤️",
+      "rifPost": null
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2026-04-08T20:10:00+02:00",
+      "testo": "Grazie Marco, Giulia viene volentieri! Alla merenda ci sarà qualcosa senza frutta secca? Scusa la domanda ma preferisco chiedere prima",
+      "rifPost": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2026-04-08T20:24:00+02:00",
+      "testo": "Edoardo presente! 🎈 Federica al chiosco hanno anche cose confezionate senza frutta secca, comunque lo dico io a Marco che ci sentiamo per la merenda, tranquilla",
+      "rifPost": null
+    },
+    {
+      "persona": "chiara.leone",
+      "quando": "2026-04-08T21:03:00+02:00",
+      "testo": "ok x noi, nicolò viene",
+      "rifPost": null
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2026-04-09T08:15:00+02:00",
+      "testo": "TANTI AUGURI AD ALESSANDRO 🎂🎉❤️ 10 ANNI CHE BELLO AUGURI DA AURORA E DALLA NONNA",
+      "rifPost": null
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2026-04-09T17:20:00+02:00",
+      "testo": "Scusate, per i colloqui come faccio a prenotare? Ho aperto il messaggio ma non trovo dove si scrive l'orario",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2026-04-09T17:35:00+02:00",
+      "testo": "Giovanni basta rispondere qui o scrivere a Denise con il giorno e l'ora che preferisci, la tabella la fa lei. Il post con gli orari è questo, se non riesci ti chiamo io 🙂",
+      "rifPost": "p-2026-04-02"
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-09T18:02:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-04-03"
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2026-04-10T08:40:00+02:00",
+      "testo": "Ho firmato l'autorizzazione per la foto, la consegno lunedì. Va bene lunedì vero? Non serve prima?",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-10T08:55:00+02:00",
+      "testo": "Va benissimo Federica, c'è tempo fino a venerdì 17 come scritto nel post 🙂",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-10T13:12:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-04-04"
+    },
+    {
+      "persona": "roberto.villa",
+      "quando": "2026-04-10T14:30:00+02:00",
+      "testo": "Buongiorno a tutti. Premetto che di norma cerco di organizzarmi per tempo e che mi scuso in anticipo per la lunghezza del messaggio, ma la questione richiede un minimo di contesto. Come alcuni di voi sanno lavoro in una ditta di impiantistica e in questo periodo siamo in fase di collaudo su un cantiere fuori Bologna, con orari che purtroppo non decido io. Venendo al punto: ho lo slot del colloquio martedì 14 alle 16:40, ma mi è sopraggiunto un impegno lavorativo improrogabile proprio quel pomeriggio. Ci sarebbe qualcuno con uno slot giovedì 16 o venerdì 17 disposto a scambiarlo con il mio? Ovviamente a Denise l'onere, di cui mi scuso, di aggiornare la tabella. P.S. Beatrice nel frattempo ha ritrovato il diario che credevamo perso: era nell'armadietto della palestra.",
+      "rifPost": null
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2026-04-10T15:02:00+02:00",
+      "testo": "Villa te lo scambio io: ho venerdì 17 alle 16:20 e a me martedì andrebbe pure meglio. Almeno la storia degli slot funziona, non come le quote della gita",
+      "rifPost": null
+    },
+    {
+      "persona": "roberto.villa",
+      "quando": "2026-04-10T15:20:00+02:00",
+      "testo": "Perfetto Stefano, ti ringrazio davvero, mi togli da un impiccio. Denise, quando hai un momento puoi registrare lo scambio in tabella? Grazie ancora a entrambi.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-10T16:00:00+02:00",
+      "testo": "Fatto, tabella aggiornata con lo scambio Stefano/Roberto ✅",
+      "rifPost": null
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2026-04-11T18:40:00+02:00",
+      "testo": "Festa bellissima oggi, grazie Marco e ancora auguri ad Alessandro! 🎉 Ho fatto qualche foto ai bimbi, le giro in privato a chi le vuole 📸",
+      "rifPost": null
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2026-04-11T19:15:00+02:00",
+      "testo": "GRAZIE DELLA BELLA FESTA AURORA SI È DIVERTITA TANTISSIMO ❤️🎂🙏",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-13T13:00:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-04-05"
+    },
+    {
+      "persona": "simone.moretti",
+      "quando": "2026-04-13T14:12:00+02:00",
+      "testo": "Scusate, qualcuno mi manda l'IBAN di Anna per la quota della gita? 🙏",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2026-04-13T14:20:00+02:00",
+      "testo": "Simone è lo stesso di ottobre per la cassa comune, te l'avevo già girato allora 😄 Comunque è scritto nel post della gita, eccolo 👇",
+      "rifPost": "p-2026-04-05"
+    },
+    {
+      "persona": "simone.moretti",
+      "quando": "2026-04-13T14:26:00+02:00",
+      "testo": "vero, scusate 🤦‍♂️ trovato, grazie Sara",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-04-13T15:05:00+02:00",
+      "testo": "Confermo: bonifico all'IBAN che trovate nel post (causale: gita Ravenna + nome del bambino) oppure contanti in busta chiusa con il nome, a me all'uscita. Segno tutto man mano. Entro venerdì 24 mi raccomando, poi devo confermare il pullman",
+      "rifPost": null
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2026-04-13T16:40:00+02:00",
+      "testo": "28€ per una giornata restano tanti, l'avevo detto anche in assemblea. Comunque pago, non ricominciamo la discussione",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-13T16:55:00+02:00",
+      "testo": "Grazie Stefano 🙂 Approfitto: cerchiamo 2 genitori accompagnatori per il 7 maggio, chi può venire?",
+      "rifPost": null
+    },
+    {
+      "persona": "davide.longo",
+      "quando": "2026-04-13T17:10:00+02:00",
+      "testo": "Io ci sono. Come per la biblioteca: ho già fatto l'accompagnatore quest'anno quindi la scuola ha già i miei documenti",
+      "rifPost": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2026-04-13T17:22:00+02:00",
+      "testo": "Ci sono io come seconda! Così in spiaggia organizzo io i giochi e le maestre respirano 😄",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-13T17:30:00+02:00",
+      "testo": "Perfetto, Davide e Valentina 👏 Lo segno nel post della gita così resta scritto",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-14T08:57:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-04-06"
+    },
+    {
+      "persona": "chiara.leone",
+      "quando": "2026-04-14T09:14:00+02:00",
+      "testo": "votato, sacco x noi",
+      "rifPost": null
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2026-04-14T09:30:00+02:00",
+      "testo": "Votato pranzo al sacco, ovviamente: la struttura sono altri 6 euro a testa che non servono a niente",
+      "rifPost": null
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2026-04-14T10:05:00+02:00",
+      "testo": "Ma il pranzo al sacco lo dobbiamo preparare noi da casa?",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2026-04-14T10:12:00+02:00",
+      "testo": "Sì Giulia, ognuno il suo nello zainetto, è spiegato nel sondaggio 🙂",
+      "rifPost": null
+    },
+    {
+      "persona": "fatima.hassan",
+      "quando": "2026-04-14T12:30:00+02:00",
+      "testo": "Votato, grazie Denise per il sondaggio. Per me è comodo perché posso rileggere con calma prima di decidere",
+      "rifPost": null
+    },
+    {
+      "persona": "simone.moretti",
+      "quando": "2026-04-15T16:35:00+02:00",
+      "testo": "Scusate ma il mio colloquio era OGGI alle 16:20?? Sono ancora in ufficio 😰",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-15T16:48:00+02:00",
+      "testo": "Simone dalla tabella eri oggi alle 16:20 sì... scrivi subito alla maestra sul diario di Anita o chiama la segreteria, magari ti recupera venerdì",
+      "rifPost": null
+    },
+    {
+      "persona": "simone.moretti",
+      "quando": "2026-04-15T18:20:00+02:00",
+      "testo": "fatto, gentilissima, mi ha spostato a venerdì alle 17:00. grazie e scusate ancora",
+      "rifPost": null
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2026-04-15T19:00:00+02:00",
+      "testo": "Per la festa di sabato ringrazio anche da parte nostra, Marco si è divertito molto. Il mio Marco intendo, non il papà di Alessandro",
+      "rifPost": null
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2026-04-16T17:45:00+02:00",
+      "testo": "Colloquio fatto. La maestra ha parlato di prepararli per le medie... qualcun altro ha avuto la stessa impressione? Ditemi che non è solo per Giulia, ora sono in ansia 😅",
+      "rifPost": null
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2026-04-16T18:02:00+02:00",
+      "testo": "Federica tranquilla, l'hanno detto uguale anche a me per Bianca, è il discorso standard di quinta ❤️",
+      "rifPost": null
+    },
+    {
+      "persona": "andrea.fontana",
+      "quando": "2026-04-16T18:30:00+02:00",
+      "testo": "Detto pure a me, parola per parola. Comunque lo ammetto: la tabella degli slot nell'app ha evitato il solito delirio di cinquanta messaggi per gli orari",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-17T08:10:00+02:00",
+      "testo": "Ultimo giorno di colloqui oggi. E promemoria: entro oggi va consegnata l'autorizzazione per la foto di classe 👇 Chi se n'è dimenticato la porti lunedì mattina direttamente alla maestra",
+      "rifPost": "p-2026-04-03"
+    },
+    {
+      "persona": "chiara.leone",
+      "quando": "2026-04-17T08:25:00+02:00",
+      "testo": "ops me la sono scordata, la porto lun grz",
+      "rifPost": null
+    },
+    {
+      "persona": "luca.bruno",
+      "quando": "2026-04-17T23:28:00+02:00",
+      "testo": "autorizzazione foto consegnata stamattina prima del turno. per la quota gita passo lunedì da Anna, ci sto dentro giusto?",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-18T09:30:00+02:00",
+      "testo": "Sì Luca, lunedì va benissimo, la scadenza è venerdì 24 🙂",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-20T08:57:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-04-07"
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-04-20T09:15:00+02:00",
+      "testo": "Aggiornamento cassa: 16 famiglie su 22 hanno consegnato la quota gita. Mancano 6: vi aspetto entro venerdì così venerdì sera chiudo i conti e confermo il pullman 🙂",
+      "rifPost": null
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2026-04-20T12:10:00+02:00",
+      "testo": "Anna io passo domani mattina con i contanti, va bene la busta con il nome come per la biblioteca? Denise mi ha risposto nell'app che si può",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-04-20T12:30:00+02:00",
+      "testo": "Perfetto Giovanni, busta chiusa con nome, ti segno domani. Grazie!",
+      "rifPost": null
+    },
+    {
+      "persona": "paolo.ferrari",
+      "quando": "2026-04-20T21:15:00+02:00",
+      "testo": "Bonifico fatto ora, scusate il ritardo! Comunque sabato vittoria 3-2 dei nostri, doppietta di Tommaso, lo dico qui perché a scuola non me lo fanno raccontare ⚽😄",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-21T12:57:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-04-08"
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2026-04-22T08:20:00+02:00",
+      "testo": "Stamattina erano tutti bellissimi per la foto! Bianca si è fatta la treccia da sola alle 6:45 😍 L'ultima foto di classe della primaria, non ci pensiamo troppo che mi commuovo",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-22T17:28:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-04-09"
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2026-04-22T17:50:00+02:00",
+      "testo": "DENISE SI POSSONO AVERE 3 COPIE? UNA PER NOI UNA PER I NONNI DI MODENA E UNA PER LO ZIO ❤️🙏",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-22T18:05:00+02:00",
+      "testo": "Certo Rosa! Nel modulo d'ordine scrivi quantità 3: sono 12€ a kit, quindi 36€ in busta",
+      "rifPost": null
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2026-04-22T18:20:00+02:00",
+      "testo": "Scusate ma quanto costa il kit delle foto?",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2026-04-22T18:24:00+02:00",
+      "testo": "12€, Giulia 😅 È scritto due messaggi sopra e nel post, eccolo 👇",
+      "rifPost": "p-2026-04-09"
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-23T08:27:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-04-10"
+    },
+    {
+      "persona": "simone.moretti",
+      "quando": "2026-04-23T13:45:00+02:00",
+      "testo": "quota gita pagata ora con bonifico, come sempre all'ultimo, scusate 🤦‍♂️",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-04-23T14:00:00+02:00",
+      "testo": "Ricevuto Simone ✅ A questo punto manca solo una famiglia, la sento io in privato",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-04-24T18:30:00+02:00",
+      "testo": "Chiusa la raccolta gita: 21 famiglie su 22, pullman confermato. Per l'ultima quota ho già scritto in privato, sistemiamo la prossima settimana. Buon fine settimana e buon 25 aprile a tutti",
+      "rifPost": null
+    },
+    {
+      "persona": "martina.colombo",
+      "quando": "2026-04-30T21:40:00+02:00",
+      "testo": "Scusate il silenzio, periodo complicato. Ho appena fatto il bonifico ad Anna per la gita, Leonardo ci sarà 🙏",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-04-30T21:55:00+02:00",
+      "testo": "Ricevuto Martina, tutto a posto ✅ Quote gita 22 su 22 🎉",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-04-30T22:10:00+02:00",
+      "testo": "Grazie a tutti, raccolta completa! A inizio maggio pubblico i dettagli su orari, ritrovo e pullman. Ci siamo quasi 🙂",
+      "rifPost": null
+    }
+  ],
+  "fatti": [
+    {
+      "id": "f-gita-quota",
+      "domanda": "Quanto costa la gita a Ravenna, a chi si paga ed entro quando?",
+      "risposta": "28€ da consegnare ad Anna Ricci (bonifico o contanti in busta chiusa) entro venerdì 24 aprile",
+      "rifPost": "p-2026-04-05",
+      "pubblicatoIl": "2026-04-13T12:55:00+02:00",
+      "sostituisce": null
+    },
+    {
+      "id": "f-colloqui-prenotazione--2026-04",
+      "domanda": "Come si prenotano i colloqui individuali di aprile?",
+      "risposta": "Scegliendo uno slot da 20 minuti (13-17 aprile, ore 16-18) e comunicandolo a Denise entro venerdì 10 aprile; la tabella definitiva degli slot è pubblicata in bacheca",
+      "rifPost": "p-2026-04-02",
+      "pubblicatoIl": "2026-04-08T13:25:00+02:00",
+      "sostituisce": null
+    },
+    {
+      "id": "f-foto-kit-costo",
+      "domanda": "Quanto costa il kit della foto di classe e come si ordina?",
+      "risposta": "12€ a kit (foto di gruppo 20x30, 2 stampe singole e portafoto); si ordina con il modulo nel diario entro il 5 maggio, soldi esatti in busta chiusa",
+      "rifPost": "p-2026-04-09",
+      "pubblicatoIl": "2026-04-22T17:25:00+02:00",
+      "sostituisce": null
+    },
+    {
+      "id": "f-gita-accompagnatori",
+      "domanda": "Chi sono i genitori accompagnatori della gita a Ravenna?",
+      "risposta": "Davide Longo e Valentina Barbieri",
+      "rifPost": "p-2026-04-08",
+      "pubblicatoIl": "2026-04-21T12:55:00+02:00",
+      "sostituisce": null
+    }
+  ]
+}

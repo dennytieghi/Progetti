@@ -1,0 +1,748 @@
+{
+  "mese": "2025-10",
+  "post": [
+    {
+      "rif": "p-2025-10-01",
+      "tipo": "notice",
+      "titolo": "Sciopero scuola venerdì 3 ottobre: servizio non garantito",
+      "corpo": "Venerdì 3 ottobre è indetto uno sciopero del comparto scuola. La scuola comunica che il servizio NON è garantito: non sappiamo in anticipo quali maestre aderiranno. Come funziona: portate comunque i bambini all'orario normale; se le maestre presenti non bastano, la classe non entra e ce lo dicono al cancello. Il pre-scuola è sospeso in ogni caso. Se la classe entra, la mensa funziona regolarmente. Appena so qualcosa venerdì mattina scrivo qui e in chat.",
+      "creatoIl": "2025-10-01T13:40:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2025-10-31T21:35:00+01:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-10-02",
+      "tipo": "notice",
+      "titolo": "Assemblea di classe martedì 7 ottobre ore 17:00",
+      "corpo": "Martedì 7 ottobre alle 17:00, nella nostra aula, c'è l'assemblea di classe di inizio anno con le maestre. Ordine del giorno: presentazione della programmazione, cassa comune di classe, uscite didattiche previste, elezione dei rappresentanti del 23 ottobre. I bambini non possono restare a scuola durante l'assemblea. Chi non riesce a venire: pubblicherò qui un breve verbale con le decisioni prese.",
+      "creatoIl": "2025-10-02T17:20:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2025-10-31T21:36:00+01:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-10-03",
+      "tipo": "notice",
+      "titolo": "Compleanno di Sofia: festa sabato 11 ottobre + regalo di classe",
+      "corpo": "Sofia compie 10 anni! La festa è sabato 11 ottobre alle 16:30 alla ludoteca Il Girotondo (via degli Orti). Tutta la classe è invitata, la mamma chiede solo una conferma entro giovedì. Per il regalo di classe raccogliamo come al solito 5€ a famiglia IN CONTANTI: li ritira Valentina al cancello martedì e mercoledì mattina, meglio in una busta con il nome del bambino.",
+      "creatoIl": "2025-10-06T18:30:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2025-10-31T21:37:00+01:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-10-04",
+      "tipo": "material",
+      "titolo": "Verbale assemblea di classe del 7 ottobre",
+      "corpo": "In allegato il verbale dell'assemblea di oggi, in breve: 1) Programmazione: quest'anno progetto lettura in biblioteca (uscita a novembre, gratuita) e probabile progetto piscina da gennaio, dettagli quando la scuola conferma. 2) Cassa comune: approvata quota di 20€ a famiglia, coprirà teatro (gennaio), museo (marzo) e piccole spese; tesoriera Anna, rendiconto a febbraio. Pubblico un avviso dedicato con i dettagli per il pagamento. 3) Elezioni rappresentanti giovedì 23 ottobre, seguirà avviso. 4) Le maestre chiedono di controllare il diario tutti i giorni.",
+      "creatoIl": "2025-10-07T21:10:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-10-05",
+      "tipo": "deadline",
+      "titolo": "Cassa comune: 20€ a famiglia entro venerdì 31 ottobre",
+      "corpo": "Come deciso in assemblea, raccogliamo 20€ a famiglia per la cassa comune di classe. Servono per: biglietto del teatro a gennaio (8€), museo a marzo (6€) e piccole spese durante l'anno (fotocopie, materiali). Come pagare, entro venerdì 31 ottobre: 1) Bonifico ad Anna Ricci, IBAN IT60X0542811101000000123456, causale 'Cassa comune 5B + nome del bambino'. 2) Oppure contanti in busta chiusa con il nome, direttamente ad Anna al cancello. Anna segna tutti i pagamenti e a febbraio pubblica il rendiconto.",
+      "creatoIl": "2025-10-08T13:15:00+02:00",
+      "dueDate": "2025-10-31T23:59:00+01:00",
+      "pinned": false,
+      "archiviatoIl": "2026-01-10T18:20:00+01:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-10-06",
+      "tipo": "deadline",
+      "titolo": "Promemoria: assicurazione scolastica entro mercoledì 15 ottobre",
+      "corpo": "Promemoria per chi non ha ancora pagato: l'assicurazione scolastica con il contributo volontario scade mercoledì 15 ottobre. Si paga con pagoPA usando l'avviso arrivato con la circolare di settembre (va bene anche il tabaccaio o la ricevitoria, basta conservare la ricevuta). Attenzione: serve un pagamento per ogni figlio iscritto, ognuno con il suo avviso. La ricevuta non va consegnata: la scuola vede i pagamenti in automatico. Chi ha dubbi sul proprio pagamento può chiedere in segreteria.",
+      "creatoIl": "2025-10-10T08:50:00+02:00",
+      "dueDate": "2025-10-15T23:59:00+02:00",
+      "pinned": false,
+      "archiviatoIl": "2025-10-31T21:38:00+01:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-10-07",
+      "tipo": "notice",
+      "titolo": "Elezione rappresentanti di classe: giovedì 23 ottobre",
+      "corpo": "Giovedì 23 ottobre si vota per i rappresentanti di classe, in aula dalle 16:45 alle 18:45. Come funziona: si firma il registro delle presenze, si possono esprimere fino a due preferenze, può candidarsi (o essere votato) qualunque genitore della classe. Si vota ogni anno, anche se i rappresentanti erano già stati eletti l'anno scorso. Non serve fermarsi tutto il tempo: si entra, si vota e si va. Pubblicherò l'esito qui la sera stessa.",
+      "creatoIl": "2025-10-16T13:30:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2025-10-31T21:39:00+01:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-10-08",
+      "tipo": "poll",
+      "titolo": "Festa di Aurora: sabato 25 o domenica 26?",
+      "corpo": "Aurora compie gli anni il 29 ottobre e la famiglia vuole festeggiare con tutta la classe il fine settimana prima. Ci chiedono di scegliere il giorno che va meglio alla maggioranza: votate entro martedì 21 sera, così riescono a prenotare la sala. La festa sarà nel pomeriggio, seguirà invito con orario e indirizzo.",
+      "creatoIl": "2025-10-17T17:45:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-01-10T18:21:00+01:00",
+      "condivisoInChat": true,
+      "sondaggio": {
+        "chiudeIl": "2025-10-21T21:00:00+02:00",
+        "opzioni": [
+          "Sabato 25 ottobre pomeriggio",
+          "Domenica 26 ottobre pomeriggio"
+        ],
+        "voti": [
+          {
+            "persona": "marco.rizzo",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "laura.bianchi",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "sara.greco",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "elena.gatti",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "valentina.barbieri",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "anna.ricci",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "chiara.leone",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "davide.longo",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "federica.russo",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "cristina.pagani",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "stefano.gallo",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "fatima.hassan",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "denise.fabbri",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "giovanni.neri",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "paolo.ferrari",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "luca.bruno",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "giulia.esposito",
+            "opzioni": [
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "rif": "p-2025-10-09",
+      "tipo": "notice",
+      "titolo": "Festa di Aurora: domenica 26 ottobre ore 16, sala parrocchiale",
+      "corpo": "Ha vinto la domenica! La festa per i 10 anni di Aurora è domenica 26 ottobre alle 16:00 nella sala parrocchiale di San Giuseppe (via Marzabotto 12, c'è il parcheggio interno). Sono benvenuti anche fratelli e sorelle. Merenda offerta dalla famiglia. Per il regalo di classe: soliti 5€ in contanti a Valentina, al cancello giovedì e venerdì mattina, busta con il nome del bambino.",
+      "creatoIl": "2025-10-22T18:40:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-01-10T18:22:00+01:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-10-10",
+      "tipo": "notice",
+      "titolo": "Esito elezioni: rappresentanti 2025/26",
+      "corpo": "Grazie a tutti quelli che sono passati a votare oggi (18 famiglie su 22, ottima partecipazione). Esito: Denise Fabbri riconfermata rappresentante di classe, Laura Bianchi eletta vice. Continueremo a pubblicare qui su ClasseHub tutti gli avvisi, con promemoria in chat. Per richieste personali usate la funzione 'Invia una richiesta' dell'app, così non si perde niente. Grazie della fiducia!",
+      "creatoIl": "2025-10-23T20:15:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true
+    }
+  ],
+  "richieste": [
+    {
+      "persona": "fatima.hassan",
+      "testo": "Buongiorno Denise, una domanda sull'assicurazione: ho pagato con pagoPA ma la ricevuta è intestata a me e non a Youssef. Va bene lo stesso o devo segnalarlo in segreteria? Grazie mille.",
+      "creatoIl": "2025-10-11T14:20:00+02:00",
+      "esito": "handled",
+      "convertitaIn": null
+    },
+    {
+      "persona": "federica.russo",
+      "testo": "Ciao Denise, scusa il disturbo. Puoi chiedere in segreteria se risulta il mio pagamento dell'assicurazione? L'ho fatto il 30 settembre ma non mi è arrivata nessuna conferma e la scadenza è il 15. Non vorrei che Giulia risultasse scoperta.",
+      "creatoIl": "2025-10-13T08:05:00+02:00",
+      "esito": "handled",
+      "convertitaIn": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "testo": "Denise, per la festa di Aurora la famiglia è indecisa tra sabato 25 e domenica 26 pomeriggio: dipende da quanti riescono a venire. Fai un sondaggio sull'app così chiudiamo in fretta e prenotano la sala? Grazie!",
+      "creatoIl": "2025-10-14T21:40:00+02:00",
+      "esito": "handled",
+      "convertitaIn": "p-2025-10-08"
+    },
+    {
+      "persona": "cristina.pagani",
+      "testo": "Un suggerimento, prendilo come feedback: la scadenza della cassa comune rischia di perdersi sotto i post delle feste. Nell'ultima settimana la metterei in evidenza, o almeno un promemoria in chat. Per il resto l'app funziona bene, molto meglio dei 300 messaggi di prima.",
+      "creatoIl": "2025-10-24T19:15:00+02:00",
+      "esito": "handled",
+      "convertitaIn": null
+    }
+  ],
+  "chat": [
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-01T13:42:00+02:00",
+      "testo": "",
+      "rifPost": "p-2025-10-01"
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2025-10-01T14:05:00+02:00",
+      "testo": "Scusate ma quindi venerdì la maestra c'è o non c'è? Come faccio a saperlo prima di uscire di casa? Io alle 8:15 devo essere al lavoro",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2025-10-01T14:12:00+02:00",
+      "testo": "Federica non si può sapere prima, è proprio questo il senso di 'servizio non garantito'. Si va al cancello all'orario normale e lì ci dicono se la classe entra. Lo sapremo venerdì mattina.",
+      "rifPost": null
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2025-10-01T14:30:00+02:00",
+      "testo": "Ogni volta questa storia del servizio non garantito. Le famiglie devono organizzarsi con un giorno di preavviso e la scuola non riesce a dirci nemmeno quante maestre aderiscono. Non è colpa di nessuno qui dentro, ma il sistema è assurdo.",
+      "rifPost": null
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2025-10-01T15:20:00+02:00",
+      "testo": "Quindi confermate che devo portarla e vedere? E se poi entra solo mezza classe la fanno stare comunque? Scusate ma devo avvisare il capo per tempo",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2025-10-01T15:26:00+02:00",
+      "testo": "Federica è scritto tutto nell'avviso di Denise: si porta il bimbo all'orario normale, se le maestre non bastano la classe non entra e te lo dicono al cancello. Rileggi qui 👇",
+      "rifPost": "p-2025-10-01"
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2025-10-01T18:40:00+02:00",
+      "testo": "Buonasera a tutti. Domando cortesemente: lo sciopero di venerdì riguarda anche il servizio mensa? Ringrazio anticipatamente. Giovanni Neri.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-01T18:55:00+02:00",
+      "testo": "Giovanni se la classe entra, la mensa funziona regolarmente. Lo sapremo solo venerdì mattina al cancello, purtroppo prima non si può.",
+      "rifPost": null
+    },
+    {
+      "persona": "roberto.villa",
+      "quando": "2025-10-01T21:30:00+02:00",
+      "testo": "Buonasera. Premetto che capisco le ragioni di chi sciopera, ci mancherebbe, ai miei tempi in fabbrica gli scioperi si annunciavano con i manifesti ai cancelli e almeno si sapeva chi aderiva. Detto questo, per chi come noi si appoggia ai nonni il venerdì, segnalo a beneficio di tutti che nella circolare c'è scritto che il pre-scuola è sospeso in ogni caso, quindi non portate i bambini alle 7:30 che trovano chiuso. P.S. Beatrice venerdì la porta sua nonna alle 8:25 precise, ci organizziamo così.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-02T17:25:00+02:00",
+      "testo": "",
+      "rifPost": "p-2025-10-02"
+    },
+    {
+      "persona": "andrea.fontana",
+      "quando": "2025-10-02T19:10:00+02:00",
+      "testo": "Mi sono iscritto anch'io a questa app, così non dite che non ci provo. Resto dell'idea che non bastava la chat? Comunque ci sono, vediamo.",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2025-10-02T19:18:00+02:00",
+      "testo": "Benvenuto Andrea! Vedrai che la prima volta che devi ritrovare un orario a distanza di tre settimane ci ringrazi.",
+      "rifPost": null
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2025-10-03T07:50:00+02:00",
+      "testo": "Ragazzi sono al cancello: la bidella dice che le maestre della 5B ci sono tutte, si entra regolarmente!",
+      "rifPost": null
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2025-10-03T07:58:00+02:00",
+      "testo": "Confermate?? Giulia è già in macchina con me, entro o aspetto conferma ufficiale?",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2025-10-03T08:02:00+02:00",
+      "testo": "Confermo Federica, Sofia è appena entrata in classe con la maestra Sandra. Tutto regolare, anche la mensa.",
+      "rifPost": null
+    },
+    {
+      "persona": "luca.bruno",
+      "quando": "2025-10-03T23:35:00+02:00",
+      "testo": "Scusate rispondo solo ora, turno lungo. Quindi oggi è andata regolare? Diego mi ha detto che in mensa erano in pochi ma non ho capito se era per lo sciopero o per l'influenza.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-06T18:32:00+02:00",
+      "testo": "",
+      "rifPost": "p-2025-10-03"
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2025-10-06T18:50:00+02:00",
+      "testo": "Riguardo allo sciopero di venerdì scorso: confermo che era tutto regolare, anche la mensa. Lo scrivo per completezza, per chi se lo fosse chiesto. Giovanni Neri.",
+      "rifPost": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2025-10-06T19:05:00+02:00",
+      "testo": "Per il regalo di Sofia raccolgo io i 5€ in contanti, domattina e mercoledì al cancello. Se riuscite busta con il nome del bambino che poi non impazzisco con i conti!",
+      "rifPost": null
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2025-10-06T19:20:00+02:00",
+      "testo": "5€ esatti in contanti giusto? Se ho solo un pezzo da 10 mi dai il resto o li porto mercoledì?",
+      "rifPost": null
+    },
+    {
+      "persona": "chiara.leone",
+      "quando": "2025-10-06T21:15:00+02:00",
+      "testo": "nicolò cè!! i 5e li porto dmn al cancello ok",
+      "rifPost": null
+    },
+    {
+      "persona": "luca.bruno",
+      "quando": "2025-10-07T00:20:00+02:00",
+      "testo": "Io domani all'assemblea non ci sono, ho il turno di pomeriggio. Qualcuno poi mi fa un riassunto delle cose importanti? Grazie",
+      "rifPost": null
+    },
+    {
+      "persona": "davide.longo",
+      "quando": "2025-10-07T08:10:00+02:00",
+      "testo": "Io all'assemblea ci sono, se serve prendo due appunti per chi manca. E se quest'anno servono accompagnatori per le uscite mi prenoto già ora.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-07T21:12:00+02:00",
+      "testo": "",
+      "rifPost": "p-2025-10-04"
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2025-10-07T21:30:00+02:00",
+      "testo": "GRAZIE DENISE SEI PREZIOSA!! 🌹🌹 IL VERBALE LO FA LEGGERE MIA FIGLIA A ME STASERA COSÌ SO TUTTO ANCHE IO ❤️",
+      "rifPost": null
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2025-10-07T21:45:00+02:00",
+      "testo": "Sul punto cassa comune: 20€ mi sembrano tanti, l'anno scorso alla materna di mio nipote erano 15. Per cosa li usiamo di preciso? Non per fare polemica, ma i conti vanno fatti prima, non dopo.",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2025-10-07T21:58:00+02:00",
+      "testo": "Stefano è tutto nel verbale: 8€ il teatro a gennaio, 6€ il museo a marzo, e i 6€ restanti coprono fotocopie e piccole spese dell'anno. Segno ogni euro e a febbraio pubblico il rendiconto con il saldo. Se avanza, scala sulle quote di quinta... anzi no, siamo già in quinta: se avanza si restituisce o va nella festa di fine anno, lo decideremo insieme.",
+      "rifPost": null
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2025-10-07T22:05:00+02:00",
+      "testo": "Va bene, così va già meglio. Il rendiconto di febbraio però lo aspetto davvero, non come nella vecchia classe di mio nipote dove i conti non li ha mai visti nessuno.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-08T13:17:00+02:00",
+      "testo": "",
+      "rifPost": "p-2025-10-05"
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2025-10-08T14:10:00+02:00",
+      "testo": "Il bonifico si può fare anche subito vero? Così non rischio di dimenticarmelo e poi risulta tutto in tempo giusto?",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2025-10-08T14:22:00+02:00",
+      "testo": "Certo Federica, anche subito. E per chi preferisce i contanti: busta chiusa con il nome, direttamente a me al cancello, la segno al momento.",
+      "rifPost": null
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2025-10-08T16:40:00+02:00",
+      "testo": "Ma quindi i 20€ vanno dati subito o si può fare con calma? E a chi esattamente?",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2025-10-08T16:47:00+02:00",
+      "testo": "Giulia è tutto nel post di oggi: entro il 31 ottobre, ad Anna, bonifico o contanti. Lo trovi qui 👇",
+      "rifPost": "p-2025-10-05"
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-10T08:52:00+02:00",
+      "testo": "",
+      "rifPost": "p-2025-10-06"
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2025-10-10T09:30:00+02:00",
+      "testo": "Buongiorno. Il pagamento dell'assicurazione l'ha eseguito mia moglie presso il tabaccaio la settimana scorsa. È da ritenersi valido ugualmente? Cordialità, Giovanni Neri.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-10T09:40:00+02:00",
+      "testo": "Sì Giovanni, il tabaccaio con pagoPA va benissimo, è la stessa cosa. Basta conservare la ricevuta e siete a posto.",
+      "rifPost": null
+    },
+    {
+      "persona": "roberto.villa",
+      "quando": "2025-10-10T22:10:00+02:00",
+      "testo": "Buonasera. Racconto la mia odissea con pagoPA a beneficio di chi deve ancora pagare: primo tentativo dal sito, mi chiedeva lo SPID che ho dovuto recuperare perché non lo usavo da mesi, secondo tentativo bloccato perché il browser del telefono era vecchio, alla fine ha funzionato dal computer di mia figlia grande. Morale: se non siete pratici, andate dal tabaccaio come ha fatto la moglie di Giovanni, cinque minuti. Domanda: la ricevuta va poi consegnata alle maestre o è sufficiente conservarla? P.S. scusate la lunghezza.",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2025-10-10T22:25:00+02:00",
+      "testo": "Basta conservarla Roberto, la scuola vede i pagamenti in automatico. C'è scritto anche nel promemoria di stamattina 👇",
+      "rifPost": "p-2025-10-06"
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2025-10-11T19:30:00+02:00",
+      "testo": "Festa bellissima, brava Laura! 🎉 Domanda pratica: qualcuno ha visto il giubbino blu di Bianca? Forse è rimasto in ludoteca, ha il nome sull'etichetta.",
+      "rifPost": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2025-10-11T19:50:00+02:00",
+      "testo": "Ce l'ho io Elena! L'ho raccolto per sbaglio con le nostre cose. Te lo porto lunedì al cancello.",
+      "rifPost": null
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2025-10-14T10:20:00+02:00",
+      "testo": "Ragazze ma l'assicurazione quant'era? E dove si paga? Non trovo più la circolare 🙈",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2025-10-14T10:26:00+02:00",
+      "testo": "Giulia trovi tutto nel promemoria di Denise, e occhio che scade domani 👇",
+      "rifPost": "p-2025-10-06"
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2025-10-14T13:40:00+02:00",
+      "testo": "Io ho pagato il 30 settembre ma non mi è mai arrivata una conferma. A qualcuno è arrivata una mail? Ho già chiesto anche a Denise di verificare, scusate l'ansia 😅",
+      "rifPost": null
+    },
+    {
+      "persona": "fatima.hassan",
+      "quando": "2025-10-15T09:15:00+02:00",
+      "testo": "Una domanda: ho due figli nella scuola, Youssef in 5B e la sorellina in 2A. Il pagamento va fatto due volte, uno per ciascun figlio?",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-15T09:28:00+02:00",
+      "testo": "Sì Fatima, un pagamento per ogni figlio, ognuno con l'avviso pagoPA della propria classe.",
+      "rifPost": null
+    },
+    {
+      "persona": "luca.bruno",
+      "quando": "2025-10-15T23:30:00+02:00",
+      "testo": "Pagata l'assicurazione adesso, appena tornato dal turno. Entro mezzanotte conta ancora come 'entro il 15' vero? 😅",
+      "rifPost": null
+    },
+    {
+      "persona": "chiara.leone",
+      "quando": "2025-10-16T07:50:00+02:00",
+      "testo": "raga io mi ero segnata il 15 x la cassa comune nn x l'assicurazione 🤦‍♀️ cmq pagato adesso, spero nn sia un problema x un giorno",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-16T13:32:00+02:00",
+      "testo": "",
+      "rifPost": "p-2025-10-07"
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2025-10-16T15:10:00+02:00",
+      "testo": "Mi scuso per la domanda forse banale: le elezioni si tengono ogni anno? Ero convinto valesse la nomina dell'anno passato. E come funziona materialmente la votazione? Giovanni Neri.",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2025-10-16T15:22:00+02:00",
+      "testo": "Ogni anno Giovanni! Giovedì 23 dalle 16:45 in aula: si firma il registro, si scrivono fino a due preferenze su una scheda, cinque minuti in tutto. È spiegato anche nell'avviso di Denise.",
+      "rifPost": "p-2025-10-07"
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2025-10-16T18:40:00+02:00",
+      "testo": "Chiunque venga eletto, per favore si porti al dirigente la questione del riscaldamento: le aule del piano terra sono un frigorifero da due settimane e i bambini stanno in giacca. Questa è roba da rappresentanti, altro che sondaggi sulle feste.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-17T17:47:00+02:00",
+      "testo": "",
+      "rifPost": "p-2025-10-08"
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2025-10-17T18:30:00+02:00",
+      "testo": "GRAZIE A TUTTI!! 🎀🎀 LA MAMMA DI AURORA PREFERIREBBE LA DOMENICA MA VA BENE QUELLO CHE DECIDE LA MAGGIORANZA. VOTATE VOTATE COSÌ PRENOTIAMO LA SALA ❤️",
+      "rifPost": null
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2025-10-17T19:40:00+02:00",
+      "testo": "Vedo il sondaggio sull'applicazione ma non trovo il pulsante per esprimere il voto. Dove devo premere? Chiedo scusa per il disturbo. Giovanni Neri.",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2025-10-17T19:52:00+02:00",
+      "testo": "Giovanni deve toccare l'opzione che preferisce (si colora di blu) e poi il bottone 'Conferma voto' in fondo alla pagina. Se non lo vede, provi a scorrere in basso.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-20T20:30:00+02:00",
+      "testo": "Chiudo il sondaggio per la festa di Aurora domani sera alle 21: mancano ancora 6 voti, è un tocco e via 🙏 La famiglia deve prenotare la sala.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-22T18:42:00+02:00",
+      "testo": "",
+      "rifPost": "p-2025-10-09"
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2025-10-22T19:00:00+02:00",
+      "testo": "Per il regalo di Aurora raccolgo io come al solito: 5€ in contanti, giovedì e venerdì mattina al cancello, busta con il nome. Ho già un'idea regalo concordata con la mamma 😉",
+      "rifPost": null
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2025-10-22T19:15:00+02:00",
+      "testo": "Domenica alle 16 giusto? E confermate che i fratelli piccoli possono venire? Devo capire se portare anche il piccolo o chiedere a mia madre",
+      "rifPost": null
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2025-10-22T19:35:00+02:00",
+      "testo": "CERTO FEDERICA PORTATE TUTTI!! C'È POSTO E TORTA PER TUTTI ❤️🎂 LA SALA È GRANDE E C'È ANCHE IL CORTILE SE NON PIOVE",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-23T20:17:00+02:00",
+      "testo": "",
+      "rifPost": "p-2025-10-10"
+    },
+    {
+      "persona": "andrea.fontana",
+      "quando": "2025-10-23T20:45:00+02:00",
+      "testo": "Congratulazioni alle elette. E lo ammetto: sapere il risultato la sera stessa, per iscritto, senza chiedere a nessuno, non è male. Non ritiro ancora tutto quello che ho detto sull'app, ma quasi.",
+      "rifPost": null
+    },
+    {
+      "persona": "cristina.pagani",
+      "quando": "2025-10-23T21:00:00+02:00",
+      "testo": "Complimenti a Denise e Laura. E apprezzo l'esito pubblicato subito sull'app: l'anno scorso l'ho saputo una settimana dopo da un'altra mamma nel parcheggio.",
+      "rifPost": null
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2025-10-25T15:20:00+02:00",
+      "testo": "Scusate ma dov'è la festa di Aurora domani? E a che ora si va?",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2025-10-25T15:27:00+02:00",
+      "testo": "Giulia c'è l'invito con tutto: ore 16, sala parrocchiale San Giuseppe, via Marzabotto 12 👇",
+      "rifPost": "p-2025-10-09"
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2025-10-26T19:40:00+01:00",
+      "testo": "Festa stupenda oggi, Aurora era felicissima! 🎉 E le lasagne di nonna Rosa sono leggendarie, altro che merenda. Bianca non ha cenato ovviamente 😄",
+      "rifPost": null
+    },
+    {
+      "persona": "luca.bruno",
+      "quando": "2025-10-26T23:35:00+01:00",
+      "testo": "Ho perso anche questa festa per il turno, Diego è venuto con la mamma. Domanda: la cassa comune si può versare anche i primi di novembre? Questo mese sono in ritardo con tutto, scusate.",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2025-10-27T08:15:00+01:00",
+      "testo": "Sì Luca, l'ideale è entro venerdì 31 ma se sfori di qualche giorno non crolla niente. Basta che mi avvisi, così non ti conto tra i dispersi 😊",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2025-10-28T13:20:00+01:00",
+      "testo": "Promemoria cassa comune: mancano ancora 7 famiglie, la scadenza è venerdì 31. IBAN, causale e tutti i dettagli sono nel post 👇 Chi preferisce i contanti mi trova al cancello alle 8:20.",
+      "rifPost": "p-2025-10-05"
+    },
+    {
+      "persona": "simone.moretti",
+      "quando": "2025-10-28T22:40:00+01:00",
+      "testo": "Anna scusami, mi rimandi l'IBAN? Non ritrovo più il messaggio in mezzo a tutti gli altri. Venerdì pago, promesso.",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2025-10-28T22:55:00+01:00",
+      "testo": "Simone è sempre nel post della cassa comune, con la causale già pronta da copiare 👇",
+      "rifPost": "p-2025-10-05"
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2025-10-29T09:10:00+01:00",
+      "testo": "Ho fatto il bonifico per la cassa ma nella causale ho scritto solo 'Giulia 5B' senza 'cassa comune'. È un problema? Lo devo rifare? Ditemi che non lo devo rifare 😅",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2025-10-29T09:25:00+01:00",
+      "testo": "Va benissimo Federica, ti ho già segnata stamattina. Non rifare niente!",
+      "rifPost": null
+    },
+    {
+      "persona": "martina.colombo",
+      "quando": "2025-10-30T21:50:00+01:00",
+      "testo": "Scusate, ho letto solo ora tutti i messaggi arretrati. La quota della cassa la porto in contanti lunedì ad Anna, spero vada bene lo stesso.",
+      "rifPost": null
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2025-10-31T12:30:00+01:00",
+      "testo": "Pagato anch'io, bonifico partito. Resto in attesa del rendiconto di febbraio, come da verbale. Segnatevelo 😉",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-10-31T21:45:00+01:00",
+      "testo": "Ho fatto un po' di ordine in bacheca: ho archiviato gli avvisi ormai passati (sciopero, assemblea, elezioni, compleanni). Restano in evidenza le cose ancora attive, tra cui la cassa comune per chi deve ancora versare. Buon weekend a tutti!",
+      "rifPost": null
+    }
+  ],
+  "fatti": [
+    {
+      "id": "f-sciopero-servizio",
+      "domanda": "Cosa succede a scuola per lo sciopero di inizio ottobre?",
+      "risposta": "Venerdì 3 ottobre sciopero del comparto scuola con servizio non garantito: si portano i bambini all'orario normale e solo al cancello si sa se la classe entra; il pre-scuola è sospeso in ogni caso; se la classe entra la mensa funziona regolarmente.",
+      "rifPost": "p-2025-10-01",
+      "pubblicatoIl": "2025-10-01T13:40:00+02:00",
+      "sostituisce": null
+    },
+    {
+      "id": "f-cassa-quota",
+      "domanda": "Quanto si versa per la cassa comune di classe e entro quando?",
+      "risposta": "20€ a famiglia entro venerdì 31 ottobre, ad Anna Ricci: bonifico (IBAN IT60X0542811101000000123456, causale 'Cassa comune 5B + nome del bambino') oppure contanti in busta chiusa al cancello.",
+      "rifPost": "p-2025-10-05",
+      "pubblicatoIl": "2025-10-08T13:15:00+02:00",
+      "sostituisce": null
+    },
+    {
+      "id": "f-assicurazione-scadenza--2025-10",
+      "domanda": "Entro quando va pagata l'assicurazione scolastica e come?",
+      "risposta": "Entro mercoledì 15 ottobre, con pagoPA usando l'avviso della circolare di settembre (va bene anche il tabaccaio); un pagamento per ogni figlio; la ricevuta va solo conservata, non consegnata.",
+      "rifPost": "p-2025-10-06",
+      "pubblicatoIl": "2025-10-10T08:50:00+02:00",
+      "sostituisce": null
+    },
+    {
+      "id": "f-elezioni-esito",
+      "domanda": "Chi sono i rappresentanti di classe della 5B per il 2025/26?",
+      "risposta": "Denise Fabbri riconfermata rappresentante di classe e Laura Bianchi eletta vice, alle elezioni del 23 ottobre (18 famiglie votanti su 22).",
+      "rifPost": "p-2025-10-10",
+      "pubblicatoIl": "2025-10-23T20:15:00+02:00",
+      "sostituisce": null
+    }
+  ]
+}

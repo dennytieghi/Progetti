@@ -1,0 +1,724 @@
+{
+  "mese": "2026-06",
+  "post": [
+    {
+      "rif": "p-2026-06-01",
+      "tipo": "notice",
+      "titolo": "Mercoledì 3 giugno: compleanno di Pietro in classe",
+      "corpo": "Mercoledì 3 giugno festeggiamo in classe il compleanno di Pietro: è l'ultimo compleanno dell'anno (e della primaria!). La torta la porta Anna, la quota regalo è già stata raccolta in contanti come al solito. Non serve portare nulla.",
+      "creatoIl": "2026-06-01T08:10:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-06-08T21:28:00+02:00",
+      "condivisoInChat": false,
+      "sondaggio": null
+    },
+    {
+      "rif": "p-2026-06-02",
+      "tipo": "notice",
+      "titolo": "Festa di fine anno — venerdì 5 giugno: orari, regole e lista definitiva",
+      "corpo": "Ci siamo: venerdì 5 giugno festa di fine anno nel giardino della scuola. Come funziona:\n\n• I bambini escono regolarmente alle 16:30 e ci raggiungono in giardino.\n• Noi genitori possiamo entrare dal cancello piccolo dalle 16:45.\n• Torte e dolci: SOLO confezionati o da forno, niente creme (regola della scuola). Ognuno porta quello che ha scelto nel sondaggio di maggio: la lista definitiva chi-porta-cosa è qui sotto.\n• Bibite, bicchieri, piatti e tovaglioli li offre la cassa di classe (usiamo i 35€ rimasti).\n• Gazebo: lo porta e lo monta Davide alle 15.\n• In caso di pioggia la festa si fa comunque: gazebo + porticato della palestra.\n\nLISTA CHI-PORTA-COSA (definitiva):\n• Crostate/torte da forno: Chiara, Federica, Giulia, Irene\n• Ciambelle e biscotti: Rosa, Cristina, Roberto\n• Dolcetti al cocco e succhi: Fatima\n• Pizzette e salato confezionato: Elena, Sara, Simone\n• Frutta tagliata: Laura, Anna\n• Ghiaccio e frigo portatile: Stefano, Luca\n• Tovaglie e allestimento: Valentina (coordina), Paolo\n• Gazebo e tavoli: Davide\n\nÈ l'ultima festa della 5B: portate i fazzoletti.",
+      "creatoIl": "2026-06-01T08:15:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-06-08T21:30:00+02:00",
+      "condivisoInChat": true,
+      "sondaggio": null
+    },
+    {
+      "rif": "p-2026-06-03",
+      "tipo": "deadline",
+      "titolo": "Colletta regalo maestre: si chiude mercoledì 3 giugno",
+      "corpo": "Ultimi giorni per la colletta del regalo di fine ciclo alle maestre (10€ a famiglia, come deciso col sondaggio di maggio: targa ricordo con i nomi dei bambini + buono spa). Chi non ha ancora dato può consegnare in contanti ad Anna all'uscita o fare il bonifico entro mercoledì 3 giugno. La consegna del regalo sarà sabato 6, l'ultimo giorno di scuola.",
+      "creatoIl": "2026-06-01T08:18:00+02:00",
+      "dueDate": "2026-06-03T18:00:00+02:00",
+      "pinned": false,
+      "archiviatoIl": "2026-06-08T21:32:00+02:00",
+      "condivisoInChat": true,
+      "sondaggio": null
+    },
+    {
+      "rif": "p-2026-06-04",
+      "tipo": "poll",
+      "titolo": "Cena di fine anno genitori + maestre — giovedì 11 giugno: dove andiamo?",
+      "corpo": "Le maestre hanno confermato la disponibilità per giovedì 11 giugno sera. Due opzioni, entrambe già sentite da Valentina:\n\n• Pizzeria Da Cesare (quella vicino scuola): menu fisso, circa 20€ a testa, sala interna tutta per noi.\n• Agriturismo Il Gelso: più scenografico ma fuori città, serve la macchina, costo stimato 30-35€.\n\nVotate entro domenica 7 giugno alle 21:00, poi prenoto. Votate anche se non siete sicuri di venire: le conferme presenze le raccogliamo dopo.",
+      "creatoIl": "2026-06-03T18:25:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-06-15T09:20:00+02:00",
+      "condivisoInChat": true,
+      "sondaggio": {
+        "chiudeIl": "2026-06-07T21:00:00+02:00",
+        "opzioni": [
+          "Pizzeria Da Cesare (quella vicino scuola)",
+          "Agriturismo Il Gelso"
+        ],
+        "voti": [
+          {
+            "persona": "laura.bianchi",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "marco.rizzo",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "sara.greco",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "stefano.gallo",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "chiara.leone",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "davide.longo",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "anna.ricci",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "fatima.hassan",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "federica.russo",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "elena.gatti",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "valentina.barbieri",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "cristina.pagani",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "irene.sala",
+            "opzioni": [
+              1
+            ]
+          },
+          {
+            "persona": "giovanni.neri",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "rosa.marino",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "paolo.ferrari",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "luca.bruno",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "simone.moretti",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "roberto.villa",
+            "opzioni": [
+              0
+            ]
+          },
+          {
+            "persona": "andrea.fontana",
+            "opzioni": [
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "rif": "p-2026-06-05",
+      "tipo": "material",
+      "titolo": "Grazie per la festa ❤️ — caricate qui le foto",
+      "corpo": "Sono a casa da un'ora e ancora mi brillano gli occhi. Grazie a Valentina che ha coordinato tutto, a Davide per il gazebo, a Paolo per le partite infinite, e a tutti voi per torte, mani e sorrisi. Vedere i nostri bambini ballare insieme nel giardino dove cinque anni fa non arrivavano al citofono... ecco, lascio perdere che ricomincio.\n\nRichiesta pratica: caricate QUI le foto della festa (o mandatemele e le carico io), così restano in un posto solo e le ritroviamo anche tra un anno. In chat si perdono in due giorni.",
+      "creatoIl": "2026-06-05T21:35:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-06-15T09:22:00+02:00",
+      "condivisoInChat": true,
+      "sondaggio": null
+    },
+    {
+      "rif": "p-2026-06-06",
+      "tipo": "notice",
+      "titolo": "Grazie di tutto, 5B ❤️",
+      "corpo": "Oggi si è chiuso un ciclo: cinque anni di zaini, recite, collette, gite, pidocchi (sì, anche quelli) e di una classe che è stata una piccola comunità. Stamattina, quando i bambini hanno consegnato la targa alle maestre, ho capito che tutto il lavoro di quest'anno — gli avvisi, i sondaggi, i solleciti — era solo la cornice: il quadro lo avete fatto voi.\n\nGrazie alle maestre, che ci hanno restituito ragazzini pronti per le medie. Grazie a chi ha organizzato, portato, montato, cucinato, votato (quasi) in tempo. Grazie anche a chi ha brontolato: ci ha tenuti svegli.\n\nCose pratiche: le pagelle escono il 10 giugno sul registro (post con le istruzioni in bacheca), la cena genitori+maestre è giovedì 11. L'app resta consultabile per tutta l'estate.\n\nBuone vacanze, e buona strada ai nostri ragazzi. — Denise",
+      "creatoIl": "2026-06-06T21:10:00+02:00",
+      "dueDate": null,
+      "pinned": true,
+      "archiviatoIl": null,
+      "condivisoInChat": true,
+      "sondaggio": null
+    },
+    {
+      "rif": "p-2026-06-07",
+      "tipo": "notice",
+      "titolo": "Pagelle finali dal 10 giugno: dove trovarle",
+      "corpo": "Le pagelle del secondo quadrimestre (quelle finali, con l'ammissione alla secondaria) saranno visibili da mercoledì 10 giugno sul registro elettronico.\n\nPercorso: registro elettronico → Documenti → Scrutinio finale → Scarica pagella. Serve l'accesso con lo SPID di un genitore. Se non ricordate la strada, è la stessa di febbraio.\n\nLa pagella si può scaricare in PDF fino a fine agosto: conservatela, la scuola media potrebbe chiederla all'iscrizione definitiva.",
+      "creatoIl": "2026-06-08T12:35:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true,
+      "sondaggio": null
+    },
+    {
+      "rif": "p-2026-06-08",
+      "tipo": "notice",
+      "titolo": "Cena di fine anno: vince la pizzeria — giovedì 11 giugno ore 20:00",
+      "corpo": "Sondaggio chiuso: 14 voti per la Pizzeria Da Cesare, 6 per l'agriturismo. Ha vinto la comodità (e il parcheggio).\n\n• Quando: giovedì 11 giugno, ore 20:00\n• Dove: Pizzeria Da Cesare, via Andrea Costa 12 (quella vicino scuola)\n• Quanto: menu fisso concordato, 20€ a testa tutto compreso (bibite e caffè inclusi)\n• Chi: genitori + le 5 maestre (ospiti nostre: la loro quota la copriamo dividendo, è inclusa nei 20€)\n\nConfermate le presenze in chat entro martedì 9 sera, devo dare il numero esatto a Cesare.",
+      "creatoIl": "2026-06-08T12:30:00+02:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-06-15T09:25:00+02:00",
+      "condivisoInChat": true,
+      "sondaggio": null
+    }
+  ],
+  "richieste": [
+    {
+      "persona": "valentina.barbieri",
+      "testo": "Ciao Denise! Le maestre mi hanno confermato che per la cena vanno bene giovedì 11. Puoi fare tu il sondaggio tra Pizzeria Da Cesare (quella vicino scuola, menu fisso sui 20€) e l'Agriturismo Il Gelso (più bello ma sui 30-35€ e serve la macchina)? Li ho sentiti entrambi, tengono il posto fino a lunedì.",
+      "creatoIl": "2026-06-02T18:40:00+02:00",
+      "esito": "handled",
+      "convertitaIn": "p-2026-06-04"
+    },
+    {
+      "persona": "martina.colombo",
+      "testo": "Ciao Denise, scusami, lo so che sono sparita praticamente tutto l'anno... Sto mettendo in ordine i documenti di Leonardo per l'iscrizione alle medie e non trovo più la ricevuta dell'assicurazione scolastica che abbiamo pagato a ottobre. Ti risulta che il mio pagamento sia andato a buon fine? E dove posso recuperare la ricevuta? Grazie mille e scusa ancora il disturbo.",
+      "creatoIl": "2026-06-09T14:20:00+02:00",
+      "esito": "handled",
+      "convertitaIn": null
+    },
+    {
+      "persona": "irene.sala",
+      "testo": "Ciao Denise, una curiosità: c'è un modo per scaricare tutte le foto della festa in una volta sola dal post? Vorrei stamparne un piccolo album per Gabriele: è arrivato a novembre e questi sette mesi in 5B per lui sono stati importanti. Grazie di tutto, davvero.",
+      "creatoIl": "2026-06-12T10:05:00+02:00",
+      "esito": "handled",
+      "convertitaIn": null
+    }
+  ],
+  "chat": [
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-01T08:20:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-06-02"
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-01T08:24:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-06-03"
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2026-06-01T09:10:00+02:00",
+      "testo": "La lista chi-porta-cosa è quella DEFINITIVA, controllate il vostro nome 🙏 Ripeto le regole d'oro: torte confezionate o da forno, NIENTE creme. Chi ha imprevisti me lo dice entro giovedì che sistemo.",
+      "rifPost": "p-2026-06-02"
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-06-01T09:45:00+02:00",
+      "testo": "Aggiornamento cassa: con i 35€ rimasti ho preso bibite, bicchieri, piatti e tovaglioli per venerdì. La cassa 5B chiude in pari, al centesimo. Per la colletta maestre mancano ancora 3 famiglie: si chiude mercoledì.",
+      "rifPost": null
+    },
+    {
+      "persona": "simone.moretti",
+      "quando": "2026-06-01T13:05:00+02:00",
+      "testo": "Scusate, la colletta scadeva oggi o mercoledì? Nel dubbio ho appena fatto il bonifico ad Anna 😅",
+      "rifPost": null
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2026-06-01T17:40:00+02:00",
+      "testo": "Quindi venerdì i bambini escono normalmente alle 16:30 e la festa inizia subito dopo, giusto? E noi genitori da che ora possiamo entrare?",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2026-06-01T17:52:00+02:00",
+      "testo": "Federica trovi tutto qui: genitori dal cancello piccolo dalle 16:45, i bimbi escono alle 16:30 e ci raggiungono in giardino 🙂",
+      "rifPost": "p-2026-06-02"
+    },
+    {
+      "persona": "luca.bruno",
+      "quando": "2026-06-02T23:31:00+02:00",
+      "testo": "Scusate l'ora, sono appena smontato... la colletta chiude domani giusto? Faccio il bonifico domattina appena a casa, Anna ce la faccio?",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-06-03T07:50:00+02:00",
+      "testo": "Tranquillo Luca, entro domani sera va benissimo. E ricevuto quello di Simone: in anticipo per la prima volta nella storia 😄",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-06-03T16:55:00+02:00",
+      "testo": "Grazie a tutti per gli auguri a Pietro, era felicissimo ❤️ Ultimo compleanno festeggiato in 5B... la maestra ha fatto fare ai bambini il trenino come in prima, non vi dico la scena 🥲",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-03T18:30:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-06-04"
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2026-06-03T18:44:00+02:00",
+      "testo": "Votato pizzeria. L'agriturismo sarà anche bello, ma tra strada, 'assaggini della casa' e coperto altro che 20€ a testa. Da Cesare si sa cosa si mangia e cosa si spende.",
+      "rifPost": null
+    },
+    {
+      "persona": "chiara.leone",
+      "quando": "2026-06-03T18:51:00+02:00",
+      "testo": "votato x la pizzeria, cmq x me una vale laltra basta ke si esce tutti insieme 😄",
+      "rifPost": null
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2026-06-03T19:20:00+02:00",
+      "testo": "Ma la cena sarebbe giovedì 11? E a che ora?",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-03T19:26:00+02:00",
+      "testo": "Sì Giulia, giovedì 11: c'è scritto nel sondaggio 🙂 L'orario lo mettiamo appena chiude, intanto vota che mancano in tanti.",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-06-03T21:30:00+02:00",
+      "testo": "Colletta chiusa: 21 famiglie su 22, direi ottimo risultato. Domani pomeriggio ritiro la targa 🤫",
+      "rifPost": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2026-06-04T08:40:00+02:00",
+      "testo": "Ripasso veloce per domani: la lista è questa, chi non può portare la sua cosa me lo dice OGGI. Ci vediamo alle 16:45!",
+      "rifPost": "p-2026-06-02"
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2026-06-04T12:15:00+02:00",
+      "testo": "Avete visto le previsioni?? Danno temporale domani alle 17 😰 C'è un piano B o annulliamo?",
+      "rifPost": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2026-06-04T12:24:00+02:00",
+      "testo": "Visto sì, tranquilla: gazebo di Davide + porticato della palestra. La festa si fa comunque, con o senza sole.",
+      "rifPost": null
+    },
+    {
+      "persona": "fatima.hassan",
+      "quando": "2026-06-04T15:10:00+02:00",
+      "testo": "Io confermo i dolcetti al cocco e due bottiglie di succo come da lista. Grazie Valentina per come hai organizzato tutto.",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-06-04T18:20:00+02:00",
+      "testo": "Targa ritirata: è venuta benissimo, con i nomi di tutti i bambini incisi. Il buono spa è già in busta. Mi raccomando: acqua in bocca fino a sabato 🤐",
+      "rifPost": null
+    },
+    {
+      "persona": "roberto.villa",
+      "quando": "2026-06-04T21:05:00+02:00",
+      "testo": "Buonasera a tutti. Premetto che non volevo dilungarmi, ma l'occasione mi sembra di quelle che meritano due righe. Riordinando il computer per lavoro mi sono ritrovato davanti le foto della recita di prima elementare, dicembre 2021, quando i nostri figli erano alti come il termosifone e Beatrice aveva perso i due denti davanti proprio la sera prima. Ecco, mi sono detto: non possiamo chiudere questi cinque anni senza qualcosa di tangibile. Quindi la proposta, e poi chiudo davvero: in ditta abbiamo il plotter, potrei stampare gratuitamente un paio di collage formato A3 con le foto più belle dell'anno, uno per la classe e uno per le maestre, da consegnare magari sabato insieme al resto. Se l'idea vi pare sensata mandatemi le foto entro domani sera. P.S. Per chi viene domani in macchina: il parcheggio della palestra il venerdì chiude alle 19, meglio quello dietro la chiesa.",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2026-06-04T22:10:00+02:00",
+      "testo": "Ah, ho detto a mio marito Michele di iscriversi all'app così la smette di chiedere a me 😅 Denise ti dovrebbe essere arrivata la richiesta.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-04T22:18:00+02:00",
+      "testo": "Vista! La guardo con calma dopo la festa, in questi giorni sono in modalità sopravvivenza 😅",
+      "rifPost": null
+    },
+    {
+      "persona": "davide.longo",
+      "quando": "2026-06-05T14:58:00+02:00",
+      "testo": "In viaggio col gazebo e i tavoli. Paolo ci sei alle 15 che in due lo montiamo in venti minuti?",
+      "rifPost": null
+    },
+    {
+      "persona": "paolo.ferrari",
+      "quando": "2026-06-05T15:02:00+02:00",
+      "testo": "Arrivo arrivo! Porto anche il pallone per il dopo-merenda, ultima partita ufficiale della 5B ⚽",
+      "rifPost": null
+    },
+    {
+      "persona": "chiara.leone",
+      "quando": "2026-06-05T15:20:00+02:00",
+      "testo": "raga esco tardi dal lavoro, la crostata la porta mia mamma alle 16:30 ok? è qlla della lista cmq",
+      "rifPost": null
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2026-06-05T19:45:00+02:00",
+      "testo": "Non ho parole per questo pomeriggio ❤️❤️ Ho fatto tipo 200 foto, stasera le sistemo. I bambini che ballavano tutti insieme sotto il gazebo me li porto nel cuore per sempre 🥹",
+      "rifPost": null
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2026-06-05T20:05:00+02:00",
+      "testo": "CHE FESTA MERAVIGLIOSA GRAZIE A TUTTI ❤️❤️❤️ AURORA NON VOLEVA PIÙ VENIRE VIA 🌸🌸 E LA CROSTATA DELLA MAMMA DI CHIARA ERA SQUISITA 🌷",
+      "rifPost": null
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2026-06-05T20:22:00+02:00",
+      "testo": "Lo dico io che di solito trovo il pelo nell'uovo: festa organizzata benissimo e senza spendere un euro più del dovuto. Brave Valentina, Anna e Denise.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-05T21:40:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-06-05"
+    },
+    {
+      "persona": "cristina.pagani",
+      "quando": "2026-06-05T21:55:00+02:00",
+      "testo": "Suggerimento: le foto carichiamole tutte nel post, non qui in chat. Qui tra due giorni sono sepolte, lì le ritroviamo anche tra un anno.",
+      "rifPost": "p-2026-06-05"
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-05T22:01:00+02:00",
+      "testo": "Esatto, è proprio per quello che ho fatto il post: caricate lì, oppure mandatemele e le metto io.",
+      "rifPost": null
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2026-06-05T22:30:00+02:00",
+      "testo": "Io ho fatto qualche foto ma metà sono venute mosse... le mando lo stesso a Denise, magari una si salva. Comunque bellissima festa, anche mio suocero si è commosso.",
+      "rifPost": null
+    },
+    {
+      "persona": "luca.bruno",
+      "quando": "2026-06-05T23:34:00+02:00",
+      "testo": "Recupero solo ora i messaggi, ero di turno 😞 Mi spiace essermi perso la festa... Diego è tornato a casa con la maglietta firmata da tutti i compagni e non se la vuole più togliere.",
+      "rifPost": null
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2026-06-06T08:10:00+02:00",
+      "testo": "Ultimo giorno... ho già le lacrime agli occhi e non sono nemmeno arrivata a scuola 😭 A dopo.",
+      "rifPost": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2026-06-06T13:05:00+02:00",
+      "testo": "Targa e buono consegnati 😭😭 La maestra Paola non riusciva a parlare, e a ruota abbiamo pianto tutti. Grazie Anna per aver gestito tutto al centesimo, e Roberto: i collage erano bellissimi, le maestre li hanno già appesi.",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-06-06T13:15:00+02:00",
+      "testo": "Grazie a voi che avete partecipato tutti. E con questo la tesoriera va ufficialmente in pensione 😄",
+      "rifPost": null
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2026-06-06T14:20:00+02:00",
+      "testo": "Marco stamattina uscendo mi ha chiesto 'papà ma a settembre la maestra Paola non c'è più?' e mi è venuto un groppo in gola che ce l'ho ancora adesso.",
+      "rifPost": null
+    },
+    {
+      "persona": "fatima.hassan",
+      "quando": "2026-06-06T15:00:00+02:00",
+      "testo": "Grazie di cuore alle maestre e a tutti voi. Youssef è arrivato in seconda che non parlava una parola di italiano e stamattina ha letto il suo pezzo davanti a tutta la scuola. Questa cosa non la dimenticherò mai.",
+      "rifPost": null
+    },
+    {
+      "persona": "roberto.villa",
+      "quando": "2026-06-06T16:40:00+02:00",
+      "testo": "Mi permetto un ultimo messaggio lungo, poi giuro che per l'estate taccio. Stamattina, mentre i bambini cantavano, pensavo a quando in prima elementare aspettavamo fuori dal cancello senza conoscerci, ognuno col suo ombrello, e ci si salutava appena. Cinque anni dopo ci prestiamo i gazebo, ci raccogliamo i figli a vicenda all'uscita, e una signora che non conoscevo mi ha abbracciato piangendo (era la nonna di Aurora, ora lo so). Volevo solo dire che non era scontato. Grazie alle maestre, a Denise che ci ha tenuti in riga con santa pazienza, e a tutti voi. Beatrice stasera ha detto 'papà, mi mancherà anche il bidello Franco'. Ecco. P.S. Chi volesse i collage in formato digitale me lo scriva pure in privato, li mando volentieri.",
+      "rifPost": null
+    },
+    {
+      "persona": "paolo.ferrari",
+      "quando": "2026-06-06T17:10:00+02:00",
+      "testo": "E ora il vero totocalcio dell'estate: chi capita in sezione con chi alle medie? 😄 Tommaso fa il tifo per finire con Alessandro e Diego, accetto scommesse.",
+      "rifPost": null
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2026-06-06T17:18:00+02:00",
+      "testo": "Non me lo dire che mi agito già per le sezioni 😅 Ma quando escono? Qualcuno lo sa di preciso?",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2026-06-06T17:25:00+02:00",
+      "testo": "Di solito fine agosto, sul sito della scuola media. C'è tempo Federica, goditi l'estate 🙂",
+      "rifPost": null
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2026-06-06T18:00:00+02:00",
+      "testo": "Proposta: questo gruppo lo teniamo anche alle medie ❤️ Ormai siamo una famiglia, mica ci perdiamo di vista adesso.",
+      "rifPost": null
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2026-06-06T18:07:00+02:00",
+      "testo": "D'accordo a tenerlo, MA con un patto: niente catene di Sant'Antonio e niente buongiorno coi fiori. Rosa, con affetto eh 😄",
+      "rifPost": null
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2026-06-06T18:15:00+02:00",
+      "testo": "STEFANO I MIEI FIORI TI MANCHERANNO VEDRAI 😂😂🌸🌸❤️",
+      "rifPost": null
+    },
+    {
+      "persona": "andrea.fontana",
+      "quando": "2026-06-06T19:30:00+02:00",
+      "testo": "Lo dico una volta sola e poi torno nel mio angolo: io che a ottobre brontolavo per 'l'ennesima app' oggi ammetto che senza saremmo ancora a cercare l'orario della recita tra 400 messaggi. Grazie Denise.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-06T21:15:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-06-06"
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-06T21:22:00+02:00",
+      "testo": "E qui in chat invece grazie a voi, senza formalità: 22 famiglie, un anno intero, e per la prima volta da quando faccio la rappresentante non abbiamo perso per strada (quasi) nessuna informazione 😄 Il post di saluto resta fissato in alto; l'app resta consultabile per pagelle e cena. Vi voglio bene, buona estate ❤️",
+      "rifPost": null
+    },
+    {
+      "persona": "chiara.leone",
+      "quando": "2026-06-06T21:30:00+02:00",
+      "testo": "grazie a te denise, senza te e lapp eravamo persi. e scusa x tutte le volte ke ho letto le date a metà 😅",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-07T10:30:00+02:00",
+      "testo": "Ultimo giorno per votare la cena: mancano 7 voti, stasera alle 21 chiudo e prenoto. Votate anche se non siete sicuri di venire, le conferme le raccogliamo dopo 🙂",
+      "rifPost": "p-2026-06-04"
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2026-06-07T11:45:00+02:00",
+      "testo": "Votato! E l'ho trovato da solo senza chiedere niente a nessuno. Fine anno trionfale anche per me 💪",
+      "rifPost": null
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2026-06-07T12:30:00+02:00",
+      "testo": "VOTATO ANCHE IO CON L'AIUTO DI MIA FIGLIA 🍕❤️ PIZZERIA TUTTA LA VITA CHE ALL'AGRITURISMO POI GUIDO IO 😂🌸",
+      "rifPost": null
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2026-06-07T16:20:00+02:00",
+      "testo": "Caricate le mie foto nel post della festa: ci sono anche quelle della targa e il video della consegna ❤️ Buona visione, fazzoletti alla mano.",
+      "rifPost": "p-2026-06-05"
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-08T12:40:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-06-08"
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-08T12:45:00+02:00",
+      "testo": "",
+      "rifPost": "p-2026-06-07"
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2026-06-08T13:10:00+02:00",
+      "testo": "Confermo 2 per la cena, io e il papà di Giulia 🙂",
+      "rifPost": null
+    },
+    {
+      "persona": "fatima.hassan",
+      "quando": "2026-06-08T14:00:00+02:00",
+      "testo": "Io vengo da sola, confermo. Contenta che abbia vinto la pizzeria, più semplice per tutti.",
+      "rifPost": null
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2026-06-08T15:20:00+02:00",
+      "testo": "20€ tutto compreso confermati? Chiedo solo per non avere sorprese quando arriva il conto, la storia della cena di terza ve la ricordate tutti.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-08T15:31:00+02:00",
+      "testo": "Confermatissimi Stefano: menu fisso concordato con Cesare, bibite e caffè inclusi. Se avanza qualcosa lo lasciamo di mancia e chiudiamo in bellezza.",
+      "rifPost": null
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2026-06-10T09:15:00+02:00",
+      "testo": "Ragazze ma le pagelle dove si vedono? Sono entrata nel registro ma non trovo niente 🤔",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2026-06-10T09:24:00+02:00",
+      "testo": "Giulia, i passaggi sono tutti qui: registro → Documenti → Scrutinio finale → Scarica pagella. Serve lo SPID di un genitore.",
+      "rifPost": "p-2026-06-07"
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2026-06-10T10:40:00+02:00",
+      "testo": "Stamattina il registro mi ha chiesto di nuovo la password e stavo già per scrivere qui... poi mi sono RICORDATO DA SOLO del post con le istruzioni, ho recuperato l'accesso e ho scaricato la pagella. Marco promosso alle medie! Sono più fiero di me che di lui 😄",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2026-06-10T10:48:00+02:00",
+      "testo": "Giovanni sei ufficialmente il nostro orgoglio tecnologico dell'anno 😄👏",
+      "rifPost": null
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2026-06-10T11:30:00+02:00",
+      "testo": "Aperta la pagella con le mani che tremavano manco fosse la mia 😅 Tutto bene per fortuna, Giulia promossa. Che sollievo, ultima ansia dell'anno!",
+      "rifPost": null
+    },
+    {
+      "persona": "luca.bruno",
+      "quando": "2026-06-10T23:36:00+02:00",
+      "testo": "Letta ora la pagella, appena smontato dal turno: Diego promosso, domani si festeggia a colazione 🍩",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-11T09:30:00+02:00",
+      "testo": "Promemoria per stasera: ore 20:00 da Cesare, siamo 26 adulti + le 5 maestre. Chi arriva prima tiene i tavoli 😄",
+      "rifPost": "p-2026-06-08"
+    },
+    {
+      "persona": "simone.moretti",
+      "quando": "2026-06-11T18:40:00+02:00",
+      "testo": "Scusate, mi ridite l'indirizzo esatto della pizzeria? 😅",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2026-06-11T18:44:00+02:00",
+      "testo": "Simone, è tutto nel post: via Andrea Costa 12, quella vicino scuola 🙂 A stasera!",
+      "rifPost": "p-2026-06-08"
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2026-06-11T23:50:00+02:00",
+      "testo": "Serata stupenda ❤️ Le maestre commosse per la seconda volta in una settimana, record. La foto di gruppo la carico domani nel post della festa!",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2026-06-11T23:58:00+02:00",
+      "testo": "Raccolti i 20€ da tutti al tavolo, conto pagato e i 14€ avanzati lasciati di mancia a Cesare. Il bilancio della 5B chiude ufficialmente in pari: missione compiuta 😄 Buonanotte a tutti!",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2026-06-15T09:35:00+02:00",
+      "testo": "Ultima cosa da rappresentante, poi vado in ferie anch'io 😄 Ho fatto ordine in bacheca: archiviato tutto tranne il post di saluto (resta fissato in alto) e quello delle pagelle, che vi serve fino a fine agosto per scaricare il PDF. Le foto della festa restano nel post archiviato: si ritrovano con la ricerca. Buona estate davvero ❤️",
+      "rifPost": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2026-06-15T09:50:00+02:00",
+      "testo": "Grazie ancora di tutto Denise, sei stata un capitano vero. Buona estate a tutti, ci si vede al mare o a settembre fuori da un'altra scuola 🥹",
+      "rifPost": null
+    }
+  ],
+  "fatti": [
+    {
+      "id": "f-festa-regole",
+      "domanda": "A che ora inizia la festa di fine anno e cosa bisogna portare?",
+      "risposta": "Venerdì 5 giugno nel giardino della scuola: i bambini escono alle 16:30, i genitori entrano dal cancello piccolo dalle 16:45. Ognuno porta quanto assegnato nella lista chi-porta-cosa; torte e dolci solo confezionati o da forno, senza creme. Bibite, bicchieri e stoviglie li offre la cassa di classe. In caso di pioggia si fa comunque (gazebo + porticato).",
+      "rifPost": "p-2026-06-02",
+      "pubblicatoIl": "2026-06-01T08:15:00+02:00",
+      "sostituisce": null
+    },
+    {
+      "id": "f-pagelle-dove--2026-06",
+      "domanda": "Quando escono le pagelle finali e dove si vedono?",
+      "risposta": "Dal 10 giugno sul registro elettronico: Documenti → Scrutinio finale → Scarica pagella, con accesso tramite SPID di un genitore. Il PDF resta scaricabile fino a fine agosto.",
+      "rifPost": "p-2026-06-07",
+      "pubblicatoIl": "2026-06-08T12:35:00+02:00",
+      "sostituisce": null
+    },
+    {
+      "id": "f-cena-dove",
+      "domanda": "Quando e dove si fa la cena di fine anno dei genitori con le maestre, e quanto costa?",
+      "risposta": "Giovedì 11 giugno alle 20:00 alla Pizzeria Da Cesare, via Andrea Costa 12 (vicino alla scuola). Menu fisso 20€ a testa tutto compreso, quota delle maestre inclusa.",
+      "rifPost": "p-2026-06-08",
+      "pubblicatoIl": "2026-06-08T12:30:00+02:00",
+      "sostituisce": null
+    }
+  ]
+}

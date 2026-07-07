@@ -1,0 +1,582 @@
+{
+  "mese": "2025-11",
+  "post": [
+    {
+      "rif": "p-2025-11-01",
+      "tipo": "deadline",
+      "titolo": "Autorizzazione Salaborsa: riconsegna entro lunedì 3/11",
+      "corpo": "Ultima chiamata per il modulo giallo dell'uscita in biblioteca Salaborsa di giovedì 6 novembre. Va riconsegnato firmato alla maestra entro lunedì 3 novembre, nel diario. Chi non consegna l'autorizzazione resta a scuola con la 4A: sarebbe un peccato, l'uscita è gratuita. Se avete perso il modulo, in segreteria ne hanno di scorta oppure scrivetemi e vi giro la scansione.",
+      "creatoIl": "2025-11-01T10:15:00+01:00",
+      "dueDate": "2025-11-03",
+      "pinned": false,
+      "archiviatoIl": "2026-01-10T21:28:00+01:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-11-02",
+      "tipo": "poll",
+      "titolo": "Uscita Salaborsa: chi può fare l'accompagnatore?",
+      "corpo": "Le maestre chiedono 2 genitori accompagnatori per l'uscita di giovedì 6 novembre (ritrovo a scuola alle 8:30, rientro previsto per le 12:45). Serve solo un documento d'identità. Votate entro mercoledì a mezzogiorno, poi le maestre scelgono i 2 nomi. Grazie a Valentina per aver suggerito il sondaggio.",
+      "creatoIl": "2025-11-03T13:40:00+01:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-01-10T21:29:00+01:00",
+      "condivisoInChat": true,
+      "sondaggio": {
+        "chiudeIl": "2025-11-05T12:00:00+01:00",
+        "opzioni": [
+          "Posso accompagnare giovedì 6/11 (8:30-12:45)",
+          "Non posso"
+        ],
+        "voti": [
+          { "persona": "davide.longo", "opzioni": [0] },
+          { "persona": "elena.gatti", "opzioni": [0] },
+          { "persona": "laura.bianchi", "opzioni": [1] },
+          { "persona": "marco.rizzo", "opzioni": [1] },
+          { "persona": "sara.greco", "opzioni": [1] },
+          { "persona": "federica.russo", "opzioni": [1] },
+          { "persona": "stefano.gallo", "opzioni": [1] },
+          { "persona": "chiara.leone", "opzioni": [1] },
+          { "persona": "anna.ricci", "opzioni": [1] },
+          { "persona": "valentina.barbieri", "opzioni": [1] },
+          { "persona": "fatima.hassan", "opzioni": [1] },
+          { "persona": "cristina.pagani", "opzioni": [1] },
+          { "persona": "paolo.ferrari", "opzioni": [1] }
+        ]
+      }
+    },
+    {
+      "rif": "p-2025-11-03",
+      "tipo": "notice",
+      "titolo": "Uscita in Salaborsa giovedì 6/11: tutti i dettagli",
+      "corpo": "Giovedì 6 novembre la 5B va in biblioteca Salaborsa per una mezza giornata: visita guidata e laboratorio di lettura. Ingresso a scuola al solito orario (8:30), si va in centro con l'autobus riservato dal Comune e si rientra a scuola per le 12:30, in tempo per la mensa. Cosa serve: zaino leggero con solo astuccio e una merenda al sacco. Niente libri, niente soldi: l'uscita è completamente gratuita. Accompagnano le maestre più due genitori (Davide ed Elena). In caso di pioggia si va lo stesso, il percorso è quasi tutto al coperto.",
+      "creatoIl": "2025-11-04T13:20:00+01:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-01-10T21:30:00+01:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-11-04",
+      "tipo": "notice",
+      "titolo": "Com'è andata in Salaborsa (e la tessera nel diario)",
+      "corpo": "Uscita bellissima: visita alla biblioteca, laboratorio di lettura e — sorpresa — a ogni bambino è stata fatta la tessera delle biblioteche comunali di Bologna. La tessera è nel diario di vostro figlio: è gratuita, non scade e permette di prendere libri in prestito in tutte le biblioteche del Comune, Salaborsa compresa. Le maestre suggeriscono di portarci i bambini anche il sabato: la sezione ragazzi è al piano terra. Grazie a Davide ed Elena che hanno accompagnato.",
+      "creatoIl": "2025-11-06T17:45:00+01:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-11-05",
+      "tipo": "material",
+      "titolo": "I libri consigliati dalla bibliotecaria della Salaborsa",
+      "corpo": "Durante il laboratorio la bibliotecaria ha lasciato ai bambini una lista di libri adatti alla quinta, ve la ricopio qui così non si perde: \"Wonder\" di R.J. Palacio, \"La fabbrica di cioccolato\" e \"Il GGG\" di Roald Dahl, \"Il giardino segreto\" di F.H. Burnett, \"Storie il cui finale sei tu\" (per chi legge poco volentieri) e la serie \"Geronimo Stilton — Viaggio nel tempo\" per i più pigri. Si trovano tutti in prestito gratuito con la tessera nuova. In allegato la foto del segnalibro con la lista completa.",
+      "creatoIl": "2025-11-07T14:10:00+01:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-11-06",
+      "tipo": "notice",
+      "titolo": "Benvenuti Gabriele e famiglia!",
+      "corpo": "Da oggi la 5B ha un compagno in più: diamo il benvenuto a Gabriele, appena arrivato da Modena, e alla sua mamma Irene che è già nel gruppo e su ClasseHub. Per Irene e per chiunque si fosse perso qualcosa: in bacheca trovate ancora i post di inizio anno su assicurazione e contributo volontario, iscrizione mensa e cassa comune (usate la ricerca oppure scorrete a settembre-ottobre). Per qualsiasi dubbio scrivete pure qui o a me in privato.",
+      "creatoIl": "2025-11-10T14:30:00+01:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": null,
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-11-07",
+      "tipo": "notice",
+      "titolo": "Avviso pediculosi in 5B: cosa fare (e cosa no)",
+      "corpo": "La scuola ha segnalato alcuni casi di pidocchi in classe. Niente panico, capita ogni anno: ecco cosa chiedono le maestre e la scheda dell'ASL. 1) Controllare la testa ogni giorno per le prossime due settimane, con il pettine a denti fitti sui capelli bagnati, guardando bene dietro orecchie e nuca. 2) Fare il trattamento SOLO se trovate pidocchi o lendini: i trattamenti preventivi non servono e sono sconsigliati. 3) Se trovate qualcosa: trattamento la sera stessa, il bambino rientra a scuola già il giorno dopo con il modulo di riammissione firmato (chi non ha trovato nulla non deve consegnare niente). 4) Avvisate la maestra con discrezione. Link alla scheda ASL con le istruzioni passo passo in fondo al post.",
+      "creatoIl": "2025-11-18T13:05:00+01:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-01-10T21:31:00+01:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-11-08",
+      "tipo": "deadline",
+      "titolo": "Colloqui di dicembre: prenota entro giovedì 27/11",
+      "corpo": "Sono aperte le prenotazioni per i colloqui individuali con le maestre, che si terranno da lunedì 1 a venerdì 5 dicembre, dalle 16:30 alle 18:30 (slot da 10 minuti). Si prenota dal registro elettronico: sezione \"Colloqui\", si sceglie giorno e ora tra quelli liberi. La prenotazione chiude giovedì 27 novembre. Chi ha problemi con il registro (password, accesso) mi scriva: raccolgo io le richieste e le giro in segreteria. Consiglio di prenotare presto, gli slot del pomeriggio tardi finiscono subito.",
+      "creatoIl": "2025-11-20T13:30:00+01:00",
+      "dueDate": "2025-11-27",
+      "pinned": false,
+      "archiviatoIl": "2026-01-10T21:32:00+01:00",
+      "condivisoInChat": true
+    },
+    {
+      "rif": "p-2025-11-09",
+      "tipo": "notice",
+      "titolo": "Sciopero venerdì 28/11: servizio non garantito",
+      "corpo": "Venerdì 28 novembre è indetto uno sciopero generale del comparto scuola. Come sempre in questi casi la scuola NON garantisce: lezioni regolari, mensa, pre e post scuola. Non è possibile sapere prima chi aderirà: venerdì mattina il cancello apre solo se c'è personale sufficiente, altrimenti i bambini vengono riaffidati ai genitori. Chi può organizzarsi con un piano B per la mattinata lo faccia; chi accompagna a scuola aspetti la conferma dell'ingresso prima di andare via. Appena so qualcosa venerdì mattina scrivo nel gruppo.",
+      "creatoIl": "2025-11-24T13:15:00+01:00",
+      "dueDate": null,
+      "pinned": false,
+      "archiviatoIl": "2026-01-10T21:33:00+01:00",
+      "condivisoInChat": true
+    }
+  ],
+  "richieste": [
+    {
+      "persona": "valentina.barbieri",
+      "testo": "Denise, le maestre chiedono 2 accompagnatori per l'uscita in Salaborsa di giovedì. Fai un sondaggio così vediamo chi può? Servono i nomi entro mercoledì.",
+      "creatoIl": "2025-11-02T20:15:00+01:00",
+      "esito": "handled",
+      "convertitaIn": "p-2025-11-02"
+    },
+    {
+      "persona": "irene.sala",
+      "testo": "Ciao Denise, sono Irene, la mamma di Gabriele. Sto recuperando i post dei mesi scorsi: l'assicurazione scaduta il 15/10 la posso ancora pagare? E c'è qualche altro modulo di inizio anno che devo rifare per Gabriele?",
+      "creatoIl": "2025-11-10T21:40:00+01:00",
+      "esito": "handled",
+      "convertitaIn": null
+    },
+    {
+      "persona": "federica.russo",
+      "testo": "Si sa già qualcosa dei colloqui di dicembre? Vorrei prenotare il prima possibile per incastrarli con i turni in negozio, sennò mi tocca chiedere un permesso.",
+      "creatoIl": "2025-11-17T09:12:00+01:00",
+      "esito": "handled",
+      "convertitaIn": "p-2025-11-08"
+    },
+    {
+      "persona": "cristina.pagani",
+      "testo": "Suggerimento: nel post sui pidocchi aggiungerei il link alla scheda dell'ASL, così chi cerca trova subito la fonte ufficiale invece dei rimedi della nonna che girano in chat.",
+      "creatoIl": "2025-11-18T14:55:00+01:00",
+      "esito": "handled",
+      "convertitaIn": null
+    }
+  ],
+  "chat": [
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-01T10:18:00+01:00",
+      "testo": "",
+      "rifPost": "p-2025-11-01"
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-01T10:20:00+01:00",
+      "testo": "Mancano ancora 6 autorizzazioni per la Salaborsa. Senza modulo giallo firmato il bambino resta a scuola con la 4A, quindi stasera controllate lo zaino 🙏",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-03T13:35:00+01:00",
+      "testo": "Aggiornamento dalla maestra: mancano solo 2 autorizzazioni. Le accetta anche domani mattina, ma è l'ultimissima chiamata.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-03T13:50:00+01:00",
+      "testo": "",
+      "rifPost": "p-2025-11-02"
+    },
+    {
+      "persona": "simone.moretti",
+      "quando": "2025-11-03T14:02:00+01:00",
+      "testo": "ops, una delle due autorizzazioni che mancano temo sia quella di Anita 🙈 il modulo ce l'ho firmato sul tavolo da giovedì, domattina alle 8:25 sono al cancello, promesso",
+      "rifPost": null
+    },
+    {
+      "persona": "davide.longo",
+      "quando": "2025-11-03T14:15:00+01:00",
+      "testo": "Votato: io giovedì ci sono, ho già preso il permesso in ufficio. Se serve porto anche l'ombrello gigante per la fila 😄",
+      "rifPost": null
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2025-11-03T15:03:00+01:00",
+      "testo": "votato, ci sono anch'io!! adoro la Salaborsa 📚 se le maestre danno l'ok porto la macchina fotografica e poi giro le foto qui",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-04T13:25:00+01:00",
+      "testo": "",
+      "rifPost": "p-2025-11-03"
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2025-11-04T13:41:00+01:00",
+      "testo": "quindi giovedì zaino leggero, merenda al sacco e ingresso normale alle 8:30 giusto? niente libri niente diario? scusate ma preferisco chiedere",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2025-11-04T13:52:00+01:00",
+      "testo": "Esatto Federica, solo astuccio e merenda, il resto è scritto tutto qui 👇 rispondo col link così vale per tutti 🙂",
+      "rifPost": "p-2025-11-03"
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2025-11-04T15:58:00+01:00",
+      "testo": "ragazze ma giovedì a che ora devono essere a scuola? partono subito?",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2025-11-04T16:06:00+01:00",
+      "testo": "Orario normale, 8:30 come sempre, l'autobus parte dopo. Trovi orari e tutto il resto qui 👇",
+      "rifPost": "p-2025-11-03"
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2025-11-04T18:22:00+01:00",
+      "testo": "scusate il disturbo. io il modulo di marco l'ho firmato venerdi e messo nel diario, ma marco dice che la maestra non gliel'ha ritirato. devo riportarne un altro? non vorrei che restasse con la 4A poverino",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-04T18:40:00+01:00",
+      "testo": "Giovanni tranquillo: ho visto oggi la lista dei consegnati e Marco c'è. Se è nel diario lo ritirano loro, a volte passano giorni.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-05T12:30:00+01:00",
+      "testo": "Sondaggio accompagnatori chiuso: giovedì vengono Davide ed Elena, scelti dalle maestre. Grazie a tutti quelli che hanno votato, gli altri disponibili li teniamo buoni per il teatro di gennaio 🙂",
+      "rifPost": null
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2025-11-06T13:20:00+01:00",
+      "testo": "tornati!! bambini entusiasti, laboratorio bellissimo e sorpresa: hanno fatto a tutti la tessera della biblioteca 🥰 le foto le ho date alle maestre che le caricano sul registro",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-06T17:48:00+01:00",
+      "testo": "",
+      "rifPost": "p-2025-11-04"
+    },
+    {
+      "persona": "paolo.ferrari",
+      "quando": "2025-11-06T18:10:00+01:00",
+      "testo": "Tommaso ha chiesto alla bibliotecaria se in Salaborsa c'era la playstation. C'è ancora della strada da fare 😂📚",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-07T14:12:00+01:00",
+      "testo": "",
+      "rifPost": "p-2025-11-05"
+    },
+    {
+      "persona": "fatima.hassan",
+      "quando": "2025-11-07T16:30:00+01:00",
+      "testo": "Grazie Denise, la lista dei libri è molto utile. Youssef ha scelto Wonder, domani andiamo a prenderlo con la tessera nuova. Bella idea metterla in un post, così la ritrovo con calma.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-10T14:32:00+01:00",
+      "testo": "",
+      "rifPost": "p-2025-11-06"
+    },
+    {
+      "persona": "irene.sala",
+      "quando": "2025-11-10T15:10:00+01:00",
+      "testo": "Ciao a tutti! Sono Irene, la mamma di Gabriele, ci siamo appena trasferiti da Modena. Grazie dell'accoglienza! Confesso che sono un po' persa: c'è un'assicurazione da pagare? Ho letto di una cassa comune, come funziona? E la mensa come si paga? Scusate le mille domande 😅",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2025-11-10T15:25:00+01:00",
+      "testo": "Benvenuta Irene! Respira 🙂 È tutto sulla bacheca di ClasseHub: cerca i post \"Assicurazione e contributo volontario\" (fine settembre) e \"Cassa comune\" (ottobre), ci sono cifre, scadenze e istruzioni. Ti ho girato i link dei due post in privato.",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2025-11-10T15:31:00+01:00",
+      "testo": "Aggiungo: la mensa si paga con i buoni sul portale del Comune, anche per quello c'è il post di settembre in bacheca con la procedura. Per l'assicurazione sei nei tempi: la segreteria accetta i nuovi arrivati fino a fine mese.",
+      "rifPost": null
+    },
+    {
+      "persona": "irene.sala",
+      "quando": "2025-11-10T15:44:00+01:00",
+      "testo": "Fantastico, ho appena aperto l'app: c'è davvero tutto, in una chat normale non avrei mai ritrovato niente 😅 Per la cassa comune a chi verso i 20€?",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2025-11-10T16:02:00+01:00",
+      "testo": "Ciao Irene, la cassa la tengo io. Ti mando l'IBAN in privato, causale \"cassa 5B - Gabriele\". Benvenuti!",
+      "rifPost": null
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2025-11-10T17:20:00+01:00",
+      "testo": "benvenuta signora irene, io sono giovanni il papà di marco, il più anziano del gruppo. se lei è riuscita ad aprire l'app al primo colpo è già più brava di me che a settembre ho chiesto tre volte come si apriva il link",
+      "rifPost": null
+    },
+    {
+      "persona": "andrea.fontana",
+      "quando": "2025-11-10T18:05:00+01:00",
+      "testo": "benvenuta. io l'app la apro solo sotto minaccia, però lo ammetto: per chi arriva a novembre è comoda, l'alternativa era leggersi 700 messaggi di chat",
+      "rifPost": null
+    },
+    {
+      "persona": "irene.sala",
+      "quando": "2025-11-11T09:15:00+01:00",
+      "testo": "Bonifico per la cassa fatto ✔️ E grazie ancora Sara per i link: ieri sera ho recuperato due mesi di avvisi in dieci minuti. Gabriele stamattina è andato a scuola contento, mi sento già meno ospite 🙂",
+      "rifPost": null
+    },
+    {
+      "persona": "anna.ricci",
+      "quando": "2025-11-11T12:40:00+01:00",
+      "testo": "Ricevuto, tutto in ordine 👍 Con Irene siamo 22 famiglie su 22 in regola con la cassa comune: record storico, concedetemi il momento di gloria da tesoriera.",
+      "rifPost": null
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2025-11-12T19:30:00+01:00",
+      "testo": "genitori una domanda: venerdì 14 marco compie 10 anni. vorremmo festeggiare sabato 15 alle 15:30 al parco della montagnola, merenda la portiamo noi. come si fa a mandare l'invito a tutti? va bene se lo scrivo qui?",
+      "rifPost": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2025-11-12T19:48:00+01:00",
+      "testo": "Giovanni l'invito l'hai appena fatto, perfetto così 😄 Per il regalo raccolgo io i soliti 5€ in contanti all'uscita, giovedì e venerdì. Pensavo a un set Lego, Marco è fissato giusto?",
+      "rifPost": null
+    },
+    {
+      "persona": "valentina.barbieri",
+      "quando": "2025-11-13T16:10:00+01:00",
+      "testo": "Promemoria: domani all'uscita ultimo giro per i 5€ del regalo di Marco. Siamo già a 14 famiglie, direi che il Lego grosso ci scappa 👍",
+      "rifPost": null
+    },
+    {
+      "persona": "giovanni.neri",
+      "quando": "2025-11-15T18:50:00+01:00",
+      "testo": "grazie a tutti quelli che sono venuti oggi al parco, marco era felicissimo. il lego è talmente grande che ci arriviamo a natale a finirlo. grazie valentina per la raccolta, non so come farebbe questa classe senza di te",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-18T13:08:00+01:00",
+      "testo": "",
+      "rifPost": "p-2025-11-07"
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2025-11-18T13:15:00+01:00",
+      "testo": "PIDOCCHI?? nella nostra classe?? ma da quando?? Giulia si gratta da ieri sera, mi sta venendo un colpo",
+      "rifPost": null
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2025-11-18T13:24:00+01:00",
+      "testo": "ho letto il post, quindi se non trovo niente NON faccio il trattamento? ma il controllo come si fa di preciso? solo dietro le orecchie o tutta la testa? scusate ma è la prima volta",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2025-11-18T13:40:00+01:00",
+      "testo": "Federica respira 🙂 pettine a denti fitti sui capelli bagnati, tutta la testa ma soprattutto nuca e dietro le orecchie. E trattamento solo se TROVI qualcosa. È spiegato passo passo qui 👇",
+      "rifPost": "p-2025-11-07"
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2025-11-18T14:05:00+01:00",
+      "testo": "SIGNORE MIE AI MIEI TEMPI SI FACEVA CON ACETO CALDO E PETTINE FITTO 💪 E TRECCE STRETTE PER LE BAMBINE! STASERA LA AURORA LA CONTROLLO IO PETTINATA COME SI DEVE ❤️❤️",
+      "rifPost": null
+    },
+    {
+      "persona": "paolo.ferrari",
+      "quando": "2025-11-18T14:22:00+01:00",
+      "testo": "i pidocchi in quinta sono una certezza stagionale come il panettone al supermercato a novembre. dicono che scelgano solo le teste più intelligenti, quindi complimenti a tutta la 5B 😂",
+      "rifPost": null
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2025-11-18T15:10:00+01:00",
+      "testo": "la domanda vera è un'altra: perché la scuola manda l'avviso quando ormai girano da una settimana? mia cognata fa la maestra in un altro istituto e lì l'avviso parte il giorno stesso della segnalazione. così il controllo lo facciamo sempre in ritardo",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-18T15:35:00+01:00",
+      "testo": "Ho aggiunto al post il link alla scheda ASL sulla pediculosi, grazie Cristina del suggerimento. E per favore: niente nomi né ipotesi su chi li avrebbe portati, non ci interessa e mettiamo solo in imbarazzo i bambini 🙏",
+      "rifPost": null
+    },
+    {
+      "persona": "chiara.leone",
+      "quando": "2025-11-18T16:45:00+01:00",
+      "testo": "nicolò si grattava da giorni pensavo fose lo shampo nuovo 🙈 stasera pettinata di controllo x tutti e tre i miei, w la vita",
+      "rifPost": null
+    },
+    {
+      "persona": "luca.bruno",
+      "quando": "2025-11-18T23:34:00+01:00",
+      "testo": "letto tutto solo ora dopo il turno. diego è praticamente rasato da ottobre: per una volta essere il papà pigro del taglio a macchinetta paga 😎 comunque lo controllo lo stesso domattina",
+      "rifPost": null
+    },
+    {
+      "persona": "fatima.hassan",
+      "quando": "2025-11-19T10:20:00+01:00",
+      "testo": "Una domanda per essere sicura di fare giusto: il modulo di riammissione va consegnato anche se non abbiamo trovato niente? Ho riletto il post ma su questo avevo un dubbio.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-19T12:15:00+01:00",
+      "testo": "No Fatima, il modulo serve solo per chi ha fatto il trattamento. Se la testa è pulita non devi consegnare nulla. Lo preciso meglio anche nel post, era ambiguo in effetti.",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-20T13:32:00+01:00",
+      "testo": "",
+      "rifPost": "p-2025-11-08"
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2025-11-20T13:50:00+01:00",
+      "testo": "prenotato subito: lunedì 1/12 ore 16:30 ✔️ una cosa: se poi al lavoro mi cambiano il turno si può spostare la prenotazione o è definitiva?",
+      "rifPost": null
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2025-11-20T17:30:00+01:00",
+      "testo": "scusate ma dove si prenota il colloquio? c'è un foglio a scuola?",
+      "rifPost": null
+    },
+    {
+      "persona": "sara.greco",
+      "quando": "2025-11-20T17:41:00+01:00",
+      "testo": "Niente foglio Giulia, si fa dal registro elettronico, sezione Colloqui. Procedura e scadenza sono qui 👇",
+      "rifPost": "p-2025-11-08"
+    },
+    {
+      "persona": "roberto.villa",
+      "quando": "2025-11-21T21:10:00+01:00",
+      "testo": "Buonasera a tutti. Premetto che non volevo intasare il gruppo, e mi scuso in anticipo per la lunghezza, ma credo che il tema meriti due righe. Come forse qualcuno ricorda, io per lavoro sono spesso fuori Bologna dal lunedì al giovedì, e i colloqui infrasettimanali del pomeriggio per me sono storicamente un problema: l'anno scorso, in quarta, dovetti fare i salti mortali con un collega per esserci. Detto questo, ho prenotato venerdì 5/12 alle 18:20, ultimo slot disponibile del venerdì, e volevo chiedere: qualcuno sa se le maestre, in casi documentati di impossibilità, concedono in via eccezionale un colloquio telefonico? Non per me, che come detto ho risolto, ma mi pareva utile saperlo per il futuro, anche per altri genitori nella mia situazione. P.S. Mi associo ai complimenti per l'uscita in Salaborsa: Beatrice ne parla ancora.",
+      "rifPost": null
+    },
+    {
+      "persona": "luca.bruno",
+      "quando": "2025-11-21T23:29:00+01:00",
+      "testo": "quesito da turnista: io riesco solo venerdì 5 tardi ma gli slot dopo le 18 sono già finiti tutti. se qualcuno ha preso le 18:10 o 18:20 del venerdì e può fare un altro giorno, scambiamo? offro caffè e gratitudine eterna",
+      "rifPost": null
+    },
+    {
+      "persona": "irene.sala",
+      "quando": "2025-11-22T10:05:00+01:00",
+      "testo": "Prenotato anche noi, mercoledì 3/12. Primo colloquio nella scuola nuova, un po' di ansia da genitore nuovo ce l'ho 😅 le maestre come sono ai colloqui, dirette?",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-24T13:18:00+01:00",
+      "testo": "",
+      "rifPost": "p-2025-11-09"
+    },
+    {
+      "persona": "federica.russo",
+      "quando": "2025-11-24T13:30:00+01:00",
+      "testo": "quindi venerdì 28 li portiamo a scuola o no?? io venerdì lavoro, non posso scoprirlo alle 8:25 davanti al cancello 😰",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-24T13:45:00+01:00",
+      "testo": "Federica purtroppo non si può sapere prima, è la regola degli scioperi: nessuno è obbligato a dichiarare se aderisce. Chi può si organizzi un piano B; venerdì mattina appena so se il cancello apre scrivo qui, come per lo sciopero di ottobre.",
+      "rifPost": null
+    },
+    {
+      "persona": "stefano.gallo",
+      "quando": "2025-11-24T14:20:00+01:00",
+      "testo": "secondo sciopero da settembre. tutto legittimo per carità, ma il conto lo pagano sempre le famiglie che lavorano: ferie bruciate o nonni precettati. almeno stavolta l'avviso è arrivato con 4 giorni di anticipo",
+      "rifPost": null
+    },
+    {
+      "persona": "chiara.leone",
+      "quando": "2025-11-24T15:05:00+01:00",
+      "testo": "io vnrd nn lavoro, se qualcuna è messa male posso tenere qlche bimbo qui da noi la mattina, nicolò è contento",
+      "rifPost": null
+    },
+    {
+      "persona": "simone.moretti",
+      "quando": "2025-11-26T08:40:00+01:00",
+      "testo": "scusate, i colloqui si prenotavano entro oggi o entro domani? il registro mi dice ancora slot disponibili quindi forse sono in tempo?",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-26T09:02:00+01:00",
+      "testo": "Entro domani, giovedì 27, Simone. Sei in tempo ma prenota adesso che ci sei, così non ci ripensiamo venerdì 🙂",
+      "rifPost": null
+    },
+    {
+      "persona": "giulia.esposito",
+      "quando": "2025-11-27T07:50:00+01:00",
+      "testo": "ragazze ma quindi domani c'è scuola sì o no? ho perso il filo",
+      "rifPost": null
+    },
+    {
+      "persona": "laura.bianchi",
+      "quando": "2025-11-27T08:15:00+01:00",
+      "testo": "Non si sa Giulia, è uno sciopero: si scopre domattina al cancello. Qui c'è l'avviso completo, Denise scriverà appena si sa qualcosa 👇",
+      "rifPost": "p-2025-11-09"
+    },
+    {
+      "persona": "rosa.marino",
+      "quando": "2025-11-27T12:30:00+01:00",
+      "testo": "IO DOMANI LA AURORA LA TENGO A CASA CON LA NONNA COSÌ NON SI RISCHIA ❤️ FACCIAMO I BISCOTTI PER TUTTA LA CLASSE 🍪🍪",
+      "rifPost": null
+    },
+    {
+      "persona": "elena.gatti",
+      "quando": "2025-11-28T07:55:00+01:00",
+      "testo": "aggiornamento dal cancello: APERTO, la maestra Paola e la maestra Elisa ci sono, la 5B fa lezione regolare! mensa confermata, me l'ha detto la bidella 🙌",
+      "rifPost": null
+    },
+    {
+      "persona": "denise.fabbri",
+      "quando": "2025-11-28T08:30:00+01:00",
+      "testo": "Grazie Elena per la diretta 🙂 Confermo: lezione e mensa regolari per la 5B, solo il post-scuola oggi è sospeso, chi lo usa deve ritirare alle 16:30.",
+      "rifPost": null
+    }
+  ],
+  "fatti": [
+    {
+      "id": "f-biblioteca-autorizzazione",
+      "domanda": "Entro quando va riconsegnata l'autorizzazione per l'uscita in biblioteca Salaborsa?",
+      "risposta": "Il modulo giallo firmato va riconsegnato alla maestra entro lunedì 3 novembre (nel diario); chi non lo consegna resta a scuola con la 4A.",
+      "rifPost": "p-2025-11-01",
+      "pubblicatoIl": "2025-11-01T10:15:00+01:00",
+      "sostituisce": null
+    },
+    {
+      "id": "f-biblioteca-orario",
+      "domanda": "A che ora si parte e si torna per l'uscita in Salaborsa e cosa bisogna portare?",
+      "risposta": "Giovedì 6 novembre: ingresso a scuola al solito orario (8:30), rientro per le 12:30 in tempo per la mensa; zaino leggero con solo astuccio e merenda al sacco; l'uscita è gratuita.",
+      "rifPost": "p-2025-11-03",
+      "pubblicatoIl": "2025-11-04T13:20:00+01:00",
+      "sostituisce": null
+    },
+    {
+      "id": "f-pidocchi-cosafare",
+      "domanda": "Cosa bisogna fare dopo l'avviso pidocchi?",
+      "risposta": "Controllare la testa ogni giorno per due settimane con pettine a denti fitti sui capelli bagnati; trattamento solo se si trovano pidocchi o lendini (niente trattamenti preventivi); il modulo di riammissione va consegnato solo da chi ha fatto il trattamento.",
+      "rifPost": "p-2025-11-07",
+      "pubblicatoIl": "2025-11-18T13:05:00+01:00",
+      "sostituisce": null
+    },
+    {
+      "id": "f-colloqui-prenotazione",
+      "domanda": "Come e entro quando si prenotano i colloqui di dicembre?",
+      "risposta": "Dal registro elettronico, sezione Colloqui, entro giovedì 27 novembre; i colloqui si tengono dal 1 al 5 dicembre, dalle 16:30 alle 18:30, in slot da 10 minuti.",
+      "rifPost": "p-2025-11-08",
+      "pubblicatoIl": "2025-11-20T13:30:00+01:00",
+      "sostituisce": null
+    }
+  ]
+}
