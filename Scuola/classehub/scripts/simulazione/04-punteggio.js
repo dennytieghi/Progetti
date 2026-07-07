@@ -69,10 +69,14 @@ function scoreChat(log, verita, chat, risposta) {
 }
 
 /** C2 (0-20): il ponte chat→app: ha aperto il post GIUSTO? */
-function scorePonte(log, verita, risposta) {
+function scorePonte(log, verita, risposta, rispostaCorretta) {
   const aperture = log.filter((v) => v.azione === "apri" && v.esito === "ok");
   if (aperture.some((v) => v.slug === verita.slug)) return 20;
   if (aperture.some((v) => verita.catenaSlug.includes(v.slug))) return 8; // versione vecchia
+  // Ha aperto un post DIVERSO da quello canonico ma la risposta è giusta:
+  // il ponte ha funzionato, però l'informazione vive duplicata in più post
+  // (piccolo difetto di reperibilità, non un fallimento).
+  if (aperture.length > 0 && rispostaCorretta) return 14;
   const trovato = risposta?.comeTrovata && risposta.comeTrovata !== "non-trovata";
   if (trovato) return 6; // risposta pescata dal testo della chat, senza app
   return 0;
@@ -118,10 +122,27 @@ function main() {
       : null;
     const dMs = new Date(s.dataD).getTime();
 
-    const c1 = scoreChat(log, v, chat, risposta);
-    const c2 = scorePonte(log, v, risposta);
-    const c3 = scoreBacheca(v, registroPost, dMs);
     const c4 = Math.max(0, Math.min(20, giudizi[s.id]?.punteggio ?? 0));
+    const rispostaCorretta = c4 >= 15;
+
+    // Se la risposta è giusta, il messaggio che ha portato al post aperto
+    // dal cercatore conta come pertinente anche quando quel post non è
+    // quello canonico del fatto (informazione duplicata in più post).
+    let vEstesa = v;
+    if (rispostaCorretta && risposta?.slugAperto && !v.catenaSlug.includes(risposta.slugAperto)) {
+      const rifAperto = Object.entries(registroPost).find(
+        ([, p]) => p.slug === risposta.slugAperto
+      )?.[0];
+      vEstesa = {
+        ...v,
+        catenaSlug: [...v.catenaSlug, risposta.slugAperto],
+        catenaRif: rifAperto ? [...v.catenaRif, rifAperto] : v.catenaRif,
+      };
+    }
+
+    const c1 = scoreChat(log, vEstesa, chat, risposta);
+    const c2 = scorePonte(log, v, risposta, rispostaCorretta);
+    const c3 = scoreBacheca(v, registroPost, dMs);
 
     risultati.push({
       id: s.id,

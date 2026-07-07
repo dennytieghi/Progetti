@@ -84,7 +84,9 @@ Score 0-100 per sondaggio, quattro componenti:
    simula lo scroll: punteggio che decade con la profondità
    (`30 × max(0, 1 − messaggi_da_scorrere / 300) × 0.5`).
 2. **Ponte chat → app (0-20)** — il messaggio pertinente contiene il link
-   ClasseHub al post giusto? 20. Link a un post vecchio/sbagliato? 8.
+   ClasseHub al post giusto? 20. Link alla versione vecchia di un'informazione
+   poi aggiornata? 8. Risposta giusta ma trovata in un post DIVERSO da quello
+   canonico (informazione duplicata su più post, piccolo difetto)? 14.
    L'informazione sta solo nel testo della chat, sparsa? 0-6.
 3. **Trovabilità in bacheca (0-30)** — stato della bacheca alla data D
    (ricostruito da post, pin e archiviazioni): post fissato in alto = 30;
