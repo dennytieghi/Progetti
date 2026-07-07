@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Banner } from "@/components/shared/Banner";
 import { initialFormState } from "@/lib/form-state";
 import { it } from "@/lib/i18n/it";
+import { ALLOWED_PHOTO_TYPES, MAX_PHOTO_BYTES } from "@/lib/upload-limits";
 import type { PostType } from "@/lib/db/types";
 import {
   creaAvvisoAction,
@@ -37,7 +38,30 @@ export function NuovoPostForm({
 }) {
   const [state, formAction] = useActionState(ACTIONS[tipo], initialFormState);
   const [options, setOptions] = useState<string[]>(["", ""]);
+  const [photoError, setPhotoError] = useState<string | null>(null);
   const today = new Date().toISOString().slice(0, 10);
+
+  // Controllo subito nel browser: le Server Action rifiutano gli invii
+  // troppo grandi con un errore grezzo, quindi un file fuori misura
+  // non deve nemmeno partire. Il file scartato viene tolto dal campo.
+  function onPhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) {
+      setPhotoError(null);
+      return;
+    }
+    if (!ALLOWED_PHOTO_TYPES[file.type]) {
+      setPhotoError(it.nuovo.fotoErroreTipo);
+      e.target.value = "";
+      return;
+    }
+    if (file.size > MAX_PHOTO_BYTES) {
+      setPhotoError(it.nuovo.fotoErroreDimensione);
+      e.target.value = "";
+      return;
+    }
+    setPhotoError(null);
+  }
 
   return (
     <form action={formAction} className="space-y-5" noValidate>
@@ -95,7 +119,13 @@ export function NuovoPostForm({
             type="file"
             accept="image/jpeg,image/png"
             className="py-2.5"
+            onChange={onPhotoChange}
           />
+          {photoError && (
+            <div aria-live="assertive" className="mt-2">
+              <Banner tone="danger">{photoError}</Banner>
+            </div>
+          )}
           <p className="mt-1.5 text-[15px] text-ink-soft">{it.nuovo.fotoSpiega}</p>
         </div>
       )}

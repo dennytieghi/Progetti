@@ -3,6 +3,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { randomUUID } from "node:crypto";
 import path from "node:path";
 import { it } from "@/lib/i18n/it";
+import { ALLOWED_PHOTO_TYPES, MAX_PHOTO_BYTES } from "@/lib/upload-limits";
 
 /**
  * Foto degli avvisi/materiali — PoC: salvate in .data/uploads/{classId}/.
@@ -11,19 +12,14 @@ import { it } from "@/lib/i18n/it";
  */
 
 const UPLOAD_DIR = path.join(process.cwd(), ".data", "uploads");
-const MAX_BYTES = 5 * 1024 * 1024; // 5 MB
-const ALLOWED_TYPES: Record<string, string> = {
-  "image/jpeg": "jpg",
-  "image/png": "png",
-};
 
 export async function savePhoto(
   classId: string,
   file: File
 ): Promise<{ ok: true; path: string } | { ok: false; error: string }> {
-  const ext = ALLOWED_TYPES[file.type];
+  const ext = ALLOWED_PHOTO_TYPES[file.type];
   if (!ext) return { ok: false, error: it.nuovo.fotoErroreTipo };
-  if (file.size > MAX_BYTES) return { ok: false, error: it.nuovo.fotoErroreDimensione };
+  if (file.size > MAX_PHOTO_BYTES) return { ok: false, error: it.nuovo.fotoErroreDimensione };
 
   const dir = path.join(UPLOAD_DIR, classId);
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
