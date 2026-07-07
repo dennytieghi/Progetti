@@ -17,6 +17,8 @@ export default async function ControllaEmailPage({
   searchParams: Promise<{ demo?: string }>;
 }) {
   const { demo } = await searchParams;
+  // Solo percorsi del nostro callback: niente redirect verso l'esterno.
+  const demoHref = demo?.startsWith("/auth/callback?") ? demo : null;
 
   return (
     <div className="mx-auto max-w-md space-y-6 pt-8 text-center">
@@ -25,14 +27,11 @@ export default async function ControllaEmailPage({
       <p className="text-ink-soft">{it.controllaEmail.testo}</p>
       <p className="text-[16px] text-ink-soft">{it.controllaEmail.spam}</p>
 
-      {demo && (
+      {demoHref && (
         <Card className="space-y-3 border-warning/40 bg-warning-light text-left">
           <p className="font-semibold text-warning">{it.controllaEmail.demoTitolo}</p>
           <p className="text-[16px]">{it.controllaEmail.demoTesto}</p>
-          <Link
-            href={`/auth/callback?token=${encodeURIComponent(demo)}`}
-            className={buttonClasses("primary", "lg")}
-          >
+          <Link href={demoHref} className={buttonClasses("primary", "lg")}>
             {it.controllaEmail.demoBottone}
           </Link>
         </Card>

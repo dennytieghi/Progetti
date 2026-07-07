@@ -35,10 +35,10 @@ export default async function BachecaPage({
   const showArchived = ctx.isRepresentative && archiviati === "1";
   const activeFilter = FILTERS.find((f) => f.key === tipo) ?? FILTERS[0]!;
 
-  const deadlines = listUpcomingDeadlines(ctx.klass.id);
-  const posts = listPosts(ctx.klass.id, { includeArchived: showArchived }).filter(
-    (p) => (activeFilter.type ? p.type === activeFilter.type : true)
-  );
+  const deadlines = await listUpcomingDeadlines(ctx.klass.id);
+  const posts = (
+    await listPosts(ctx.klass.id, { includeArchived: showArchived })
+  ).filter((p) => (activeFilter.type ? p.type === activeFilter.type : true));
 
   return (
     <div className="space-y-8">

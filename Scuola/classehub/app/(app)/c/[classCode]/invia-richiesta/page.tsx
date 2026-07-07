@@ -21,7 +21,7 @@ export default async function InviaRichiestaPage({
   const { inviata } = await searchParams;
   const ctx = await requireActiveMembership(classCode);
 
-  const myRequests = listRequestsByAuthor(ctx.klass.id, ctx.user.id);
+  const myRequests = await listRequestsByAuthor(ctx.klass.id, ctx.user.id);
 
   return (
     <div className="mx-auto max-w-md space-y-6">
@@ -76,14 +76,14 @@ export default async function InviaRichiestaPage({
   );
 }
 
-function ConvertedLink({
+async function ConvertedLink({
   classCode,
   postId,
 }: {
   classCode: string;
   postId: string;
 }) {
-  const post = getPostById(postId);
+  const post = await getPostById(postId);
   if (!post) return null;
   return (
     <Link

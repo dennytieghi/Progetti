@@ -1,61 +1,79 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getClassById, getMembership } from "@/lib/db/queries";
 import {
-  consumeMagicLink,
   createClassWithRepresentative,
   createOneTimeSecret,
   createPendingMembership,
-  upsertAuthUser,
   upsertProfile,
 } from "@/lib/db/mutations";
-import { createSession } from "@/lib/auth/session";
+import { supabaseServer } from "@/lib/db/supabase";
 
 /**
- * Callback del magic link. Qui l'email è verificata (l'utente ha
- * cliccato il link ricevuto), quindi:
- * - rappresentante: crea classe + membership active + segreto one-time
- *   per mostrare il codice di emergenza una sola volta;
- * - genitore: crea membership 'pending' con nota per il rappresentante.
- * In produzione questa logica vive nel callback di Supabase Auth.
+ * Callback del magic link (Supabase Auth). Qui l'email è verificata:
+ * Supabase convalida il token e apre la sessione, poi noi eseguiamo
+ * l'intento trasportato nei parametri dell'URL:
+ * - create_class: crea classe + membership del rappresentante (active)
+ *   + segreto one-time per mostrare il codice di emergenza una volta;
+ * - join_class: crea membership 'pending' con nota per il rappresentante;
+ * - login: solo sessione, si va sull'account.
+ * Manomettere i parametri non dà privilegi: sono le stesse azioni dei
+ * form pubblici, e un pending resta un pending.
  */
 export async function GET(request: NextRequest) {
-  const token = request.nextUrl.searchParams.get("token");
-  const link = token ? consumeMagicLink(token) : null;
-  if (!link) {
+  const params = request.nextUrl.searchParams;
+  const supabase = await supabaseServer();
+
+  // Demo/dev: token_hash generato dall'admin. Produzione: code (email vera).
+  const tokenHash = params.get("token_hash");
+  const code = params.get("code");
+  const auth = tokenHash
+    ? await supabase.auth.verifyOtp({ type: "email", token_hash: tokenHash })
+    : code
+      ? await supabase.auth.exchangeCodeForSession(code)
+      : null;
+
+  const user = auth?.data.user ?? null;
+  if (!auth || auth.error || !user) {
     return NextResponse.redirect(new URL("/link-non-valido", request.url));
   }
 
-  const user = upsertAuthUser(link.email);
-  upsertProfile(user.id, link.display_name);
-  await createSession(user.id);
+  const displayName = params.get("nome")?.trim();
+  if (displayName) {
+    await upsertProfile(user.id, displayName);
+  }
 
-  const payload = link.payload;
+  const intent = params.get("intent");
 
-  if (payload.kind === "create_class") {
-    const { klass, emergencyCode } = createClassWithRepresentative({
-      className: payload.class_name,
+  if (intent === "create_class") {
+    const className = params.get("classe")?.trim();
+    if (!className) {
+      return NextResponse.redirect(new URL("/link-non-valido", request.url));
+    }
+    const { klass, emergencyCode } = await createClassWithRepresentative({
+      className,
       representativeUserId: user.id,
     });
-    const secretId = createOneTimeSecret(klass.id, emergencyCode);
+    const secretId = await createOneTimeSecret(klass.id, emergencyCode);
     return NextResponse.redirect(
       new URL(`/c/${klass.class_code}/stampa?segreto=${secretId}`, request.url)
     );
   }
 
-  if (payload.kind === "join_class") {
-    const klass = getClassById(payload.class_id);
+  if (intent === "join_class") {
+    const classId = params.get("classe_id");
+    const klass = classId ? await getClassById(classId) : null;
     if (!klass) {
       return NextResponse.redirect(new URL("/link-non-valido", request.url));
     }
     // Se era già attivo (link vecchio ricliccato), va dritto in bacheca.
-    const existing = getMembership(user.id, klass.id);
+    const existing = await getMembership(user.id, klass.id);
     if (existing?.status === "active") {
       return NextResponse.redirect(new URL(`/c/${klass.class_code}`, request.url));
     }
-    createPendingMembership({
+    await createPendingMembership({
       userId: user.id,
       classId: klass.id,
-      noteForRep: payload.note_for_rep,
+      noteForRep: params.get("nota") || null,
     });
     return NextResponse.redirect(
       new URL(`/in-attesa?classe=${klass.class_code}`, request.url)

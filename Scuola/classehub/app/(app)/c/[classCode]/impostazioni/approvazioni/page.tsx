@@ -22,7 +22,7 @@ export default async function ApprovazioniPage({
 }) {
   const { classCode } = await params;
   const ctx = await requireRepresentative(classCode);
-  const pending = listPendingMemberships(ctx.klass.id);
+  const pending = await listPendingMemberships(ctx.klass.id);
 
   return (
     <div className="mx-auto max-w-md space-y-6">

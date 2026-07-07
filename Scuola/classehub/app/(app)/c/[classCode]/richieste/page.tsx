@@ -23,9 +23,16 @@ export default async function RichiesteRepPage({
   const { classCode } = await params;
   const ctx = await requireRepresentative(classCode);
 
-  const all = listRequests(ctx.klass.id);
+  const all = await listRequests(ctx.klass.id);
   const open = all.filter((r) => r.status === "open");
   const done = all.filter((r) => r.status !== "open");
+
+  // Nomi degli autori, letti una volta sola prima di disegnare la lista.
+  const authorNames = new Map<string, string>();
+  for (const authorId of new Set(all.map((r) => r.author_id))) {
+    const profile = await getProfile(authorId);
+    if (profile) authorNames.set(authorId, profile.display_name);
+  }
 
   return (
     <div className="space-y-8">
@@ -36,7 +43,7 @@ export default async function RichiesteRepPage({
       ) : (
         <ul className="space-y-4">
           {open.map((request) => {
-            const author = getProfile(request.author_id);
+            const author = { display_name: authorNames.get(request.author_id) };
             return (
               <li key={request.id}>
                 <Card className="space-y-4">
@@ -85,7 +92,7 @@ export default async function RichiesteRepPage({
           <h2 className="mb-3 text-[22px] font-bold">{it.richieste.richiesteGestite}</h2>
           <ul className="space-y-3">
             {done.map((request) => {
-              const author = getProfile(request.author_id);
+              const author = { display_name: authorNames.get(request.author_id) };
               return (
                 <li key={request.id}>
                   <Card className="bg-paper-soft">

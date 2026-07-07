@@ -17,7 +17,7 @@ export default async function MembriPage({
 }) {
   const { classCode } = await params;
   const ctx = await requireRepresentative(classCode);
-  const members = listActiveMembers(ctx.klass.id);
+  const members = await listActiveMembers(ctx.klass.id);
 
   return (
     <div className="mx-auto max-w-md space-y-6">

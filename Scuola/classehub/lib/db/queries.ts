@@ -1,9 +1,7 @@
 import "server-only";
-import { readDb } from "./store";
+import { supabaseAdmin, supabaseServer } from "./supabase";
 import type {
-  AuthUserRow,
   ClassRow,
-  MagicLinkRow,
   MembershipRow,
   PollOptionRow,
   PollRow,
@@ -13,55 +11,101 @@ import type {
   RequestRow,
 } from "./types";
 
-/** Helper di sola lettura. In produzione: stesse firme, dentro Supabase. */
+/**
+ * Helper di sola lettura su Supabase.
+ * Default: client utente (la RLS decide cosa può vedere).
+ * Client admin SOLO dove la RLS non può arrivare, con motivo a fianco.
+ */
 
-export function getClassByCode(classCode: string): ClassRow | null {
-  const db = readDb();
-  return db.classes.find((c) => c.class_code === classCode && !c.archived_at) ?? null;
+/** Admin: serve prima del login (l'RLS nasconde le classi ai non membri). */
+export async function getClassByCode(classCode: string): Promise<ClassRow | null> {
+  const { data } = await supabaseAdmin()
+    .from("classes")
+    .select("*")
+    .eq("class_code", classCode)
+    .is("archived_at", null)
+    .maybeSingle();
+  return (data as ClassRow | null) ?? null;
 }
 
-export function getClassById(classId: string): ClassRow | null {
-  const db = readDb();
-  return db.classes.find((c) => c.id === classId) ?? null;
+/** Admin: usato nel callback, quando la membership non esiste ancora. */
+export async function getClassById(classId: string): Promise<ClassRow | null> {
+  const { data } = await supabaseAdmin()
+    .from("classes")
+    .select("*")
+    .eq("id", classId)
+    .maybeSingle();
+  return (data as ClassRow | null) ?? null;
 }
 
-export function getAuthUserByEmail(email: string): AuthUserRow | null {
-  const db = readDb();
-  const normalized = email.trim().toLowerCase();
-  return db.auth_users.find((u) => u.email === normalized) ?? null;
+/** Admin: le email vivono in auth.users, che i client non leggono. */
+export async function getUserEmailById(userId: string): Promise<string | null> {
+  const { data } = await supabaseAdmin().auth.admin.getUserById(userId);
+  return data.user?.email ?? null;
 }
 
-export function getAuthUserById(userId: string): AuthUserRow | null {
-  const db = readDb();
-  return db.auth_users.find((u) => u.id === userId) ?? null;
+export async function getProfile(userId: string): Promise<ProfileRow | null> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("user_id", userId)
+    .maybeSingle();
+  return (data as ProfileRow | null) ?? null;
 }
 
-export function getProfile(userId: string): ProfileRow | null {
-  const db = readDb();
-  return db.profiles.find((p) => p.user_id === userId) ?? null;
+export async function getMembership(
+  userId: string,
+  classId: string
+): Promise<MembershipRow | null> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("memberships")
+    .select("*")
+    .eq("user_id", userId)
+    .eq("class_id", classId)
+    .maybeSingle();
+  return (data as MembershipRow | null) ?? null;
 }
 
-export function getMembership(userId: string, classId: string): MembershipRow | null {
-  const db = readDb();
-  return (
-    db.memberships.find((m) => m.user_id === userId && m.class_id === classId) ?? null
-  );
+export async function getMembershipById(
+  membershipId: string
+): Promise<MembershipRow | null> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("memberships")
+    .select("*")
+    .eq("id", membershipId)
+    .maybeSingle();
+  return (data as MembershipRow | null) ?? null;
 }
 
-export function getMembershipById(membershipId: string): MembershipRow | null {
-  const db = readDb();
-  return db.memberships.find((m) => m.id === membershipId) ?? null;
-}
-
-/** Le classi di un utente (per la pagina account). */
-export function listClassesForUser(
+/**
+ * Le classi di un utente (pagina account). Le classi delle membership
+ * pending sono nascoste dall'RLS, quindi i nomi si leggono con l'admin.
+ */
+export async function listClassesForUser(
   userId: string
-): Array<{ membership: MembershipRow; klass: ClassRow }> {
-  const db = readDb();
-  return db.memberships
-    .filter((m) => m.user_id === userId && (m.status === "active" || m.status === "pending"))
+): Promise<Array<{ membership: MembershipRow; klass: ClassRow }>> {
+  const supabase = await supabaseServer();
+  const { data: memberships } = await supabase
+    .from("memberships")
+    .select("*")
+    .eq("user_id", userId)
+    .in("status", ["active", "pending"]);
+  if (!memberships || memberships.length === 0) return [];
+
+  const classIds = memberships.map((m) => m.class_id);
+  const { data: classes } = await supabaseAdmin()
+    .from("classes")
+    .select("*")
+    .in("id", classIds);
+
+  return (memberships as MembershipRow[])
     .map((membership) => {
-      const klass = db.classes.find((c) => c.id === membership.class_id);
+      const klass = (classes as ClassRow[] | null)?.find(
+        (c) => c.id === membership.class_id
+      );
       return klass ? { membership, klass } : null;
     })
     .filter((x): x is { membership: MembershipRow; klass: ClassRow } => x !== null);
@@ -73,148 +117,238 @@ export interface MemberWithProfile {
   email: string | null;
 }
 
-function withProfile(membership: MembershipRow): MemberWithProfile {
-  const db = readDb();
-  return {
+/**
+ * Aggancia profilo (RLS: i compagni di classe si vedono) ed email.
+ * Le email vivono in auth.users, che i client non possono leggere:
+ * si recuperano con l'admin — queste liste le vede solo chi è già
+ * dentro la classe (la query memberships è passata dall'RLS).
+ */
+async function withProfiles(memberships: MembershipRow[]): Promise<MemberWithProfile[]> {
+  if (memberships.length === 0) return [];
+  const supabase = await supabaseServer();
+  const admin = supabaseAdmin();
+  const userIds = memberships.map((m) => m.user_id);
+
+  const [{ data: profiles }, emails] = await Promise.all([
+    supabase.from("profiles").select("*").in("user_id", userIds),
+    Promise.all(
+      userIds.map(async (id) => {
+        const { data } = await admin.auth.admin.getUserById(id);
+        return { id, email: data.user?.email ?? null };
+      })
+    ),
+  ]);
+
+  return memberships.map((membership) => ({
     membership,
-    profile: db.profiles.find((p) => p.user_id === membership.user_id) ?? null,
-    email: db.auth_users.find((u) => u.id === membership.user_id)?.email ?? null,
-  };
+    profile:
+      (profiles as ProfileRow[] | null)?.find(
+        (p) => p.user_id === membership.user_id
+      ) ?? null,
+    email: emails.find((e) => e.id === membership.user_id)?.email ?? null,
+  }));
 }
 
 /** Coda approvazioni: richieste pending, dalla più vecchia. */
-export function listPendingMemberships(classId: string): MemberWithProfile[] {
-  const db = readDb();
-  return db.memberships
-    .filter((m) => m.class_id === classId && m.status === "pending")
-    .sort((a, b) => a.joined_at.localeCompare(b.joined_at))
-    .map(withProfile);
+export async function listPendingMemberships(
+  classId: string
+): Promise<MemberWithProfile[]> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("memberships")
+    .select("*")
+    .eq("class_id", classId)
+    .eq("status", "pending")
+    .order("joined_at", { ascending: true });
+  return withProfiles((data as MembershipRow[] | null) ?? []);
 }
 
 /** Membri attivi della classe (rappresentante in cima). */
-export function listActiveMembers(classId: string): MemberWithProfile[] {
-  const db = readDb();
-  return db.memberships
-    .filter((m) => m.class_id === classId && m.status === "active")
-    .sort((a, b) => {
-      if (a.role !== b.role) return a.role === "representative" ? -1 : 1;
-      return a.joined_at.localeCompare(b.joined_at);
-    })
-    .map(withProfile);
+export async function listActiveMembers(classId: string): Promise<MemberWithProfile[]> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("memberships")
+    .select("*")
+    .eq("class_id", classId)
+    .eq("status", "active")
+    .order("joined_at", { ascending: true });
+  const members = ((data as MembershipRow[] | null) ?? []).sort((a, b) => {
+    if (a.role !== b.role) return a.role === "representative" ? -1 : 1;
+    return a.joined_at.localeCompare(b.joined_at);
+  });
+  return withProfiles(members);
 }
 
-export function countPendingMemberships(classId: string): number {
-  const db = readDb();
-  return db.memberships.filter((m) => m.class_id === classId && m.status === "pending")
-    .length;
+export async function countPendingMemberships(classId: string): Promise<number> {
+  const supabase = await supabaseServer();
+  const { count } = await supabase
+    .from("memberships")
+    .select("id", { count: "exact", head: true })
+    .eq("class_id", classId)
+    .eq("status", "pending");
+  return count ?? 0;
 }
 
 /** Post della bacheca: fissati in cima, poi dal più recente. */
-export function listPosts(
+export async function listPosts(
   classId: string,
   opts: { includeArchived?: boolean } = {}
-): PostRow[] {
-  const db = readDb();
-  return db.posts
-    .filter(
-      (p) => p.class_id === classId && (opts.includeArchived ? true : !p.archived)
-    )
-    .sort((a, b) => {
-      if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
-      return b.created_at.localeCompare(a.created_at);
-    });
+): Promise<PostRow[]> {
+  const supabase = await supabaseServer();
+  let query = supabase
+    .from("posts")
+    .select("*")
+    .eq("class_id", classId)
+    .order("pinned", { ascending: false })
+    .order("created_at", { ascending: false });
+  if (!opts.includeArchived) query = query.eq("archived", false);
+  const { data } = await query;
+  return (data as PostRow[] | null) ?? [];
 }
 
 /** Scadenze future non archiviate, dalla più vicina. */
-export function listUpcomingDeadlines(classId: string): PostRow[] {
-  const db = readDb();
-  const now = new Date().toISOString();
-  return db.posts
-    .filter(
-      (p) =>
-        p.class_id === classId &&
-        !p.archived &&
-        p.type === "deadline" &&
-        p.due_date !== null &&
-        p.due_date >= now.slice(0, 10)
-    )
-    .sort((a, b) => (a.due_date ?? "").localeCompare(b.due_date ?? ""));
+export async function listUpcomingDeadlines(classId: string): Promise<PostRow[]> {
+  const supabase = await supabaseServer();
+  const today = new Date().toISOString().slice(0, 10);
+  const { data } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("class_id", classId)
+    .eq("type", "deadline")
+    .eq("archived", false)
+    .gte("due_date", today)
+    .order("due_date", { ascending: true });
+  return (data as PostRow[] | null) ?? [];
 }
 
-export function getPostBySlug(classId: string, slug: string): PostRow | null {
-  const db = readDb();
-  return db.posts.find((p) => p.class_id === classId && p.slug === slug) ?? null;
+export async function getPostBySlug(
+  classId: string,
+  slug: string
+): Promise<PostRow | null> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("class_id", classId)
+    .eq("slug", slug)
+    .maybeSingle();
+  return (data as PostRow | null) ?? null;
 }
 
-export function getPostById(postId: string): PostRow | null {
-  const db = readDb();
-  return db.posts.find((p) => p.id === postId) ?? null;
-}
-
-export function getPoll(postId: string): PollRow | null {
-  const db = readDb();
-  return db.polls.find((p) => p.post_id === postId) ?? null;
-}
-
-export function listPollOptions(postId: string): PollOptionRow[] {
-  const db = readDb();
-  return db.poll_options
-    .filter((o) => o.post_id === postId)
-    .sort((a, b) => a.ord - b.ord);
-}
-
-export function listPollVotes(postId: string): PollVoteRow[] {
-  const db = readDb();
-  return db.poll_votes.filter((v) => v.post_id === postId);
-}
-
-export function hasVoted(postId: string, voterHash: string): boolean {
-  const db = readDb();
-  return db.poll_votes.some((v) => v.post_id === postId && v.voter_hash === voterHash);
-}
-
-/** Un sondaggio è chiuso se scaduto o chiuso a mano. */
-export function isPollClosed(poll: PollRow): boolean {
-  return poll.closed_manually || new Date(poll.closes_at) <= new Date();
-}
-
-/** Richieste aperte per il rappresentante, dalla più recente. */
-export function listRequests(classId: string): RequestRow[] {
-  const db = readDb();
-  return db.requests
-    .filter((r) => r.class_id === classId)
-    .sort((a, b) => b.created_at.localeCompare(a.created_at));
-}
-
-export function listRequestsByAuthor(classId: string, authorId: string): RequestRow[] {
-  const db = readDb();
-  return db.requests
-    .filter((r) => r.class_id === classId && r.author_id === authorId)
-    .sort((a, b) => b.created_at.localeCompare(a.created_at));
-}
-
-export function getRequestById(requestId: string): RequestRow | null {
-  const db = readDb();
-  return db.requests.find((r) => r.id === requestId) ?? null;
+export async function getPostById(postId: string): Promise<PostRow | null> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("id", postId)
+    .maybeSingle();
+  return (data as PostRow | null) ?? null;
 }
 
 /**
- * Rate limit richieste (ARCHITECTURE §RATE LIMITING):
- * conta open+handled dell'autore nella classe nelle ultime 24 ore.
+ * Il salt del sondaggio non lascia MAI il database (i permessi per
+ * colonna lo bloccano, migrazione 0002): qui si leggono solo i campi
+ * pubblici. Il tipo esposto quindi non contiene salt.
  */
-export function countRecentRequests(classId: string, authorId: string): number {
-  const db = readDb();
-  const dayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-  return db.requests.filter(
-    (r) =>
-      r.class_id === classId &&
-      r.author_id === authorId &&
-      (r.status === "open" || r.status === "handled") &&
-      r.created_at >= dayAgo
-  ).length;
+export type PollPublic = Omit<PollRow, "salt">;
+
+export async function getPoll(postId: string): Promise<PollPublic | null> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("polls")
+    .select("post_id, closes_at, closed_manually")
+    .eq("post_id", postId)
+    .maybeSingle();
+  return (data as PollPublic | null) ?? null;
 }
 
-export function getMagicLink(token: string): MagicLinkRow | null {
-  const db = readDb();
-  return db.magic_links.find((l) => l.token === token) ?? null;
+export async function listPollOptions(postId: string): Promise<PollOptionRow[]> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("poll_options")
+    .select("*")
+    .eq("post_id", postId)
+    .order("ord", { ascending: true });
+  return (data as PollOptionRow[] | null) ?? [];
+}
+
+/**
+ * Voti del sondaggio. L'RLS li mostra solo a chi ha già votato, a
+ * sondaggio chiuso o al rappresentante: per gli altri torna vuoto.
+ */
+export async function listPollVotes(postId: string): Promise<PollVoteRow[]> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("poll_votes")
+    .select("*")
+    .eq("post_id", postId);
+  return (data as PollVoteRow[] | null) ?? [];
+}
+
+/** "Ho già votato?" — calcolato nel DB (RPC), il salt non esce mai. */
+export async function hasVoted(postId: string): Promise<boolean> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase.rpc("has_voted", { target_post: postId });
+  return data === true;
+}
+
+/** Un sondaggio è chiuso se scaduto o chiuso a mano. */
+export function isPollClosed(poll: PollPublic): boolean {
+  return poll.closed_manually || new Date(poll.closes_at) <= new Date();
+}
+
+/** Richieste della classe per il rappresentante, dalla più recente. */
+export async function listRequests(classId: string): Promise<RequestRow[]> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("requests")
+    .select("*")
+    .eq("class_id", classId)
+    .order("created_at", { ascending: false });
+  return (data as RequestRow[] | null) ?? [];
+}
+
+export async function listRequestsByAuthor(
+  classId: string,
+  authorId: string
+): Promise<RequestRow[]> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("requests")
+    .select("*")
+    .eq("class_id", classId)
+    .eq("author_id", authorId)
+    .order("created_at", { ascending: false });
+  return (data as RequestRow[] | null) ?? [];
+}
+
+export async function getRequestById(requestId: string): Promise<RequestRow | null> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("requests")
+    .select("*")
+    .eq("id", requestId)
+    .maybeSingle();
+  return (data as RequestRow | null) ?? null;
+}
+
+/**
+ * Rate limit richieste (ARCHITECTURE §RATE LIMITING): conta open+handled
+ * dell'autore nelle ultime 24 ore. Serve per il messaggio gentile;
+ * il limite vero lo impone comunque l'RLS in inserimento.
+ */
+export async function countRecentRequests(
+  classId: string,
+  authorId: string
+): Promise<number> {
+  const supabase = await supabaseServer();
+  const dayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+  const { count } = await supabase
+    .from("requests")
+    .select("id", { count: "exact", head: true })
+    .eq("class_id", classId)
+    .eq("author_id", authorId)
+    .in("status", ["open", "handled"])
+    .gte("created_at", dayAgo);
+  return count ?? 0;
 }

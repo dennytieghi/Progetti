@@ -14,7 +14,7 @@ export default async function ImpostazioniPage({
 }) {
   const { classCode } = await params;
   const ctx = await requireRepresentative(classCode);
-  const pendingCount = countPendingMemberships(ctx.klass.id);
+  const pendingCount = await countPendingMemberships(ctx.klass.id);
 
   return (
     <div className="mx-auto max-w-md space-y-6">

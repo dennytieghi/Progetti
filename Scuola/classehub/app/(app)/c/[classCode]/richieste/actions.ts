@@ -12,10 +12,10 @@ export async function archiviaRichiestaAction(formData: FormData): Promise<void>
   if (typeof classCode !== "string" || typeof requestId !== "string") return;
 
   const ctx = await requireRepresentative(classCode);
-  const request = getRequestById(requestId);
+  const request = await getRequestById(requestId);
   // La richiesta deve appartenere alla classe del rappresentante.
   if (request && request.class_id === ctx.klass.id) {
-    setRequestStatus(requestId, "archived");
+    await setRequestStatus(requestId, "archived");
     revalidatePath(`/c/${classCode}/richieste`);
   }
 }

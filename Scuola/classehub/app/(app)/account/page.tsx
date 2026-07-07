@@ -14,7 +14,7 @@ export default async function AccountPage() {
   const ctx = await getCurrentUser();
   if (!ctx) redirect("/");
 
-  const classes = listClassesForUser(ctx.user.id);
+  const classes = await listClassesForUser(ctx.user.id);
 
   return (
     <div className="mx-auto max-w-md space-y-6 px-4 py-8">

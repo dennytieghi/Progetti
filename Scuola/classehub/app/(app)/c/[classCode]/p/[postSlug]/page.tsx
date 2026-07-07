@@ -17,7 +17,6 @@ import {
   listPollOptions,
   listPollVotes,
 } from "@/lib/db/queries";
-import { computeVoterHash } from "@/lib/db/mutations";
 import { getBaseUrl } from "@/lib/base-url";
 import { formatDateIt, formatShortDateIt } from "@/lib/format-date";
 import { formatPostForWhatsapp } from "@/lib/whatsapp/format-message";
@@ -42,17 +41,15 @@ export default async function PostDetailPage({
   const { fatto } = await searchParams;
   const ctx = await requireActiveMembership(classCode);
 
-  const post = getPostBySlug(ctx.klass.id, postSlug);
+  const post = await getPostBySlug(ctx.klass.id, postSlug);
   if (!post) notFound();
 
-  const author = getProfile(post.author_id);
-  const poll = post.type === "poll" ? getPoll(post.id) : null;
-  const pollOptions = poll ? listPollOptions(post.id) : [];
-  const pollVotes = poll ? listPollVotes(post.id) : [];
+  const author = await getProfile(post.author_id);
+  const poll = post.type === "poll" ? await getPoll(post.id) : null;
+  const pollOptions = poll ? await listPollOptions(post.id) : [];
+  const pollVotes = poll ? await listPollVotes(post.id) : [];
   const pollClosed = poll ? isPollClosed(poll) : false;
-  const userHasVoted = poll
-    ? hasVoted(post.id, computeVoterHash(ctx.user.id, poll.salt))
-    : false;
+  const userHasVoted = poll ? await hasVoted(post.id) : false;
 
   const whatsappText = formatPostForWhatsapp({
     post,

@@ -18,12 +18,6 @@ export interface ClassRow {
   archived_at: string | null;
 }
 
-export interface AuthUserRow {
-  id: string;
-  email: string;
-  created_at: string;
-}
-
 export interface ProfileRow {
   user_id: string;
   display_name: string;
@@ -93,37 +87,13 @@ export interface RequestRow {
 }
 
 /**
- * Solo PoC: sostituisce il flusso email di Supabase Auth.
- * Il payload dice cosa fare quando l'utente clicca il link.
- */
-export interface MagicLinkRow {
-  token: string;
-  email: string;
-  display_name: string;
-  payload:
-    | { kind: "create_class"; class_name: string }
-    | { kind: "join_class"; class_id: string; note_for_rep: string | null }
-    | { kind: "login" };
-  created_at: string;
-  used_at: string | null;
-}
-
-/**
  * Segreti mostrati una volta sola (codice di emergenza dopo la
  * creazione classe). Consumati alla prima visualizzazione.
+ * Tabella con RLS senza policy: ci passa solo il server.
  */
 export interface OneTimeSecretRow {
   id: string;
   class_id: string;
   emergency_code: string;
   consumed_at: string | null;
-}
-
-/** Email in uscita: in demo finiscono qui invece che nella casella vera. */
-export interface OutboxEmailRow {
-  id: string;
-  to: string;
-  subject: string;
-  body: string;
-  sent_at: string;
 }

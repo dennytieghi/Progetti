@@ -25,7 +25,7 @@ export default async function StampaPage({
   const { segreto } = await searchParams;
   const ctx = await requireRepresentative(classCode);
 
-  const emergencyCode = segreto ? consumeOneTimeSecret(segreto, ctx.klass.id) : null;
+  const emergencyCode = segreto ? await consumeOneTimeSecret(segreto, ctx.klass.id) : null;
   const baseUrl = (await getBaseUrl()).replace(/^https?:\/\//, "");
 
   const steps = [

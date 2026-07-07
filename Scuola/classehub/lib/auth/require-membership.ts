@@ -1,27 +1,24 @@
 import "server-only";
 import { notFound, redirect } from "next/navigation";
-import {
-  getAuthUserById,
-  getClassByCode,
-  getMembership,
-  getProfile,
-} from "@/lib/db/queries";
-import type {
-  AuthUserRow,
-  ClassRow,
-  MembershipRow,
-  ProfileRow,
-} from "@/lib/db/types";
-import { getSessionUserId } from "./session";
+import { getClassByCode, getMembership, getProfile } from "@/lib/db/queries";
+import type { ClassRow, MembershipRow, ProfileRow } from "@/lib/db/types";
+import { getSessionUser } from "./session";
 
 /**
  * Guardie di sicurezza per pagine e Server Actions.
  * Regola non negoziabile (CLAUDE.md §7): ogni operazione su una classe
  * verifica membership.status = 'active'. Un pending non può fare NULLA.
+ * Con Supabase c'è una seconda rete: anche saltando queste guardie,
+ * l'RLS nel database applica le stesse regole.
  */
 
+export interface SessionUser {
+  id: string;
+  email: string;
+}
+
 export interface UserContext {
-  user: AuthUserRow;
+  user: SessionUser;
   profile: ProfileRow | null;
 }
 
@@ -32,11 +29,9 @@ export interface ClassContext extends UserContext {
 }
 
 export async function getCurrentUser(): Promise<UserContext | null> {
-  const userId = await getSessionUserId();
-  if (!userId) return null;
-  const user = getAuthUserById(userId);
+  const user = await getSessionUser();
   if (!user) return null;
-  return { user, profile: getProfile(userId) };
+  return { user, profile: await getProfile(user.id) };
 }
 
 /**
@@ -49,10 +44,10 @@ export async function requireActiveMembership(classCode: string): Promise<ClassC
   const ctx = await getCurrentUser();
   if (!ctx) redirect(`/entra?codice=${encodeURIComponent(classCode)}`);
 
-  const klass = getClassByCode(classCode);
+  const klass = await getClassByCode(classCode);
   if (!klass) notFound();
 
-  const membership = getMembership(ctx.user.id, klass.id);
+  const membership = await getMembership(ctx.user.id, klass.id);
   if (!membership || membership.status === "removed") {
     redirect(`/entra?codice=${encodeURIComponent(classCode)}`);
   }

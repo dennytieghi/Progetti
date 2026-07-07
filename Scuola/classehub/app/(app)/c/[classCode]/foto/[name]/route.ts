@@ -13,7 +13,7 @@ export async function GET(
   const { classCode, name } = await params;
   const ctx = await requireActiveMembership(classCode);
 
-  const photo = readPhoto(ctx.klass.id, name);
+  const photo = await readPhoto(ctx.klass.id, name);
   if (!photo) {
     return new NextResponse(null, { status: 404 });
   }

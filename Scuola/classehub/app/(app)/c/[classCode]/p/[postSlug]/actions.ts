@@ -6,13 +6,7 @@ import {
   requireRepresentative,
 } from "@/lib/auth/require-membership";
 import { getPoll, getPostBySlug, hasVoted, isPollClosed } from "@/lib/db/queries";
-import {
-  castVote,
-  closePoll,
-  computeVoterHash,
-  setArchived,
-  setPinned,
-} from "@/lib/db/mutations";
+import { castVote, closePoll, setArchived, setPinned } from "@/lib/db/mutations";
 import { voteSchema } from "@/lib/validation/schemas";
 import { it } from "@/lib/i18n/it";
 import type { FormState } from "@/lib/form-state";
@@ -33,13 +27,11 @@ export async function votaAction(
 
   if (ctx.membership.muted) return { error: it.errori.silenziato };
 
-  const post = getPostBySlug(ctx.klass.id, slug);
-  const poll = post ? getPoll(post.id) : null;
+  const post = await getPostBySlug(ctx.klass.id, slug);
+  const poll = post ? await getPoll(post.id) : null;
   if (!post || !poll) return { error: it.common.erroreGenerico };
   if (isPollClosed(poll)) return { error: it.sondaggio.erroreChiuso };
-
-  const voterHash = computeVoterHash(ctx.user.id, poll.salt);
-  if (hasVoted(post.id, voterHash)) return { error: it.sondaggio.erroreGiaVotato };
+  if (await hasVoted(post.id)) return { error: it.sondaggio.erroreGiaVotato };
 
   const parsed = voteSchema.safeParse({
     optionIds: formData.getAll("optionIds").filter((v) => typeof v === "string"),
@@ -48,7 +40,7 @@ export async function votaAction(
     return { error: parsed.error.issues[0]?.message ?? it.common.erroreGenerico };
   }
 
-  const ok = castVote({ postId: post.id, optionIds: parsed.data.optionIds, voterHash });
+  const ok = await castVote({ postId: post.id, optionIds: parsed.data.optionIds });
   if (!ok) return { error: it.common.erroreGenerico };
 
   revalidatePath(`/c/${classCode}/p/${slug}`);
@@ -61,9 +53,9 @@ export async function chiudiSondaggioAction(formData: FormData): Promise<void> {
   const slug = str(formData, "slug");
   const ctx = await requireRepresentative(classCode);
 
-  const post = getPostBySlug(ctx.klass.id, slug);
+  const post = await getPostBySlug(ctx.klass.id, slug);
   if (post?.type === "poll") {
-    closePoll(post.id);
+    await closePoll(post.id);
     revalidatePath(`/c/${classCode}/p/${slug}`);
   }
 }
@@ -74,9 +66,9 @@ export async function togglePinAction(formData: FormData): Promise<void> {
   const slug = str(formData, "slug");
   const ctx = await requireRepresentative(classCode);
 
-  const post = getPostBySlug(ctx.klass.id, slug);
+  const post = await getPostBySlug(ctx.klass.id, slug);
   if (post) {
-    setPinned(post.id, !post.pinned);
+    await setPinned(post.id, !post.pinned);
     revalidatePath(`/c/${classCode}`);
     revalidatePath(`/c/${classCode}/p/${slug}`);
   }
@@ -88,9 +80,9 @@ export async function toggleArchivioAction(formData: FormData): Promise<void> {
   const slug = str(formData, "slug");
   const ctx = await requireRepresentative(classCode);
 
-  const post = getPostBySlug(ctx.klass.id, slug);
+  const post = await getPostBySlug(ctx.klass.id, slug);
   if (post) {
-    setArchived(post.id, !post.archived);
+    await setArchived(post.id, !post.archived);
     revalidatePath(`/c/${classCode}`);
     revalidatePath(`/c/${classCode}/p/${slug}`);
   }

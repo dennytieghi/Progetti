@@ -37,7 +37,7 @@ export default async function NuovoPostPage({
   let defaultBody = "";
   let requestId = "";
   if (richiesta) {
-    const request = getRequestById(richiesta);
+    const request = await getRequestById(richiesta);
     if (request && request.class_id === ctx.klass.id) {
       defaultBody = request.body;
       requestId = request.id;

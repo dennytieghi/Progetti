@@ -28,12 +28,12 @@ function str(formData: FormData, key: string): string {
 }
 
 /** Collega l'eventuale richiesta di origine, verificando che sia della classe. */
-function linkRequest(formData: FormData, classId: string, postId: string): void {
+async function linkRequest(formData: FormData, classId: string, postId: string): Promise<void> {
   const requestId = str(formData, "requestId");
   if (!requestId) return;
-  const request = getRequestById(requestId);
+  const request = await getRequestById(requestId);
   if (request && request.class_id === classId) {
-    setRequestStatus(requestId, "handled", postId);
+    await setRequestStatus(requestId, "handled", postId);
   }
 }
 
@@ -84,7 +84,7 @@ async function createSimplePost(
     }
   }
 
-  const post = createPost({
+  const post = await createPost({
     classId: ctx.klass.id,
     authorId: ctx.user.id,
     type,
@@ -93,7 +93,7 @@ async function createSimplePost(
     dueDate,
     photoPath,
   });
-  linkRequest(formData, ctx.klass.id, post.id);
+  await linkRequest(formData, ctx.klass.id, post.id);
   finish(classCode, post.slug);
 }
 
@@ -143,7 +143,7 @@ export async function creaSondaggioAction(
   // Si vota fino alla fine del giorno scelto (23:59 locali).
   const closesAt = new Date(`${parsed.data.closesAt}T23:59:59`).toISOString();
 
-  const post = createPost({
+  const post = await createPost({
     classId: ctx.klass.id,
     authorId: ctx.user.id,
     type: "poll",
@@ -153,6 +153,6 @@ export async function creaSondaggioAction(
     photoPath: null,
     poll: { closesAt, options: parsed.data.options },
   });
-  linkRequest(formData, ctx.klass.id, post.id);
+  await linkRequest(formData, ctx.klass.id, post.id);
   finish(classCode, post.slug);
 }

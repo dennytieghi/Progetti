@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { requireRepresentative } from "@/lib/auth/require-membership";
-import { getAuthUserById, getMembershipById } from "@/lib/db/queries";
+import { getUserEmailById, getMembershipById } from "@/lib/db/queries";
 import { approveMembership, rejectMembership } from "@/lib/db/mutations";
 import { sendEmail } from "@/lib/email/send";
 import { getBaseUrl } from "@/lib/base-url";
@@ -23,7 +23,7 @@ export async function approvaAction(formData: FormData): Promise<void> {
   const classCode = str(formData, "classCode");
   const ctx = await requireRepresentative(classCode);
 
-  const membership = getMembershipById(str(formData, "membershipId"));
+  const membership = await getMembershipById(str(formData, "membershipId"));
   if (
     !membership ||
     membership.class_id !== ctx.klass.id ||
@@ -32,13 +32,13 @@ export async function approvaAction(formData: FormData): Promise<void> {
     return;
   }
 
-  approveMembership(membership.id, ctx.user.id);
+  await approveMembership(membership.id, ctx.user.id);
 
-  const parent = getAuthUserById(membership.user_id);
-  if (parent) {
+  const parentEmail = await getUserEmailById(membership.user_id);
+  if (parentEmail) {
     const baseUrl = await getBaseUrl();
     await sendEmail({
-      to: parent.email,
+      to: parentEmail,
       subject: it.email.approvatoOggetto,
       body: it.email.approvatoTesto(
         ctx.klass.name,
@@ -55,7 +55,7 @@ export async function rifiutaAction(formData: FormData): Promise<void> {
   const classCode = str(formData, "classCode");
   const ctx = await requireRepresentative(classCode);
 
-  const membership = getMembershipById(str(formData, "membershipId"));
+  const membership = await getMembershipById(str(formData, "membershipId"));
   if (
     !membership ||
     membership.class_id !== ctx.klass.id ||
@@ -67,12 +67,12 @@ export async function rifiutaAction(formData: FormData): Promise<void> {
   const parsed = rejectMembershipSchema.safeParse({ reason: formData.get("reason") });
   const reason = parsed.success ? parsed.data.reason : null;
 
-  rejectMembership(membership.id, ctx.user.id, reason);
+  await rejectMembership(membership.id, ctx.user.id, reason);
 
-  const parent = getAuthUserById(membership.user_id);
-  if (parent) {
+  const parentEmail = await getUserEmailById(membership.user_id);
+  if (parentEmail) {
     await sendEmail({
-      to: parent.email,
+      to: parentEmail,
       subject: it.email.rifiutatoOggetto,
       body: it.email.rifiutatoTesto(ctx.klass.name, reason),
     });

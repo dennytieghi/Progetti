@@ -17,7 +17,7 @@ export default async function ClassLayout({
   const ctx = await requireActiveMembership(classCode);
 
   const openRequestsCount = ctx.isRepresentative
-    ? listRequests(ctx.klass.id).filter((r) => r.status === "open").length
+    ? (await listRequests(ctx.klass.id)).filter((r) => r.status === "open").length
     : 0;
 
   return (

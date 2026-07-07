@@ -30,15 +30,16 @@ export async function inviaRichiestaAction(
     return { error: parsed.error.issues[0]?.message ?? it.common.erroreGenerico };
   }
 
-  if (countRecentRequests(ctx.klass.id, ctx.user.id) >= 5) {
+  if ((await countRecentRequests(ctx.klass.id, ctx.user.id)) >= 5) {
     return { error: it.richieste.limiteRaggiunto };
   }
 
-  createRequest({
+  const created = await createRequest({
     classId: ctx.klass.id,
     authorId: ctx.user.id,
     body: parsed.data.body,
   });
+  if (!created) return { error: it.common.erroreGenerico };
 
   revalidatePath(`/c/${ctx.klass.class_code}/invia-richiesta`);
   revalidatePath(`/c/${ctx.klass.class_code}/richieste`);

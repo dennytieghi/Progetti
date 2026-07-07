@@ -23,10 +23,10 @@ export default async function InAttesaPage({
   const ctx = await getCurrentUser();
   if (!ctx) redirect("/");
 
-  const klass = classe ? getClassByCode(classe) : null;
+  const klass = classe ? await getClassByCode(classe) : null;
   if (!klass) redirect("/account");
 
-  const membership = getMembership(ctx.user.id, klass.id);
+  const membership = await getMembership(ctx.user.id, klass.id);
   if (!membership) redirect(`/entra?codice=${klass.class_code}`);
   if (membership.status === "active") redirect(`/c/${klass.class_code}`);
 
