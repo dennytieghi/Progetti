@@ -3,10 +3,12 @@
 Bacheca semplice per le classi scolastiche. Sostituisce il caos delle chat WhatsApp senza rimpiazzare WhatsApp.
 
 ## Stato
-PoC funzionante e verificato end-to-end (vedi `docs/TEST_PLAN.md`).
-Gira in "modalità dimostrazione": dati su file locale `.data/db.json`
-e magic link simulato, senza bisogno di Supabase. Il passaggio a
-Supabase è descritto in `docs/SETUP.md`. Roadmap in `docs/ROADMAP.md`.
+App su **Supabase** (Postgres + Auth magic link + Storage, RLS su ogni
+tabella, regione Francoforte/GDPR), verificata end-to-end (vedi
+`docs/TEST_PLAN.md`). In sviluppo resta la "modalità dimostrazione":
+le email non partono e il link d'accesso compare in un riquadro giallo.
+Setup e variabili d'ambiente in `docs/SETUP.md`. Roadmap in
+`docs/ROADMAP.md`.
 
 ## Documenti
 - `CLAUDE.md` — protocollo di lavoro con Claude Code
