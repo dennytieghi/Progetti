@@ -461,6 +461,21 @@ export async function getCashDeclarationById(
 }
 
 /**
+ * Totale della cassa come aggregato (ADR-017): il genitore non vede
+ * più tutti i movimenti, quindi il totale arriva da una funzione SQL
+ * SECURITY DEFINER che ritorna solo la somma. Client dell'utente:
+ * la guardia sul membro attivo sta dentro la funzione.
+ */
+export async function getClassCashTotal(classId: string): Promise<number> {
+  const supabase = await supabaseServer();
+  const { data, error } = await supabase.rpc("class_cash_total", {
+    target_class: classId,
+  });
+  if (error) throw new Error(`Totale cassa non disponibile: ${error.message}`);
+  return (data as number | null) ?? 0;
+}
+
+/**
  * Rate limit richieste (ARCHITECTURE §RATE LIMITING): conta open+handled
  * dell'autore nelle ultime 24 ore. Serve per il messaggio gentile;
  * il limite vero lo impone comunque l'RLS in inserimento.
