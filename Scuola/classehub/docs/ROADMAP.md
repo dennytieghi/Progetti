@@ -65,10 +65,12 @@
 - [x] Filtri movimenti (Tutti/Versamenti/Spese + per genitore) ed export filtrato.
 - [x] Promemoria WhatsApp per richiedere versamenti (link alla cassa, ognuno vede la sua quota).
 - [x] Eliminazione definitiva dei post (solo rappresentante, con conferma).
-- [ ] Coordinate di pagamento del rappresentante (IBAN/PayPal/Satispay) in impostazioni, cassa e promemoria WhatsApp (ADR-016).
-- [ ] Versamenti "dichiara → conferma" con metodo di pagamento sul movimento (ADR-016).
-- [ ] Migrazione 0005 e 0006 eseguite su Supabase.
-- [ ] Rimosso Stripe (ADR-014 superato da ADR-016).
+- [x] Coordinate di pagamento del rappresentante (IBAN/PayPal/Satispay) in impostazioni, cassa e promemoria WhatsApp (ADR-016).
+- [x] Versamenti "dichiara → conferma" con metodo di pagamento sul movimento (ADR-016).
+- [x] Contatore "da confermare" sulla voce Cassa del menu (solo rappresentante).
+- [x] Migrazione 0005 e 0006 eseguite su Supabase.
+- [x] Rimosso Stripe (ADR-014 superato da ADR-016).
+- [x] Test manuale end-to-end pagamenti semplici su TEST5B (11/7/2026, TEST_PLAN §Cassa — pagamenti semplici).
 
 ## V1.1 — Post-pilota (dopo feedback reale)
 - Notifiche push web (per chi accetta).
