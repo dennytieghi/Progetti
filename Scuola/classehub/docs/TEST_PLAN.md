@@ -146,3 +146,6 @@ Usa due browser (normale + incognito) per i due ruoli.
       membro, Da confermare, registra movimenti, filtri).
 - [ ] Probe ostile: chiamata alla RPC `class_cash_total` con il class_id di
       un'altra classe → errore, nessun totale restituito.
+- [ ] Probe ostile: un membro RIMOSSO dalla classe non legge più i movimenti
+      né il totale via API (con la sua sessione ancora valida: lista
+      movimenti vuota, RPC `class_cash_total` rifiutata).

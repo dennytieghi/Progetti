@@ -85,9 +85,12 @@ export default async function CassaPage({
 
   // ADR-017: il genitore non vede tutti i movimenti, quindi il totale
   // arriva dall'aggregato SQL; per il rappresentante resta il calcolo
-  // dai movimenti (che per lui sono tutti).
-  const totaleClasse = ctx.isRepresentative
-    ? saldoCassaCents(items.map((i) => i.movement))
+  // dai movimenti (che per lui sono tutti, quindi sempre un numero).
+  // Se la RPC del genitore non risponde, torna null: la riga in fondo
+  // alla pagina semplicemente sparisce, niente errore mostrato.
+  const totaleClasseRep = saldoCassaCents(items.map((i) => i.movement));
+  const totaleClasseGenitore = ctx.isRepresentative
+    ? null
     : await getClassCashTotal(ctx.klass.id);
   const miaQuota = saldoPersonaleCents(items, ctx.user.id);
   const contestoSaldo = testoSaldoPersonale(miaQuota);
@@ -194,7 +197,7 @@ export default async function CassaPage({
           </Card>
           <Card>
             <p className="text-[16px] font-semibold text-ink-soft">{it.cassa.saldoCassa}</p>
-            <p className="text-[32px] font-bold">{formatEuroCents(totaleClasse)}</p>
+            <p className="text-[32px] font-bold">{formatEuroCents(totaleClasseRep)}</p>
           </Card>
         </div>
       ) : (
@@ -448,9 +451,12 @@ export default async function CassaPage({
         )}
       </section>
 
-      {!ctx.isRepresentative && (
+      {!ctx.isRepresentative && totaleClasseGenitore !== null && (
         <p className="text-center text-[14px] text-ink-soft">
-          {it.cassa.totaleClasse.replace("{importo}", formatEuroCents(totaleClasse))}
+          {it.cassa.totaleClasse.replace(
+            "{importo}",
+            formatEuroCents(totaleClasseGenitore)
+          )}
         </p>
       )}
     </div>

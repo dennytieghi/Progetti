@@ -465,13 +465,16 @@ export async function getCashDeclarationById(
  * più tutti i movimenti, quindi il totale arriva da una funzione SQL
  * SECURITY DEFINER che ritorna solo la somma. Client dell'utente:
  * la guardia sul membro attivo sta dentro la funzione.
+ * Se la RPC fallisce (rete, membership appena cambiata, ecc.) torna
+ * `null` invece di lanciare: la pagina nasconde la riga del totale,
+ * il genitore non vede un errore tecnico in inglese.
  */
-export async function getClassCashTotal(classId: string): Promise<number> {
+export async function getClassCashTotal(classId: string): Promise<number | null> {
   const supabase = await supabaseServer();
   const { data, error } = await supabase.rpc("class_cash_total", {
     target_class: classId,
   });
-  if (error) throw new Error(`Totale cassa non disponibile: ${error.message}`);
+  if (error) return null;
   return (data as number | null) ?? 0;
 }
 
