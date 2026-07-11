@@ -338,8 +338,8 @@ export async function getRequestById(requestId: string): Promise<RequestRow | nu
 
 /**
  * Movimenti della cassa con le quote, dal più recente.
- * L'RLS fa da filtro naturale: il genitore riceve tutti i movimenti
- * della classe ma SOLO le proprie quote; il rappresentante riceve tutto.
+ * L'RLS fa da filtro naturale (0007, ADR-017): il genitore riceve solo
+ * i movimenti in cui ha una sua quota; il rappresentante riceve tutto.
  */
 export async function listCashMovementsWithShares(
   classId: string

@@ -210,10 +210,10 @@ Ogni tabella ha RLS `enable` e policy di questo tipo:
 - **INSERT poll_votes**: solo membro `active`, non `muted`, e non oltre `closes_at`.
 - **poll_votes SELECT aggregato**: solo dopo che il voter_hash del richiedente Ã¨ presente nella tabella per quel `post_id`.
 
-## Cassa e pagamenti fuori dall'app (ADR-013, ADR-016)
+## Cassa e pagamenti fuori dall'app (ADR-013, ADR-016, ADR-017)
 
 - Saldi calcolati in `lib/cassa/saldi.ts` (logica pura): personale = versamenti - quote spesa; cassa = somma totali movimenti.
-- RLS: movimenti visibili a tutti i membri attivi; `cash_shares` solo proprie (o tutte per il rappresentante). Scritture solo rappresentante.
+- RLS (0007, ADR-017): il genitore vede solo i `cash_movements` in cui ha una sua quota (`cash_shares`); il rappresentante vede tutto. Il totale della classe è esposto solo dalla funzione SECURITY DEFINER `class_cash_total` (guardia membro attivo, mai via `supabaseAdmin`). Scritture solo rappresentante.
 - ClasseHub non tocca mai denaro: il rappresentante pubblica le proprie coordinate (IBAN, paypal.me, Satispay), il genitore paga fuori dall'app col metodo che preferisce e dichiara il versamento (`cash_declarations`, `status='pending'`). Solo quando il rappresentante conferma nasce il movimento con la quota intestata e la colonna `method`; se rifiuta la dichiarazione passa a `rejected` e i saldi restano invariati. Massimo 5 dichiarazioni pending per genitore per classe.
 - Modifica spesa (0004): sostituzione in blocco delle quote (delete + insert), totale ricalcolato.
 - Export: `cassa/esporta` genera CSV (BOM UTF-8, separatore ";", decimali con virgola) con una riga per quota; nessuna libreria xlsx.

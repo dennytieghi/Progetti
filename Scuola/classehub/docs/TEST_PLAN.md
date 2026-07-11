@@ -132,3 +132,17 @@ Usa due browser (normale + incognito) per i due ruoli.
       niente righe vuote per PayPal/Satispay.
 - [ ] Un genitore non vede le dichiarazioni in attesa di un altro genitore
       (solo le proprie; il rappresentante vede tutte).
+
+## 12. Cassa — vista genitore ristretta
+
+- [ ] Laura (genitore) apre la cassa → vede "Quanto ti resta" col suo saldo
+      in grande, la lista SOLO dei suoi movimenti con le sue quote, e il
+      totale della classe in fondo alla pagina, piccolo.
+- [ ] Giovanni (genitore senza movimenti) apre la cassa → lista vuota, ma il
+      totale della classe in fondo compare comunque.
+- [ ] Export CSV: quello di Laura contiene solo le sue righe; quello di
+      Denise (rappresentante) tutte le righe.
+- [ ] Denise (rappresentante) vede la cassa identica a prima (saldi per
+      membro, Da confermare, registra movimenti, filtri).
+- [ ] Probe ostile: chiamata alla RPC `class_cash_total` con il class_id di
+      un'altra classe → errore, nessun totale restituito.

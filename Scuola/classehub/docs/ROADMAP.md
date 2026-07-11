@@ -71,6 +71,7 @@
 - [x] Migrazione 0005 e 0006 eseguite su Supabase.
 - [x] Rimosso Stripe (ADR-014 superato da ADR-016).
 - [x] Test manuale end-to-end pagamenti semplici su TEST5B (11/7/2026, TEST_PLAN §Cassa — pagamenti semplici).
+- [ ] Vista genitore ristretta: solo i propri movimenti, saldo personale in evidenza, totale di classe aggregato (ADR-017). Migrazione 0007.
 
 ## V1.1 — Post-pilota (dopo feedback reale)
 - Notifiche push web (per chi accetta).

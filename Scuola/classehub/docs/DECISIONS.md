@@ -86,6 +86,7 @@ ADR (Architecture Decision Records). Formato breve: contesto, decisione, alterna
 - ripartizione pro-quota di ogni spesa su tutti i versanti: i contanti non hanno il nome sopra, e chi non partecipa a una gita non deve pagarla.
 - registrazione contabile a doppia entrata: over-engineering per una cassa di classe.
 **Revisione se**: i rappresentanti chiedono spese con importi diversi per partecipante (non a testa) → aggiungi importo per quota nella UI, lo schema lo supporta già.
+**Superato in parte da ADR-017** (2026-07-11): vista genitore ristretta.
 
 ## ADR-014 — Stripe Connect Standard, conferma sincrona, produzione rimandata
 **Contesto**: versamenti con carta senza che ClasseHub tocchi il denaro.
@@ -112,3 +113,10 @@ ADR (Architecture Decision Records). Formato breve: contesto, decisione, alterna
 **Scartato**: Stripe (vedi sopra); registrazione diretta del genitore senza conferma (chiunque potrebbe gonfiare la cassa senza pagare).
 **Trade-off accettato**: la conferma è manuale — il rappresentante deve controllare il proprio conto. È lo stesso lavoro che fa oggi col gruppo WhatsApp, ma con una lista ordinata invece di messaggi sparsi.
 **Revisione se**: nel pilota i rappresentanti lamentano l'attesa delle conferme o le segnalazioni fantasma superano casi sporadici.
+
+## ADR-017 — Il genitore vede solo la propria cassa (supera in parte ADR-013)
+**Contesto**: il genitore vedeva tutti i movimenti della classe col totale; il numero "In cassa adesso" veniva scambiato per la propria disponibilità e i totali delle spese ("−14,00 €") per addebiti personali.
+**Decisione**: RLS ristretta — il genitore vede solo i movimenti con una sua quota (spariscono anche i versamenti degli altri: chi versa e quanto è un fatto tra genitore e rappresentante). La sua pagina mostra "Quanto ti resta" col suo saldo; ogni riga mostra la SUA quota. Il totale della classe resta come unico controllo collettivo, in fondo e in piccolo, esposto dalla funzione SECURITY DEFINER `class_cash_total` (mai via admin, mai i singoli movimenti). Il rappresentante vede tutto come prima.
+**Scartato**: totale via `supabaseAdmin` (aggirerebbe l'RLS creando un precedente); colonna "totale" mantenuta da trigger (fragile, inutile a questi volumi); lasciare visibili i versamenti altrui (reintroduce i confronti tra famiglie).
+**Trade-off accettato**: il genitore non può più ricostruire la contabilità riga per riga; resta il totale aggregato. Accettato perché la fiducia nel rappresentante è già presupposta dal modello (è lui che tiene i contanti).
+**Revisione se**: un genitore contesta un ammanco e serve una vista di dettaglio → valutare un riepilogo aggregato delle spese (causale + totale, senza i nomi dei partecipanti).
