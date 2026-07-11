@@ -9,6 +9,7 @@ import {
   listActiveMembers,
   listCashMovementsWithShares,
   listMyDeclarations,
+  listPendingDeclarations,
 } from "@/lib/db/queries";
 import {
   saldiPerMembroCents,
@@ -29,6 +30,7 @@ import { SpesaForm } from "./SpesaForm";
 import { PromemoriaWhatsapp } from "./PromemoriaWhatsapp";
 import { ComePagareBox } from "./ComePagareBox";
 import { DichiaraVersamentoForm } from "./DichiaraVersamentoForm";
+import { DaConfermareList } from "./DaConfermareList";
 
 export const metadata = { title: `${it.cassa.titolo} — ${it.app.name}` };
 
@@ -50,13 +52,16 @@ export default async function CassaPage({
     fatto?: string;
     modificata?: string;
     dichiarata?: string;
+    confermata?: string;
+    rifiutata?: string;
     errore?: string;
     tipo?: string;
     genitore?: string;
   }>;
 }) {
   const { classCode } = await params;
-  const { fatto, modificata, dichiarata, errore, tipo, genitore } = await searchParams;
+  const { fatto, modificata, dichiarata, confermata, rifiutata, errore, tipo, genitore } =
+    await searchParams;
   const ctx = await requireActiveMembership(classCode);
 
   const [items, members] = await Promise.all([
@@ -65,6 +70,9 @@ export default async function CassaPage({
   ]);
   const mieDichiarazioni = !ctx.isRepresentative
     ? await listMyDeclarations(ctx.klass.id, ctx.user.id)
+    : [];
+  const daConfermare = ctx.isRepresentative
+    ? await listPendingDeclarations(ctx.klass.id)
     : [];
 
   const memberOptions: MemberOption[] = members.map((m) => ({
@@ -138,7 +146,23 @@ export default async function CassaPage({
         {dichiarata === "1" && (
           <Banner tone="success">{it.cassa.dichiarazioneInviata}</Banner>
         )}
+        {confermata === "1" && (
+          <Banner tone="success">{it.cassa.dichiarazioneConfermata}</Banner>
+        )}
+        {rifiutata === "1" && (
+          <Banner tone="success">{it.cassa.dichiarazioneRifiutata}</Banner>
+        )}
       </div>
+
+      {ctx.isRepresentative && daConfermare.length > 0 && (
+        <DaConfermareList
+          classCode={classCode}
+          items={daConfermare.map((d) => ({
+            declaration: d,
+            parentName: nomi.get(d.user_id) ?? "—",
+          }))}
+        />
+      )}
 
       {/* Quota personale + saldo cassa */}
       <div className="grid gap-3 sm:grid-cols-2">

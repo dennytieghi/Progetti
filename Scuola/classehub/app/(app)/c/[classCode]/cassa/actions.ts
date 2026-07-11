@@ -5,20 +5,24 @@ import { revalidatePath } from "next/cache";
 import { requireActiveMembership, requireRepresentative } from "@/lib/auth/require-membership";
 import {
   countPendingDeclarationsByUser,
+  getCashDeclarationById,
   getCashMovementById,
   getMembership,
 } from "@/lib/db/queries";
 import {
+  confirmCashDeclaration,
   deleteCashMovement,
   insertCashDeclaration,
   recordCashDeposit,
   recordCashExpense,
+  rejectCashDeclaration,
   updateCashExpense,
 } from "@/lib/db/mutations";
 import {
   cashDeclarationSchema,
   cashDepositSchema,
   cashExpenseSchema,
+  confirmDeclarationSchema,
 } from "@/lib/validation/schemas";
 import { it } from "@/lib/i18n/it";
 import type { FormState } from "@/lib/form-state";
@@ -192,6 +196,71 @@ export async function dichiaraVersamentoAction(
   });
   revalidatePath(`/c/${classCode}/cassa`);
   redirect(`/c/${classCode}/cassa?dichiarata=1`);
+}
+
+/**
+ * Conferma del rappresentante: la dichiarazione deve appartenere alla
+ * classe ed essere ancora 'pending'. `confirmCashDeclaration` ritorna
+ * false se un'altra conferma ha già vinto la corsa nel frattempo
+ * (claim-first lato database): in quel caso niente redirect, solo
+ * l'errore che invita a ricaricare la pagina.
+ */
+export async function confermaDichiarazioneAction(
+  _prev: FormState,
+  formData: FormData
+): Promise<FormState> {
+  const classCode = str(formData, "classCode");
+  const ctx = await requireRepresentative(classCode);
+
+  const declaration = await getCashDeclarationById(str(formData, "declarationId"));
+  if (
+    !declaration ||
+    declaration.class_id !== ctx.klass.id ||
+    declaration.status !== "pending"
+  ) {
+    return { error: it.cassa.dichiarazioneNonTrovata };
+  }
+
+  const parsed = confirmDeclarationSchema.safeParse({
+    amount: formData.get("amount"),
+    method: formData.get("method"),
+    title: formData.get("title"),
+  });
+  if (!parsed.success) {
+    return { error: parsed.error.issues[0]?.message ?? it.common.erroreGenerico };
+  }
+
+  // Il dichiarante dev'essere ancora un membro attivo.
+  if (!(await isActiveMemberOfClass(declaration.user_id, ctx.klass.id))) {
+    return { error: it.cassa.erroreGenitore };
+  }
+
+  const confirmed = await confirmCashDeclaration({
+    declarationId: declaration.id,
+    classId: ctx.klass.id,
+    representativeId: ctx.user.id,
+    parentId: declaration.user_id,
+    amountCents: parsed.data.amount,
+    method: parsed.data.method,
+    title: parsed.data.title,
+  });
+  if (!confirmed) {
+    return { error: it.cassa.dichiarazioneNonTrovata };
+  }
+  revalidatePath(`/c/${classCode}/cassa`);
+  redirect(`/c/${classCode}/cassa?confermata=1`);
+}
+
+export async function rifiutaDichiarazioneAction(formData: FormData): Promise<void> {
+  const classCode = str(formData, "classCode");
+  const ctx = await requireRepresentative(classCode);
+
+  const declaration = await getCashDeclarationById(str(formData, "declarationId"));
+  if (declaration && declaration.class_id === ctx.klass.id && declaration.status === "pending") {
+    await rejectCashDeclaration(declaration.id);
+  }
+  revalidatePath(`/c/${classCode}/cassa`);
+  redirect(`/c/${classCode}/cassa?rifiutata=1`);
 }
 
 export async function eliminaMovimentoAction(formData: FormData): Promise<void> {

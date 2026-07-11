@@ -495,6 +495,23 @@ export const it = {
       "Scrivi un importo valido in euro, ad esempio 12,50. Massimo 5.000 euro.",
     erroreCausale: "Scrivi per cosa hai speso: aiuta i genitori a capire.",
     errorePartecipanti: "Scegli almeno un genitore che partecipa alla spesa.",
+
+    // Il rappresentante conferma o rifiuta una segnalazione
+    daConfermareTitolo: "Da confermare",
+    daConfermareSpiega:
+      "Versamenti segnalati dai genitori. Controlla di aver davvero ricevuto i soldi, poi conferma: solo allora entrano in cassa. Puoi correggere importo e metodo se non tornano.",
+    confermaBottone: "Conferma e registra",
+    rifiutaBottone: "Rifiuta",
+    rifiutaTitolo: "Vuoi rifiutare questa segnalazione?",
+    rifiutaTesto:
+      "Non verrà registrato niente in cassa e il genitore vedrà che il versamento non è stato confermato.",
+    rifiutaSi: "Sì, rifiuta",
+    rifiutaNo: "Annulla",
+    dichiarazioneConfermata: "Versamento confermato e registrato in cassa.",
+    dichiarazioneRifiutata: "Segnalazione rifiutata.",
+    dichiarazioneNonTrovata:
+      "Questa segnalazione non esiste più o è già stata gestita. Ricarica la pagina.",
+    segnalatoIl: "segnalato il",
   },
 
   account: {

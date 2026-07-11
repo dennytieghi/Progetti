@@ -204,6 +204,17 @@ export const cashDeclarationSchema = z.object({
     .default(null),
 });
 
+/** Il rappresentante può correggere importo, metodo e causale in conferma. */
+export const confirmDeclarationSchema = z.object({
+  amount: euroCentsSchema,
+  method: paymentMethodSchema,
+  title: z
+    .string()
+    .trim()
+    .max(120)
+    .transform((s) => (s.length > 0 ? s : it.cassa.causaleVersamentoDefault)),
+});
+
 export const rejectMembershipSchema = z.object({
   reason: z
     .string()
