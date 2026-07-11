@@ -128,6 +128,7 @@ export default async function CassaPage({
   const promemoriaWhatsapp = ctx.isRepresentative
     ? formatCassaReminderForWhatsapp({
         classCode: ctx.klass.class_code,
+        className: ctx.klass.name,
         baseUrl: await getBaseUrl(),
         coords: {
           iban: ctx.klass.payment_iban,

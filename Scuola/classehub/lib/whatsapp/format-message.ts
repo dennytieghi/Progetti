@@ -50,6 +50,7 @@ export function formatPostForWhatsapp(input: {
  */
 export function formatCassaReminderForWhatsapp(input: {
   classCode: string;
+  className: string;
   baseUrl: string;
   coords: {
     iban: string | null;
@@ -59,7 +60,7 @@ export function formatCassaReminderForWhatsapp(input: {
   } | null;
 }): string {
   const url = `${input.baseUrl}/c/${input.classCode}/cassa`;
-  const lines = [`💰 ${it.cassa.waTitolo} — ${it.cassa.waServono}`, it.cassa.waTesto];
+  const lines = [`💰 ${it.cassa.waTitolo} — ${input.className} — ${it.cassa.waServono}`, it.cassa.waTesto];
 
   const c = input.coords;
   if (c && (c.iban || c.paypal || c.satispay)) {

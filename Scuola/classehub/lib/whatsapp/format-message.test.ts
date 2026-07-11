@@ -5,6 +5,7 @@ describe("formatCassaReminderForWhatsapp", () => {
   test("senza coordinate: solo invito e link", () => {
     const msg = formatCassaReminderForWhatsapp({
       classCode: "ABC123",
+      className: "5B",
       baseUrl: "https://classehub.app",
       coords: null,
     });
@@ -14,6 +15,7 @@ describe("formatCassaReminderForWhatsapp", () => {
   test("con coordinate: elenca solo quelle compilate", () => {
     const msg = formatCassaReminderForWhatsapp({
       classCode: "ABC123",
+      className: "5B",
       baseUrl: "https://classehub.app",
       coords: {
         iban: "IT60X0542811101000000123456",
@@ -26,5 +28,14 @@ describe("formatCassaReminderForWhatsapp", () => {
     expect(msg).toContain("Denise Fabbri");
     expect(msg).toContain("+393331234567");
     expect(msg).not.toContain("paypal.me");
+  });
+  test("il titolo contiene il nome della classe", () => {
+    const msg = formatCassaReminderForWhatsapp({
+      classCode: "ABC123",
+      className: "5B Rodari",
+      baseUrl: "https://classehub.app",
+      coords: null,
+    });
+    expect(msg.split("\n")[0]).toContain("5B Rodari");
   });
 });
