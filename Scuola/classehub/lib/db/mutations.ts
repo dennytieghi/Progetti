@@ -6,7 +6,14 @@ import {
   hashEmergencyCode,
 } from "@/lib/codes/generate";
 import { supabaseAdmin, supabaseServer } from "./supabase";
-import type { ClassRow, MembershipRow, PostRow, PostType, RequestRow } from "./types";
+import type {
+  CashMovementRow,
+  ClassRow,
+  MembershipRow,
+  PostRow,
+  PostType,
+  RequestRow,
+} from "./types";
 
 /**
  * Helper di scrittura su Supabase.
@@ -263,6 +270,47 @@ export async function createPost(input: {
   return post;
 }
 
+/**
+ * Modifica dopo la pubblicazione: titolo, testo e (per le scadenze)
+ * data. Le opzioni dei sondaggi non si toccano mai: qualcuno potrebbe
+ * aver già votato. edited_at segnala ai genitori che il post è cambiato.
+ */
+export async function updatePost(input: {
+  postId: string;
+  title: string;
+  body: string | null;
+  dueDate?: string | null;
+}): Promise<void> {
+  const supabase = await supabaseServer();
+  const patch: Record<string, unknown> = {
+    title: input.title,
+    body: input.body,
+    edited_at: new Date().toISOString(),
+  };
+  if (input.dueDate !== undefined) patch.due_date = input.dueDate;
+  const { error } = await supabase.from("posts").update(patch).eq("id", input.postId);
+  if (error) throw new Error(`Modifica fallita: ${error.message}`);
+}
+
+/**
+ * Eliminazione definitiva (0005): sondaggio, opzioni e voti spariscono
+ * in cascata; il collegamento delle richieste convertite si azzera.
+ * L'RLS limita tutto al rappresentante della classe.
+ */
+export async function deletePost(post: PostRow): Promise<void> {
+  const supabase = await supabaseServer();
+  const { error } = await supabase.from("posts").delete().eq("id", post.id);
+  if (error) throw new Error(`Eliminazione fallita: ${error.message}`);
+
+  // Foto orfana in Storage: ADMIN perché il bucket non ha una policy
+  // di delete client. Se fallisce pazienza: il post è già eliminato.
+  if (post.photo_path) {
+    await supabaseAdmin()
+      .storage.from("class-photos")
+      .remove([`${post.class_id}/${post.photo_path}`]);
+  }
+}
+
 export async function setPinned(postId: string, pinned: boolean): Promise<void> {
   const supabase = await supabaseServer();
   await supabase.from("posts").update({ pinned }).eq("id", postId);
@@ -330,6 +378,192 @@ export async function setRequestStatus(
   const patch: Record<string, unknown> = { status };
   if (convertedToPostId) patch.converted_to_post_id = convertedToPostId;
   await supabase.from("requests").update(patch).eq("id", requestId);
+}
+
+// ---------------------------------------------------------------- cassa
+
+/**
+ * Inserisce un movimento e le sue quote. Se le quote falliscono il
+ * movimento viene rimosso: mai un movimento senza intestatari.
+ * Scrive col client utente: l'RLS impone rappresentante + source manual.
+ */
+async function insertMovementWithShares(input: {
+  classId: string;
+  createdBy: string;
+  kind: "deposit" | "expense";
+  title: string;
+  shares: Array<{ userId: string; amountCents: number }>;
+}): Promise<CashMovementRow> {
+  const supabase = await supabaseServer();
+  const total = input.shares.reduce((sum, s) => sum + s.amountCents, 0);
+
+  const { data, error } = await supabase
+    .from("cash_movements")
+    .insert({
+      class_id: input.classId,
+      kind: input.kind,
+      title: input.title,
+      total_cents: total,
+      created_by: input.createdBy,
+    })
+    .select()
+    .single();
+  if (error) throw new Error(`Registrazione movimento fallita: ${error.message}`);
+  const movement = data as CashMovementRow;
+
+  const { error: sharesError } = await supabase.from("cash_shares").insert(
+    input.shares.map((s) => ({
+      movement_id: movement.id,
+      user_id: s.userId,
+      amount_cents: s.amountCents,
+    }))
+  );
+  if (sharesError) {
+    await supabase.from("cash_movements").delete().eq("id", movement.id);
+    throw new Error(`Registrazione quote fallita: ${sharesError.message}`);
+  }
+
+  return movement;
+}
+
+/** Versamento in contanti registrato dal rappresentante. */
+export async function recordCashDeposit(input: {
+  classId: string;
+  representativeId: string;
+  parentId: string;
+  amountCents: number;
+  title: string;
+}): Promise<CashMovementRow> {
+  return insertMovementWithShares({
+    classId: input.classId,
+    createdBy: input.representativeId,
+    kind: "deposit",
+    title: input.title,
+    shares: [{ userId: input.parentId, amountCents: input.amountCents }],
+  });
+}
+
+/** Spesa: importo a testa, addebitata solo ai partecipanti scelti. */
+export async function recordCashExpense(input: {
+  classId: string;
+  representativeId: string;
+  title: string;
+  perHeadCents: number;
+  participantIds: string[];
+}): Promise<CashMovementRow> {
+  return insertMovementWithShares({
+    classId: input.classId,
+    createdBy: input.representativeId,
+    kind: "expense",
+    title: input.title,
+    shares: input.participantIds.map((userId) => ({
+      userId,
+      amountCents: input.perHeadCents,
+    })),
+  });
+}
+
+/**
+ * Modifica di una spesa manuale: causale, importo a testa, partecipanti.
+ * Le quote vengono sostituite in blocco (delete + insert): più semplice
+ * e più sicuro che calcolare le differenze. L'RLS limita tutto al
+ * rappresentante e ai movimenti manuali.
+ */
+export async function updateCashExpense(input: {
+  movementId: string;
+  title: string;
+  perHeadCents: number;
+  participantIds: string[];
+}): Promise<void> {
+  const supabase = await supabaseServer();
+  const total = input.perHeadCents * input.participantIds.length;
+
+  const { error: deleteError } = await supabase
+    .from("cash_shares")
+    .delete()
+    .eq("movement_id", input.movementId);
+  if (deleteError) throw new Error(`Modifica quote fallita: ${deleteError.message}`);
+
+  const { error: insertError } = await supabase.from("cash_shares").insert(
+    input.participantIds.map((userId) => ({
+      movement_id: input.movementId,
+      user_id: userId,
+      amount_cents: input.perHeadCents,
+    }))
+  );
+  if (insertError) throw new Error(`Modifica quote fallita: ${insertError.message}`);
+
+  const { error: updateError } = await supabase
+    .from("cash_movements")
+    .update({ title: input.title, total_cents: total })
+    .eq("id", input.movementId);
+  if (updateError) throw new Error(`Modifica spesa fallita: ${updateError.message}`);
+}
+
+/** Cancella un movimento manuale (l'RLS blocca quelli Stripe). */
+export async function deleteCashMovement(movementId: string): Promise<void> {
+  const supabase = await supabaseServer();
+  await supabase.from("cash_movements").delete().eq("id", movementId);
+}
+
+/**
+ * Versamento pagato con carta (Stripe Checkout).
+ * ADMIN: i movimenti 'stripe' non hanno policy di insert client — nascono
+ * solo qui, dopo che la sessione è stata verificata presso Stripe.
+ * Idempotente sulla sessione: al secondo tentativo non succede nulla.
+ */
+export async function recordStripeDeposit(input: {
+  classId: string;
+  parentId: string;
+  amountCents: number;
+  title: string;
+  stripeSessionId: string;
+}): Promise<void> {
+  const admin = supabaseAdmin();
+  const { data, error } = await admin
+    .from("cash_movements")
+    .insert({
+      class_id: input.classId,
+      kind: "deposit",
+      title: input.title,
+      total_cents: input.amountCents,
+      source: "stripe",
+      stripe_session_id: input.stripeSessionId,
+      created_by: input.parentId,
+    })
+    .select()
+    .single();
+  if (error) {
+    if (error.code === UNIQUE_VIOLATION) return; // già registrato
+    throw new Error(`Registrazione pagamento fallita: ${error.message}`);
+  }
+
+  const movement = data as CashMovementRow;
+  const { error: shareError } = await admin.from("cash_shares").insert({
+    movement_id: movement.id,
+    user_id: input.parentId,
+    amount_cents: input.amountCents,
+  });
+  if (shareError) {
+    await admin.from("cash_movements").delete().eq("id", movement.id);
+    throw new Error(`Registrazione quota fallita: ${shareError.message}`);
+  }
+}
+
+/**
+ * ADMIN: la colonna stripe_account_id non ha policy di update client;
+ * la scrive solo il server durante il collegamento del conto.
+ */
+export async function setClassStripeAccount(
+  classId: string,
+  stripeAccountId: string
+): Promise<void> {
+  const admin = supabaseAdmin();
+  const { error } = await admin
+    .from("classes")
+    .update({ stripe_account_id: stripeAccountId })
+    .eq("id", classId);
+  if (error) throw new Error(`Salvataggio conto Stripe fallito: ${error.message}`);
 }
 
 // ---------------------------------------------------------------- segreti one-time

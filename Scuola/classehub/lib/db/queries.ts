@@ -1,6 +1,8 @@
 import "server-only";
 import { supabaseAdmin, supabaseServer } from "./supabase";
 import type {
+  CashMovementRow,
+  CashShareRow,
   ClassRow,
   MembershipRow,
   PollOptionRow,
@@ -10,6 +12,7 @@ import type {
   ProfileRow,
   RequestRow,
 } from "./types";
+import type { MovimentoConQuote } from "@/lib/cassa/saldi";
 
 /**
  * Helper di sola lettura su Supabase.
@@ -330,6 +333,58 @@ export async function getRequestById(requestId: string): Promise<RequestRow | nu
     .eq("id", requestId)
     .maybeSingle();
   return (data as RequestRow | null) ?? null;
+}
+
+/**
+ * Movimenti della cassa con le quote, dal più recente.
+ * L'RLS fa da filtro naturale: il genitore riceve tutti i movimenti
+ * della classe ma SOLO le proprie quote; il rappresentante riceve tutto.
+ */
+export async function listCashMovementsWithShares(
+  classId: string
+): Promise<MovimentoConQuote[]> {
+  const supabase = await supabaseServer();
+  const { data: movements } = await supabase
+    .from("cash_movements")
+    .select("*")
+    .eq("class_id", classId)
+    .order("created_at", { ascending: false });
+  const rows = (movements as CashMovementRow[] | null) ?? [];
+  if (rows.length === 0) return [];
+
+  const { data: shares } = await supabase
+    .from("cash_shares")
+    .select("*")
+    .in("movement_id", rows.map((m) => m.id));
+  const shareRows = (shares as CashShareRow[] | null) ?? [];
+
+  return rows.map((movement) => ({
+    movement,
+    shares: shareRows.filter((s) => s.movement_id === movement.id),
+  }));
+}
+
+export async function listCashSharesByMovement(
+  movementId: string
+): Promise<CashShareRow[]> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("cash_shares")
+    .select("*")
+    .eq("movement_id", movementId);
+  return (data as CashShareRow[] | null) ?? [];
+}
+
+export async function getCashMovementById(
+  movementId: string
+): Promise<CashMovementRow | null> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("cash_movements")
+    .select("*")
+    .eq("id", movementId)
+    .maybeSingle();
+  return (data as CashMovementRow | null) ?? null;
 }
 
 /**

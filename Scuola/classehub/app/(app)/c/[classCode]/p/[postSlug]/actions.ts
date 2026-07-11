@@ -5,8 +5,15 @@ import {
   requireActiveMembership,
   requireRepresentative,
 } from "@/lib/auth/require-membership";
+import { redirect } from "next/navigation";
 import { getPoll, getPostBySlug, hasVoted, isPollClosed } from "@/lib/db/queries";
-import { castVote, closePoll, setArchived, setPinned } from "@/lib/db/mutations";
+import {
+  castVote,
+  closePoll,
+  deletePost,
+  setArchived,
+  setPinned,
+} from "@/lib/db/mutations";
 import { voteSchema } from "@/lib/validation/schemas";
 import { it } from "@/lib/i18n/it";
 import type { FormState } from "@/lib/form-state";
@@ -72,6 +79,19 @@ export async function togglePinAction(formData: FormData): Promise<void> {
     revalidatePath(`/c/${classCode}`);
     revalidatePath(`/c/${classCode}/p/${slug}`);
   }
+}
+
+/** Eliminazione definitiva: solo rappresentante, con conferma a monte. */
+export async function eliminaPostAction(formData: FormData): Promise<void> {
+  const classCode = str(formData, "classCode");
+  const slug = str(formData, "slug");
+  const ctx = await requireRepresentative(classCode);
+
+  const post = await getPostBySlug(ctx.klass.id, slug);
+  if (post) await deletePost(post);
+
+  revalidatePath(`/c/${classCode}`);
+  redirect(`/c/${classCode}?eliminato=1`);
 }
 
 /** Archivia / riporta in bacheca: solo rappresentante. */

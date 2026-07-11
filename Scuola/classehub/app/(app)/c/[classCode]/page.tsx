@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { PostCard } from "@/components/posts/PostCard";
+import { Banner } from "@/components/shared/Banner";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { buttonClasses } from "@/components/ui/Button";
 import { requireActiveMembership } from "@/lib/auth/require-membership";
@@ -26,10 +27,10 @@ export default async function BachecaPage({
   searchParams,
 }: {
   params: Promise<{ classCode: string }>;
-  searchParams: Promise<{ tipo?: string; archiviati?: string }>;
+  searchParams: Promise<{ tipo?: string; archiviati?: string; eliminato?: string }>;
 }) {
   const { classCode } = await params;
-  const { tipo, archiviati } = await searchParams;
+  const { tipo, archiviati, eliminato } = await searchParams;
   const ctx = await requireActiveMembership(classCode);
 
   const showArchived = ctx.isRepresentative && archiviati === "1";
@@ -42,6 +43,12 @@ export default async function BachecaPage({
 
   return (
     <div className="space-y-8">
+      {eliminato === "1" && ctx.isRepresentative && (
+        <div aria-live="polite">
+          <Banner tone="success">{it.bacheca.eliminato}</Banner>
+        </div>
+      )}
+
       {deadlines.length > 0 && (
         <section aria-label={it.bacheca.prossimeScadenze}>
           <h2 className="mb-3 text-[24px] font-bold">{it.bacheca.prossimeScadenze}</h2>

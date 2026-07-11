@@ -15,7 +15,12 @@ app/
 â”‚   â”œâ”€â”€ c/[classCode]/              # namespace classe
 â”‚   â”‚   â”œâ”€â”€ page.tsx                # home bacheca
 â”‚   â”‚   â”œâ”€â”€ p/[postSlug]/           # dettaglio post pubblico condivisibile
+â”‚   â”‚   â”‚   â””â”€â”€ modifica/           # rappresentante: modifica post pubblicato
 â”‚   â”‚   â”œâ”€â”€ nuovo/                  # rappresentante: crea post
+â”‚   â”‚   â”œâ”€â”€ cassa/                  # cassa di classe (quota personale, movimenti, Stripe)
+â”‚   â”‚   â”‚   â”œâ”€â”€ conferma/           # ritorno da Stripe Checkout (verifica + registra)
+â”‚   â”‚   â”‚   â”œâ”€â”€ esporta/            # route GET: CSV movimenti (RLS decide il contenuto)
+â”‚   â”‚   â”‚   â””â”€â”€ spesa/[movementId]/ # rappresentante: modifica spesa
 â”‚   â”‚   â”œâ”€â”€ richieste/              # rappresentante: coda richieste genitori
 â”‚   â”‚   â”œâ”€â”€ impostazioni/           # rappresentante: gestione classe
 â”‚   â”‚   â”‚   â”œâ”€â”€ page.tsx
@@ -156,6 +161,29 @@ create index on requests (class_id, status, created_at desc);
 -- RATE LIMITING (richieste dei genitori)
 -- Implementazione: check via query counting su requests.created_at negli ultimi 24h.
 -- Max 5 open+handled per author_id in una classe.
+
+-- CASSA DI CLASSE (migrazione 0003, ADR-013)
+-- classes.stripe_account_id: conto Stripe Connect del rappresentante (null = non collegato).
+create table cash_movements (
+  id uuid primary key default gen_random_uuid(),
+  class_id uuid not null references classes(id) on delete cascade,
+  kind text not null check (kind in ('deposit','expense')),
+  title text not null,                       -- causale
+  total_cents int not null check (total_cents > 0),
+  source text not null default 'manual' check (source in ('manual','stripe')),
+  stripe_session_id text unique,             -- idempotenza pagamenti carta
+  created_by uuid not null references auth.users(id),
+  created_at timestamptz not null default now()
+);
+
+-- Quota di un movimento intestata a un genitore.
+-- deposit: una quota (chi versa). expense: una quota per partecipante (importo a testa).
+create table cash_shares (
+  movement_id uuid not null references cash_movements(id) on delete cascade,
+  user_id uuid not null references auth.users(id),
+  amount_cents int not null check (amount_cents > 0),
+  primary key (movement_id, user_id)
+);
 ```
 
 ## RLS Policies (principi)
@@ -169,6 +197,19 @@ Ogni tabella ha RLS `enable` e policy di questo tipo:
 - **INSERT requests**: solo `parent` `active` non `muted`, e rate check via funzione SQL.
 - **INSERT poll_votes**: solo membro `active`, non `muted`, e non oltre `closes_at`.
 - **poll_votes SELECT aggregato**: solo dopo che il voter_hash del richiedente Ã¨ presente nella tabella per quel `post_id`.
+
+## Cassa e Stripe (ADR-013, ADR-014)
+
+- Saldi calcolati in `lib/cassa/saldi.ts` (logica pura): personale = versamenti - quote spesa; cassa = somma totali movimenti.
+- RLS: movimenti visibili a tutti i membri attivi; `cash_shares` solo proprie (o tutte per il rappresentante). Scritture manuali solo rappresentante; movimenti `stripe` solo via service role.
+- Versamento con carta: Server Action crea Checkout Session sul conto collegato (`stripeAccount`, direct charge) -> il genitore paga su Stripe -> ritorno su `cassa/conferma` -> il server rilegge la sessione da Stripe e registra la quota solo se `paid` (idempotente su `stripe_session_id`). Niente webhook in V1.
+- Senza `STRIPE_SECRET_KEY` la parte carta non compare: cassa solo contanti.
+- Modifica spesa (0004): sostituzione in blocco delle quote (delete + insert), totale ricalcolato. Solo movimenti manuali; quelli Stripe si correggono coi rimborsi (V2).
+- Export: `cassa/esporta` genera CSV (BOM UTF-8, separatore ";", decimali con virgola) con una riga per quota; nessuna libreria xlsx.
+- Post modificati dopo la pubblicazione: `posts.edited_at` (0004), mostrato come "Modificato il" nel dettaglio. Le opzioni dei sondaggi non sono mai modificabili.
+- Eliminazione post (0005): policy delete rep-only; sondaggi/voti in cascata, `requests.converted_to_post_id` si azzera, foto rimossa da Storage best-effort.
+- Filtri cassa: query param `tipo` (versamenti/spese) e `genitore` (solo rep); l'export CSV riceve gli stessi parametri e, filtrando per genitore, esporta solo le quote di quel genitore.
+- Promemoria WhatsApp cassa: `formatCassaReminderForWhatsapp` — testo neutro, mai importi personali in chat; il link porta a `/cassa` dove ognuno vede la propria quota.
 
 ## Flusso magic link + membership
 

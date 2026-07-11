@@ -36,8 +36,8 @@ corepack pnpm dev
 ## Preparare un nuovo progetto Supabase
 
 1. Crea il progetto su https://supabase.com — regione **eu-central-1**.
-2. SQL Editor → esegui in ordine `supabase/migrations/0001_init.sql`
-   e `0002_secrets_e_salt.sql`.
+2. SQL Editor → esegui in ordine tutti i file di
+   `supabase/migrations/` (da `0001_init.sql` in avanti).
 3. Bucket Storage e relative policy (non fanno parte delle migrazioni)
    — sempre nel SQL Editor:
    ```sql
@@ -49,6 +49,27 @@ corepack pnpm dev
      with check (bucket_id = 'class-photos' and is_representative((split_part(name, '/', 1))::uuid));
    ```
 4. Copia le chiavi in `.env.local` (vedi sopra).
+
+## Pagamenti con carta (Stripe, facoltativo)
+
+Senza chiave Stripe la cassa funziona solo in contanti: la parte carta
+non compare. Per attivarla in **test mode** (soldi finti):
+
+1. Crea un account su https://stripe.com (va fatto a mano, serve email).
+2. Dashboard Stripe → attiva la **modalità test** (interruttore in alto)
+   → Developers → API keys → copia la **Secret key** (`sk_test_…`).
+3. Aggiungi in `.env.local`:
+   ```
+   STRIPE_SECRET_KEY=sk_test_…
+   ```
+4. Riavvia `corepack pnpm dev`. Nella scheda Cassa il rappresentante
+   trova "Collega Stripe"; in test mode l'onboarding si può saltare con
+   i dati finti proposti da Stripe.
+5. Per pagare come genitore usa la carta di test `4242 4242 4242 4242`,
+   scadenza futura qualsiasi, CVC qualsiasi.
+
+**Produzione**: NON attivare la chiave live prima delle condizioni in
+ADR-014 (deploy Vercel + webhook, entità legale, decisione commissioni).
 
 ## Architettura degli accessi (per chi eredita il codice)
 
@@ -82,3 +103,4 @@ corepack pnpm dev
 | `SUPABASE_SECRET_KEY` | dev + prod | SOLO server, mai nel client |
 | `NEXT_PUBLIC_BASE_URL` | dev + prod | link WhatsApp ed email |
 | `RESEND_API_KEY` | prod | email transazionali |
+| `STRIPE_SECRET_KEY` | dev + prod | facoltativa; senza, la cassa è solo contanti |

@@ -133,6 +133,7 @@ export const it = {
     soloAttivi: "Nascondi gli archiviati",
     filtroTutti: "Tutti",
     entroIl: "Entro",
+    eliminato: "Contenuto eliminato dalla bacheca.",
     chiuso: "Chiuso",
     chiudeIl: "Puoi votare fino a",
     archiviato: "Archiviato",
@@ -186,6 +187,9 @@ export const it = {
   dettaglio: {
     pubblicatoDa: "Pubblicato da",
     il: "il",
+    modificatoIl: "Modificato il",
+    modifica: "Modifica",
+    aggiornato: "Modifiche salvate. I genitori vedono la versione nuova.",
     fissa: "Metti in evidenza",
     togliFissa: "Togli dall'evidenza",
     archivia: "Archivia",
@@ -195,9 +199,24 @@ export const it = {
       "I genitori non lo vedranno più in bacheca. Potrai sempre ripristinarlo.",
     archiviaSi: "Sì, archivia",
     archiviaNo: "No, torna indietro",
+    eliminaPost: "Elimina",
+    eliminaPostTitolo: "Vuoi eliminare per sempre?",
+    eliminaPostTesto:
+      "Sparisce dalla bacheca per tutti e non si può recuperare. Se vuoi solo nasconderlo, usa Archivia.",
+    eliminaPostSi: "Sì, elimina per sempre",
+    eliminaPostNo: "No, torna indietro",
     nonTrovatoTitolo: "Contenuto non trovato",
     nonTrovatoTesto:
       "Forse è stato rimosso, oppure il link è sbagliato. Controlla il link o chiedi al rappresentante.",
+  },
+
+  modificaPost: {
+    titolo: "Modifica",
+    spiega:
+      "Il link WhatsApp resta lo stesso: chi lo apre vedrà la versione aggiornata.",
+    sondaggioNota:
+      "Di un sondaggio puoi cambiare solo titolo e testo. Le opzioni di risposta non si toccano: qualcuno potrebbe aver già votato.",
+    salva: "Salva le modifiche",
   },
 
   sondaggio: {
@@ -309,6 +328,138 @@ export const it = {
     emergenzaGiaVisto:
       "Il codice di emergenza è stato mostrato al momento della creazione della classe. Se l'hai perso, contatta l'assistenza.",
     stampa: "Stampa questo foglio",
+  },
+
+  cassa: {
+    titolo: "Cassa",
+    spiegaGenitore:
+      "Qui vedi i soldi che hai versato nella cassa della classe e per cosa sono stati usati.",
+    spiegaRep:
+      "Registra i soldi ricevuti e spesi in contanti. I genitori vedono solo la propria quota.",
+    saldoCassa: "In cassa adesso",
+    tuaQuota: "La tua quota",
+    quotaPositiva: "Disponibili per le prossime spese.",
+    quotaNegativa: "Da versare al rappresentante.",
+    quotaZero: "Non hai soldi in cassa al momento.",
+    tuoiMovimenti: "I tuoi movimenti",
+    nessunMovimentoTuo:
+      "Ancora nessun movimento. Quando versi qualcosa o partecipi a una spesa, lo vedi qui.",
+    movimentiCassa: "Tutti i movimenti della cassa",
+    nessunMovimento:
+      "La cassa è ancora vuota. I movimenti compariranno qui.",
+    versamento: "Versamento",
+    spesa: "Spesa",
+    conCarta: "pagato con carta",
+    inContanti: "in contanti",
+    partecipante: "partecipante",
+    partecipanti: "partecipanti",
+    aTesta: "a testa",
+
+    // Rappresentante: registra movimenti
+    registraTitolo: "Registra un movimento",
+    registraVersamento: "Segna un versamento",
+    registraVersamentoSpiega:
+      "Un genitore ti ha dato dei soldi in contanti.",
+    registraSpesa: "Segna una spesa",
+    registraSpesaSpiega:
+      "Hai speso soldi della cassa. Scegli chi partecipa: la quota viene tolta solo a loro.",
+    genitoreLabel: "Chi ha versato?",
+    genitoreScegli: "Scegli il genitore…",
+    importoLabel: "Importo in euro",
+    importoEsempio: "Es. 12,50",
+    causaleVersamentoLabel: "Per cosa? (facoltativo)",
+    causaleVersamentoEsempio: "Es. Quota gita a Verona",
+    causaleVersamentoDefault: "Versamento in cassa",
+    causaleSpesaLabel: "Per cosa hai speso?",
+    causaleSpesaEsempio: "Es. Regalo per la maestra",
+    importoATestaLabel: "Importo a testa, in euro",
+    partecipantiLabel: "Chi partecipa a questa spesa?",
+    tuttiPartecipanti: "Seleziona tutti",
+    nessunPartecipante: "Togli tutti",
+    totaleSpesa: "Totale spesa",
+    registra: "Registra",
+    registrato: "Movimento registrato.",
+    elimina: "Elimina",
+    modificaSpesa: "Modifica",
+    modificaSpesaTitolo: "Modifica la spesa",
+    modificaSpesaSpiega:
+      "Correggi causale, importo o partecipanti: le quote di tutti si ricalcolano da sole.",
+    spesaAggiornata: "Spesa aggiornata.",
+    spesaNonTrovata:
+      "Questa spesa non esiste più o non si può modificare. Torna alla cassa e controlla.",
+
+    // Filtri
+    filtroTutti: "Tutti",
+    filtroVersamenti: "Versamenti",
+    filtroSpese: "Spese",
+    filtroGenitoreLabel: "Vedi un solo genitore",
+    filtroGenitoreTutti: "Tutti i genitori",
+    filtra: "Filtra",
+    nessunRisultatoFiltro:
+      "Nessun movimento con questi filtri. Prova a togliere un filtro.",
+
+    // Promemoria WhatsApp
+    promemoriaTitolo: "Chiedi i versamenti su WhatsApp",
+    promemoriaSpiega:
+      "Puoi modificare il testo come preferisci, poi copialo e incollalo nel gruppo. Ogni genitore, aprendo il link, vede la propria quota e decide se e quanto versare.",
+    waTitolo: "CASSA DI CLASSE",
+    waServono: "Servono nuovi versamenti",
+    waTesto:
+      "Apri il link, controlla la tua quota e, se puoi, fai un versamento (con carta oppure in contanti al rappresentante).",
+    waLink: "Controlla la tua quota qui:",
+
+    // Export
+    esporta: "Scarica i movimenti (Excel)",
+    esportaSpiegaRep:
+      "Un file con tutti i versamenti e le spese, una riga per ogni quota. Si apre con Excel o Google Fogli.",
+    esportaSpiegaGenitore:
+      "Un file con i tuoi movimenti e le causali. Si apre con Excel o Google Fogli.",
+    csvData: "Data",
+    csvTipo: "Tipo",
+    csvCausale: "Causale",
+    csvGenitore: "Genitore",
+    csvQuota: "Quota in euro",
+    csvTotale: "Totale movimento in euro",
+    csvOrigine: "Origine",
+    csvContanti: "Contanti",
+    csvCarta: "Carta",
+
+    eliminaTitolo: "Vuoi eliminare questo movimento?",
+    eliminaTesto:
+      "Le quote dei genitori verranno ricalcolate come se non fosse mai esistito. Se era giusto, dovrai reinserirlo.",
+    eliminaSi: "Sì, elimina",
+    eliminaNo: "No, torna indietro",
+    saldiTitolo: "Quote dei genitori",
+    saldiSpiega:
+      "Quanto ha in cassa ogni genitore. In rosso chi deve ancora versare.",
+
+    // Errori
+    erroreGenitore: "Scegli il genitore che ha versato.",
+    erroreImporto:
+      "Scrivi un importo valido in euro, ad esempio 12,50. Massimo 5.000 euro.",
+    erroreCausale: "Scrivi per cosa hai speso: aiuta i genitori a capire.",
+    errorePartecipanti: "Scegli almeno un genitore che partecipa alla spesa.",
+
+    // Stripe (pagamenti con carta)
+    stripeTitolo: "Pagamenti con carta",
+    stripeCollegaSpiega:
+      "Collega un conto Stripe per permettere ai genitori di versare con la carta, senza contanti. Stripe è il servizio che gestisce i pagamenti in sicurezza.",
+    stripeCollega: "Collega Stripe",
+    stripeCollegato: "Conto Stripe collegato: i genitori possono versare con carta.",
+    stripeNonPronto:
+      "Il collegamento con Stripe non è ancora completo. Riprova il collegamento per finire la configurazione.",
+    stripeErrore:
+      "Il collegamento con Stripe non ha funzionato. Riprova tra qualche secondo.",
+    versaOnlineTitolo: "Versa con la carta",
+    versaOnlineSpiega:
+      "Scegli quanto versare: paghi con la carta e la tua quota si aggiorna da sola.",
+    versaOnlineBottone: "Vai al pagamento",
+    versaOnlineCausale: "Versamento con carta",
+    pagamentoRiuscito: "Pagamento riuscito! La tua quota è stata aggiornata.",
+    pagamentoAnnullato:
+      "Il pagamento è stato annullato. Non è stato prelevato niente.",
+    pagamentoErrore:
+      "Non siamo riusciti a confermare il pagamento. Se i soldi risultano prelevati, avvisa il rappresentante.",
   },
 
   account: {

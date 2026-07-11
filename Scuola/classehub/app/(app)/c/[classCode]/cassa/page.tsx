@@ -1,0 +1,458 @@
+import Link from "next/link";
+import { Download, Pencil } from "lucide-react";
+import { Banner } from "@/components/shared/Banner";
+import { ConfirmSubmit } from "@/components/shared/ConfirmSubmit";
+import { Button, buttonClasses } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { requireActiveMembership } from "@/lib/auth/require-membership";
+import { listActiveMembers, listCashMovementsWithShares } from "@/lib/db/queries";
+import {
+  saldiPerMembroCents,
+  saldoCassaCents,
+  saldoPersonaleCents,
+  type MovimentoConQuote,
+} from "@/lib/cassa/saldi";
+import { formatEuroCents } from "@/lib/euro";
+import { formatShortDateIt } from "@/lib/format-date";
+import { formatCassaReminderForWhatsapp } from "@/lib/whatsapp/format-message";
+import { getBaseUrl } from "@/lib/base-url";
+import { isAccountReady, stripeEnabled } from "@/lib/stripe";
+import { it } from "@/lib/i18n/it";
+import { cn } from "@/lib/cn";
+import { SubmitButton } from "@/components/ui/SubmitButton";
+import { collegaStripeAction, eliminaMovimentoAction } from "./actions";
+import { VersamentoForm, type MemberOption } from "./VersamentoForm";
+import { SpesaForm } from "./SpesaForm";
+import { VersaOnlineForm } from "./VersaOnlineForm";
+import { PromemoriaWhatsapp } from "./PromemoriaWhatsapp";
+
+export const metadata = { title: `${it.cassa.titolo} — ${it.app.name}` };
+
+export default async function CassaPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ classCode: string }>;
+  searchParams: Promise<{
+    fatto?: string;
+    modificata?: string;
+    pagato?: string;
+    annullato?: string;
+    errore?: string;
+    stripe?: string;
+    tipo?: string;
+    genitore?: string;
+  }>;
+}) {
+  const { classCode } = await params;
+  const { fatto, modificata, pagato, annullato, errore, stripe, tipo, genitore } =
+    await searchParams;
+  const ctx = await requireActiveMembership(classCode);
+
+  const [items, members] = await Promise.all([
+    listCashMovementsWithShares(ctx.klass.id),
+    listActiveMembers(ctx.klass.id),
+  ]);
+
+  // Stato pagamenti con carta: senza chiave Stripe la sezione sparisce.
+  const stripeOn = stripeEnabled();
+  let stripeReady = false;
+  if (stripeOn && ctx.klass.stripe_account_id) {
+    stripeReady = await isAccountReady(ctx.klass.stripe_account_id).catch(() => false);
+  }
+
+  const memberOptions: MemberOption[] = members.map((m) => ({
+    userId: m.membership.user_id,
+    name: m.profile?.display_name ?? m.email ?? "?",
+  }));
+  const nomi = new Map(memberOptions.map((m) => [m.userId, m.name]));
+
+  const saldoCassa = saldoCassaCents(items.map((i) => i.movement));
+  const miaQuota = saldoPersonaleCents(items, ctx.user.id);
+
+  // Filtri: per tipo (tutti) e per genitore (solo rappresentante).
+  const kindFiltro =
+    tipo === "versamenti" ? "deposit" : tipo === "spese" ? "expense" : null;
+  const genitoreFiltro =
+    ctx.isRepresentative && genitore && nomi.has(genitore) ? genitore : null;
+  let visibili = items;
+  if (kindFiltro) visibili = visibili.filter((i) => i.movement.kind === kindFiltro);
+  if (genitoreFiltro) {
+    visibili = visibili.filter((i) =>
+      i.shares.some((s) => s.user_id === genitoreFiltro)
+    );
+  }
+
+  // I filtri attivi viaggiano nei link (chips ed export).
+  function withFilters(overrides: { tipo?: string | null }): string {
+    const q = new URLSearchParams();
+    const t = overrides.tipo === undefined ? tipo : overrides.tipo;
+    if (t === "versamenti" || t === "spese") q.set("tipo", t);
+    if (genitoreFiltro) q.set("genitore", genitoreFiltro);
+    const s = q.toString();
+    return s ? `?${s}` : "";
+  }
+
+  const FILTRI = [
+    { key: "tutti", label: it.cassa.filtroTutti },
+    { key: "versamenti", label: it.cassa.filtroVersamenti },
+    { key: "spese", label: it.cassa.filtroSpese },
+  ];
+  const filtroAttivo = kindFiltro ? tipo : "tutti";
+
+  const promemoriaWhatsapp = ctx.isRepresentative
+    ? formatCassaReminderForWhatsapp({
+        classCode: ctx.klass.class_code,
+        baseUrl: await getBaseUrl(),
+      })
+    : null;
+
+  return (
+    <div className="mx-auto max-w-2xl space-y-6">
+      <div>
+        <h1 className="text-[28px] font-bold">{it.cassa.titolo}</h1>
+        <p className="mt-1 text-ink-soft">
+          {ctx.isRepresentative ? it.cassa.spiegaRep : it.cassa.spiegaGenitore}
+        </p>
+      </div>
+
+      <div aria-live="polite" className="space-y-3">
+        {fatto === "1" && <Banner tone="success">{it.cassa.registrato}</Banner>}
+        {modificata === "1" && <Banner tone="success">{it.cassa.spesaAggiornata}</Banner>}
+        {pagato === "1" && <Banner tone="success">{it.cassa.pagamentoRiuscito}</Banner>}
+        {annullato === "1" && (
+          <Banner tone="warning">{it.cassa.pagamentoAnnullato}</Banner>
+        )}
+        {errore === "1" && <Banner tone="danger">{it.cassa.pagamentoErrore}</Banner>}
+        {stripe === "ok" &&
+          (stripeReady ? (
+            <Banner tone="success">{it.cassa.stripeCollegato}</Banner>
+          ) : (
+            <Banner tone="warning">{it.cassa.stripeNonPronto}</Banner>
+          ))}
+        {stripe === "riprova" && (
+          <Banner tone="warning">{it.cassa.stripeNonPronto}</Banner>
+        )}
+        {stripe === "errore" && <Banner tone="danger">{it.cassa.stripeErrore}</Banner>}
+      </div>
+
+      {/* Quota personale + saldo cassa */}
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Card>
+          <p className="text-[16px] font-semibold text-ink-soft">{it.cassa.tuaQuota}</p>
+          <p
+            className={cn(
+              "text-[32px] font-bold",
+              miaQuota < 0 ? "text-danger" : "text-ink"
+            )}
+          >
+            {formatEuroCents(Math.abs(miaQuota))}
+          </p>
+          <p className="text-[15px] text-ink-soft">
+            {miaQuota > 0
+              ? it.cassa.quotaPositiva
+              : miaQuota < 0
+                ? it.cassa.quotaNegativa
+                : it.cassa.quotaZero}
+          </p>
+        </Card>
+        <Card>
+          <p className="text-[16px] font-semibold text-ink-soft">{it.cassa.saldoCassa}</p>
+          <p className="text-[32px] font-bold">{formatEuroCents(saldoCassa)}</p>
+        </Card>
+      </div>
+
+      {/* Genitore: versa con la carta (solo se il conto è pronto) */}
+      {!ctx.isRepresentative && stripeReady && (
+        <Card>
+          <h2 className="text-[19px] font-bold">{it.cassa.versaOnlineTitolo}</h2>
+          <p className="mb-4 mt-1 text-[15px] text-ink-soft">
+            {it.cassa.versaOnlineSpiega}
+          </p>
+          <VersaOnlineForm classCode={classCode} />
+        </Card>
+      )}
+
+      {/* Rappresentante: collegamento Stripe */}
+      {ctx.isRepresentative && stripeOn && (
+        <Card>
+          <h2 className="text-[19px] font-bold">{it.cassa.stripeTitolo}</h2>
+          {ctx.klass.stripe_account_id && stripeReady ? (
+            <p className="mt-1 text-[15px] text-ink-soft">{it.cassa.stripeCollegato}</p>
+          ) : (
+            <>
+              <p className="mb-4 mt-1 text-[15px] text-ink-soft">
+                {ctx.klass.stripe_account_id
+                  ? it.cassa.stripeNonPronto
+                  : it.cassa.stripeCollegaSpiega}
+              </p>
+              <form action={collegaStripeAction}>
+                <input type="hidden" name="classCode" value={classCode} />
+                <SubmitButton variant="secondary">{it.cassa.stripeCollega}</SubmitButton>
+              </form>
+            </>
+          )}
+        </Card>
+      )}
+
+      {/* Rappresentante: registra movimenti */}
+      {ctx.isRepresentative && (
+        <section className="space-y-4">
+          <h2 className="text-[22px] font-bold">{it.cassa.registraTitolo}</h2>
+          <Card>
+            <h3 className="text-[19px] font-bold">{it.cassa.registraVersamento}</h3>
+            <p className="mb-4 mt-1 text-[15px] text-ink-soft">
+              {it.cassa.registraVersamentoSpiega}
+            </p>
+            <VersamentoForm classCode={classCode} members={memberOptions} />
+          </Card>
+          <Card>
+            <h3 className="text-[19px] font-bold">{it.cassa.registraSpesa}</h3>
+            <p className="mb-4 mt-1 text-[15px] text-ink-soft">
+              {it.cassa.registraSpesaSpiega}
+            </p>
+            <SpesaForm classCode={classCode} members={memberOptions} />
+          </Card>
+        </section>
+      )}
+
+      {/* Rappresentante: promemoria versamenti per il gruppo WhatsApp */}
+      {promemoriaWhatsapp && (
+        <Card className="space-y-3">
+          <h2 className="text-[19px] font-bold">{it.cassa.promemoriaTitolo}</h2>
+          <p className="text-[15px] text-ink-soft">{it.cassa.promemoriaSpiega}</p>
+          <PromemoriaWhatsapp defaultText={promemoriaWhatsapp} />
+        </Card>
+      )}
+
+      {/* Rappresentante: quote dei genitori */}
+      {ctx.isRepresentative && items.length > 0 && (
+        <section>
+          <h2 className="text-[22px] font-bold">{it.cassa.saldiTitolo}</h2>
+          <p className="mb-3 mt-1 text-[15px] text-ink-soft">{it.cassa.saldiSpiega}</p>
+          <Card>
+            <ul className="divide-y divide-line">
+              {[...saldiPerMembroCents(items).entries()]
+                .map(([userId, cents]) => ({
+                  userId,
+                  cents,
+                  name: nomi.get(userId) ?? "—",
+                }))
+                .sort((a, b) => a.name.localeCompare(b.name, "it"))
+                .map(({ userId, cents, name }) => (
+                  <li
+                    key={userId}
+                    className="flex items-center justify-between py-2 text-[17px]"
+                  >
+                    <span>{name}</span>
+                    <span
+                      className={cn(
+                        "font-semibold",
+                        cents < 0 ? "text-danger" : "text-ink"
+                      )}
+                    >
+                      {formatEuroCents(cents)}
+                    </span>
+                  </li>
+                ))}
+            </ul>
+          </Card>
+        </section>
+      )}
+
+      {/* Scarica i movimenti (CSV che Excel e Google Fogli aprono) */}
+      {items.length > 0 && (
+        <Card className="flex flex-wrap items-center justify-between gap-3">
+          <p className="max-w-xs text-[15px] text-ink-soft">
+            {ctx.isRepresentative
+              ? it.cassa.esportaSpiegaRep
+              : it.cassa.esportaSpiegaGenitore}
+          </p>
+          <a
+            href={`/c/${classCode}/cassa/esporta${withFilters({})}`}
+            download
+            className={buttonClasses("secondary")}
+          >
+            <Download className="size-5" aria-hidden /> {it.cassa.esporta}
+          </a>
+        </Card>
+      )}
+
+      {/* Movimenti */}
+      <section>
+        <h2 className="mb-3 text-[22px] font-bold">{it.cassa.movimentiCassa}</h2>
+
+        {items.length > 0 && (
+          <div className="mb-4 space-y-3">
+            <div className="flex flex-wrap gap-2">
+              {FILTRI.map((f) => (
+                <Link
+                  key={f.key}
+                  href={`/c/${classCode}/cassa${withFilters({
+                    tipo: f.key === "tutti" ? null : f.key,
+                  })}`}
+                  className={cn(
+                    "min-h-12 rounded-full border-2 px-4 py-2.5 text-[16px] font-semibold",
+                    f.key === filtroAttivo
+                      ? "border-accent bg-accent text-white"
+                      : "border-line bg-paper text-ink-soft hover:border-accent"
+                  )}
+                >
+                  {f.label}
+                </Link>
+              ))}
+            </div>
+
+            {ctx.isRepresentative && (
+              <form
+                action={`/c/${classCode}/cassa`}
+                method="get"
+                className="flex flex-wrap items-end gap-2"
+              >
+                {kindFiltro && <input type="hidden" name="tipo" value={tipo} />}
+                <div className="min-w-52">
+                  <label
+                    htmlFor="filtro-genitore"
+                    className="mb-1 block text-[15px] font-semibold text-ink-soft"
+                  >
+                    {it.cassa.filtroGenitoreLabel}
+                  </label>
+                  <select
+                    id="filtro-genitore"
+                    name="genitore"
+                    defaultValue={genitoreFiltro ?? ""}
+                    className="min-h-12 w-full rounded-xl border-2 border-line bg-paper px-4 text-[17px] focus:border-accent focus:outline-none"
+                  >
+                    <option value="">{it.cassa.filtroGenitoreTutti}</option>
+                    {memberOptions.map((m) => (
+                      <option key={m.userId} value={m.userId}>
+                        {m.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <Button type="submit" variant="secondary">
+                  {it.cassa.filtra}
+                </Button>
+              </form>
+            )}
+          </div>
+        )}
+
+        {items.length === 0 ? (
+          <Card>
+            <p className="text-ink-soft">{it.cassa.nessunMovimento}</p>
+          </Card>
+        ) : visibili.length === 0 ? (
+          <Card>
+            <p className="text-ink-soft">{it.cassa.nessunRisultatoFiltro}</p>
+          </Card>
+        ) : (
+          <ul className="space-y-3">
+            {visibili.map((item) => (
+              <li key={item.movement.id}>
+                <MovementCard
+                  item={item}
+                  classCode={classCode}
+                  userId={ctx.user.id}
+                  isRepresentative={ctx.isRepresentative}
+                  nomi={nomi}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+    </div>
+  );
+}
+
+function MovementCard({
+  item,
+  classCode,
+  userId,
+  isRepresentative,
+  nomi,
+}: {
+  item: MovimentoConQuote;
+  classCode: string;
+  userId: string;
+  isRepresentative: boolean;
+  nomi: Map<string, string>;
+}) {
+  const { movement, shares } = item;
+  const isDeposit = movement.kind === "deposit";
+  const myShare = shares.find((s) => s.user_id === userId);
+
+  // Il rappresentante vede l'intestatario del versamento; per la spesa
+  // basta il conteggio (i nomi sono nella sezione quote).
+  const firstShare = shares[0];
+  const intestatario =
+    isDeposit && shares.length === 1 && firstShare
+      ? nomi.get(firstShare.user_id)
+      : null;
+  const perHead = !isDeposit && firstShare ? firstShare.amount_cents : null;
+  // Il genitore riceve solo la propria quota (RLS): i partecipanti si
+  // contano dal totale, non dalle quote visibili.
+  const partecipanti = perHead ? Math.round(movement.total_cents / perHead) : 0;
+
+  return (
+    <Card className="flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <p className="text-[15px] font-semibold uppercase tracking-wide text-ink-soft">
+          {isDeposit ? it.cassa.versamento : it.cassa.spesa}
+          {movement.source === "stripe" ? ` · ${it.cassa.conCarta}` : ""}
+        </p>
+        <p className="text-[18px] font-semibold">{movement.title}</p>
+        <p className="text-[15px] text-ink-soft">
+          {formatShortDateIt(movement.created_at)}
+          {intestatario ? ` · ${intestatario}` : ""}
+          {perHead !== null
+            ? ` · ${partecipanti} ${partecipanti === 1 ? it.cassa.partecipante : it.cassa.partecipanti} × ${formatEuroCents(perHead)} ${it.cassa.aTesta}`
+            : ""}
+        </p>
+        {myShare && !isDeposit && (
+          <p className="text-[15px] font-semibold text-danger">
+            {it.cassa.tuaQuota}: −{formatEuroCents(myShare.amount_cents)}
+          </p>
+        )}
+      </div>
+
+      <div className="flex flex-col items-end gap-2">
+        <p
+          className={cn(
+            "text-[20px] font-bold",
+            isDeposit ? "text-success" : "text-danger"
+          )}
+        >
+          {isDeposit ? "+" : "−"}
+          {formatEuroCents(movement.total_cents)}
+        </p>
+        {isRepresentative && movement.source === "manual" && (
+          <div className="flex gap-2">
+            {!isDeposit && (
+              <Link
+                href={`/c/${classCode}/cassa/spesa/${movement.id}`}
+                className={buttonClasses("secondary")}
+              >
+                <Pencil className="size-5" aria-hidden /> {it.cassa.modificaSpesa}
+              </Link>
+            )}
+            <ConfirmSubmit
+              action={eliminaMovimentoAction}
+              triggerLabel={it.cassa.elimina}
+              title={it.cassa.eliminaTitolo}
+              description={it.cassa.eliminaTesto}
+              confirmLabel={it.cassa.eliminaSi}
+              cancelLabel={it.cassa.eliminaNo}
+              variant="secondary"
+            >
+              <input type="hidden" name="classCode" value={classCode} />
+              <input type="hidden" name="movementId" value={movement.id} />
+            </ConfirmSubmit>
+          </div>
+        )}
+      </div>
+    </Card>
+  );
+}

@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { it } from "@/lib/i18n/it";
 import { normalizeCode } from "@/lib/codes/generate";
+import { parseEuroToCents } from "@/lib/euro";
 
 /**
  * Schema Zod per OGNI input utente (CLAUDE.md §7).
@@ -83,6 +84,16 @@ export const createMaterialSchema = z.object({
   body: bodySchema,
 });
 
+/**
+ * Modifica di una scadenza: la data deve essere valida ma può anche
+ * essere nel passato (correggere una data sbagliata è un uso legittimo).
+ */
+export const editDeadlineSchema = z.object({
+  title: titleSchema,
+  body: bodySchema,
+  dueDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, { message: it.nuovo.erroreData }),
+});
+
 export const createPollSchema = z.object({
   title: titleSchema,
   body: bodySchema,
@@ -110,6 +121,42 @@ export const createRequestSchema = z.object({
     .trim()
     .min(5, { message: it.richieste.erroreTesto })
     .max(1000, { message: it.richieste.erroreTesto }),
+});
+
+/** Importo in euro scritto dall'utente ("12,50") → centesimi interi. */
+const euroCentsSchema = z
+  .string()
+  .transform((s) => parseEuroToCents(s))
+  .refine((cents): cents is number => cents !== null && cents > 0, {
+    message: it.cassa.erroreImporto,
+  })
+  .refine((cents) => cents <= 500_000, { message: it.cassa.erroreImporto });
+
+export const cashDepositSchema = z.object({
+  parentId: z.string().uuid({ message: it.cassa.erroreGenitore }),
+  amount: euroCentsSchema,
+  title: z
+    .string()
+    .trim()
+    .max(120)
+    .transform((s) => (s.length > 0 ? s : it.cassa.causaleVersamentoDefault)),
+});
+
+export const cashExpenseSchema = z.object({
+  title: z
+    .string()
+    .trim()
+    .min(2, { message: it.cassa.erroreCausale })
+    .max(120, { message: it.cassa.erroreCausale }),
+  perHead: euroCentsSchema,
+  participantIds: z
+    .array(z.string().uuid())
+    .min(1, { message: it.cassa.errorePartecipanti })
+    .max(200),
+});
+
+export const onlineDepositSchema = z.object({
+  amount: euroCentsSchema,
 });
 
 export const rejectMembershipSchema = z.object({

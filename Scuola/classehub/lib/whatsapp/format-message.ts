@@ -43,3 +43,20 @@ export function formatPostForWhatsapp(input: {
 
   return lines.join("\n");
 }
+
+/**
+ * Promemoria versamenti in cassa: il link porta alla scheda Cassa,
+ * dove ogni genitore vede la PROPRIA quota (mai importi in chat).
+ */
+export function formatCassaReminderForWhatsapp(input: {
+  classCode: string;
+  baseUrl: string;
+}): string {
+  const url = `${input.baseUrl}/c/${input.classCode}/cassa`;
+  return [
+    `💰 ${it.cassa.waTitolo} — ${it.cassa.waServono}`,
+    it.cassa.waTesto,
+    it.cassa.waLink,
+    `👉 ${url}`,
+  ].join("\n");
+}

@@ -1,11 +1,12 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Pin, PinOff } from "lucide-react";
+import { Pencil, Pin, PinOff } from "lucide-react";
 import { PollResults } from "@/components/polls/PollResults";
 import { PollVoteForm } from "@/components/polls/PollVoteForm";
 import { Banner } from "@/components/shared/Banner";
 import { ConfirmSubmit } from "@/components/shared/ConfirmSubmit";
 import { CopyButton } from "@/components/shared/CopyButton";
-import { Button } from "@/components/ui/Button";
+import { Button, buttonClasses } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { requireActiveMembership } from "@/lib/auth/require-membership";
 import {
@@ -23,6 +24,7 @@ import { formatPostForWhatsapp } from "@/lib/whatsapp/format-message";
 import { it } from "@/lib/i18n/it";
 import {
   chiudiSondaggioAction,
+  eliminaPostAction,
   toggleArchivioAction,
   togglePinAction,
 } from "./actions";
@@ -35,10 +37,10 @@ export default async function PostDetailPage({
   searchParams,
 }: {
   params: Promise<{ classCode: string; postSlug: string }>;
-  searchParams: Promise<{ fatto?: string }>;
+  searchParams: Promise<{ fatto?: string; modificato?: string }>;
 }) {
   const { classCode, postSlug } = await params;
-  const { fatto } = await searchParams;
+  const { fatto, modificato } = await searchParams;
   const ctx = await requireActiveMembership(classCode);
 
   const post = await getPostBySlug(ctx.klass.id, postSlug);
@@ -78,6 +80,12 @@ export default async function PostDetailPage({
         </Card>
       )}
 
+      {modificato === "1" && ctx.isRepresentative && (
+        <div aria-live="polite">
+          <Banner tone="success">{it.dettaglio.aggiornato}</Banner>
+        </div>
+      )}
+
       <article>
         {post.archived && (
           <div className="mb-3">
@@ -91,6 +99,8 @@ export default async function PostDetailPage({
         <p className="mt-1 text-[15px] text-ink-soft">
           {it.dettaglio.pubblicatoDa} {author?.display_name ?? "—"} {it.dettaglio.il}{" "}
           {formatShortDateIt(post.created_at)}
+          {post.edited_at &&
+            ` · ${it.dettaglio.modificatoIl} ${formatShortDateIt(post.edited_at)}`}
         </p>
 
         {post.type === "deadline" && post.due_date && (
@@ -183,6 +193,13 @@ export default async function PostDetailPage({
           )}
 
           <div className="flex flex-wrap gap-3">
+            <Link
+              href={`/c/${classCode}/p/${post.slug}/modifica`}
+              className={buttonClasses("secondary")}
+            >
+              <Pencil className="size-5" aria-hidden /> {it.dettaglio.modifica}
+            </Link>
+
             <form action={togglePinAction}>
               {hiddenFields}
               <Button type="submit" variant="secondary">
@@ -218,6 +235,18 @@ export default async function PostDetailPage({
                 {hiddenFields}
               </ConfirmSubmit>
             )}
+
+            <ConfirmSubmit
+              action={eliminaPostAction}
+              triggerLabel={it.dettaglio.eliminaPost}
+              title={it.dettaglio.eliminaPostTitolo}
+              description={it.dettaglio.eliminaPostTesto}
+              confirmLabel={it.dettaglio.eliminaPostSi}
+              cancelLabel={it.dettaglio.eliminaPostNo}
+              variant="danger"
+            >
+              {hiddenFields}
+            </ConfirmSubmit>
           </div>
         </Card>
       )}

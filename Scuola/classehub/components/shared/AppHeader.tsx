@@ -6,13 +6,15 @@ import {
   Plus,
   Settings,
   UserRound,
+  Wallet,
 } from "lucide-react";
 import { it } from "@/lib/i18n/it";
 import { cn } from "@/lib/cn";
 
 /**
- * Header della classe. Massimo 4 voci di navigazione, sempre visibili,
- * icone SEMPRE con etichetta testuale (UX_PRINCIPLES §anti-pattern).
+ * Header della classe. Poche voci, sempre visibili, icone SEMPRE con
+ * etichetta testuale (UX_PRINCIPLES §anti-pattern). Con la Cassa il
+ * rappresentante arriva a 5 voci: su schermi stretti la barra scorre.
  */
 export function AppHeader({
   classCode,
@@ -37,6 +39,7 @@ export function AppHeader({
           icon: Inbox,
           badge: openRequestsCount,
         },
+        { href: `${base}/cassa`, label: it.cassa.titolo, icon: Wallet },
         { href: `${base}/impostazioni`, label: it.impostazioni.titolo, icon: Settings },
       ]
     : [
@@ -46,6 +49,7 @@ export function AppHeader({
           label: it.richieste.titoloGenitore,
           icon: MessageSquarePlus,
         },
+        { href: `${base}/cassa`, label: it.cassa.titolo, icon: Wallet },
         { href: "/account", label: it.account.titolo, icon: UserRound },
       ];
 

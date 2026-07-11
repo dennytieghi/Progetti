@@ -16,6 +16,8 @@ export interface ClassRow {
   emergency_code_hash: string;
   created_at: string;
   archived_at: string | null;
+  /** Conto Stripe Connect del rappresentante; null se non collegato. */
+  stripe_account_id: string | null;
 }
 
 export interface ProfileRow {
@@ -52,6 +54,8 @@ export interface PostRow {
   archived: boolean;
   photo_path: string | null;
   created_at: string;
+  /** Ultima modifica dopo la pubblicazione; null = mai modificato. */
+  edited_at: string | null;
 }
 
 export interface PollRow {
@@ -84,6 +88,28 @@ export interface RequestRow {
   status: RequestStatus;
   converted_to_post_id: string | null;
   created_at: string;
+}
+
+export type CashMovementKind = "deposit" | "expense";
+export type CashMovementSource = "manual" | "stripe";
+
+export interface CashMovementRow {
+  id: string;
+  class_id: string;
+  kind: CashMovementKind;
+  title: string;
+  total_cents: number;
+  source: CashMovementSource;
+  stripe_session_id: string | null;
+  created_by: string;
+  created_at: string;
+}
+
+/** Quota di un movimento intestata a un genitore (0003_cassa.sql). */
+export interface CashShareRow {
+  movement_id: string;
+  user_id: string;
+  amount_cents: number;
 }
 
 /**

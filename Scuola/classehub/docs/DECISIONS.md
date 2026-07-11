@@ -78,3 +78,29 @@ ADR (Architecture Decision Records). Formato breve: contesto, decisione, alterna
 **Motivo**: minimo dato sui minori = minimo rischio GDPR + copy naturale.
 **Trade-off**: impossibile filtrare/aggregare per figlio. Non serve in V1.
 **Revisione se**: emerge un uso significativo per figlio (es. classi con doppio turno) â†’ valuta tag opzionali, non entitÃ .
+## ADR-013 — Cassa a quote personali, movimenti intestati
+**Contesto**: la cassa di classe è comune ma non tutti partecipano alle stesse spese: le quote in cassa non sono uguali per tutti.
+**Decisione**: ogni movimento (`cash_movements`) ha quote intestate (`cash_shares`). Versamento = una quota del genitore che versa. Spesa = importo a testa × partecipanti scelti dal rappresentante. Saldo personale = versato − quote spesa. Il genitore vede tutti i movimenti della classe ma SOLO le proprie quote (RLS); il rappresentante vede tutto. La quota può andare in negativo ("da versare"), mai bloccata.
+**Scartato**:
+- fondo comune puro senza quote personali: non risponde al requisito "ogni genitore vede la sua quota rimasta".
+- ripartizione pro-quota di ogni spesa su tutti i versanti: i contanti non hanno il nome sopra, e chi non partecipa a una gita non deve pagarla.
+- registrazione contabile a doppia entrata: over-engineering per una cassa di classe.
+**Revisione se**: i rappresentanti chiedono spese con importi diversi per partecipante (non a testa) → aggiungi importo per quota nella UI, lo schema lo supporta già.
+
+## ADR-014 — Stripe Connect Standard, conferma sincrona, produzione rimandata
+**Contesto**: versamenti con carta senza che ClasseHub tocchi il denaro.
+**Decisione**: Stripe Connect **Standard** — il conto è del rappresentante, i pagamenti (Checkout, direct charge) arrivano lì. La quota si registra al ritorno dal Checkout: il server rilegge la sessione da Stripe con la chiave segreta e registra solo se `paid`, in modo idempotente (unique su `stripe_session_id`). Niente webhook in V1: in locale non c'è URL pubblico. Senza `STRIPE_SECRET_KEY` la sezione carta sparisce e la cassa resta manuale.
+**Scartato**:
+- webhook `checkout.session.completed` in V1: richiede deploy pubblico o CLI Stripe; rimandato a quando l'app va su Vercel.
+- Connect Express/Custom: ClasseHub diventerebbe responsabile di più oneri della piattaforma; Standard tiene il rapporto contrattuale tra rappresentante e Stripe.
+- pagamenti sul conto Stripe di ClasseHub con giroconti: ClasseHub toccherebbe i soldi = rischio legale/fiscale inaccettabile.
+**Trade-off accettato**: se il genitore paga e chiude il browser prima del ritorno, la quota non si registra finché non riapre il link — accettabile in test mode.
+**Condizioni per andare in produzione (test → live)**: (1) app pubblicata su Vercel con webhook attivo, (2) entità legale per l'account piattaforma ClasseHub, (3) decisione su chi assorbe le commissioni (~1,5% + 0,25 € a transazione).
+
+## ADR-015 — Export in CSV, non in .xlsx
+**Contesto**: rappresentante e genitori vogliono i dati della cassa "in Excel o Google Sheets".
+**Decisione**: la route `cassa/esporta` genera un **CSV** su misura per l'Excel italiano (BOM UTF-8, separatore `;`, decimali con la virgola): doppio clic e si apre, e Google Fogli lo importa direttamente. Una riga per ogni quota, così i totali si ricostruiscono con una tabella pivot. Il contenuto lo decide l'RLS: stessa route per tutti, il rappresentante riceve tutto, il genitore solo le sue quote.
+**Scartato**:
+- libreria xlsx (exceljs/sheetjs): una dipendenza in più, superficie di bug in più, per un vantaggio estetico.
+- integrazione Google Sheets API: OAuth e permessi Google per un file che si può semplicemente importare.
+**Revisione se**: i rappresentanti chiedono formattazione (colori, totali pronti) → valuta exceljs in V2.
