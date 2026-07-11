@@ -500,70 +500,10 @@ export async function updateCashExpense(input: {
   if (updateError) throw new Error(`Modifica spesa fallita: ${updateError.message}`);
 }
 
-/** Cancella un movimento manuale (l'RLS blocca quelli Stripe). */
+/** Cancella un movimento della cassa (l'RLS impone rappresentante + classe). */
 export async function deleteCashMovement(movementId: string): Promise<void> {
   const supabase = await supabaseServer();
   await supabase.from("cash_movements").delete().eq("id", movementId);
-}
-
-/**
- * Versamento pagato con carta (Stripe Checkout).
- * ADMIN: i movimenti 'stripe' non hanno policy di insert client — nascono
- * solo qui, dopo che la sessione è stata verificata presso Stripe.
- * Idempotente sulla sessione: al secondo tentativo non succede nulla.
- */
-export async function recordStripeDeposit(input: {
-  classId: string;
-  parentId: string;
-  amountCents: number;
-  title: string;
-  stripeSessionId: string;
-}): Promise<void> {
-  const admin = supabaseAdmin();
-  const { data, error } = await admin
-    .from("cash_movements")
-    .insert({
-      class_id: input.classId,
-      kind: "deposit",
-      title: input.title,
-      total_cents: input.amountCents,
-      source: "stripe",
-      stripe_session_id: input.stripeSessionId,
-      created_by: input.parentId,
-    })
-    .select()
-    .single();
-  if (error) {
-    if (error.code === UNIQUE_VIOLATION) return; // già registrato
-    throw new Error(`Registrazione pagamento fallita: ${error.message}`);
-  }
-
-  const movement = data as CashMovementRow;
-  const { error: shareError } = await admin.from("cash_shares").insert({
-    movement_id: movement.id,
-    user_id: input.parentId,
-    amount_cents: input.amountCents,
-  });
-  if (shareError) {
-    await admin.from("cash_movements").delete().eq("id", movement.id);
-    throw new Error(`Registrazione quota fallita: ${shareError.message}`);
-  }
-}
-
-/**
- * ADMIN: la colonna stripe_account_id non ha policy di update client;
- * la scrive solo il server durante il collegamento del conto.
- */
-export async function setClassStripeAccount(
-  classId: string,
-  stripeAccountId: string
-): Promise<void> {
-  const admin = supabaseAdmin();
-  const { error } = await admin
-    .from("classes")
-    .update({ stripe_account_id: stripeAccountId })
-    .eq("id", classId);
-  if (error) throw new Error(`Salvataggio conto Stripe fallito: ${error.message}`);
 }
 
 // ---------------------------------------------------------------- segreti one-time

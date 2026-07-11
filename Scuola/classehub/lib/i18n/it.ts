@@ -349,7 +349,6 @@ export const it = {
       "La cassa è ancora vuota. I movimenti compariranno qui.",
     versamento: "Versamento",
     spesa: "Spesa",
-    conCarta: "pagato con carta",
     inContanti: "in contanti",
     partecipante: "partecipante",
     partecipanti: "partecipanti",
@@ -422,7 +421,6 @@ export const it = {
     csvTotale: "Totale movimento in euro",
     csvOrigine: "Origine",
     csvContanti: "Contanti",
-    csvCarta: "Carta",
 
     eliminaTitolo: "Vuoi eliminare questo movimento?",
     eliminaTesto:
@@ -439,27 +437,6 @@ export const it = {
       "Scrivi un importo valido in euro, ad esempio 12,50. Massimo 5.000 euro.",
     erroreCausale: "Scrivi per cosa hai speso: aiuta i genitori a capire.",
     errorePartecipanti: "Scegli almeno un genitore che partecipa alla spesa.",
-
-    // Stripe (pagamenti con carta)
-    stripeTitolo: "Pagamenti con carta",
-    stripeCollegaSpiega:
-      "Collega un conto Stripe per permettere ai genitori di versare con la carta, senza contanti. Stripe è il servizio che gestisce i pagamenti in sicurezza.",
-    stripeCollega: "Collega Stripe",
-    stripeCollegato: "Conto Stripe collegato: i genitori possono versare con carta.",
-    stripeNonPronto:
-      "Il collegamento con Stripe non è ancora completo. Riprova il collegamento per finire la configurazione.",
-    stripeErrore:
-      "Il collegamento con Stripe non ha funzionato. Riprova tra qualche secondo.",
-    versaOnlineTitolo: "Versa con la carta",
-    versaOnlineSpiega:
-      "Scegli quanto versare: paghi con la carta e la tua quota si aggiorna da sola.",
-    versaOnlineBottone: "Vai al pagamento",
-    versaOnlineCausale: "Versamento con carta",
-    pagamentoRiuscito: "Pagamento riuscito! La tua quota è stata aggiornata.",
-    pagamentoAnnullato:
-      "Il pagamento è stato annullato. Non è stato prelevato niente.",
-    pagamentoErrore:
-      "Non siamo riusciti a confermare il pagamento. Se i soldi risultano prelevati, avvisa il rappresentante.",
   },
 
   account: {

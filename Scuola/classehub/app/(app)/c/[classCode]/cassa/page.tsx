@@ -16,14 +16,11 @@ import { formatEuroCents } from "@/lib/euro";
 import { formatShortDateIt } from "@/lib/format-date";
 import { formatCassaReminderForWhatsapp } from "@/lib/whatsapp/format-message";
 import { getBaseUrl } from "@/lib/base-url";
-import { isAccountReady, stripeEnabled } from "@/lib/stripe";
 import { it } from "@/lib/i18n/it";
 import { cn } from "@/lib/cn";
-import { SubmitButton } from "@/components/ui/SubmitButton";
-import { collegaStripeAction, eliminaMovimentoAction } from "./actions";
+import { eliminaMovimentoAction } from "./actions";
 import { VersamentoForm, type MemberOption } from "./VersamentoForm";
 import { SpesaForm } from "./SpesaForm";
-import { VersaOnlineForm } from "./VersaOnlineForm";
 import { PromemoriaWhatsapp } from "./PromemoriaWhatsapp";
 
 export const metadata = { title: `${it.cassa.titolo} — ${it.app.name}` };
@@ -36,30 +33,19 @@ export default async function CassaPage({
   searchParams: Promise<{
     fatto?: string;
     modificata?: string;
-    pagato?: string;
-    annullato?: string;
     errore?: string;
-    stripe?: string;
     tipo?: string;
     genitore?: string;
   }>;
 }) {
   const { classCode } = await params;
-  const { fatto, modificata, pagato, annullato, errore, stripe, tipo, genitore } =
-    await searchParams;
+  const { fatto, modificata, errore, tipo, genitore } = await searchParams;
   const ctx = await requireActiveMembership(classCode);
 
   const [items, members] = await Promise.all([
     listCashMovementsWithShares(ctx.klass.id),
     listActiveMembers(ctx.klass.id),
   ]);
-
-  // Stato pagamenti con carta: senza chiave Stripe la sezione sparisce.
-  const stripeOn = stripeEnabled();
-  let stripeReady = false;
-  if (stripeOn && ctx.klass.stripe_account_id) {
-    stripeReady = await isAccountReady(ctx.klass.stripe_account_id).catch(() => false);
-  }
 
   const memberOptions: MemberOption[] = members.map((m) => ({
     userId: m.membership.user_id,
@@ -119,21 +105,6 @@ export default async function CassaPage({
       <div aria-live="polite" className="space-y-3">
         {fatto === "1" && <Banner tone="success">{it.cassa.registrato}</Banner>}
         {modificata === "1" && <Banner tone="success">{it.cassa.spesaAggiornata}</Banner>}
-        {pagato === "1" && <Banner tone="success">{it.cassa.pagamentoRiuscito}</Banner>}
-        {annullato === "1" && (
-          <Banner tone="warning">{it.cassa.pagamentoAnnullato}</Banner>
-        )}
-        {errore === "1" && <Banner tone="danger">{it.cassa.pagamentoErrore}</Banner>}
-        {stripe === "ok" &&
-          (stripeReady ? (
-            <Banner tone="success">{it.cassa.stripeCollegato}</Banner>
-          ) : (
-            <Banner tone="warning">{it.cassa.stripeNonPronto}</Banner>
-          ))}
-        {stripe === "riprova" && (
-          <Banner tone="warning">{it.cassa.stripeNonPronto}</Banner>
-        )}
-        {stripe === "errore" && <Banner tone="danger">{it.cassa.stripeErrore}</Banner>}
       </div>
 
       {/* Quota personale + saldo cassa */}
@@ -161,39 +132,6 @@ export default async function CassaPage({
           <p className="text-[32px] font-bold">{formatEuroCents(saldoCassa)}</p>
         </Card>
       </div>
-
-      {/* Genitore: versa con la carta (solo se il conto è pronto) */}
-      {!ctx.isRepresentative && stripeReady && (
-        <Card>
-          <h2 className="text-[19px] font-bold">{it.cassa.versaOnlineTitolo}</h2>
-          <p className="mb-4 mt-1 text-[15px] text-ink-soft">
-            {it.cassa.versaOnlineSpiega}
-          </p>
-          <VersaOnlineForm classCode={classCode} />
-        </Card>
-      )}
-
-      {/* Rappresentante: collegamento Stripe */}
-      {ctx.isRepresentative && stripeOn && (
-        <Card>
-          <h2 className="text-[19px] font-bold">{it.cassa.stripeTitolo}</h2>
-          {ctx.klass.stripe_account_id && stripeReady ? (
-            <p className="mt-1 text-[15px] text-ink-soft">{it.cassa.stripeCollegato}</p>
-          ) : (
-            <>
-              <p className="mb-4 mt-1 text-[15px] text-ink-soft">
-                {ctx.klass.stripe_account_id
-                  ? it.cassa.stripeNonPronto
-                  : it.cassa.stripeCollegaSpiega}
-              </p>
-              <form action={collegaStripeAction}>
-                <input type="hidden" name="classCode" value={classCode} />
-                <SubmitButton variant="secondary">{it.cassa.stripeCollega}</SubmitButton>
-              </form>
-            </>
-          )}
-        </Card>
-      )}
 
       {/* Rappresentante: registra movimenti */}
       {ctx.isRepresentative && (
@@ -401,7 +339,6 @@ function MovementCard({
       <div>
         <p className="text-[15px] font-semibold uppercase tracking-wide text-ink-soft">
           {isDeposit ? it.cassa.versamento : it.cassa.spesa}
-          {movement.source === "stripe" ? ` · ${it.cassa.conCarta}` : ""}
         </p>
         <p className="text-[18px] font-semibold">{movement.title}</p>
         <p className="text-[15px] text-ink-soft">
@@ -428,7 +365,7 @@ function MovementCard({
           {isDeposit ? "+" : "−"}
           {formatEuroCents(movement.total_cents)}
         </p>
-        {isRepresentative && movement.source === "manual" && (
+        {isRepresentative && (
           <div className="flex gap-2">
             {!isDeposit && (
               <Link

@@ -155,10 +155,6 @@ export const cashExpenseSchema = z.object({
     .max(200),
 });
 
-export const onlineDepositSchema = z.object({
-  amount: euroCentsSchema,
-});
-
 export const rejectMembershipSchema = z.object({
   reason: z
     .string()

@@ -77,7 +77,7 @@ export async function GET(
           csvField(nomi.get(share.user_id) ?? "—"),
           centsToEuroText(segno * share.amount_cents),
           centsToEuroText(segno * movement.total_cents),
-          movement.source === "stripe" ? it.cassa.csvCarta : it.cassa.csvContanti,
+          it.cassa.csvContanti,
         ].join(";")
       );
     }
