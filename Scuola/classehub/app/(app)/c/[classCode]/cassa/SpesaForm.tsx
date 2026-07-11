@@ -10,7 +10,7 @@ import { initialFormState } from "@/lib/form-state";
 import { centsToEuroText, formatEuroCents, parseEuroToCents } from "@/lib/euro";
 import { it } from "@/lib/i18n/it";
 import { modificaSpesaAction, registraSpesaAction } from "./actions";
-import type { MemberOption } from "./VersamentoForm";
+import type { MemberOption } from "./MovementCard";
 
 /** Spesa esistente da modificare; assente = si registra una nuova. */
 export interface SpesaDaModificare {

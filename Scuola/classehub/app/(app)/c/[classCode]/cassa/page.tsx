@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Download } from "lucide-react";
 import { Banner } from "@/components/shared/Banner";
-import { Button, buttonClasses } from "@/components/ui/Button";
+import { buttonClasses } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { requireActiveMembership } from "@/lib/auth/require-membership";
 import {
@@ -11,6 +11,7 @@ import {
   listMyDeclarations,
   listPendingDeclarations,
 } from "@/lib/db/queries";
+import { dividiPerSaldo } from "@/lib/cassa/debitori";
 import {
   saldiPerMembroCents,
   saldoCassaCents,
@@ -19,14 +20,9 @@ import {
 } from "@/lib/cassa/saldi";
 import { formatEuroCents } from "@/lib/euro";
 import { formatShortDateIt } from "@/lib/format-date";
-import { formatCassaReminderForWhatsapp } from "@/lib/whatsapp/format-message";
-import { getBaseUrl } from "@/lib/base-url";
 import { it } from "@/lib/i18n/it";
 import { cn } from "@/lib/cn";
-import { MovementCard, METODO_LABEL } from "./MovementCard";
-import { VersamentoForm, type MemberOption } from "./VersamentoForm";
-import { SpesaForm } from "./SpesaForm";
-import { PromemoriaWhatsapp } from "./PromemoriaWhatsapp";
+import { MovementCard, METODO_LABEL, type MemberOption } from "./MovementCard";
 import { ComePagareBox } from "./ComePagareBox";
 import { DichiaraVersamentoForm } from "./DichiaraVersamentoForm";
 import { DaConfermareList } from "./DaConfermareList";
@@ -46,11 +42,10 @@ export default async function CassaPage({
     rifiutata?: string;
     errore?: string;
     tipo?: string;
-    genitore?: string;
   }>;
 }) {
   const { classCode } = await params;
-  const { fatto, modificata, dichiarata, confermata, rifiutata, errore, tipo, genitore } =
+  const { fatto, modificata, dichiarata, confermata, rifiutata, errore, tipo } =
     await searchParams;
   const ctx = await requireActiveMembership(classCode);
 
@@ -71,6 +66,10 @@ export default async function CassaPage({
   }));
   const nomi = new Map(memberOptions.map((m) => [m.userId, m.name]));
 
+  const { debitori, aPosto, totaleDovutoCents } = ctx.isRepresentative
+    ? dividiPerSaldo(memberOptions, saldiPerMembroCents(items))
+    : { debitori: [], aPosto: [], totaleDovutoCents: 0 };
+
   // ADR-017: il genitore non vede tutti i movimenti, quindi il totale
   // arriva dall'aggregato SQL; per il rappresentante resta il calcolo
   // dai movimenti (che per lui sono tutti, quindi sempre un numero).
@@ -83,25 +82,17 @@ export default async function CassaPage({
   const miaQuota = saldoPersonaleCents(items, ctx.user.id);
   const contestoSaldo = testoSaldoPersonale(miaQuota);
 
-  // Filtri: per tipo (tutti) e per genitore (solo rappresentante).
+  // Filtri: per tipo (solo per la lista del genitore, che resta com'era).
   const kindFiltro =
     tipo === "versamenti" ? "deposit" : tipo === "spese" ? "expense" : null;
-  const genitoreFiltro =
-    ctx.isRepresentative && genitore && nomi.has(genitore) ? genitore : null;
   let visibili = items;
   if (kindFiltro) visibili = visibili.filter((i) => i.movement.kind === kindFiltro);
-  if (genitoreFiltro) {
-    visibili = visibili.filter((i) =>
-      i.shares.some((s) => s.user_id === genitoreFiltro)
-    );
-  }
 
-  // I filtri attivi viaggiano nei link (chips ed export).
+  // Il filtro attivo viaggia nei link (chips ed export).
   function withFilters(overrides: { tipo?: string | null }): string {
     const q = new URLSearchParams();
     const t = overrides.tipo === undefined ? tipo : overrides.tipo;
     if (t === "versamenti" || t === "spese") q.set("tipo", t);
-    if (genitoreFiltro) q.set("genitore", genitoreFiltro);
     const s = q.toString();
     return s ? `?${s}` : "";
   }
@@ -112,20 +103,6 @@ export default async function CassaPage({
     { key: "spese", label: it.cassa.filtroSpese },
   ];
   const filtroAttivo = kindFiltro ? tipo : "tutti";
-
-  const promemoriaWhatsapp = ctx.isRepresentative
-    ? formatCassaReminderForWhatsapp({
-        classCode: ctx.klass.class_code,
-        className: ctx.klass.name,
-        baseUrl: await getBaseUrl(),
-        coords: {
-          iban: ctx.klass.payment_iban,
-          ibanHolder: ctx.klass.payment_iban_holder,
-          paypal: ctx.klass.payment_paypal,
-          satispay: ctx.klass.payment_satispay,
-        },
-      })
-    : null;
 
   const haCoordinate = Boolean(
     ctx.klass.payment_iban || ctx.klass.payment_paypal || ctx.klass.payment_satispay
@@ -165,30 +142,20 @@ export default async function CassaPage({
       )}
 
       {ctx.isRepresentative ? (
-        <div className="grid gap-3 sm:grid-cols-2">
-          <Card>
-            <p className="text-[16px] font-semibold text-ink-soft">{it.cassa.tuaQuota}</p>
-            <p
-              className={cn(
-                "text-[32px] font-bold",
-                miaQuota < 0 ? "text-danger" : "text-ink"
-              )}
-            >
-              {formatEuroCents(Math.abs(miaQuota))}
-            </p>
+        <Card className="text-center">
+          <p className="text-[16px] font-semibold text-ink-soft">{it.cassa.saldoCassa}</p>
+          <p className="text-[44px] font-bold leading-tight">
+            {formatEuroCents(totaleClasseRep)}
+          </p>
+          {debitori.length > 0 && (
             <p className="text-[15px] text-ink-soft">
-              {miaQuota > 0
-                ? it.cassa.quotaPositiva
-                : miaQuota < 0
-                  ? it.cassa.quotaNegativa
-                  : it.cassa.quotaZero}
+              {(debitori.length === 1
+                ? it.cassa.deveVersareUno
+                : it.cassa.devonoVersare.replace("{n}", String(debitori.length))
+              ).replace("{importo}", formatEuroCents(totaleDovutoCents))}
             </p>
-          </Card>
-          <Card>
-            <p className="text-[16px] font-semibold text-ink-soft">{it.cassa.saldoCassa}</p>
-            <p className="text-[32px] font-bold">{formatEuroCents(totaleClasseRep)}</p>
-          </Card>
-        </div>
+          )}
+        </Card>
       ) : (
         <Card className="text-center">
           <p className="text-[16px] font-semibold text-ink-soft">
@@ -269,78 +236,139 @@ export default async function CassaPage({
         </section>
       )}
 
-      {/* Rappresentante: registra movimenti */}
+      {/* Rappresentante: due azioni grandi */}
       {ctx.isRepresentative && (
-        <section className="space-y-4">
-          <h2 className="text-[22px] font-bold">{it.cassa.registraTitolo}</h2>
-          <Card>
-            <h3 className="text-[19px] font-bold">{it.cassa.registraVersamento}</h3>
-            <p className="mb-4 mt-1 text-[15px] text-ink-soft">
-              {it.cassa.registraVersamentoSpiega}
-            </p>
-            <VersamentoForm classCode={classCode} members={memberOptions} />
-          </Card>
-          <Card>
-            <h3 className="text-[19px] font-bold">{it.cassa.registraSpesa}</h3>
-            <p className="mb-4 mt-1 text-[15px] text-ink-soft">
-              {it.cassa.registraSpesaSpiega}
-            </p>
-            <SpesaForm classCode={classCode} members={memberOptions} />
-          </Card>
+        <div className="grid grid-cols-2 gap-3">
+          <Link
+            href={`/c/${classCode}/cassa/versamento`}
+            className={buttonClasses("primary", "lg", "min-h-16")}
+          >
+            {it.cassa.bottoneRicevuto}
+          </Link>
+          <Link
+            href={`/c/${classCode}/cassa/spesa`}
+            className={buttonClasses("secondary", "lg", "min-h-16")}
+          >
+            {it.cassa.bottoneSpeso}
+          </Link>
+        </div>
+      )}
+
+      {/* Rappresentante: chi deve versare */}
+      {ctx.isRepresentative && (
+        <section>
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <h2 className="text-[22px] font-bold">{it.cassa.chiDeveVersareTitolo}</h2>
+            <Link
+              href={`/c/${classCode}/cassa/promemoria`}
+              className={buttonClasses("secondary")}
+            >
+              {it.cassa.ricordaATutti}
+            </Link>
+          </div>
+          {debitori.length === 0 ? (
+            <Card>
+              <p className="text-ink-soft">{it.cassa.tuttiAPosto}</p>
+            </Card>
+          ) : (
+            <ul className="space-y-2">
+              {debitori.map((d) => (
+                <li key={d.userId}>
+                  <Card className="flex items-center justify-between gap-3 py-3">
+                    <div>
+                      <p className="text-[18px] font-semibold">{d.name}</p>
+                      <p className="text-[15px] font-semibold text-danger">
+                        {it.cassa.deveImporto.replace(
+                          "{importo}",
+                          formatEuroCents(-d.cents)
+                        )}
+                      </p>
+                    </div>
+                    <Link
+                      href={`/c/${classCode}/cassa/versamento?genitore=${d.userId}`}
+                      className={buttonClasses("secondary")}
+                    >
+                      {it.cassa.haPagato}
+                    </Link>
+                  </Card>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
       )}
 
-      {/* Rappresentante: promemoria versamenti per il gruppo WhatsApp */}
-      {promemoriaWhatsapp && (
-        <Card className="space-y-3">
-          <h2 className="text-[19px] font-bold">{it.cassa.promemoriaTitolo}</h2>
-          <p className="text-[15px] text-ink-soft">{it.cassa.promemoriaSpiega}</p>
-          <PromemoriaWhatsapp defaultText={promemoriaWhatsapp} />
-        </Card>
+      {/* Rappresentante: accordion chi è a posto */}
+      {ctx.isRepresentative && aPosto.length > 0 && (
+        <details className="rounded-2xl border border-line bg-paper px-5 py-4">
+          <summary className="min-h-12 cursor-pointer text-[17px] font-semibold">
+            {aPosto.length === 1
+              ? it.cassa.genitoreAPostoUno
+              : it.cassa.genitoriAPosto.replace("{n}", String(aPosto.length))}
+          </summary>
+          <ul className="mt-3 divide-y divide-line">
+            {aPosto.map((m) => (
+              <li
+                key={m.userId}
+                className="flex items-center justify-between py-2 text-[17px]"
+              >
+                <span>{m.name}</span>
+                <span className="text-ink-soft">{formatEuroCents(m.cents)}</span>
+              </li>
+            ))}
+          </ul>
+        </details>
       )}
 
-      {/* Rappresentante: quote dei genitori */}
-      {ctx.isRepresentative && items.length > 0 && (
+      {/* Rappresentante: le ultime entrate e uscite */}
+      {ctx.isRepresentative && (
         <section>
-          <h2 className="text-[22px] font-bold">{it.cassa.saldiTitolo}</h2>
-          <p className="mb-3 mt-1 text-[15px] text-ink-soft">{it.cassa.saldiSpiega}</p>
-          <Card>
-            <ul className="divide-y divide-line">
-              {[...saldiPerMembroCents(items).entries()]
-                .map(([userId, cents]) => ({
-                  userId,
-                  cents,
-                  name: nomi.get(userId) ?? "—",
-                }))
-                .sort((a, b) => a.name.localeCompare(b.name, "it"))
-                .map(({ userId, cents, name }) => (
-                  <li
-                    key={userId}
-                    className="flex items-center justify-between py-2 text-[17px]"
-                  >
-                    <span>{name}</span>
-                    <span
-                      className={cn(
-                        "font-semibold",
-                        cents < 0 ? "text-danger" : "text-ink"
-                      )}
-                    >
-                      {formatEuroCents(cents)}
-                    </span>
+          <h2 className="mb-3 text-[22px] font-bold">{it.cassa.ultimeEntrateUscite}</h2>
+          {items.length === 0 ? (
+            <Card>
+              <p className="text-ink-soft">{it.cassa.nessunMovimento}</p>
+            </Card>
+          ) : (
+            <>
+              <ul className="space-y-3">
+                {items.slice(0, 5).map((item) => (
+                  <li key={item.movement.id}>
+                    <MovementCard
+                      item={item}
+                      classCode={classCode}
+                      userId={ctx.user.id}
+                      isRepresentative={true}
+                      nomi={nomi}
+                      showActions={false}
+                    />
                   </li>
                 ))}
-            </ul>
-          </Card>
+              </ul>
+              <div className="mt-3 flex gap-2">
+                <Link
+                  href={`/c/${classCode}/cassa/movimenti`}
+                  className={buttonClasses("secondary")}
+                >
+                  {it.cassa.vediTutti}
+                </Link>
+                <a
+                  href={`/c/${classCode}/cassa/esporta`}
+                  download
+                  className={buttonClasses("secondary")}
+                >
+                  <Download className="size-5" aria-hidden /> {it.cassa.excel}
+                </a>
+              </div>
+            </>
+          )}
         </section>
       )}
 
-      {/* Scarica i movimenti (CSV che Excel e Google Fogli aprono) */}
-      {items.length > 0 && (
+      {/* Genitore: scarica i movimenti (CSV che Excel e Google Fogli aprono) */}
+      {!ctx.isRepresentative && items.length > 0 && (
         <Card className="flex flex-wrap items-center justify-between gap-3">
           <p className="max-w-xs text-[15px] text-ink-soft">
-            {ctx.isRepresentative
-              ? it.cassa.esportaSpiegaRep
-              : it.cassa.esportaSpiegaGenitore}
+            {it.cassa.esportaSpiegaGenitore}
           </p>
           <a
             href={`/c/${classCode}/cassa/esporta${withFilters({})}`}
@@ -352,94 +380,60 @@ export default async function CassaPage({
         </Card>
       )}
 
-      {/* Movimenti */}
-      <section>
-        <h2 className="mb-3 text-[22px] font-bold">{it.cassa.movimentiCassa}</h2>
+      {/* Genitore: i tuoi movimenti */}
+      {!ctx.isRepresentative && (
+        <section>
+          <h2 className="mb-3 text-[22px] font-bold">{it.cassa.movimentiCassa}</h2>
 
-        {items.length > 0 && (
-          <div className="mb-4 space-y-3">
-            <div className="flex flex-wrap gap-2">
-              {FILTRI.map((f) => (
-                <Link
-                  key={f.key}
-                  href={`/c/${classCode}/cassa${withFilters({
-                    tipo: f.key === "tutti" ? null : f.key,
-                  })}`}
-                  className={cn(
-                    "min-h-12 rounded-full border-2 px-4 py-2.5 text-[16px] font-semibold",
-                    f.key === filtroAttivo
-                      ? "border-accent bg-accent text-white"
-                      : "border-line bg-paper text-ink-soft hover:border-accent"
-                  )}
-                >
-                  {f.label}
-                </Link>
-              ))}
+          {items.length > 0 && (
+            <div className="mb-4 space-y-3">
+              <div className="flex flex-wrap gap-2">
+                {FILTRI.map((f) => (
+                  <Link
+                    key={f.key}
+                    href={`/c/${classCode}/cassa${withFilters({
+                      tipo: f.key === "tutti" ? null : f.key,
+                    })}`}
+                    className={cn(
+                      "min-h-12 rounded-full border-2 px-4 py-2.5 text-[16px] font-semibold",
+                      f.key === filtroAttivo
+                        ? "border-accent bg-accent text-white"
+                        : "border-line bg-paper text-ink-soft hover:border-accent"
+                    )}
+                  >
+                    {f.label}
+                  </Link>
+                ))}
+              </div>
             </div>
+          )}
 
-            {ctx.isRepresentative && (
-              <form
-                action={`/c/${classCode}/cassa`}
-                method="get"
-                className="flex flex-wrap items-end gap-2"
-              >
-                {kindFiltro && <input type="hidden" name="tipo" value={tipo} />}
-                <div className="min-w-52">
-                  <label
-                    htmlFor="filtro-genitore"
-                    className="mb-1 block text-[15px] font-semibold text-ink-soft"
-                  >
-                    {it.cassa.filtroGenitoreLabel}
-                  </label>
-                  <select
-                    id="filtro-genitore"
-                    name="genitore"
-                    defaultValue={genitoreFiltro ?? ""}
-                    className="min-h-12 w-full rounded-xl border-2 border-line bg-paper px-4 text-[17px] focus:border-accent focus:outline-none"
-                  >
-                    <option value="">{it.cassa.filtroGenitoreTutti}</option>
-                    {memberOptions.map((m) => (
-                      <option key={m.userId} value={m.userId}>
-                        {m.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <Button type="submit" variant="secondary">
-                  {it.cassa.filtra}
-                </Button>
-              </form>
-            )}
-          </div>
-        )}
-
-        {items.length === 0 ? (
-          <Card>
-            <p className="text-ink-soft">
-              {ctx.isRepresentative ? it.cassa.nessunMovimento : it.cassa.nessunMovimentoTuo}
-            </p>
-          </Card>
-        ) : visibili.length === 0 ? (
-          <Card>
-            <p className="text-ink-soft">{it.cassa.nessunRisultatoFiltro}</p>
-          </Card>
-        ) : (
-          <ul className="space-y-3">
-            {visibili.map((item) => (
-              <li key={item.movement.id}>
-                <MovementCard
-                  item={item}
-                  classCode={classCode}
-                  userId={ctx.user.id}
-                  isRepresentative={ctx.isRepresentative}
-                  nomi={nomi}
-                  showActions={true}
-                />
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+          {items.length === 0 ? (
+            <Card>
+              <p className="text-ink-soft">{it.cassa.nessunMovimentoTuo}</p>
+            </Card>
+          ) : visibili.length === 0 ? (
+            <Card>
+              <p className="text-ink-soft">{it.cassa.nessunRisultatoFiltro}</p>
+            </Card>
+          ) : (
+            <ul className="space-y-3">
+              {visibili.map((item) => (
+                <li key={item.movement.id}>
+                  <MovementCard
+                    item={item}
+                    classCode={classCode}
+                    userId={ctx.user.id}
+                    isRepresentative={false}
+                    nomi={nomi}
+                    showActions={true}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      )}
 
       {!ctx.isRepresentative && totaleClasseGenitore !== null && (
         <p className="text-center text-[14px] text-ink-soft">

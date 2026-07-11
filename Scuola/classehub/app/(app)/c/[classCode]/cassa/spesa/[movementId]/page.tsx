@@ -8,7 +8,7 @@ import {
 } from "@/lib/db/queries";
 import { it } from "@/lib/i18n/it";
 import { SpesaForm } from "../../SpesaForm";
-import type { MemberOption } from "../../VersamentoForm";
+import type { MemberOption } from "../../MovementCard";
 
 export const metadata = { title: `${it.cassa.modificaSpesaTitolo} — ${it.app.name}` };
 

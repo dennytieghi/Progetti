@@ -11,6 +11,12 @@ import { cn } from "@/lib/cn";
 import type { PaymentMethod } from "@/lib/db/types";
 import { eliminaMovimentoAction } from "./actions";
 
+/** Riusata dai form e dalle pagine che elencano i genitori della classe. */
+export interface MemberOption {
+  userId: string;
+  name: string;
+}
+
 /** Riusata anche dal Task 8-9 per mostrare il metodo nei movimenti. */
 export const METODO_LABEL: Record<PaymentMethod, string> = {
   contanti: it.cassa.metodoContanti,

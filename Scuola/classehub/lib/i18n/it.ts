@@ -412,6 +412,20 @@ export const it = {
     spesaNonTrovata:
       "Questa spesa non esiste più o non si può modificare. Torna alla cassa e controlla.",
 
+    // Nuova home rappresentante
+    devonoVersare: "{n} genitori devono ancora versare {importo}.",
+    deveVersareUno: "1 genitore deve ancora versare {importo}.",
+    bottoneRicevuto: "Ho ricevuto soldi",
+    bottoneSpeso: "Ho speso soldi",
+    chiDeveVersareTitolo: "Chi deve versare",
+    ricordaATutti: "Ricorda a tutti",
+    tuttiAPosto: "Sono tutti a posto.",
+    genitoriAPosto: "{n} genitori sono a posto",
+    genitoreAPostoUno: "1 genitore è a posto",
+    ultimeEntrateUscite: "Le ultime entrate e uscite",
+    vediTutti: "Vedi tutti",
+    excel: "Excel",
+
     // Filtri
     filtroTutti: "Tutti",
     filtroVersamenti: "Versamenti",

@@ -6,8 +6,7 @@ import { requireRepresentative } from "@/lib/auth/require-membership";
 import { listActiveMembers, listCashMovementsWithShares } from "@/lib/db/queries";
 import { it } from "@/lib/i18n/it";
 import { cn } from "@/lib/cn";
-import { MovementCard } from "../MovementCard";
-import type { MemberOption } from "../VersamentoForm";
+import { MovementCard, type MemberOption } from "../MovementCard";
 
 export const metadata = { title: `${it.cassa.entrateUsciteTitolo} — ${it.app.name}` };
 
