@@ -166,6 +166,10 @@ Usa due browser (normale + incognito) per i due ruoli.
       due versamenti di fila.
 - [ ] Dalla schermata di conferma, "Annulla questo versamento" → "Sì,
       annulla" → il saldo torna esattamente com'era prima del versamento.
+- [ ] Versamento in anticipo: in `/cassa/versamento` scegli un genitore
+      "a posto" → la micro-copy sotto l'importo dice "Non deve niente: sta
+      versando in anticipo"; il link "ha pagato in un altro modo?" apre il
+      selettore dei metodi di pagamento.
 - [ ] "Ho speso soldi" → form spesa su pagina dedicata → dopo il salvataggio,
       banner di conferma sulla home della cassa.
 - [ ] "Vedi tutti" → `/cassa/movimenti` con lo storico completo: i filtri
