@@ -59,6 +59,7 @@ export async function registraVersamentoAction(
     parentId: formData.get("parentId"),
     amount: formData.get("amount"),
     title: formData.get("title"),
+    method: formData.get("method"),
   });
   if (!parsed.success) {
     return { error: parsed.error.issues[0]?.message ?? it.common.erroreGenerico };
@@ -74,7 +75,7 @@ export async function registraVersamentoAction(
     parentId: parsed.data.parentId,
     amountCents: parsed.data.amount,
     title: parsed.data.title,
-    method: "contanti",
+    method: parsed.data.method,
   });
   finish(classCode);
 }

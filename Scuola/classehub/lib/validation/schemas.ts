@@ -137,6 +137,11 @@ const euroCentsSchema = z
   })
   .refine((cents) => cents <= 500_000, { message: it.cassa.erroreImporto });
 
+export const paymentMethodSchema = z.enum(
+  ["contanti", "bonifico", "satispay", "paypal", "altro"],
+  { message: it.cassa.erroreMetodo }
+);
+
 export const cashDepositSchema = z.object({
   parentId: z.string().uuid({ message: it.cassa.erroreGenitore }),
   amount: euroCentsSchema,
@@ -145,6 +150,7 @@ export const cashDepositSchema = z.object({
     .trim()
     .max(120)
     .transform((s) => (s.length > 0 ? s : it.cassa.causaleVersamentoDefault)),
+  method: paymentMethodSchema,
 });
 
 export const cashExpenseSchema = z.object({
@@ -186,11 +192,6 @@ export const paymentCoordsSchema = z.object({
   paypal: coordSchema(normalizzaLinkPaypal, it.impostazioni.errorePaypal),
   satispay: coordSchema(normalizzaTelefono, it.impostazioni.erroreTelefonoSatispay),
 });
-
-export const paymentMethodSchema = z.enum(
-  ["contanti", "bonifico", "satispay", "paypal", "altro"],
-  { message: it.cassa.erroreMetodo }
-);
 
 export const cashDeclarationSchema = z.object({
   amount: euroCentsSchema,

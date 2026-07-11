@@ -452,6 +452,7 @@ function MovementCard({
       <div>
         <p className="text-[15px] font-semibold uppercase tracking-wide text-ink-soft">
           {isDeposit ? it.cassa.versamento : it.cassa.spesa}
+          {isDeposit ? ` · ${METODO_LABEL[movement.method]}` : ""}
         </p>
         <p className="text-[18px] font-semibold">{movement.title}</p>
         <p className="text-[15px] text-ink-soft">

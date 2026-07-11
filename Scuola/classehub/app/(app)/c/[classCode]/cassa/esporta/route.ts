@@ -2,6 +2,15 @@ import { requireActiveMembership } from "@/lib/auth/require-membership";
 import { listActiveMembers, listCashMovementsWithShares } from "@/lib/db/queries";
 import { centsToEuroText } from "@/lib/euro";
 import { it } from "@/lib/i18n/it";
+import type { PaymentMethod } from "@/lib/db/types";
+
+const METODO_CSV: Record<PaymentMethod, string> = {
+  contanti: it.cassa.metodoContanti,
+  bonifico: it.cassa.metodoBonifico,
+  satispay: it.cassa.metodoSatispay,
+  paypal: it.cassa.metodoPaypal,
+  altro: it.cassa.metodoAltro,
+};
 
 /**
  * Scarica i movimenti della cassa come CSV (si apre con Excel e
@@ -62,7 +71,7 @@ export async function GET(
       it.cassa.csvGenitore,
       it.cassa.csvQuota,
       it.cassa.csvTotale,
-      it.cassa.csvOrigine,
+      it.cassa.csvMetodo,
     ].join(";"),
   ];
 
@@ -77,7 +86,7 @@ export async function GET(
           csvField(nomi.get(share.user_id) ?? "—"),
           centsToEuroText(segno * share.amount_cents),
           centsToEuroText(segno * movement.total_cents),
-          it.cassa.csvContanti,
+          METODO_CSV[movement.method],
         ].join(";")
       );
     }

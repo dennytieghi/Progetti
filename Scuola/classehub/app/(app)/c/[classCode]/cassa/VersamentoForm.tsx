@@ -8,6 +8,7 @@ import { SubmitButton } from "@/components/ui/SubmitButton";
 import { initialFormState } from "@/lib/form-state";
 import { it } from "@/lib/i18n/it";
 import { registraVersamentoAction } from "./actions";
+import { METODI } from "./DichiaraVersamentoForm";
 
 export interface MemberOption {
   userId: string;
@@ -62,6 +63,23 @@ export function VersamentoForm({
           placeholder={it.cassa.importoEsempio}
           required
         />
+      </div>
+
+      <div>
+        <Label htmlFor="method">{it.cassa.metodoLabelRep}</Label>
+        <select
+          id="method"
+          name="method"
+          required
+          defaultValue="contanti"
+          className="min-h-12 w-full rounded-xl border-2 border-line bg-paper px-4 text-[18px] focus:border-accent focus:outline-none"
+        >
+          {METODI.map((m) => (
+            <option key={m.value} value={m.value}>
+              {m.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>

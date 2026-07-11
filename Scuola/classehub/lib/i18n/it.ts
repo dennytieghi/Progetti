@@ -370,7 +370,6 @@ export const it = {
       "La cassa è ancora vuota. I movimenti compariranno qui.",
     versamento: "Versamento",
     spesa: "Spesa",
-    inContanti: "in contanti",
     partecipante: "partecipante",
     partecipanti: "partecipanti",
     aTesta: "a testa",
@@ -387,6 +386,7 @@ export const it = {
     genitoreScegli: "Scegli il genitore…",
     importoLabel: "Importo in euro",
     importoEsempio: "Es. 12,50",
+    metodoLabelRep: "Come ha pagato?",
     causaleVersamentoLabel: "Per cosa? (facoltativo)",
     causaleVersamentoEsempio: "Es. Quota gita a Verona",
     causaleVersamentoDefault: "Versamento in cassa",
@@ -452,8 +452,7 @@ export const it = {
     csvGenitore: "Genitore",
     csvQuota: "Quota in euro",
     csvTotale: "Totale movimento in euro",
-    csvOrigine: "Origine",
-    csvContanti: "Contanti",
+    csvMetodo: "Metodo",
 
     eliminaTitolo: "Vuoi eliminare questo movimento?",
     eliminaTesto:
