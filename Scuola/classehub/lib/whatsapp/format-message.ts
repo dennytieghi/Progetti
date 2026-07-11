@@ -51,12 +51,28 @@ export function formatPostForWhatsapp(input: {
 export function formatCassaReminderForWhatsapp(input: {
   classCode: string;
   baseUrl: string;
+  coords: {
+    iban: string | null;
+    ibanHolder: string | null;
+    paypal: string | null;
+    satispay: string | null;
+  } | null;
 }): string {
   const url = `${input.baseUrl}/c/${input.classCode}/cassa`;
-  return [
-    `💰 ${it.cassa.waTitolo} — ${it.cassa.waServono}`,
-    it.cassa.waTesto,
-    it.cassa.waLink,
-    `👉 ${url}`,
-  ].join("\n");
+  const lines = [`💰 ${it.cassa.waTitolo} — ${it.cassa.waServono}`, it.cassa.waTesto];
+
+  const c = input.coords;
+  if (c && (c.iban || c.paypal || c.satispay)) {
+    lines.push(it.cassa.waPagaCosi);
+    if (c.iban) {
+      lines.push(
+        `🏦 IBAN: ${c.iban}${c.ibanHolder ? ` (${it.cassa.comePagareIntestato} ${c.ibanHolder})` : ""}`
+      );
+    }
+    if (c.paypal) lines.push(`💳 PayPal: ${c.paypal}`);
+    if (c.satispay) lines.push(`📱 Satispay: ${c.satispay}`);
+  }
+
+  lines.push(it.cassa.waLink, `👉 ${url}`);
+  return lines.join("\n");
 }

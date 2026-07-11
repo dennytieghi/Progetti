@@ -418,6 +418,17 @@ export const it = {
     nessunRisultatoFiltro:
       "Nessun movimento con questi filtri. Prova a togliere un filtro.",
 
+    // Come pagare (genitore) / invito a inserire coordinate (rappresentante)
+    comePagareTitolo: "Come pagare",
+    comePagareSpiega:
+      "Paga col metodo che preferisci, poi segnala il versamento qui sotto: comparirà in cassa quando il rappresentante lo conferma.",
+    comePagareIban: "IBAN",
+    comePagareIntestato: "intestato a",
+    comePagareApriPaypal: "Apri PayPal",
+    comePagareMancaRep:
+      "Non hai ancora inserito le tue coordinate di pagamento: i genitori non sanno dove mandarti i soldi.",
+    comePagareImposta: "Inserisci le coordinate",
+
     // Promemoria WhatsApp
     promemoriaTitolo: "Chiedi i versamenti su WhatsApp",
     promemoriaSpiega:
@@ -425,7 +436,8 @@ export const it = {
     waTitolo: "CASSA DI CLASSE",
     waServono: "Servono nuovi versamenti",
     waTesto:
-      "Apri il link, controlla la tua quota e, se puoi, fai un versamento (con carta oppure in contanti al rappresentante).",
+      "Apri il link, controlla la tua quota e, se puoi, fai un versamento col metodo che preferisci.",
+    waPagaCosi: "Puoi pagare così:",
     waLink: "Controlla la tua quota qui:",
 
     // Export

@@ -22,6 +22,7 @@ import { eliminaMovimentoAction } from "./actions";
 import { VersamentoForm, type MemberOption } from "./VersamentoForm";
 import { SpesaForm } from "./SpesaForm";
 import { PromemoriaWhatsapp } from "./PromemoriaWhatsapp";
+import { ComePagareBox } from "./ComePagareBox";
 
 export const metadata = { title: `${it.cassa.titolo} — ${it.app.name}` };
 
@@ -90,8 +91,18 @@ export default async function CassaPage({
     ? formatCassaReminderForWhatsapp({
         classCode: ctx.klass.class_code,
         baseUrl: await getBaseUrl(),
+        coords: {
+          iban: ctx.klass.payment_iban,
+          ibanHolder: ctx.klass.payment_iban_holder,
+          paypal: ctx.klass.payment_paypal,
+          satispay: ctx.klass.payment_satispay,
+        },
       })
     : null;
+
+  const haCoordinate = Boolean(
+    ctx.klass.payment_iban || ctx.klass.payment_paypal || ctx.klass.payment_satispay
+  );
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
@@ -132,6 +143,19 @@ export default async function CassaPage({
           <p className="text-[32px] font-bold">{formatEuroCents(saldoCassa)}</p>
         </Card>
       </div>
+
+      {haCoordinate && !ctx.isRepresentative && <ComePagareBox klass={ctx.klass} />}
+      {ctx.isRepresentative && !haCoordinate && (
+        <Card className="space-y-3">
+          <p className="text-[15px] text-ink-soft">{it.cassa.comePagareMancaRep}</p>
+          <Link
+            href={`/c/${classCode}/impostazioni`}
+            className={buttonClasses("secondary")}
+          >
+            {it.cassa.comePagareImposta}
+          </Link>
+        </Card>
+      )}
 
       {/* Rappresentante: registra movimenti */}
       {ctx.isRepresentative && (
