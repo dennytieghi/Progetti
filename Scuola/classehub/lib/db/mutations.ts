@@ -7,6 +7,7 @@ import {
 } from "@/lib/codes/generate";
 import { supabaseAdmin, supabaseServer } from "./supabase";
 import type {
+  CashDeclarationRow,
   CashMovementRow,
   ClassRow,
   MembershipRow,
@@ -535,6 +536,73 @@ export async function updateCashExpense(input: {
 export async function deleteCashMovement(movementId: string): Promise<void> {
   const supabase = await supabaseServer();
   await supabase.from("cash_movements").delete().eq("id", movementId);
+}
+
+/** Il genitore segnala un versamento fatto fuori dall'app. */
+export async function insertCashDeclaration(input: {
+  classId: string;
+  userId: string;
+  amountCents: number;
+  method: PaymentMethod;
+  note: string | null;
+}): Promise<void> {
+  const supabase = await supabaseServer();
+  const { error } = await supabase.from("cash_declarations").insert({
+    class_id: input.classId,
+    user_id: input.userId,
+    amount_cents: input.amountCents,
+    method: input.method,
+    note: input.note,
+  });
+  if (error) throw new Error(`Segnalazione fallita: ${error.message}`);
+}
+
+/**
+ * Conferma del rappresentante: nasce il movimento vero e la
+ * dichiarazione viene marcata. Tre passi non atomici (stesso pattern
+ * di insertMovementWithShares): se l'ultimo fallisce, la dichiarazione
+ * resta pending e la conferma si può ripetere — il chiamante deve
+ * controllare status = 'pending' prima di agire.
+ */
+export async function confirmCashDeclaration(input: {
+  declarationId: string;
+  classId: string;
+  representativeId: string;
+  parentId: string;
+  amountCents: number;
+  method: PaymentMethod;
+  title: string;
+}): Promise<void> {
+  const movement = await insertMovementWithShares({
+    classId: input.classId,
+    createdBy: input.representativeId,
+    kind: "deposit",
+    title: input.title,
+    method: input.method,
+    shares: [{ userId: input.parentId, amountCents: input.amountCents }],
+  });
+
+  const supabase = await supabaseServer();
+  const { error } = await supabase
+    .from("cash_declarations")
+    .update({
+      status: "confirmed",
+      movement_id: movement.id,
+      decided_at: new Date().toISOString(),
+    })
+    .eq("id", input.declarationId)
+    .eq("status", "pending");
+  if (error) throw new Error(`Conferma fallita: ${error.message}`);
+}
+
+export async function rejectCashDeclaration(declarationId: string): Promise<void> {
+  const supabase = await supabaseServer();
+  const { error } = await supabase
+    .from("cash_declarations")
+    .update({ status: "rejected", decided_at: new Date().toISOString() })
+    .eq("id", declarationId)
+    .eq("status", "pending");
+  if (error) throw new Error(`Rifiuto fallito: ${error.message}`);
 }
 
 // ---------------------------------------------------------------- segreti one-time

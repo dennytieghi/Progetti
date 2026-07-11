@@ -1,6 +1,7 @@
 import "server-only";
 import { supabaseAdmin, supabaseServer } from "./supabase";
 import type {
+  CashDeclarationRow,
   CashMovementRow,
   CashShareRow,
   ClassRow,
@@ -385,6 +386,63 @@ export async function getCashMovementById(
     .eq("id", movementId)
     .maybeSingle();
   return (data as CashMovementRow | null) ?? null;
+}
+
+/** Dichiarazioni in attesa (il rappresentante le vede tutte via RLS). */
+export async function listPendingDeclarations(
+  classId: string
+): Promise<CashDeclarationRow[]> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("cash_declarations")
+    .select("*")
+    .eq("class_id", classId)
+    .eq("status", "pending")
+    .order("created_at", { ascending: true });
+  return (data as CashDeclarationRow[] | null) ?? [];
+}
+
+/** Le dichiarazioni del genitore: in attesa + rifiutate recenti. */
+export async function listMyDeclarations(
+  classId: string,
+  userId: string
+): Promise<CashDeclarationRow[]> {
+  const supabase = await supabaseServer();
+  const monthAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+  const { data } = await supabase
+    .from("cash_declarations")
+    .select("*")
+    .eq("class_id", classId)
+    .eq("user_id", userId)
+    .or(`status.eq.pending,and(status.eq.rejected,created_at.gte.${monthAgo})`)
+    .order("created_at", { ascending: false });
+  return (data as CashDeclarationRow[] | null) ?? [];
+}
+
+export async function countPendingDeclarationsByUser(
+  classId: string,
+  userId: string
+): Promise<number> {
+  const supabase = await supabaseServer();
+  const { count } = await supabase
+    .from("cash_declarations")
+    .select("id", { count: "exact", head: true })
+    .eq("class_id", classId)
+    .eq("user_id", userId)
+    .eq("status", "pending");
+  return count ?? 0;
+}
+
+export async function getCashDeclarationById(
+  id: string
+): Promise<CashDeclarationRow | null> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("cash_declarations")
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
+  return (data as CashDeclarationRow | null) ?? null;
 }
 
 /**
