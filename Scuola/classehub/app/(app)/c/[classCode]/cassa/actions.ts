@@ -69,7 +69,7 @@ export async function registraVersamentoAction(
     return { error: it.cassa.erroreGenitore };
   }
 
-  await recordCashDeposit({
+  const movement = await recordCashDeposit({
     classId: ctx.klass.id,
     representativeId: ctx.user.id,
     parentId: parsed.data.parentId,
@@ -77,7 +77,10 @@ export async function registraVersamentoAction(
     title: parsed.data.title,
     method: parsed.data.method,
   });
-  finish(classCode);
+  revalidatePath(`/c/${classCode}/cassa`);
+  redirect(
+    `/c/${classCode}/cassa/versamento/conferma?m=${encodeURIComponent(movement.id)}`
+  );
 }
 
 export async function registraSpesaAction(
