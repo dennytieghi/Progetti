@@ -194,7 +194,9 @@ export const paymentCoordsSchema = z.object({
 });
 
 export const cashDeclarationSchema = z.object({
-  amount: euroCentsSchema,
+  amount: euroCentsSchema.refine((cents) => cents <= 50_000, {
+    message: it.cassa.erroreImportoDichiarazione,
+  }),
   method: paymentMethodSchema,
   note: z
     .string()

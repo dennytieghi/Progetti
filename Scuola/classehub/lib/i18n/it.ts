@@ -483,6 +483,8 @@ export const it = {
       "Segnalazione inviata. Vedrai il versamento in cassa appena il rappresentante lo conferma.",
     erroreTroppeDichiarazioni:
       "Hai già 5 versamenti in attesa di conferma. Aspetta che il rappresentante li controlli prima di segnalarne altri.",
+    erroreImportoDichiarazione:
+      "L'importo deve essere tra 1 e 500 euro. Se hai versato di più, dividi la segnalazione o parlane col rappresentante.",
 
     tueDichiarazioni: "I tuoi versamenti segnalati",
     statoInAttesa: "In attesa di conferma",
@@ -490,6 +492,8 @@ export const it = {
 
     // Errori
     erroreGenitore: "Scegli il genitore che ha versato.",
+    erroreDichiaranteNonAttivo:
+      "Questo genitore non fa più parte della classe: non puoi confermare la sua segnalazione, puoi solo rifiutarla.",
     erroreImporto:
       "Scrivi un importo valido in euro, ad esempio 12,50. Massimo 5.000 euro.",
     erroreCausale: "Scrivi per cosa hai speso: aiuta i genitori a capire.",

@@ -233,7 +233,7 @@ export async function confermaDichiarazioneAction(
 
   // Il dichiarante dev'essere ancora un membro attivo.
   if (!(await isActiveMemberOfClass(declaration.user_id, ctx.klass.id))) {
-    return { error: it.cassa.erroreGenitore };
+    return { error: it.cassa.erroreDichiaranteNonAttivo };
   }
 
   const confirmed = await confirmCashDeclaration({
