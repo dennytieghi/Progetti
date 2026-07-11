@@ -105,3 +105,10 @@ ADR (Architecture Decision Records). Formato breve: contesto, decisione, alterna
 - libreria xlsx (exceljs/sheetjs): una dipendenza in più, superficie di bug in più, per un vantaggio estetico.
 - integrazione Google Sheets API: OAuth e permessi Google per un file che si può semplicemente importare.
 **Revisione se**: i rappresentanti chiedono formattazione (colori, totali pronti) → valuta exceljs in V2.
+
+## ADR-016 — Pagamenti fuori dall'app con conferma del rappresentante (supera ADR-014)
+**Contesto**: Stripe Connect richiedeva al rappresentante un onboarding KYC con documento d'identità e ~1,5% + 0,25 € di commissioni a transazione: sproporzionato per quote da 5-20 € e per l'utente tipo. I genitori usano già bonifico, Satispay e PayPal.
+**Decisione**: il rappresentante pubblica le SUE coordinate (IBAN, paypal.me, numero Satispay) sulla classe; il genitore paga fuori dall'app e lo segnala (`cash_declarations`); la cassa si aggiorna solo quando il rappresentante conferma (nasce il movimento con `method`). ClasseHub non tocca mai denaro.
+**Scartato**: Stripe (vedi sopra); registrazione diretta del genitore senza conferma (chiunque potrebbe gonfiare la cassa senza pagare).
+**Trade-off accettato**: la conferma è manuale — il rappresentante deve controllare il proprio conto. È lo stesso lavoro che fa oggi col gruppo WhatsApp, ma con una lista ordinata invece di messaggi sparsi.
+**Revisione se**: nel pilota i rappresentanti lamentano l'attesa delle conferme o le segnalazioni fantasma superano casi sporadici.
