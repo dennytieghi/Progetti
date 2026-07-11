@@ -384,6 +384,7 @@ export const it = {
     registraSpesa: "Segna una spesa",
     registraSpesaSpiega:
       "Hai speso soldi della cassa. Scegli chi partecipa: la quota viene tolta solo a loro.",
+    spesoTitolo: "Ho speso soldi",
     genitoreLabel: "Chi ha versato?",
     genitoreScegli: "Scegli il genitore…",
     importoLabel: "Importo in euro",
