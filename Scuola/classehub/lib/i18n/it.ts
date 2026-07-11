@@ -515,6 +515,12 @@ export const it = {
     dichiarazioneNonTrovata:
       "Questa segnalazione non esiste più o è già stata gestita. Ricarica la pagina.",
     segnalatoIl: "segnalato il",
+
+    // Saldo personale (riga di contesto nel dettaglio cassa)
+    quantoRestaTitolo: "Quanto ti resta",
+    quantoRestaPositivo: "Hai ancora {importo} in cassa.",
+    quantoRestaZero: "Hai usato tutto quello che avevi versato.",
+    quantoRestaNegativo: "Devi versare {importo}.",
   },
 
   account: {

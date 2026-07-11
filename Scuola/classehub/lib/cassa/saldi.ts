@@ -1,4 +1,6 @@
 import type { CashMovementRow, CashShareRow } from "@/lib/db/types";
+import { formatEuroCents } from "@/lib/euro";
+import { it } from "@/lib/i18n/it";
 
 /**
  * Calcoli della cassa (logica pura, senza database).
@@ -57,4 +59,23 @@ export function movimentiPersonali(
     if (mine) result.push({ movement, quotaCents: mine.amount_cents });
   }
   return result;
+}
+
+/** La riga di contesto sotto "Quanto ti resta" (ADR-017). */
+export function testoSaldoPersonale(cents: number): {
+  testo: string;
+  negativo: boolean;
+} {
+  if (cents === 0) return { testo: it.cassa.quantoRestaZero, negativo: false };
+  const importo = formatEuroCents(Math.abs(cents));
+  if (cents > 0) {
+    return {
+      testo: it.cassa.quantoRestaPositivo.replace("{importo}", importo),
+      negativo: false,
+    };
+  }
+  return {
+    testo: it.cassa.quantoRestaNegativo.replace("{importo}", importo),
+    negativo: true,
+  };
 }
