@@ -569,6 +569,13 @@ export async function insertCashDeclaration(input: {
  * rilancia l'errore. Infine si collega il movimento alla dichiarazione:
  * qui non serve più la guardia sullo status, perché la prenotazione è
  * già nostra in esclusiva.
+ *
+ * Due stati incoerenti restano possibili e vengono segnalati con
+ * errori espliciti: (1) se anche il rollback fallisce, la dichiarazione
+ * resta confermata senza movimento — va riportata a pending a mano;
+ * (2) se fallisce solo il collegamento finale, il movimento in cassa
+ * esiste ed è corretto, manca soltanto il movement_id sulla
+ * dichiarazione — riconciliazione manuale, nessun soldo perso.
  */
 export async function confirmCashDeclaration(input: {
   declarationId: string;
@@ -604,11 +611,17 @@ export async function confirmCashDeclaration(input: {
       shares: [{ userId: input.parentId, amountCents: input.amountCents }],
     });
   } catch (err) {
-    await supabase
+    const { error: rollbackError } = await supabase
       .from("cash_declarations")
       .update({ status: "pending", decided_at: null })
       .eq("id", input.declarationId)
       .eq("status", "confirmed");
+    if (rollbackError) {
+      const original = err instanceof Error ? err.message : String(err);
+      throw new Error(
+        `Conferma fallita E annullo della prenotazione fallito: la segnalazione ${input.declarationId} risulta confermata senza movimento. Errore originale: ${original}. Errore annullo: ${rollbackError.message}`
+      );
+    }
     throw err;
   }
 
@@ -616,7 +629,11 @@ export async function confirmCashDeclaration(input: {
     .from("cash_declarations")
     .update({ movement_id: movement.id })
     .eq("id", input.declarationId);
-  if (linkError) throw new Error(`Conferma fallita: ${linkError.message}`);
+  if (linkError) {
+    throw new Error(
+      `Versamento registrato in cassa, ma collegamento alla segnalazione non riuscito: ${linkError.message}. La segnalazione ${input.declarationId} va riconciliata a mano.`
+    );
+  }
 
   return true;
 }
