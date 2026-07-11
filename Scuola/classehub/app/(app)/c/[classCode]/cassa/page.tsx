@@ -6,6 +6,7 @@ import { Button, buttonClasses } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { requireActiveMembership } from "@/lib/auth/require-membership";
 import {
+  getClassCashTotal,
   listActiveMembers,
   listCashMovementsWithShares,
   listMyDeclarations,
@@ -15,6 +16,7 @@ import {
   saldiPerMembroCents,
   saldoCassaCents,
   saldoPersonaleCents,
+  testoSaldoPersonale,
   type MovimentoConQuote,
 } from "@/lib/cassa/saldi";
 import { formatEuroCents } from "@/lib/euro";
@@ -81,8 +83,14 @@ export default async function CassaPage({
   }));
   const nomi = new Map(memberOptions.map((m) => [m.userId, m.name]));
 
-  const saldoCassa = saldoCassaCents(items.map((i) => i.movement));
+  // ADR-017: il genitore non vede tutti i movimenti, quindi il totale
+  // arriva dall'aggregato SQL; per il rappresentante resta il calcolo
+  // dai movimenti (che per lui sono tutti).
+  const totaleClasse = ctx.isRepresentative
+    ? saldoCassaCents(items.map((i) => i.movement))
+    : await getClassCashTotal(ctx.klass.id);
   const miaQuota = saldoPersonaleCents(items, ctx.user.id);
+  const contestoSaldo = testoSaldoPersonale(miaQuota);
 
   // Filtri: per tipo (tutti) e per genitore (solo rappresentante).
   const kindFiltro =
@@ -164,31 +172,54 @@ export default async function CassaPage({
         />
       )}
 
-      {/* Quota personale + saldo cassa */}
-      <div className="grid gap-3 sm:grid-cols-2">
-        <Card>
-          <p className="text-[16px] font-semibold text-ink-soft">{it.cassa.tuaQuota}</p>
+      {ctx.isRepresentative ? (
+        <div className="grid gap-3 sm:grid-cols-2">
+          <Card>
+            <p className="text-[16px] font-semibold text-ink-soft">{it.cassa.tuaQuota}</p>
+            <p
+              className={cn(
+                "text-[32px] font-bold",
+                miaQuota < 0 ? "text-danger" : "text-ink"
+              )}
+            >
+              {formatEuroCents(Math.abs(miaQuota))}
+            </p>
+            <p className="text-[15px] text-ink-soft">
+              {miaQuota > 0
+                ? it.cassa.quotaPositiva
+                : miaQuota < 0
+                  ? it.cassa.quotaNegativa
+                  : it.cassa.quotaZero}
+            </p>
+          </Card>
+          <Card>
+            <p className="text-[16px] font-semibold text-ink-soft">{it.cassa.saldoCassa}</p>
+            <p className="text-[32px] font-bold">{formatEuroCents(totaleClasse)}</p>
+          </Card>
+        </div>
+      ) : (
+        <Card className="text-center">
+          <p className="text-[16px] font-semibold text-ink-soft">
+            {it.cassa.quantoRestaTitolo}
+          </p>
           <p
             className={cn(
-              "text-[32px] font-bold",
-              miaQuota < 0 ? "text-danger" : "text-ink"
+              "text-[44px] font-bold leading-tight",
+              contestoSaldo.negativo ? "text-danger" : "text-ink"
             )}
           >
             {formatEuroCents(Math.abs(miaQuota))}
           </p>
-          <p className="text-[15px] text-ink-soft">
-            {miaQuota > 0
-              ? it.cassa.quotaPositiva
-              : miaQuota < 0
-                ? it.cassa.quotaNegativa
-                : it.cassa.quotaZero}
+          <p
+            className={cn(
+              "text-[15px]",
+              contestoSaldo.negativo ? "font-semibold text-danger" : "text-ink-soft"
+            )}
+          >
+            {contestoSaldo.testo}
           </p>
         </Card>
-        <Card>
-          <p className="text-[16px] font-semibold text-ink-soft">{it.cassa.saldoCassa}</p>
-          <p className="text-[32px] font-bold">{formatEuroCents(saldoCassa)}</p>
-        </Card>
-      </div>
+      )}
 
       {haCoordinate && !ctx.isRepresentative && <ComePagareBox klass={ctx.klass} />}
       {ctx.isRepresentative && !haCoordinate && (
@@ -392,7 +423,9 @@ export default async function CassaPage({
 
         {items.length === 0 ? (
           <Card>
-            <p className="text-ink-soft">{it.cassa.nessunMovimento}</p>
+            <p className="text-ink-soft">
+              {ctx.isRepresentative ? it.cassa.nessunMovimento : it.cassa.nessunMovimentoTuo}
+            </p>
           </Card>
         ) : visibili.length === 0 ? (
           <Card>
@@ -414,6 +447,12 @@ export default async function CassaPage({
           </ul>
         )}
       </section>
+
+      {!ctx.isRepresentative && (
+        <p className="text-center text-[14px] text-ink-soft">
+          {it.cassa.totaleClasse.replace("{importo}", formatEuroCents(totaleClasse))}
+        </p>
+      )}
     </div>
   );
 }
@@ -459,14 +498,11 @@ function MovementCard({
           {formatShortDateIt(movement.created_at)}
           {intestatario ? ` · ${intestatario}` : ""}
           {perHead !== null
-            ? ` · ${partecipanti} ${partecipanti === 1 ? it.cassa.partecipante : it.cassa.partecipanti} × ${formatEuroCents(perHead)} ${it.cassa.aTesta}`
+            ? isRepresentative
+              ? ` · ${partecipanti} ${partecipanti === 1 ? it.cassa.partecipante : it.cassa.partecipanti} × ${formatEuroCents(perHead)} ${it.cassa.aTesta}`
+              : ` · ${it.cassa.spesaDiClasse} · ${partecipanti} ${partecipanti === 1 ? it.cassa.partecipante : it.cassa.partecipanti}`
             : ""}
         </p>
-        {myShare && !isDeposit && (
-          <p className="text-[15px] font-semibold text-danger">
-            {it.cassa.tuaQuota}: −{formatEuroCents(myShare.amount_cents)}
-          </p>
-        )}
       </div>
 
       <div className="flex flex-col items-end gap-2">
@@ -477,7 +513,9 @@ function MovementCard({
           )}
         >
           {isDeposit ? "+" : "−"}
-          {formatEuroCents(movement.total_cents)}
+          {formatEuroCents(
+            isRepresentative ? movement.total_cents : (myShare?.amount_cents ?? 0)
+          )}
         </p>
         {isRepresentative && (
           <div className="flex gap-2">

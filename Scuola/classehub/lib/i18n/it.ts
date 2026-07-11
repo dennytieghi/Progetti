@@ -373,6 +373,8 @@ export const it = {
     partecipante: "partecipante",
     partecipanti: "partecipanti",
     aTesta: "a testa",
+    spesaDiClasse: "spesa di classe",
+    totaleClasse: "Totale della classe: {importo} — non è la tua quota.",
 
     // Rappresentante: registra movimenti
     registraTitolo: "Registra un movimento",
