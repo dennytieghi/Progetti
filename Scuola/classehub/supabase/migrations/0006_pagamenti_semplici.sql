@@ -17,6 +17,7 @@ alter table classes drop column stripe_account_id;
 -- Le policy che citavano source vanno ricreate senza.
 drop policy cash_movements_insert_rep on cash_movements;
 drop policy cash_movements_delete_rep on cash_movements;
+drop policy cash_movements_update_rep on cash_movements;  -- creata in 0004, cita source
 alter table cash_movements drop column source;
 alter table cash_movements drop column stripe_session_id;
 alter table cash_movements add column method text not null default 'contanti'
@@ -26,6 +27,9 @@ create policy cash_movements_insert_rep on cash_movements
   for insert with check (is_representative(class_id) and created_by = auth.uid());
 create policy cash_movements_delete_rep on cash_movements
   for delete using (is_representative(class_id));
+create policy cash_movements_update_rep on cash_movements
+  for update using (is_representative(class_id))
+  with check (is_representative(class_id));
 
 -- ------------------------------------------------- DICHIARAZIONI
 -- Il genitore segnala "ho versato"; niente entra nei saldi finché
