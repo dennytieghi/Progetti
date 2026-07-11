@@ -61,6 +61,7 @@ export async function registraVersamentoAction(
     parentId: parsed.data.parentId,
     amountCents: parsed.data.amount,
     title: parsed.data.title,
+    method: "contanti",
   });
   finish(classCode);
 }
@@ -97,6 +98,7 @@ export async function registraSpesaAction(
     title: parsed.data.title,
     perHeadCents: parsed.data.perHead,
     participantIds: parsed.data.participantIds,
+    method: "contanti",
   });
   finish(classCode);
 }

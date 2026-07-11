@@ -10,6 +10,7 @@ import type {
   CashMovementRow,
   ClassRow,
   MembershipRow,
+  PaymentMethod,
   PostRow,
   PostType,
   RequestRow,
@@ -385,13 +386,14 @@ export async function setRequestStatus(
 /**
  * Inserisce un movimento e le sue quote. Se le quote falliscono il
  * movimento viene rimosso: mai un movimento senza intestatari.
- * Scrive col client utente: l'RLS impone rappresentante + source manual.
+ * Scrive col client utente: l'RLS impone rappresentante.
  */
 async function insertMovementWithShares(input: {
   classId: string;
   createdBy: string;
   kind: "deposit" | "expense";
   title: string;
+  method: PaymentMethod;
   shares: Array<{ userId: string; amountCents: number }>;
 }): Promise<CashMovementRow> {
   const supabase = await supabaseServer();
@@ -404,6 +406,7 @@ async function insertMovementWithShares(input: {
       kind: input.kind,
       title: input.title,
       total_cents: total,
+      method: input.method,
       created_by: input.createdBy,
     })
     .select()
@@ -426,19 +429,21 @@ async function insertMovementWithShares(input: {
   return movement;
 }
 
-/** Versamento in contanti registrato dal rappresentante. */
+/** Versamento registrato dal rappresentante, col metodo indicato. */
 export async function recordCashDeposit(input: {
   classId: string;
   representativeId: string;
   parentId: string;
   amountCents: number;
   title: string;
+  method: PaymentMethod;
 }): Promise<CashMovementRow> {
   return insertMovementWithShares({
     classId: input.classId,
     createdBy: input.representativeId,
     kind: "deposit",
     title: input.title,
+    method: input.method,
     shares: [{ userId: input.parentId, amountCents: input.amountCents }],
   });
 }
@@ -450,12 +455,14 @@ export async function recordCashExpense(input: {
   title: string;
   perHeadCents: number;
   participantIds: string[];
+  method: PaymentMethod;
 }): Promise<CashMovementRow> {
   return insertMovementWithShares({
     classId: input.classId,
     createdBy: input.representativeId,
     kind: "expense",
     title: input.title,
+    method: input.method,
     shares: input.participantIds.map((userId) => ({
       userId,
       amountCents: input.perHeadCents,

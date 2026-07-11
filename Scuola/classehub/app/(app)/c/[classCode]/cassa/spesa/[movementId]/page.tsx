@@ -22,12 +22,7 @@ export default async function ModificaSpesaPage({
   const ctx = await requireRepresentative(classCode);
 
   const movement = await getCashMovementById(movementId);
-  if (
-    !movement ||
-    movement.class_id !== ctx.klass.id ||
-    movement.kind !== "expense" ||
-    movement.source !== "manual"
-  ) {
+  if (!movement || movement.class_id !== ctx.klass.id || movement.kind !== "expense") {
     notFound();
   }
 

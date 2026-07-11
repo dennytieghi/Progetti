@@ -16,8 +16,11 @@ export interface ClassRow {
   emergency_code_hash: string;
   created_at: string;
   archived_at: string | null;
-  /** Conto Stripe Connect del rappresentante; null se non collegato. */
-  stripe_account_id: string | null;
+  /** Coordinate di pagamento del rappresentante (null = non inserita). */
+  payment_iban: string | null;
+  payment_iban_holder: string | null;
+  payment_paypal: string | null;
+  payment_satispay: string | null;
 }
 
 export interface ProfileRow {
@@ -91,7 +94,7 @@ export interface RequestRow {
 }
 
 export type CashMovementKind = "deposit" | "expense";
-export type CashMovementSource = "manual" | "stripe";
+export type PaymentMethod = "contanti" | "bonifico" | "satispay" | "paypal" | "altro";
 
 export interface CashMovementRow {
   id: string;
@@ -99,8 +102,7 @@ export interface CashMovementRow {
   kind: CashMovementKind;
   title: string;
   total_cents: number;
-  source: CashMovementSource;
-  stripe_session_id: string | null;
+  method: PaymentMethod;
   created_by: string;
   created_at: string;
 }
@@ -110,6 +112,22 @@ export interface CashShareRow {
   movement_id: string;
   user_id: string;
   amount_cents: number;
+}
+
+export type DeclarationStatus = "pending" | "confirmed" | "rejected";
+
+/** Versamento segnalato da un genitore, in attesa del rappresentante. */
+export interface CashDeclarationRow {
+  id: string;
+  class_id: string;
+  user_id: string;
+  amount_cents: number;
+  method: PaymentMethod;
+  note: string | null;
+  status: DeclarationStatus;
+  movement_id: string | null;
+  created_at: string;
+  decided_at: string | null;
 }
 
 /**
