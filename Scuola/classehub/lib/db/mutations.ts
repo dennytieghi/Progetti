@@ -88,6 +88,30 @@ export async function createClassWithRepresentative(input: {
   return { klass, emergencyCode };
 }
 
+/** Coordinate di pagamento della classe (solo rappresentante, via RLS update classes? NO:
+ *  classes non ha policy update client → ADMIN, dopo la guardia requireRepresentative). */
+export async function updateClassPaymentInfo(
+  classId: string,
+  coords: {
+    iban: string | null;
+    ibanHolder: string | null;
+    paypal: string | null;
+    satispay: string | null;
+  }
+): Promise<void> {
+  const admin = supabaseAdmin();
+  const { error } = await admin
+    .from("classes")
+    .update({
+      payment_iban: coords.iban,
+      payment_iban_holder: coords.ibanHolder,
+      payment_paypal: coords.paypal,
+      payment_satispay: coords.satispay,
+    })
+    .eq("id", classId);
+  if (error) throw new Error(`Salvataggio coordinate fallito: ${error.message}`);
+}
+
 // ---------------------------------------------------------------- membership
 
 /**

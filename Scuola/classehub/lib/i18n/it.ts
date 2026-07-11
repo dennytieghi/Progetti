@@ -310,6 +310,27 @@ export const it = {
     approvazioniLink: "Richieste di iscrizione",
     membriLink: "Genitori della classe",
     inAttesaBadge: "in attesa",
+
+    // Coordinate di pagamento
+    pagamentiTitolo: "Coordinate di pagamento",
+    pagamentiSpiega:
+      "Come i genitori possono farti avere i soldi della cassa. Compila solo quello che usi: comparirà nella pagina Cassa di ogni genitore.",
+    ibanLabel: "IBAN (facoltativo)",
+    ibanEsempio: "Es. IT60 X054 2811 1010 0000 0123 456",
+    intestatarioLabel: "Conto intestato a (facoltativo)",
+    intestatarioEsempio: "Es. Denise Fabbri",
+    paypalLabel: "Link PayPal (facoltativo)",
+    paypalEsempio: "Es. paypal.me/denisefabbri",
+    satispayLabel: "Numero Satispay (facoltativo)",
+    satispayEsempio: "Es. 333 1234567",
+    pagamentiSalva: "Salva le coordinate",
+    pagamentiSalvate: "Coordinate salvate. I genitori le vedono nella pagina Cassa.",
+    erroreIban:
+      "L'IBAN non sembra giusto: deve iniziare con IT ed essere lungo 27 caratteri. Controlla e riprova.",
+    errorePaypal:
+      "Il link PayPal deve essere del tipo paypal.me/tuonome. Lo trovi nell'app PayPal sotto \"Ricevi denaro\".",
+    erroreTelefonoSatispay:
+      "Il numero non sembra un cellulare italiano. Scrivilo come 333 1234567.",
   },
 
   stampa: {

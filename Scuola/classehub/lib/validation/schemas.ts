@@ -2,6 +2,11 @@ import { z } from "zod";
 import { it } from "@/lib/i18n/it";
 import { normalizeCode } from "@/lib/codes/generate";
 import { parseEuroToCents } from "@/lib/euro";
+import {
+  normalizzaIban,
+  normalizzaLinkPaypal,
+  normalizzaTelefono,
+} from "@/lib/validation/pagamento";
 
 /**
  * Schema Zod per OGNI input utente (CLAUDE.md §7).
@@ -153,6 +158,33 @@ export const cashExpenseSchema = z.object({
     .array(z.string().uuid())
     .min(1, { message: it.cassa.errorePartecipanti })
     .max(200),
+});
+
+/** Campo facoltativo: vuoto → null, altrimenti normalizza o errore. */
+function coordSchema(normalizza: (s: string) => string | null, message: string) {
+  return z
+    .string()
+    .trim()
+    .transform((s, ctx) => {
+      if (s.length === 0) return null;
+      const v = normalizza(s);
+      if (v === null) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message });
+        return z.NEVER;
+      }
+      return v;
+    });
+}
+
+export const paymentCoordsSchema = z.object({
+  iban: coordSchema(normalizzaIban, it.impostazioni.erroreIban),
+  ibanHolder: z
+    .string()
+    .trim()
+    .max(80)
+    .transform((s) => (s.length > 0 ? s : null)),
+  paypal: coordSchema(normalizzaLinkPaypal, it.impostazioni.errorePaypal),
+  satispay: coordSchema(normalizzaTelefono, it.impostazioni.erroreTelefonoSatispay),
 });
 
 export const rejectMembershipSchema = z.object({
