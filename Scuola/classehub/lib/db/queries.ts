@@ -402,6 +402,21 @@ export async function listPendingDeclarations(
   return (data as CashDeclarationRow[] | null) ?? [];
 }
 
+/**
+ * Conta le dichiarazioni in attesa di conferma nella classe.
+ * Da chiamare SOLO per il rappresentante: l'RLS mostra ai genitori solo
+ * le proprie dichiarazioni, quindi per loro il conteggio sarebbe fuorviante.
+ */
+export async function countPendingDeclarations(classId: string): Promise<number> {
+  const supabase = await supabaseServer();
+  const { count } = await supabase
+    .from("cash_declarations")
+    .select("id", { count: "exact", head: true })
+    .eq("class_id", classId)
+    .eq("status", "pending");
+  return count ?? 0;
+}
+
 /** Le dichiarazioni del genitore: in attesa + rifiutate recenti. */
 export async function listMyDeclarations(
   classId: string,

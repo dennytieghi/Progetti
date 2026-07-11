@@ -21,11 +21,13 @@ export function AppHeader({
   className,
   isRepresentative,
   openRequestsCount = 0,
+  pendingDeclarationsCount = 0,
 }: {
   classCode: string;
   className: string;
   isRepresentative: boolean;
   openRequestsCount?: number;
+  pendingDeclarationsCount?: number;
 }) {
   const base = `/c/${classCode}`;
 
@@ -39,7 +41,12 @@ export function AppHeader({
           icon: Inbox,
           badge: openRequestsCount,
         },
-        { href: `${base}/cassa`, label: it.cassa.titolo, icon: Wallet },
+        {
+          href: `${base}/cassa`,
+          label: it.cassa.titolo,
+          icon: Wallet,
+          badge: pendingDeclarationsCount,
+        },
         { href: `${base}/impostazioni`, label: it.impostazioni.titolo, icon: Settings },
       ]
     : [
