@@ -5,7 +5,11 @@ import { ConfirmSubmit } from "@/components/shared/ConfirmSubmit";
 import { Button, buttonClasses } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { requireActiveMembership } from "@/lib/auth/require-membership";
-import { listActiveMembers, listCashMovementsWithShares } from "@/lib/db/queries";
+import {
+  listActiveMembers,
+  listCashMovementsWithShares,
+  listMyDeclarations,
+} from "@/lib/db/queries";
 import {
   saldiPerMembroCents,
   saldoCassaCents,
@@ -18,13 +22,24 @@ import { formatCassaReminderForWhatsapp } from "@/lib/whatsapp/format-message";
 import { getBaseUrl } from "@/lib/base-url";
 import { it } from "@/lib/i18n/it";
 import { cn } from "@/lib/cn";
+import type { PaymentMethod } from "@/lib/db/types";
 import { eliminaMovimentoAction } from "./actions";
 import { VersamentoForm, type MemberOption } from "./VersamentoForm";
 import { SpesaForm } from "./SpesaForm";
 import { PromemoriaWhatsapp } from "./PromemoriaWhatsapp";
 import { ComePagareBox } from "./ComePagareBox";
+import { DichiaraVersamentoForm } from "./DichiaraVersamentoForm";
 
 export const metadata = { title: `${it.cassa.titolo} — ${it.app.name}` };
+
+/** Riusata anche dal Task 8-9 per mostrare il metodo nei movimenti. */
+const METODO_LABEL: Record<PaymentMethod, string> = {
+  contanti: it.cassa.metodoContanti,
+  bonifico: it.cassa.metodoBonifico,
+  satispay: it.cassa.metodoSatispay,
+  paypal: it.cassa.metodoPaypal,
+  altro: it.cassa.metodoAltro,
+};
 
 export default async function CassaPage({
   params,
@@ -34,19 +49,23 @@ export default async function CassaPage({
   searchParams: Promise<{
     fatto?: string;
     modificata?: string;
+    dichiarata?: string;
     errore?: string;
     tipo?: string;
     genitore?: string;
   }>;
 }) {
   const { classCode } = await params;
-  const { fatto, modificata, errore, tipo, genitore } = await searchParams;
+  const { fatto, modificata, dichiarata, errore, tipo, genitore } = await searchParams;
   const ctx = await requireActiveMembership(classCode);
 
   const [items, members] = await Promise.all([
     listCashMovementsWithShares(ctx.klass.id),
     listActiveMembers(ctx.klass.id),
   ]);
+  const mieDichiarazioni = !ctx.isRepresentative
+    ? await listMyDeclarations(ctx.klass.id, ctx.user.id)
+    : [];
 
   const memberOptions: MemberOption[] = members.map((m) => ({
     userId: m.membership.user_id,
@@ -116,6 +135,9 @@ export default async function CassaPage({
       <div aria-live="polite" className="space-y-3">
         {fatto === "1" && <Banner tone="success">{it.cassa.registrato}</Banner>}
         {modificata === "1" && <Banner tone="success">{it.cassa.spesaAggiornata}</Banner>}
+        {dichiarata === "1" && (
+          <Banner tone="success">{it.cassa.dichiarazioneInviata}</Banner>
+        )}
       </div>
 
       {/* Quota personale + saldo cassa */}
@@ -155,6 +177,49 @@ export default async function CassaPage({
             {it.cassa.comePagareImposta}
           </Link>
         </Card>
+      )}
+
+      {!ctx.isRepresentative && (
+        <Card>
+          <h2 className="text-[19px] font-bold">{it.cassa.dichiaraTitolo}</h2>
+          <p className="mb-4 mt-1 text-[15px] text-ink-soft">{it.cassa.dichiaraSpiega}</p>
+          <DichiaraVersamentoForm classCode={classCode} />
+        </Card>
+      )}
+
+      {mieDichiarazioni.length > 0 && (
+        <section>
+          <h2 className="mb-3 text-[22px] font-bold">{it.cassa.tueDichiarazioni}</h2>
+          <ul className="space-y-3">
+            {mieDichiarazioni.map((d) => (
+              <li key={d.id}>
+                <Card className="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <p className="text-[18px] font-semibold">
+                      {formatEuroCents(d.amount_cents)} · {METODO_LABEL[d.method]}
+                    </p>
+                    <p className="text-[15px] text-ink-soft">
+                      {formatShortDateIt(d.created_at)}
+                      {d.note ? ` · ${d.note}` : ""}
+                    </p>
+                  </div>
+                  <span
+                    className={cn(
+                      "rounded-full px-3 py-1 text-[15px] font-semibold",
+                      d.status === "pending"
+                        ? "bg-warning-light text-warning"
+                        : "bg-danger-light text-danger"
+                    )}
+                  >
+                    {d.status === "pending"
+                      ? it.cassa.statoInAttesa
+                      : it.cassa.statoRifiutata}
+                  </span>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
 
       {/* Rappresentante: registra movimenti */}

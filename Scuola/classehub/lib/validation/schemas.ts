@@ -187,6 +187,23 @@ export const paymentCoordsSchema = z.object({
   satispay: coordSchema(normalizzaTelefono, it.impostazioni.erroreTelefonoSatispay),
 });
 
+export const paymentMethodSchema = z.enum(
+  ["contanti", "bonifico", "satispay", "paypal", "altro"],
+  { message: it.cassa.erroreMetodo }
+);
+
+export const cashDeclarationSchema = z.object({
+  amount: euroCentsSchema,
+  method: paymentMethodSchema,
+  note: z
+    .string()
+    .trim()
+    .max(120)
+    .transform((s) => (s.length > 0 ? s : null))
+    .nullable()
+    .default(null),
+});
+
 export const rejectMembershipSchema = z.object({
   reason: z
     .string()

@@ -464,6 +464,31 @@ export const it = {
     saldiSpiega:
       "Quanto ha in cassa ogni genitore. In rosso chi deve ancora versare.",
 
+    // Metodo di pagamento
+    metodoContanti: "Contanti",
+    metodoBonifico: "Bonifico",
+    metodoSatispay: "Satispay",
+    metodoPaypal: "PayPal",
+    metodoAltro: "Altro",
+    erroreMetodo: "Scegli come hai pagato.",
+
+    // Il genitore dichiara un versamento
+    dichiaraTitolo: "Hai versato? Segnalalo",
+    dichiaraSpiega:
+      "Dopo aver pagato, dillo qui: il rappresentante controlla di aver ricevuto i soldi e conferma. Solo allora il versamento compare in cassa.",
+    dichiaraMetodoLabel: "Come hai pagato?",
+    dichiaraNotaLabel: "Nota per il rappresentante (facoltativa)",
+    dichiaraNotaEsempio: "Es. Per la gita a Verona",
+    dichiaraBottone: "Segnala il versamento",
+    dichiarazioneInviata:
+      "Segnalazione inviata. Vedrai il versamento in cassa appena il rappresentante lo conferma.",
+    erroreTroppeDichiarazioni:
+      "Hai già 5 versamenti in attesa di conferma. Aspetta che il rappresentante li controlli prima di segnalarne altri.",
+
+    tueDichiarazioni: "I tuoi versamenti segnalati",
+    statoInAttesa: "In attesa di conferma",
+    statoRifiutata: "Non confermato dal rappresentante",
+
     // Errori
     erroreGenitore: "Scegli il genitore che ha versato.",
     erroreImporto:

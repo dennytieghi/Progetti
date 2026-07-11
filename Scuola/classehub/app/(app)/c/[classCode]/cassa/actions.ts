@@ -2,15 +2,24 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { requireRepresentative } from "@/lib/auth/require-membership";
-import { getCashMovementById, getMembership } from "@/lib/db/queries";
+import { requireActiveMembership, requireRepresentative } from "@/lib/auth/require-membership";
+import {
+  countPendingDeclarationsByUser,
+  getCashMovementById,
+  getMembership,
+} from "@/lib/db/queries";
 import {
   deleteCashMovement,
+  insertCashDeclaration,
   recordCashDeposit,
   recordCashExpense,
   updateCashExpense,
 } from "@/lib/db/mutations";
-import { cashDepositSchema, cashExpenseSchema } from "@/lib/validation/schemas";
+import {
+  cashDeclarationSchema,
+  cashDepositSchema,
+  cashExpenseSchema,
+} from "@/lib/validation/schemas";
 import { it } from "@/lib/i18n/it";
 import type { FormState } from "@/lib/form-state";
 
@@ -146,6 +155,43 @@ export async function modificaSpesaAction(
   });
   revalidatePath(`/c/${classCode}/cassa`);
   redirect(`/c/${classCode}/cassa?modificata=1`);
+}
+
+/**
+ * Il genitore segnala un versamento fatto fuori dall'app: resta 'pending'
+ * finché il rappresentante non lo conferma (Task 8).
+ */
+export async function dichiaraVersamentoAction(
+  _prev: FormState,
+  formData: FormData
+): Promise<FormState> {
+  const classCode = str(formData, "classCode");
+  const ctx = await requireActiveMembership(classCode);
+
+  const parsed = cashDeclarationSchema.safeParse({
+    amount: formData.get("amount"),
+    method: formData.get("method"),
+    note: formData.get("note"),
+  });
+  if (!parsed.success) {
+    return { error: parsed.error.issues[0]?.message ?? it.common.erroreGenerico };
+  }
+
+  // Anti-pasticci: non più di 5 segnalazioni in attesa a testa.
+  const pending = await countPendingDeclarationsByUser(ctx.klass.id, ctx.user.id);
+  if (pending >= 5) {
+    return { error: it.cassa.erroreTroppeDichiarazioni };
+  }
+
+  await insertCashDeclaration({
+    classId: ctx.klass.id,
+    userId: ctx.user.id,
+    amountCents: parsed.data.amount,
+    method: parsed.data.method,
+    note: parsed.data.note,
+  });
+  revalidatePath(`/c/${classCode}/cassa`);
+  redirect(`/c/${classCode}/cassa?dichiarata=1`);
 }
 
 export async function eliminaMovimentoAction(formData: FormData): Promise<void> {
