@@ -50,26 +50,14 @@ corepack pnpm dev
    ```
 4. Copia le chiavi in `.env.local` (vedi sopra).
 
-## Pagamenti con carta (Stripe, facoltativo)
+## Pagamenti in cassa (fuori dall'app, ADR-016)
 
-Senza chiave Stripe la cassa funziona solo in contanti: la parte carta
-non compare. Per attivarla in **test mode** (soldi finti):
-
-1. Crea un account su https://stripe.com (va fatto a mano, serve email).
-2. Dashboard Stripe → attiva la **modalità test** (interruttore in alto)
-   → Developers → API keys → copia la **Secret key** (`sk_test_…`).
-3. Aggiungi in `.env.local`:
-   ```
-   STRIPE_SECRET_KEY=sk_test_…
-   ```
-4. Riavvia `corepack pnpm dev`. Nella scheda Cassa il rappresentante
-   trova "Collega Stripe"; in test mode l'onboarding si può saltare con
-   i dati finti proposti da Stripe.
-5. Per pagare come genitore usa la carta di test `4242 4242 4242 4242`,
-   scadenza futura qualsiasi, CVC qualsiasi.
-
-**Produzione**: NON attivare la chiave live prima delle condizioni in
-ADR-014 (deploy Vercel + webhook, entità legale, decisione commissioni).
+ClasseHub non tocca mai denaro. Il rappresentante compila le proprie
+coordinate (IBAN, link `paypal.me`, numero Satispay) nella pagina
+Impostazioni della classe; il genitore paga fuori dall'app col metodo
+che preferisce e dichiara il versamento in cassa; il rappresentante
+conferma o rifiuta dopo aver controllato il proprio conto. Nessuna
+chiave esterna da configurare.
 
 ## Architettura degli accessi (per chi eredita il codice)
 
@@ -103,4 +91,3 @@ ADR-014 (deploy Vercel + webhook, entità legale, decisione commissioni).
 | `SUPABASE_SECRET_KEY` | dev + prod | SOLO server, mai nel client |
 | `NEXT_PUBLIC_BASE_URL` | dev + prod | link WhatsApp ed email |
 | `RESEND_API_KEY` | prod | email transazionali |
-| `STRIPE_SECRET_KEY` | dev + prod | facoltativa; senza, la cassa è solo contanti |

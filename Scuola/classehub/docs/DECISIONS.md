@@ -96,6 +96,7 @@ ADR (Architecture Decision Records). Formato breve: contesto, decisione, alterna
 - pagamenti sul conto Stripe di ClasseHub con giroconti: ClasseHub toccherebbe i soldi = rischio legale/fiscale inaccettabile.
 **Trade-off accettato**: se il genitore paga e chiude il browser prima del ritorno, la quota non si registra finché non riapre il link — accettabile in test mode.
 **Condizioni per andare in produzione (test → live)**: (1) app pubblicata su Vercel con webhook attivo, (2) entità legale per l'account piattaforma ClasseHub, (3) decisione su chi assorbe le commissioni (~1,5% + 0,25 € a transazione).
+**Superato da ADR-016** (2026-07-11): codice Stripe rimosso.
 
 ## ADR-015 — Export in CSV, non in .xlsx
 **Contesto**: rappresentante e genitori vogliono i dati della cassa "in Excel o Google Sheets".

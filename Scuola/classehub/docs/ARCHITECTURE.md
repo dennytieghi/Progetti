@@ -17,8 +17,7 @@ app/
 â”‚   â”‚   â”œâ”€â”€ p/[postSlug]/           # dettaglio post pubblico condivisibile
 â”‚   â”‚   â”‚   â””â”€â”€ modifica/           # rappresentante: modifica post pubblicato
 â”‚   â”‚   â”œâ”€â”€ nuovo/                  # rappresentante: crea post
-â”‚   â”‚   â”œâ”€â”€ cassa/                  # cassa di classe (quota personale, movimenti, Stripe)
-â”‚   â”‚   â”‚   â”œâ”€â”€ conferma/           # ritorno da Stripe Checkout (verifica + registra)
+â”‚   â”‚   â”œâ”€â”€ cassa/                  # cassa di classe (quota personale, movimenti, dichiara â†’ conferma)
 â”‚   â”‚   â”‚   â”œâ”€â”€ esporta/            # route GET: CSV movimenti (RLS decide il contenuto)
 â”‚   â”‚   â”‚   â””â”€â”€ spesa/[movementId]/ # rappresentante: modifica spesa
 â”‚   â”‚   â”œâ”€â”€ richieste/              # rappresentante: coda richieste genitori
@@ -162,16 +161,15 @@ create index on requests (class_id, status, created_at desc);
 -- Implementazione: check via query counting su requests.created_at negli ultimi 24h.
 -- Max 5 open+handled per author_id in una classe.
 
--- CASSA DI CLASSE (migrazione 0003, ADR-013)
--- classes.stripe_account_id: conto Stripe Connect del rappresentante (null = non collegato).
+-- CASSA DI CLASSE (migrazione 0003, ADR-013; coordinate + dichiara→conferma: migrazione 0006, ADR-016)
+-- classes.payment_iban / payment_iban_holder / payment_paypal / payment_satispay: coordinate del rappresentante (tutte opzionali).
 create table cash_movements (
   id uuid primary key default gen_random_uuid(),
   class_id uuid not null references classes(id) on delete cascade,
   kind text not null check (kind in ('deposit','expense')),
   title text not null,                       -- causale
   total_cents int not null check (total_cents > 0),
-  source text not null default 'manual' check (source in ('manual','stripe')),
-  stripe_session_id text unique,             -- idempotenza pagamenti carta
+  method text not null default 'contanti' check (method in ('contanti','bonifico','satispay','paypal','altro')),
   created_by uuid not null references auth.users(id),
   created_at timestamptz not null default now()
 );
@@ -183,6 +181,20 @@ create table cash_shares (
   user_id uuid not null references auth.users(id),
   amount_cents int not null check (amount_cents > 0),
   primary key (movement_id, user_id)
+);
+
+-- Dichiarazione del genitore di un versamento fatto fuori dall'app.
+create table cash_declarations (
+  id uuid primary key default gen_random_uuid(),
+  class_id uuid not null references classes(id) on delete cascade,
+  user_id uuid not null references auth.users(id),
+  amount_cents int not null check (amount_cents > 0),
+  method text not null check (method in ('contanti','bonifico','satispay','paypal','altro')),
+  note text,
+  status text not null default 'pending' check (status in ('pending','confirmed','rejected')),
+  movement_id uuid references cash_movements(id) on delete set null,
+  created_at timestamptz not null default now(),
+  decided_at timestamptz
 );
 ```
 
@@ -198,13 +210,12 @@ Ogni tabella ha RLS `enable` e policy di questo tipo:
 - **INSERT poll_votes**: solo membro `active`, non `muted`, e non oltre `closes_at`.
 - **poll_votes SELECT aggregato**: solo dopo che il voter_hash del richiedente Ã¨ presente nella tabella per quel `post_id`.
 
-## Cassa e Stripe (ADR-013, ADR-014)
+## Cassa e pagamenti fuori dall'app (ADR-013, ADR-016)
 
 - Saldi calcolati in `lib/cassa/saldi.ts` (logica pura): personale = versamenti - quote spesa; cassa = somma totali movimenti.
-- RLS: movimenti visibili a tutti i membri attivi; `cash_shares` solo proprie (o tutte per il rappresentante). Scritture manuali solo rappresentante; movimenti `stripe` solo via service role.
-- Versamento con carta: Server Action crea Checkout Session sul conto collegato (`stripeAccount`, direct charge) -> il genitore paga su Stripe -> ritorno su `cassa/conferma` -> il server rilegge la sessione da Stripe e registra la quota solo se `paid` (idempotente su `stripe_session_id`). Niente webhook in V1.
-- Senza `STRIPE_SECRET_KEY` la parte carta non compare: cassa solo contanti.
-- Modifica spesa (0004): sostituzione in blocco delle quote (delete + insert), totale ricalcolato. Solo movimenti manuali; quelli Stripe si correggono coi rimborsi (V2).
+- RLS: movimenti visibili a tutti i membri attivi; `cash_shares` solo proprie (o tutte per il rappresentante). Scritture solo rappresentante.
+- ClasseHub non tocca mai denaro: il rappresentante pubblica le proprie coordinate (IBAN, paypal.me, Satispay), il genitore paga fuori dall'app col metodo che preferisce e dichiara il versamento (`cash_declarations`, `status='pending'`). Solo quando il rappresentante conferma nasce il movimento con la quota intestata e la colonna `method`; se rifiuta la dichiarazione passa a `rejected` e i saldi restano invariati. Massimo 5 dichiarazioni pending per genitore per classe.
+- Modifica spesa (0004): sostituzione in blocco delle quote (delete + insert), totale ricalcolato.
 - Export: `cassa/esporta` genera CSV (BOM UTF-8, separatore ";", decimali con virgola) con una riga per quota; nessuna libreria xlsx.
 - Post modificati dopo la pubblicazione: `posts.edited_at` (0004), mostrato come "Modificato il" nel dettaglio. Le opzioni dei sondaggi non sono mai modificabili.
 - Eliminazione post (0005): policy delete rep-only; sondaggi/voti in cascata, `requests.converted_to_post_id` si azzera, foto rimossa da Storage best-effort.

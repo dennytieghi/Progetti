@@ -114,3 +114,21 @@ Usa due browser (normale + incognito) per i due ruoli.
 ## 10. Qualità percepita (prima del pilota — UX_PRINCIPLES §finale)
 
 - [ ] Test con un 50-60enne: da link WhatsApp al voto in <90 secondi e ≤5 tap.
+
+## 11. Cassa — pagamenti semplici
+
+- [ ] Rappresentante compila coordinate (IBAN + intestatario, link PayPal,
+      numero Satispay) in Impostazioni → il genitore le vede nel riquadro
+      "Come pagare" in cassa e riesce a copiare l'IBAN.
+- [ ] Genitore dichiara un versamento di 10 € col metodo bonifico → il
+      rappresentante vede "Da confermare (1)" in cima alla cassa → conferma
+      → saldi e storico aggiornati con metodo "bonifico".
+- [ ] Rappresentante rifiuta una dichiarazione → il genitore la vede
+      "rifiutata", i saldi restano invariati.
+- [ ] Genitore prova a inviare una sesta dichiarazione in attesa → bloccato
+      con messaggio chiaro sul limite di 5.
+- [ ] Export CSV include la colonna "Metodo" coi valori corretti.
+- [ ] Riquadro "Come pagare" con solo l'IBAN compilato → mostra solo l'IBAN,
+      niente righe vuote per PayPal/Satispay.
+- [ ] Un genitore non vede le dichiarazioni in attesa di un altro genitore
+      (solo le proprie; il rappresentante vede tutte).

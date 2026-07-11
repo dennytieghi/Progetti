@@ -56,7 +56,6 @@
 - [x] Schema cassa: movimenti intestati + quote personali (ADR-013).
 - [x] Rappresentante: registra versamenti e spese in contanti (importo a testa × partecipanti).
 - [x] Genitore: quota personale, movimenti propri, saldo cassa.
-- [x] Stripe Connect Standard in test mode: collega conto + versa con carta (ADR-014).
 - [x] Migrazione 0003 eseguita su Supabase.
 - [x] Test manuale contanti (versamento, spesa, quote, eliminazione, vista genitore).
 - [x] Modifica dei post pubblicati (titolo/testo/data; sondaggi solo titolo/testo) con "Modificato il".
@@ -66,9 +65,10 @@
 - [x] Filtri movimenti (Tutti/Versamenti/Spese + per genitore) ed export filtrato.
 - [x] Promemoria WhatsApp per richiedere versamenti (link alla cassa, ognuno vede la sua quota).
 - [x] Eliminazione definitiva dei post (solo rappresentante, con conferma).
-- [ ] Migrazione 0005 eseguita su Supabase (senza, "Elimina" sui post non ha effetto).
-- [ ] Test manuale carta (serve STRIPE_SECRET_KEY di test).
-- [ ] Stripe in produzione: SOLO dopo deploy Vercel + entità legale + decisione commissioni (ADR-014).
+- [ ] Coordinate di pagamento del rappresentante (IBAN/PayPal/Satispay) in impostazioni, cassa e promemoria WhatsApp (ADR-016).
+- [ ] Versamenti "dichiara → conferma" con metodo di pagamento sul movimento (ADR-016).
+- [ ] Migrazione 0005 e 0006 eseguite su Supabase.
+- [ ] Rimosso Stripe (ADR-014 superato da ADR-016).
 
 ## V1.1 — Post-pilota (dopo feedback reale)
 - Notifiche push web (per chi accetta).
