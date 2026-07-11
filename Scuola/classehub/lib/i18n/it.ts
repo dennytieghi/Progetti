@@ -366,6 +366,7 @@ export const it = {
     nessunMovimentoTuo:
       "Ancora nessun movimento. Quando versi qualcosa o partecipi a una spesa, lo vedi qui.",
     movimentiCassa: "Tutti i movimenti della cassa",
+    entrateUsciteTitolo: "Tutte le entrate e uscite",
     nessunMovimento:
       "La cassa è ancora vuota. I movimenti compariranno qui.",
     versamento: "Versamento",
