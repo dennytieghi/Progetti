@@ -558,11 +558,17 @@ export async function insertCashDeclaration(input: {
 }
 
 /**
- * Conferma del rappresentante: nasce il movimento vero e la
- * dichiarazione viene marcata. Tre passi non atomici (stesso pattern
- * di insertMovementWithShares): se l'ultimo fallisce, la dichiarazione
- * resta pending e la conferma si può ripetere — il chiamante deve
- * controllare status = 'pending' prima di agire.
+ * Conferma del rappresentante: claim-first con rollback. Prima si
+ * "prenota" la dichiarazione (pending → confirmed): due schede aperte
+ * in contemporanea non possono vincere entrambe, perché lo `update`
+ * è guardato da `status = 'pending'` e solo una richiesta trova la riga.
+ * Se la prenotazione non trova righe, la dichiarazione è già stata
+ * gestita altrove: si torna `false` senza creare nulla.
+ * Solo dopo aver vinto la prenotazione si crea il movimento; se la
+ * creazione fallisce si ripristina lo stato pending (rollback) e si
+ * rilancia l'errore. Infine si collega il movimento alla dichiarazione:
+ * qui non serve più la guardia sullo status, perché la prenotazione è
+ * già nostra in esclusiva.
  */
 export async function confirmCashDeclaration(input: {
   declarationId: string;
@@ -572,27 +578,47 @@ export async function confirmCashDeclaration(input: {
   amountCents: number;
   method: PaymentMethod;
   title: string;
-}): Promise<void> {
-  const movement = await insertMovementWithShares({
-    classId: input.classId,
-    createdBy: input.representativeId,
-    kind: "deposit",
-    title: input.title,
-    method: input.method,
-    shares: [{ userId: input.parentId, amountCents: input.amountCents }],
-  });
-
+}): Promise<boolean> {
   const supabase = await supabaseServer();
-  const { error } = await supabase
+
+  const { data: claimed, error: claimError } = await supabase
     .from("cash_declarations")
     .update({
       status: "confirmed",
-      movement_id: movement.id,
       decided_at: new Date().toISOString(),
     })
     .eq("id", input.declarationId)
-    .eq("status", "pending");
-  if (error) throw new Error(`Conferma fallita: ${error.message}`);
+    .eq("status", "pending")
+    .select();
+  if (claimError) throw new Error(`Conferma fallita: ${claimError.message}`);
+  if (!claimed || claimed.length === 0) return false;
+
+  let movement: CashMovementRow;
+  try {
+    movement = await insertMovementWithShares({
+      classId: input.classId,
+      createdBy: input.representativeId,
+      kind: "deposit",
+      title: input.title,
+      method: input.method,
+      shares: [{ userId: input.parentId, amountCents: input.amountCents }],
+    });
+  } catch (err) {
+    await supabase
+      .from("cash_declarations")
+      .update({ status: "pending", decided_at: null })
+      .eq("id", input.declarationId)
+      .eq("status", "confirmed");
+    throw err;
+  }
+
+  const { error: linkError } = await supabase
+    .from("cash_declarations")
+    .update({ movement_id: movement.id })
+    .eq("id", input.declarationId);
+  if (linkError) throw new Error(`Conferma fallita: ${linkError.message}`);
+
+  return true;
 }
 
 export async function rejectCashDeclaration(declarationId: string): Promise<void> {
