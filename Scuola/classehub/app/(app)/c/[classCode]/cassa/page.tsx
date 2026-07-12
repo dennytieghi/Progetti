@@ -184,6 +184,29 @@ export default async function CassaPage({
                   </span>
                 </div>
               )}
+              {/* Anche il rappresentante è un genitore: la sua quota. */}
+              <div className="flex min-w-28 flex-col gap-1 border-l border-hairline px-4 py-3.5">
+                <span className="flex items-center gap-1.5">
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "size-[7px] shrink-0 rounded-full",
+                      contestoSaldo.negativo ? "bg-danger" : "bg-success"
+                    )}
+                  />
+                  <span className="whitespace-nowrap text-[15px] text-ink-soft">
+                    {it.cassa.statTuaQuota}
+                  </span>
+                </span>
+                <span
+                  className={cn(
+                    "font-display text-[24px] font-bold leading-tight",
+                    contestoSaldo.negativo && "text-danger"
+                  )}
+                >
+                  {formatEuroCents(miaQuota)}
+                </span>
+              </div>
             </>
           ) : (
             <div className="flex flex-1 flex-col gap-1 px-4 py-3.5 pl-0.5">
