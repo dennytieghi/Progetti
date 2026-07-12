@@ -109,13 +109,7 @@ export default async function CassaPage({
   );
 
   return (
-    <div className="mx-auto max-w-2xl space-y-6">
-      <div>
-        <h1 className="text-[28px] font-bold">{it.cassa.titolo}</h1>
-        <p className="mt-1 text-ink-soft">
-          {ctx.isRepresentative ? it.cassa.spiegaRep : it.cassa.spiegaGenitore}
-        </p>
-      </div>
+    <div className="mx-auto max-w-2xl space-y-6 font-body">
 
       <div aria-live="polite" className="space-y-3">
         {fatto === "1" && <Banner tone="success">{it.cassa.registrato}</Banner>}
@@ -131,6 +125,95 @@ export default async function CassaPage({
         )}
       </div>
 
+      {/* Pannello riepilogo (docs/DESIGN.md): titolo + saldo a segmenti */}
+      <section className="rounded-[22px] border border-hairline bg-paper px-5 pb-1 pt-5">
+        <div className="mb-4">
+          <h1 className="font-display text-[28px] font-bold">{it.cassa.titolo}</h1>
+          <p className="text-[16px] text-ink-soft">
+            {ctx.isRepresentative ? it.cassa.spiegaRep : it.cassa.spiegaGenitore}
+          </p>
+        </div>
+        <div className="flex overflow-x-auto border-t border-hairline">
+          {ctx.isRepresentative ? (
+            <>
+              <div className="flex min-w-32 flex-1 flex-col gap-1 px-4 py-3.5 pl-0.5">
+                <span className="flex items-center gap-1.5">
+                  <span aria-hidden className="size-[7px] shrink-0 rounded-full bg-brand" />
+                  <span className="whitespace-nowrap text-[15px] text-ink-soft">
+                    {it.cassa.saldoCassa}
+                  </span>
+                </span>
+                <span className="font-display text-[32px] font-bold leading-tight">
+                  {formatEuroCents(totaleClasseRep)}
+                </span>
+              </div>
+              {debitori.length > 0 && (
+                <div className="flex min-w-32 flex-1 flex-col gap-1 border-l border-hairline px-4 py-3.5">
+                  <span className="flex items-center gap-1.5">
+                    <span
+                      aria-hidden
+                      className="size-[7px] shrink-0 rounded-full bg-urgente"
+                    />
+                    <span className="whitespace-nowrap text-[15px] text-ink-soft">
+                      {debitori.length === 1
+                        ? it.cassa.statDeveVersareUno
+                        : it.cassa.statDevonoVersare.replace(
+                            "{n}",
+                            String(debitori.length)
+                          )}
+                    </span>
+                  </span>
+                  <span className="font-display text-[32px] font-bold leading-tight">
+                    {formatEuroCents(totaleDovutoCents)}
+                  </span>
+                </div>
+              )}
+              {daConfermare.length > 0 && (
+                <div className="flex min-w-24 flex-col gap-1 border-l border-hairline px-4 py-3.5">
+                  <span className="flex items-center gap-1.5">
+                    <span
+                      aria-hidden
+                      className="size-[7px] shrink-0 rounded-full bg-avviso"
+                    />
+                    <span className="whitespace-nowrap text-[15px] text-ink-soft">
+                      {it.cassa.statDaConfermare}
+                    </span>
+                  </span>
+                  <span className="font-display text-[32px] font-bold leading-tight">
+                    {daConfermare.length}
+                  </span>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="flex flex-1 flex-col gap-1 px-4 py-3.5 pl-0.5">
+              <span className="flex items-center gap-1.5">
+                <span aria-hidden className="size-[7px] shrink-0 rounded-full bg-brand" />
+                <span className="whitespace-nowrap text-[15px] text-ink-soft">
+                  {it.cassa.quantoRestaTitolo}
+                </span>
+              </span>
+              <span
+                className={cn(
+                  "font-display text-[32px] font-bold leading-tight",
+                  contestoSaldo.negativo ? "text-danger" : "text-ink"
+                )}
+              >
+                {formatEuroCents(Math.abs(miaQuota))}
+              </span>
+              <span
+                className={cn(
+                  "text-[15px]",
+                  contestoSaldo.negativo ? "font-semibold text-danger" : "text-ink-soft"
+                )}
+              >
+                {contestoSaldo.testo}
+              </span>
+            </div>
+          )}
+        </div>
+      </section>
+
       {ctx.isRepresentative && daConfermare.length > 0 && (
         <DaConfermareList
           classCode={classCode}
@@ -139,45 +222,6 @@ export default async function CassaPage({
             parentName: nomi.get(d.user_id) ?? "—",
           }))}
         />
-      )}
-
-      {ctx.isRepresentative ? (
-        <Card className="text-center">
-          <p className="text-[16px] font-semibold text-ink-soft">{it.cassa.saldoCassa}</p>
-          <p className="text-[44px] font-bold leading-tight">
-            {formatEuroCents(totaleClasseRep)}
-          </p>
-          {debitori.length > 0 && (
-            <p className="text-[15px] text-ink-soft">
-              {(debitori.length === 1
-                ? it.cassa.deveVersareUno
-                : it.cassa.devonoVersare.replace("{n}", String(debitori.length))
-              ).replace("{importo}", formatEuroCents(totaleDovutoCents))}
-            </p>
-          )}
-        </Card>
-      ) : (
-        <Card className="text-center">
-          <p className="text-[16px] font-semibold text-ink-soft">
-            {it.cassa.quantoRestaTitolo}
-          </p>
-          <p
-            className={cn(
-              "text-[44px] font-bold leading-tight",
-              contestoSaldo.negativo ? "text-danger" : "text-ink"
-            )}
-          >
-            {formatEuroCents(Math.abs(miaQuota))}
-          </p>
-          <p
-            className={cn(
-              "text-[15px]",
-              contestoSaldo.negativo ? "font-semibold text-danger" : "text-ink-soft"
-            )}
-          >
-            {contestoSaldo.testo}
-          </p>
-        </Card>
       )}
 
       {haCoordinate && !ctx.isRepresentative && <ComePagareBox klass={ctx.klass} />}
@@ -203,7 +247,9 @@ export default async function CassaPage({
 
       {mieDichiarazioni.length > 0 && (
         <section>
-          <h2 className="mb-3 text-[22px] font-bold">{it.cassa.tueDichiarazioni}</h2>
+          <h2 className="mb-3 font-display text-[22px] font-bold">
+            {it.cassa.tueDichiarazioni}
+          </h2>
           <ul className="space-y-3">
             {mieDichiarazioni.map((d) => (
               <li key={d.id}>
@@ -258,7 +304,9 @@ export default async function CassaPage({
       {ctx.isRepresentative && (
         <section>
           <div className="mb-3 flex items-center justify-between gap-3">
-            <h2 className="text-[22px] font-bold">{it.cassa.chiDeveVersareTitolo}</h2>
+            <h2 className="font-display text-[22px] font-bold">
+              {it.cassa.chiDeveVersareTitolo}
+            </h2>
             <Link
               href={`/c/${classCode}/cassa/promemoria`}
               className={buttonClasses("secondary")}
@@ -300,13 +348,13 @@ export default async function CassaPage({
 
       {/* Rappresentante: accordion chi è a posto */}
       {ctx.isRepresentative && aPosto.length > 0 && (
-        <details className="rounded-2xl border border-line bg-paper px-5 py-4">
+        <details className="rounded-2xl border border-hairline bg-paper px-5 py-4">
           <summary className="min-h-12 cursor-pointer text-[17px] font-semibold">
             {aPosto.length === 1
               ? it.cassa.genitoreAPostoUno
               : it.cassa.genitoriAPosto.replace("{n}", String(aPosto.length))}
           </summary>
-          <ul className="mt-3 divide-y divide-line">
+          <ul className="mt-3 divide-y divide-hairline">
             {aPosto.map((m) => (
               <li
                 key={m.userId}
@@ -323,7 +371,9 @@ export default async function CassaPage({
       {/* Rappresentante: le ultime entrate e uscite */}
       {ctx.isRepresentative && (
         <section>
-          <h2 className="mb-3 text-[22px] font-bold">{it.cassa.ultimeEntrateUscite}</h2>
+          <h2 className="mb-3 font-display text-[22px] font-bold">
+            {it.cassa.ultimeEntrateUscite}
+          </h2>
           {items.length === 0 ? (
             <Card>
               <p className="text-ink-soft">{it.cassa.nessunMovimento}</p>
@@ -383,7 +433,9 @@ export default async function CassaPage({
       {/* Genitore: i tuoi movimenti */}
       {!ctx.isRepresentative && (
         <section>
-          <h2 className="mb-3 text-[22px] font-bold">{it.cassa.movimentiCassa}</h2>
+          <h2 className="mb-3 font-display text-[22px] font-bold">
+            {it.cassa.movimentiCassa}
+          </h2>
 
           {items.length > 0 && (
             <div className="mb-4 space-y-3">
@@ -395,10 +447,10 @@ export default async function CassaPage({
                       tipo: f.key === "tutti" ? null : f.key,
                     })}`}
                     className={cn(
-                      "min-h-12 rounded-full border-2 px-4 py-2.5 text-[16px] font-semibold",
+                      "min-h-12 rounded-full border px-4 py-2.5 text-[16px] font-semibold",
                       f.key === filtroAttivo
-                        ? "border-accent bg-accent text-white"
-                        : "border-line bg-paper text-ink-soft hover:border-accent"
+                        ? "border-brand bg-brand text-white"
+                        : "border-hairline bg-paper text-ink-soft hover:border-brand hover:text-ink"
                     )}
                   >
                     {f.label}

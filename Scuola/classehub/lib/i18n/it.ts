@@ -434,6 +434,9 @@ export const it = {
     // Nuova home rappresentante
     devonoVersare: "{n} genitori devono ancora versare {importo}.",
     deveVersareUno: "1 genitore deve ancora versare {importo}.",
+    statDevonoVersare: "{n} devono ancora versare",
+    statDeveVersareUno: "1 deve ancora versare",
+    statDaConfermare: "da confermare",
     bottoneRicevuto: "Ho ricevuto soldi",
     bottoneSpeso: "Ho speso soldi",
     chiDeveVersareTitolo: "Chi deve versare",
