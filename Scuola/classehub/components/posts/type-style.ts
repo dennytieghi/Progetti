@@ -9,7 +9,17 @@ import type { PostRow } from "@/lib/db/types";
  */
 export const POST_TYPE_STYLE: Record<
   PostRow["type"],
-  { icon: typeof Megaphone; chip: string; badge: string; hover: string; action: string }
+  {
+    icon: typeof Megaphone;
+    chip: string;
+    badge: string;
+    hover: string;
+    action: string;
+    /** Box in evidenza sopra i filtri: sfondo tinta + testo leggibile. */
+    pinBox: string;
+    pinBadge: string;
+    pinText: string;
+  }
 > = {
   notice: {
     icon: Megaphone,
@@ -17,6 +27,9 @@ export const POST_TYPE_STYLE: Record<
     badge: "bg-avviso text-avviso-ink",
     hover: "hover:border-avviso",
     action: "text-avviso-ink",
+    pinBox: "bg-avviso-tint",
+    pinBadge: "bg-avviso text-avviso-ink",
+    pinText: "text-avviso-tint-ink",
   },
   deadline: {
     icon: Clock,
@@ -24,6 +37,9 @@ export const POST_TYPE_STYLE: Record<
     badge: "bg-scadenza text-white",
     hover: "hover:border-scadenza",
     action: "text-scadenza",
+    pinBox: "bg-scadenza-tint",
+    pinBadge: "bg-scadenza text-white",
+    pinText: "text-scadenza-tint-ink",
   },
   poll: {
     icon: Vote,
@@ -31,6 +47,9 @@ export const POST_TYPE_STYLE: Record<
     badge: "bg-sondaggio text-white",
     hover: "hover:border-sondaggio",
     action: "text-sondaggio",
+    pinBox: "bg-sondaggio-tint",
+    pinBadge: "bg-sondaggio text-white",
+    pinText: "text-sondaggio-tint-ink",
   },
   material: {
     icon: Paperclip,
@@ -38,5 +57,8 @@ export const POST_TYPE_STYLE: Record<
     badge: "bg-materiale text-white",
     hover: "hover:border-materiale",
     action: "text-materiale",
+    pinBox: "bg-materiale-tint",
+    pinBadge: "bg-materiale text-white",
+    pinText: "text-materiale-tint-ink",
   },
 };

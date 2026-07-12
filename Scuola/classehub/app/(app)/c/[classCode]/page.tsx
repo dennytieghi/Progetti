@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Pin, Plus } from "lucide-react";
 import { PostCard } from "@/components/posts/PostCard";
+import { POST_TYPE_STYLE } from "@/components/posts/type-style";
 import { Banner } from "@/components/shared/Banner";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { buttonClasses } from "@/components/ui/Button";
@@ -129,31 +130,45 @@ export default async function BachecaPage({
       {/* Messaggi in evidenza: box rossi sopra i filtri */}
       {pinnati.length > 0 && (
         <ul className="mb-4 space-y-2.5">
-          {pinnati.map((post) => (
-            <li key={post.id}>
-              <Link
-                href={`/c/${classCode}/p/${post.slug}`}
-                className="flex items-center gap-3 rounded-2xl bg-urgente-tint px-4 py-3"
-              >
-                <span
-                  aria-hidden
-                  className="flex size-[34px] shrink-0 items-center justify-center rounded-full bg-urgente"
+          {pinnati.map((post) => {
+            const stile = POST_TYPE_STYLE[post.type];
+            return (
+              <li key={post.id}>
+                <Link
+                  href={`/c/${classCode}/p/${post.slug}`}
+                  className={cn(
+                    "flex items-center gap-3 rounded-2xl px-4 py-3",
+                    stile.pinBox
+                  )}
                 >
-                  <Pin className="size-4 text-white" />
-                </span>
-                <span className="min-w-0">
-                  <b className="block text-[18px] leading-snug text-urgente-ink">
-                    {post.title}
-                  </b>
-                  <span className="text-[15px] text-urgente-ink/85">
-                    {post.type === "deadline" && post.due_date
-                      ? `${it.bacheca.entroIl} ${formatDateIt(post.due_date)}`
-                      : formatShortDateIt(post.created_at)}
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "flex size-[34px] shrink-0 items-center justify-center rounded-full",
+                      stile.pinBadge
+                    )}
+                  >
+                    <Pin className="size-4" />
                   </span>
-                </span>
-              </Link>
-            </li>
-          ))}
+                  <span className="min-w-0">
+                    <b
+                      className={cn(
+                        "block text-[18px] leading-snug",
+                        stile.pinText
+                      )}
+                    >
+                      {post.title}
+                    </b>
+                    <span className={cn("text-[15px] opacity-85", stile.pinText)}>
+                      {post.type === "deadline" && post.due_date
+                        ? `${it.bacheca.entroIl} ${formatDateIt(post.due_date)}`
+                        : formatShortDateIt(post.created_at)}
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       )}
 

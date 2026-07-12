@@ -61,6 +61,12 @@
   --color-avviso-ink: #4a3600;
   --color-urgente-ink: #a42323;
 
+  /* Testo leggibile sugli sfondi tinta di ogni tipo (docs/DESIGN.md) */
+  --color-avviso-tint-ink: #8a6300;
+  --color-scadenza-tint-ink: #973016;
+  --color-sondaggio-tint-ink: #1e4cb8;
+  --color-materiale-tint-ink: #0e7a54;
+
   /*
     Font del redesign (docs/DESIGN.md), caricati in app/layout.tsx
     con next/font (variabili --font-space-grotesk / --font-inter
