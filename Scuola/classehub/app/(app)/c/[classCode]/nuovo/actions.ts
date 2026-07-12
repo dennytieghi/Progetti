@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { requireRepresentative } from "@/lib/auth/require-membership";
+import { FEATURES } from "@/lib/features";
 import { getRequestById } from "@/lib/db/queries";
 import { createPost, setRequestStatus } from "@/lib/db/mutations";
 import { savePhoto } from "@/lib/photos";
@@ -29,6 +30,7 @@ function str(formData: FormData, key: string): string {
 
 /** Collega l'eventuale richiesta di origine, verificando che sia della classe. */
 async function linkRequest(formData: FormData, classId: string, postId: string): Promise<void> {
+  if (!FEATURES.richieste) return;
   const requestId = str(formData, "requestId");
   if (!requestId) return;
   const request = await getRequestById(requestId);

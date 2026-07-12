@@ -84,6 +84,13 @@ Usa due browser (normale + incognito) per i due ruoli.
 
 ## 7. Richieste dei genitori
 
+> **DISABILITATA dal 12/7/2026 (ADR-019)**: zona spenta dietro
+> `FEATURES.richieste` in `lib/features.ts`. Le spunte sotto valgono
+> per quando/se verrà riattivata. Verifiche a interruttore spento:
+> nessuna voce "Richieste"/"Scrivi al rappresentante" nei menu dei due
+> ruoli; `/c/CODICE/richieste` e `/c/CODICE/invia-richiesta` → pagina
+> non trovata; l'azione di invio rifiuta anche chiamata direttamente.
+
 - [x] (Genitore) Invia richiesta → conferma verde + compare nello storico.
 - [x] 6ª richiesta nelle 24h → errore "massimo 5" ("Hai già inviato 5
       richieste nelle ultime 24 ore").

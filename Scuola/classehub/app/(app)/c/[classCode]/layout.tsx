@@ -1,5 +1,6 @@
 import { AppHeader } from "@/components/shared/AppHeader";
 import { requireActiveMembership } from "@/lib/auth/require-membership";
+import { FEATURES } from "@/lib/features";
 import { countPendingDeclarations, listRequests } from "@/lib/db/queries";
 
 /**
@@ -16,9 +17,10 @@ export default async function ClassLayout({
   const { classCode } = await params;
   const ctx = await requireActiveMembership(classCode);
 
-  const openRequestsCount = ctx.isRepresentative
-    ? (await listRequests(ctx.klass.id)).filter((r) => r.status === "open").length
-    : 0;
+  const openRequestsCount =
+    ctx.isRepresentative && FEATURES.richieste
+      ? (await listRequests(ctx.klass.id)).filter((r) => r.status === "open").length
+      : 0;
   const pendingDeclarationsCount = ctx.isRepresentative
     ? await countPendingDeclarations(ctx.klass.id)
     : 0;

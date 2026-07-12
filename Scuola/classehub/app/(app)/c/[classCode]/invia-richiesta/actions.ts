@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { requireActiveMembership } from "@/lib/auth/require-membership";
+import { FEATURES } from "@/lib/features";
 import { countRecentRequests } from "@/lib/db/queries";
 import { createRequest } from "@/lib/db/mutations";
 import { createRequestSchema } from "@/lib/validation/schemas";
@@ -18,6 +19,9 @@ export async function inviaRichiestaAction(
   _prev: FormState,
   formData: FormData
 ): Promise<FormState> {
+  // Zona richieste disabilitata (ADR-019): rifiuta anche le chiamate dirette.
+  if (!FEATURES.richieste) return { error: it.common.erroreGenerico };
+
   const classCode = formData.get("classCode");
   const ctx = await requireActiveMembership(
     typeof classCode === "string" ? classCode : ""

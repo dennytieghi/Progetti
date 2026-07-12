@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Archive, Megaphone, Vote } from "lucide-react";
+import { FEATURES } from "@/lib/features";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { Button, buttonClasses } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -20,6 +22,7 @@ export default async function RichiesteRepPage({
 }: {
   params: Promise<{ classCode: string }>;
 }) {
+  if (!FEATURES.richieste) notFound();
   const { classCode } = await params;
   const ctx = await requireRepresentative(classCode);
 

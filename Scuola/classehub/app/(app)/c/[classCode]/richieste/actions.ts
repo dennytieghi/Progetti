@@ -2,11 +2,15 @@
 
 import { revalidatePath } from "next/cache";
 import { requireRepresentative } from "@/lib/auth/require-membership";
+import { FEATURES } from "@/lib/features";
 import { getRequestById } from "@/lib/db/queries";
 import { setRequestStatus } from "@/lib/db/mutations";
 
 /** Archivia una richiesta senza pubblicarla: solo rappresentante. */
 export async function archiviaRichiestaAction(formData: FormData): Promise<void> {
+  // Zona richieste disabilitata (ADR-019): rifiuta anche le chiamate dirette.
+  if (!FEATURES.richieste) return;
+
   const classCode = formData.get("classCode");
   const requestId = formData.get("requestId");
   if (typeof classCode !== "string" || typeof requestId !== "string") return;

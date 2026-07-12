@@ -12,6 +12,7 @@ import {
   Wallet,
 } from "lucide-react";
 import { it } from "@/lib/i18n/it";
+import { FEATURES } from "@/lib/features";
 import { cn } from "@/lib/cn";
 
 /**
@@ -58,12 +59,16 @@ export function AppHeader({
     ? [
         { href: base, label: it.bacheca.titolo, icon: Home },
         { href: `${base}/nuovo`, label: it.bacheca.nuovoPost, icon: Plus },
-        {
-          href: `${base}/richieste`,
-          label: it.richieste.titoloRep,
-          icon: Inbox,
-          badge: openRequestsCount,
-        },
+        ...(FEATURES.richieste
+          ? [
+              {
+                href: `${base}/richieste`,
+                label: it.richieste.titoloRep,
+                icon: Inbox,
+                badge: openRequestsCount,
+              },
+            ]
+          : []),
         {
           href: `${base}/cassa`,
           label: it.cassa.titolo,
@@ -74,11 +79,15 @@ export function AppHeader({
       ]
     : [
         { href: base, label: it.bacheca.titolo, icon: Home },
-        {
-          href: `${base}/invia-richiesta`,
-          label: it.richieste.titoloGenitore,
-          icon: MessageSquarePlus,
-        },
+        ...(FEATURES.richieste
+          ? [
+              {
+                href: `${base}/invia-richiesta`,
+                label: it.richieste.titoloGenitore,
+                icon: MessageSquarePlus,
+              },
+            ]
+          : []),
         { href: `${base}/cassa`, label: it.cassa.titolo, icon: Wallet },
         { href: "/account", label: it.account.titolo, icon: UserRound },
       ];

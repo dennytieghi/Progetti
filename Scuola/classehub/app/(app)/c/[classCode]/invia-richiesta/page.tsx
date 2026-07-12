@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { FEATURES } from "@/lib/features";
 import { Banner } from "@/components/shared/Banner";
 import { Card } from "@/components/ui/Card";
 import { requireActiveMembership } from "@/lib/auth/require-membership";
@@ -17,6 +19,7 @@ export default async function InviaRichiestaPage({
   params: Promise<{ classCode: string }>;
   searchParams: Promise<{ inviata?: string }>;
 }) {
+  if (!FEATURES.richieste) notFound();
   const { classCode } = await params;
   const { inviata } = await searchParams;
   const ctx = await requireActiveMembership(classCode);

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { POST_TYPE_STYLE } from "@/components/posts/type-style";
 import { requireRepresentative } from "@/lib/auth/require-membership";
+import { FEATURES } from "@/lib/features";
 import { getRequestById } from "@/lib/db/queries";
 import { it } from "@/lib/i18n/it";
 import { cn } from "@/lib/cn";
@@ -36,9 +37,10 @@ export default async function NuovoPostPage({
   const selected = TYPES.find((t) => t.type === tipo);
 
   // Precompila dal testo della richiesta, solo se appartiene alla classe.
+  // Con la zona richieste disabilitata (ADR-019) il parametro si ignora.
   let defaultBody = "";
   let requestId = "";
-  if (richiesta) {
+  if (richiesta && FEATURES.richieste) {
     const request = await getRequestById(richiesta);
     if (request && request.class_id === ctx.klass.id) {
       defaultBody = request.body;

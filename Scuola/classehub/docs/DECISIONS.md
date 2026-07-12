@@ -115,6 +115,13 @@ ADR (Architecture Decision Records). Formato breve: contesto, decisione, alterna
 **Trade-off accettato**: la conferma è manuale — il rappresentante deve controllare il proprio conto. È lo stesso lavoro che fa oggi col gruppo WhatsApp, ma con una lista ordinata invece di messaggi sparsi.
 **Revisione se**: nel pilota i rappresentanti lamentano l'attesa delle conferme o le segnalazioni fantasma superano casi sporadici.
 
+## ADR-019 — Zona richieste disabilitata (interruttore, non cancellazione)
+**Contesto**: ripensando i ruoli (rappresentante scrive, genitori leggono), l'unico canale di testo libero genitore→rappresentante — la zona Richieste (V1.3) — contraddice l'identità del prodotto e duplica ciò che il gruppo WhatsApp fa già.
+**Decisione**: la funzione è spenta dietro l'interruttore `FEATURES.richieste` (`lib/features.ts`): voci di menu nascoste per entrambi i ruoli, pagine → 404, Server Action che rifiutano anche le chiamate dirette, parametro `?richiesta=` ignorato in "nuovo", badge non calcolato. Codice, tabella `requests` e RLS restano intatti: per reintegrare basta rimettere `true` e ripassare TEST_PLAN §7.
+**Scartato**: cancellazione completa (tabella e codice) — brucia una feature finita e testata che potrebbe tornare col feedback del pilota.
+**Trade-off accettato**: codice morto ma custodito; le interazioni strutturate dei genitori (voto anonimo, dichiarazione versamento, "L'ho visto") restano attive.
+**Revisione se**: dopo il pilota nessuno ne sente la mancanza → cancellare davvero (codice + migrazione drop); oppure i rappresentanti chiedono un canale ordinato → riaccendere.
+
 ## ADR-018 — "L'ho visto" esplicito, mai sui sondaggi
 **Contesto**: il rappresentante non sa chi ha letto un avviso; il genitore vuole togliere dal contatore ciò che ha già guardato.
 **Decisione**: tabella `post_reads` (post_id, user_id, read_at). Il membro attivo spunta "L'ho visto" su avvisi, scadenze e materiale (toggle, dal dettaglio); sui sondaggi il visto è il VOTO. Contatori bacheca personali: "avvisi nuovi" = ultimi 7 giorni non visti da me; "sondaggi aperti" = aperti dove non ho votato. Il rappresentante vede SOLO il conteggio ("N su M genitori"), non i nomi (scelta di Denny 12/7: il numero basta e evita la gogna); per i sondaggi vede solo quanti voti, mai chi (il voto resta anonimo, ADR-003 non si tocca). La RLS permette comunque al rappresentante di leggere le righe: se servirà il sollecito mirato, è solo UI. La spunta di una scadenza NON la toglie da "scadenze aperte": aperta = non ancora scaduta.

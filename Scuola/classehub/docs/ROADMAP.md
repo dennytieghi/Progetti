@@ -78,6 +78,7 @@
 - [x] "L'ho visto" sui post con contatori bacheca personali e conteggio visti per il rappresentante (ADR-018). Migrazione 0009 eseguita. Test e2e + probe RLS su TEST5B (12/7/2026, TEST_PLAN §16).
 - [x] Redesign visivo (docs/DESIGN.md): palette e font nel tema, sidebar, bacheca con pannello riepilogo e segmenti cliccabili, scelta tipo post, cassa. Scala font accessibile (CLAUDE.md §6 vince sui mockup).
 - [x] Vista calendario della bacheca (settimana/mese, spec 2026-07-12). Test e2e su TEST5B (12/7/2026, TEST_PLAN §17, 9 scenari).
+- [x] Zona Richieste DISABILITATA dietro interruttore `FEATURES.richieste` (ADR-019): rappresentante scrive, genitori leggono; il testo libero resta su WhatsApp. Codice e tabella conservati per un eventuale reintegro.
 
 ## V1.1 — Post-pilota (dopo feedback reale)
 - Notifiche push web (per chi accetta).
