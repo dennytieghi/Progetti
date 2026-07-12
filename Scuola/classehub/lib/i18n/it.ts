@@ -10,6 +10,11 @@ export const it = {
       "Le informazioni della classe in un posto solo. Senza perderle nella chat.",
   },
 
+  header: {
+    ruoloRappresentante: "Rappresentante",
+    ruoloGenitore: "Genitore",
+  },
+
   common: {
     salva: "Salva",
     annulla: "Annulla",
@@ -133,6 +138,14 @@ export const it = {
     soloAttivi: "Nascondi gli archiviati",
     filtroTutti: "Tutti",
     entroIl: "Entro",
+    saluto: "Ciao {nome}",
+    sottotitolo: "Ecco cosa serve alla classe questa settimana",
+    statInEvidenza: "in evidenza",
+    statAvvisiNuovi: "avvisi nuovi",
+    statScadenzeAperte: "scadenze aperte",
+    statVotiSondaggi: "voti sondaggi",
+    apri: "Apri",
+    vota: "Vota",
     eliminato: "Contenuto eliminato dalla bacheca.",
     chiuso: "Chiuso",
     chiudeIl: "Puoi votare fino a",

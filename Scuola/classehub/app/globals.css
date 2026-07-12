@@ -49,6 +49,18 @@
   --color-urgente: #e23b3b;
   --color-urgente-tint: #fde6e6;
 
+  /* Neutri del redesign (docs/DESIGN.md §Palette) */
+  --color-ink-faint: #a7acb8;
+  --color-hairline: #eceae1;
+  --color-paper-hover: #f5f4ee;
+
+  /*
+    Testo scuro sul giallo pieno (unica eccezione alla regola
+    testo-bianco, WCAG) e testo sul tint rosso del box in evidenza.
+  */
+  --color-avviso-ink: #4a3600;
+  --color-urgente-ink: #a42323;
+
   /*
     Font del redesign (docs/DESIGN.md), caricati in app/layout.tsx
     con next/font (variabili --font-space-grotesk / --font-inter
