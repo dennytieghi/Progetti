@@ -6,7 +6,12 @@ import { Banner } from "@/components/shared/Banner";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { buttonClasses } from "@/components/ui/Button";
 import { requireActiveMembership } from "@/lib/auth/require-membership";
-import { listPollVotes, listPosts, listUpcomingDeadlines } from "@/lib/db/queries";
+import {
+  getPoll,
+  isPollClosed,
+  listPosts,
+  listUpcomingDeadlines,
+} from "@/lib/db/queries";
 import { formatDateIt, formatShortDateIt } from "@/lib/format-date";
 import { it } from "@/lib/i18n/it";
 import { cn } from "@/lib/cn";
@@ -30,10 +35,15 @@ export default async function BachecaPage({
   searchParams,
 }: {
   params: Promise<{ classCode: string }>;
-  searchParams: Promise<{ tipo?: string; archiviati?: string; eliminato?: string }>;
+  searchParams: Promise<{
+    tipo?: string;
+    vista?: string;
+    archiviati?: string;
+    eliminato?: string;
+  }>;
 }) {
   const { classCode } = await params;
-  const { tipo, archiviati, eliminato } = await searchParams;
+  const { tipo, vista, archiviati, eliminato } = await searchParams;
   const ctx = await requireActiveMembership(classCode);
 
   const showArchived = ctx.isRepresentative && archiviati === "1";
@@ -41,36 +51,72 @@ export default async function BachecaPage({
 
   const deadlines = await listUpcomingDeadlines(ctx.klass.id);
   const allPosts = await listPosts(ctx.klass.id, { includeArchived: showArchived });
-  const posts = allPosts.filter((p) =>
-    activeFilter.type ? p.type === activeFilter.type : true
-  );
 
   // Statistiche del pannello riepilogo, dai dati già caricati.
   // "Nuovo" = pubblicato negli ultimi 7 giorni.
   const attivi = allPosts.filter((p) => !p.archived);
-  const inEvidenza = attivi.filter((p) => p.pinned).length;
+  const evidenzaPosts = attivi.filter((p) => p.pinned);
   const sogliaNuovi = Date.now() - SETTE_GIORNI_MS;
-  const avvisiNuovi = attivi.filter(
+  const nuoviPosts = attivi.filter(
     (p) => p.type === "notice" && new Date(p.created_at).getTime() >= sogliaNuovi
-  ).length;
-  // I voti visibili dipendono dall'RLS: un genitore che non ha ancora
-  // votato non vede i voti degli altri (per lui il numero è più basso).
-  const votiPerSondaggio = await Promise.all(
-    attivi.filter((p) => p.type === "poll").map((p) => listPollVotes(p.id))
   );
-  const votiSondaggi = votiPerSondaggio.reduce((somma, voti) => somma + voti.length, 0);
+  // Sondaggi ancora aperti al voto (chiusura letta col helper esistente).
+  const pollPosts = attivi.filter((p) => p.type === "poll");
+  const pollDettagli = await Promise.all(pollPosts.map((p) => getPoll(p.id)));
+  const sondaggiAperti = pollPosts.filter((_, i) => {
+    const poll = pollDettagli[i];
+    return poll !== null && poll !== undefined && !isPollClosed(poll);
+  });
 
-  const stats: Array<{ dot: string; label: string; num: number }> = [
-    { dot: "bg-urgente", label: it.bacheca.statInEvidenza, num: inEvidenza },
-    { dot: "bg-avviso", label: it.bacheca.statAvvisiNuovi, num: avvisiNuovi },
-    { dot: "bg-scadenza", label: it.bacheca.statScadenzeAperte, num: deadlines.length },
-    { dot: "bg-sondaggio", label: it.bacheca.statVotiSondaggi, num: votiSondaggi },
+  // Ogni segmento è cliccabile: filtra il feed (vista) o, con un solo
+  // sondaggio aperto, porta dritto al sondaggio.
+  const base = `/c/${classCode}`;
+  const stats: Array<{ dot: string; label: string; num: number; href: string | null }> = [
+    {
+      dot: "bg-urgente",
+      label: it.bacheca.statInEvidenza,
+      num: evidenzaPosts.length,
+      href: evidenzaPosts.length > 0 ? `${base}?vista=evidenza` : null,
+    },
+    {
+      dot: "bg-avviso",
+      label: it.bacheca.statAvvisiNuovi,
+      num: nuoviPosts.length,
+      href: nuoviPosts.length > 0 ? `${base}?vista=nuovi` : null,
+    },
+    {
+      dot: "bg-scadenza",
+      label: it.bacheca.statScadenzeAperte,
+      num: deadlines.length,
+      href: deadlines.length > 0 ? `${base}?vista=scadenze` : null,
+    },
+    {
+      dot: "bg-sondaggio",
+      label: it.bacheca.statSondaggiAperti,
+      num: sondaggiAperti.length,
+      href:
+        sondaggiAperti.length === 1
+          ? `${base}/p/${sondaggiAperti[0]!.slug}`
+          : sondaggiAperti.length > 1
+            ? `${base}?vista=sondaggi`
+            : null,
+    },
   ];
 
+  // La vista (dal click su un segmento) vince sul filtro per tipo.
+  const VISTE: Record<string, { label: string; posts: typeof allPosts }> = {
+    evidenza: { label: it.bacheca.statInEvidenza, posts: evidenzaPosts },
+    nuovi: { label: it.bacheca.statAvvisiNuovi, posts: nuoviPosts },
+    scadenze: { label: it.bacheca.statScadenzeAperte, posts: deadlines },
+    sondaggi: { label: it.bacheca.statSondaggiAperti, posts: sondaggiAperti },
+  };
+  const vistaAttiva = vista ? (VISTE[vista] ?? null) : null;
+  const posts = vistaAttiva
+    ? vistaAttiva.posts
+    : allPosts.filter((p) => (activeFilter.type ? p.type === activeFilter.type : true));
+  const chipAttivo = vistaAttiva ? null : activeFilter.key;
+
   const nome = (ctx.profile?.display_name ?? "").trim().split(/\s+/)[0] ?? "";
-  // In evidenza: i pinnati vivono nei box rossi sopra i filtri
-  // (docs/DESIGN.md §Box pinnato) e restano anche nel feed.
-  const pinnati = attivi.filter((p) => p.pinned);
 
   return (
     <div className="font-body">
@@ -99,23 +145,37 @@ export default async function BachecaPage({
           )}
         </div>
         <div className="flex overflow-x-auto border-t border-hairline">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="flex min-w-24 flex-1 flex-col gap-1 border-l border-hairline px-4 py-3.5 first:border-l-0 first:pl-0.5"
-            >
-              <span className="flex items-center gap-1.5">
-                <span
-                  aria-hidden
-                  className={cn("size-[7px] shrink-0 rounded-full", stat.dot)}
-                />
-                <span className="whitespace-nowrap text-[15px] text-ink-soft">
-                  {stat.label}
+          {stats.map((stat) => {
+            const contenuto = (
+              <>
+                <span className="flex items-center gap-1.5">
+                  <span
+                    aria-hidden
+                    className={cn("size-[7px] shrink-0 rounded-full", stat.dot)}
+                  />
+                  <span className="whitespace-nowrap text-[15px] text-ink-soft">
+                    {stat.label}
+                  </span>
                 </span>
-              </span>
-              <span className="font-display text-[24px] font-bold">{stat.num}</span>
-            </div>
-          ))}
+                <span className="font-display text-[24px] font-bold">{stat.num}</span>
+              </>
+            );
+            const classi =
+              "flex min-w-24 flex-1 flex-col gap-1 border-l border-hairline px-4 py-3.5 first:border-l-0 first:pl-0.5";
+            return stat.href ? (
+              <Link
+                key={stat.label}
+                href={stat.href}
+                className={cn(classi, "transition-colors hover:bg-paper-hover")}
+              >
+                {contenuto}
+              </Link>
+            ) : (
+              <div key={stat.label} className={classi}>
+                {contenuto}
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -127,10 +187,10 @@ export default async function BachecaPage({
         <span aria-hidden className="h-px flex-1 bg-hairline" />
       </div>
 
-      {/* Messaggi in evidenza: box rossi sopra i filtri */}
-      {pinnati.length > 0 && (
+      {/* Messaggi in evidenza: box colorati sopra i filtri */}
+      {evidenzaPosts.length > 0 && (
         <ul className="mb-4 space-y-2.5">
-          {pinnati.map((post) => {
+          {evidenzaPosts.map((post) => {
             const stile = POST_TYPE_STYLE[post.type];
             return (
               <li key={post.id}>
@@ -185,6 +245,18 @@ export default async function BachecaPage({
         </ul>
       )}
 
+      {vistaAttiva && (
+        <p className="mb-4 flex flex-wrap items-center gap-2 text-[16px] text-ink-soft">
+          {it.bacheca.vistaAttiva.replace("{label}", vistaAttiva.label)}{" "}
+          <Link
+            href={`/c/${classCode}`}
+            className="font-semibold text-brand underline underline-offset-4"
+          >
+            {it.bacheca.vistaMostraTutto}
+          </Link>
+        </p>
+      )}
+
       <div className="mb-4 flex flex-wrap gap-2">
         {FILTERS.map((f) => (
           <Link
@@ -196,7 +268,7 @@ export default async function BachecaPage({
             }
             className={cn(
               "min-h-12 rounded-full border px-4 py-2.5 text-[16px] font-semibold",
-              f.key === activeFilter.key
+              f.key === chipAttivo
                 ? "border-brand bg-brand text-white"
                 : "border-hairline bg-paper text-ink-soft hover:border-brand hover:text-ink"
             )}
