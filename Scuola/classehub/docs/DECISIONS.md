@@ -115,6 +115,12 @@ ADR (Architecture Decision Records). Formato breve: contesto, decisione, alterna
 **Trade-off accettato**: la conferma è manuale — il rappresentante deve controllare il proprio conto. È lo stesso lavoro che fa oggi col gruppo WhatsApp, ma con una lista ordinata invece di messaggi sparsi.
 **Revisione se**: nel pilota i rappresentanti lamentano l'attesa delle conferme o le segnalazioni fantasma superano casi sporadici.
 
+## ADR-018 — "L'ho visto" esplicito, mai sui sondaggi
+**Contesto**: il rappresentante non sa chi ha letto un avviso; il genitore vuole togliere dal contatore ciò che ha già guardato.
+**Decisione**: tabella `post_reads` (post_id, user_id, read_at). Il membro attivo spunta "L'ho visto" su avvisi, scadenze e materiale (toggle, dal dettaglio); sui sondaggi il visto è il VOTO. Contatori bacheca personali: "avvisi nuovi" = ultimi 7 giorni non visti da me; "sondaggi aperti" = aperti dove non ho votato. Il rappresentante vede quanti e QUALI genitori hanno visto un post con la spunta; per i sondaggi vede solo quanti voti, mai chi (il voto resta anonimo, ADR-003 non si tocca). La spunta di una scadenza NON la toglie da "scadenze aperte": aperta = non ancora scaduta.
+**Scartato**: visto automatico all'apertura della pagina (falso positivo: aprire non è leggere, e il genitore non controlla cosa dichiara); de-anonimizzare i voti per mostrare chi manca (tutela dei genitori).
+**Revisione se**: i rappresentanti chiedono un sollecito mirato a chi non ha visto → bottone WhatsApp con i nomi, senza cambiare il modello.
+
 ## ADR-017 — Il genitore vede solo la propria cassa (supera in parte ADR-013)
 **Contesto**: il genitore vedeva tutti i movimenti della classe col totale; il numero "In cassa adesso" veniva scambiato per la propria disponibilità e i totali delle spese ("−14,00 €") per addebiti personali.
 **Decisione**: RLS ristretta — il genitore vede solo i movimenti con una sua quota (spariscono anche i versamenti degli altri: chi versa e quanto è un fatto tra genitore e rappresentante). La sua pagina mostra "Quanto ti resta" col suo saldo; ogni riga mostra la SUA quota. Il totale della classe resta come unico controllo collettivo, in fondo e in piccolo, esposto dalla funzione SECURITY DEFINER `class_cash_total` (mai via admin, mai i singoli movimenti). Il rappresentante vede tutto come prima.

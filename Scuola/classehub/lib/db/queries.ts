@@ -9,6 +9,7 @@ import type {
   PollOptionRow,
   PollRow,
   PollVoteRow,
+  PostReadRow,
   PostRow,
   ProfileRow,
   RequestRow,
@@ -255,6 +256,36 @@ export async function getPostById(postId: string): Promise<PostRow | null> {
  * pubblici. Il tipo esposto quindi non contiene salt.
  */
 export type PollPublic = Omit<PollRow, "salt">;
+
+/**
+ * I post che l'utente ha segnato come visti, tra quelli indicati.
+ * Il filtro esplicito su user_id serve al rappresentante: la RLS gli
+ * mostra anche i visti degli altri, ma qui vogliamo solo i propri.
+ */
+export async function listMyReadPostIds(
+  userId: string,
+  postIds: string[]
+): Promise<Set<string>> {
+  if (postIds.length === 0) return new Set();
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("post_reads")
+    .select("post_id")
+    .eq("user_id", userId)
+    .in("post_id", postIds);
+  const righe = (data as Array<Pick<PostReadRow, "post_id">> | null) ?? [];
+  return new Set(righe.map((r) => r.post_id));
+}
+
+/** Tutti i visti di un post: la RLS li dà interi solo al rappresentante. */
+export async function listPostReads(postId: string): Promise<PostReadRow[]> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("post_reads")
+    .select("*")
+    .eq("post_id", postId);
+  return (data as PostReadRow[] | null) ?? [];
+}
 
 export async function getPoll(postId: string): Promise<PollPublic | null> {
   const supabase = await supabaseServer();

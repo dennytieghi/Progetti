@@ -8,7 +8,9 @@ import { buttonClasses } from "@/components/ui/Button";
 import { requireActiveMembership } from "@/lib/auth/require-membership";
 import {
   getPoll,
+  hasVoted,
   isPollClosed,
+  listMyReadPostIds,
   listPosts,
   listUpcomingDeadlines,
 } from "@/lib/db/queries";
@@ -52,21 +54,29 @@ export default async function BachecaPage({
   const deadlines = await listUpcomingDeadlines(ctx.klass.id);
   const allPosts = await listPosts(ctx.klass.id, { includeArchived: showArchived });
 
-  // Statistiche del pannello riepilogo, dai dati già caricati.
-  // "Nuovo" = pubblicato negli ultimi 7 giorni.
+  // Statistiche del pannello riepilogo, personali: "nuovo" = pubblicato
+  // negli ultimi 7 giorni E non ancora segnato come visto da me.
   const attivi = allPosts.filter((p) => !p.archived);
   const evidenzaPosts = attivi.filter((p) => p.pinned);
   const sogliaNuovi = Date.now() - SETTE_GIORNI_MS;
-  const nuoviPosts = attivi.filter(
+  const nuoviCandidati = attivi.filter(
     (p) => p.type === "notice" && new Date(p.created_at).getTime() >= sogliaNuovi
   );
-  // Sondaggi ancora aperti al voto (chiusura letta col helper esistente).
+  const vistiMiei = await listMyReadPostIds(
+    ctx.user.id,
+    nuoviCandidati.map((p) => p.id)
+  );
+  const nuoviPosts = nuoviCandidati.filter((p) => !vistiMiei.has(p.id));
+  // Sondaggi ancora aperti al voto E dove non ho ancora votato:
+  // votare vale come "visto" (il voto resta anonimo, ADR-003).
   const pollPosts = attivi.filter((p) => p.type === "poll");
   const pollDettagli = await Promise.all(pollPosts.map((p) => getPoll(p.id)));
-  const sondaggiAperti = pollPosts.filter((_, i) => {
+  const apertiTutti = pollPosts.filter((_, i) => {
     const poll = pollDettagli[i];
     return poll !== null && poll !== undefined && !isPollClosed(poll);
   });
+  const hoVotato = await Promise.all(apertiTutti.map((p) => hasVoted(p.id)));
+  const sondaggiAperti = apertiTutti.filter((_, i) => !hoVotato[i]);
 
   // Ogni segmento è cliccabile: filtra il feed (vista) o, con un solo
   // sondaggio aperto, porta dritto al sondaggio.

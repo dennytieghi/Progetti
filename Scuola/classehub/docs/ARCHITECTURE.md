@@ -144,6 +144,16 @@ create table poll_votes (
 
 create index on poll_votes (post_id);
 
+-- POST_READS (0009, ADR-018): "L'ho visto" su avvisi/scadenze/materiale.
+-- Mai sui sondaggi: lì vale il voto (anonimo). RLS: insert/delete solo
+-- il proprio da membro attivo; select proprio + rappresentante classe.
+create table post_reads (
+  post_id uuid not null references posts(id) on delete cascade,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  read_at timestamptz not null default now(),
+  primary key (post_id, user_id)
+);
+
 -- REQUESTS (richieste dei genitori al rappresentante)
 create table requests (
   id uuid primary key default gen_random_uuid(),

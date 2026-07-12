@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Pencil, Pin, PinOff } from "lucide-react";
+import { Check, Pencil, Pin, PinOff } from "lucide-react";
 import { PollResults } from "@/components/polls/PollResults";
 import { PollVoteForm } from "@/components/polls/PollVoteForm";
 import { Banner } from "@/components/shared/Banner";
@@ -15,8 +15,11 @@ import {
   getProfile,
   hasVoted,
   isPollClosed,
+  listActiveMembers,
+  listMyReadPostIds,
   listPollOptions,
   listPollVotes,
+  listPostReads,
 } from "@/lib/db/queries";
 import { getBaseUrl } from "@/lib/base-url";
 import { formatDateIt, formatShortDateIt } from "@/lib/format-date";
@@ -25,6 +28,7 @@ import { it } from "@/lib/i18n/it";
 import {
   chiudiSondaggioAction,
   eliminaPostAction,
+  segnaVistoAction,
   toggleArchivioAction,
   togglePinAction,
 } from "./actions";
@@ -47,6 +51,22 @@ export default async function PostDetailPage({
   if (!post) notFound();
 
   const author = await getProfile(post.author_id);
+
+  // "L'ho visto": mai sui sondaggi (lì conta il voto, anonimo).
+  const conVisto = post.type !== "poll";
+  const ioHoVisto = conVisto
+    ? (await listMyReadPostIds(ctx.user.id, [post.id])).has(post.id)
+    : false;
+  // Il rappresentante vede il conteggio e chi manca (solo genitori).
+  const [visti, membri] =
+    conVisto && ctx.isRepresentative
+      ? await Promise.all([listPostReads(post.id), listActiveMembers(ctx.klass.id)])
+      : [[], []];
+  const vistiSet = new Set(visti.map((v) => v.user_id));
+  const genitori = membri.filter((m) => m.membership.role === "parent");
+  const genitoriMancanti = genitori.filter((g) => !vistiSet.has(g.membership.user_id));
+  const nVisto = genitori.length - genitoriMancanti.length;
+
   const poll = post.type === "poll" ? await getPoll(post.id) : null;
   const pollOptions = poll ? await listPollOptions(post.id) : [];
   const pollVotes = poll ? await listPollVotes(post.id) : [];
@@ -127,7 +147,49 @@ export default async function PostDetailPage({
             className="mt-4 max-w-full rounded-2xl border border-line"
           />
         )}
+
+        {conVisto && !ctx.isRepresentative && (
+          <form action={segnaVistoAction} className="mt-5">
+            <input type="hidden" name="classCode" value={classCode} />
+            <input type="hidden" name="slug" value={post.slug} />
+            <input type="hidden" name="visto" value={ioHoVisto ? "0" : "1"} />
+            <Button type="submit" variant={ioHoVisto ? "secondary" : "primary"}>
+              <Check className="size-5" aria-hidden />
+              {ioHoVisto ? it.dettaglio.vistoTogli : it.dettaglio.vistoSegna}
+            </Button>
+          </form>
+        )}
       </article>
+
+      {conVisto && ctx.isRepresentative && (
+        <Card className="space-y-2">
+          <h2 className="font-display text-[20px] font-bold">
+            {it.dettaglio.vistiTitolo}
+          </h2>
+          <p className="text-[16px]">
+            {nVisto === 0
+              ? it.dettaglio.vistiNessuno
+              : (nVisto === 1
+                  ? it.dettaglio.vistiConteggioUno
+                  : it.dettaglio.vistiConteggio.replace("{n}", String(nVisto))
+                ).replace("{tot}", String(genitori.length))}
+          </p>
+          {genitoriMancanti.length > 0 ? (
+            <p className="text-[15px] text-ink-soft">
+              {it.dettaglio.vistiMancano}{" "}
+              {genitoriMancanti
+                .map((g) => g.profile?.display_name ?? g.email ?? "?")
+                .join(", ")}
+            </p>
+          ) : (
+            genitori.length > 0 && (
+              <p className="text-[15px] font-semibold text-success">
+                {it.dettaglio.vistiTutti}
+              </p>
+            )
+          )}
+        </Card>
+      )}
 
       {poll && (
         <Card className="space-y-4">

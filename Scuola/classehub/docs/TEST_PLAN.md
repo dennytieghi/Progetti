@@ -217,3 +217,23 @@ Usa due browser (normale + incognito) per i due ruoli.
       sostituiti; "Scrivo io" → campi svuotati e fila nascosta.
 - [x] Arrivando da una richiesta genitore ("Trasforma in post") le
       scorciatoie NON compaiono e il testo della richiesta resta.
+
+## 16. "L'ho visto" (richiede migrazione 0009)
+
+- [ ] Genitore (Laura) apre un avviso → in fondo al testo c'è il bottone
+      "L'ho visto"; dopo il tap diventa "Visto — tocca per togliere" e
+      il contatore "avvisi nuovi" in bacheca scende di 1. Un secondo tap
+      toglie il visto e il contatore risale.
+- [ ] La spunta c'è anche su scadenze e materiale, NON sui sondaggi.
+      Spuntare una scadenza NON la toglie dal contatore "scadenze
+      aperte" (resta finché non passa la data).
+- [ ] Laura vota un sondaggio aperto → per lei "sondaggi aperti" scende
+      di 1; per un altro genitore che non ha votato resta invariato.
+- [ ] Rappresentante (Denise) apre lo stesso avviso → card "Chi l'ha
+      visto" con "1 genitore su N l'ha segnato come visto." e l'elenco
+      di chi manca; quando tutti hanno spuntato compare "L'hanno visto
+      tutti". Sul sondaggio la card NON c'è (voto anonimo).
+- [ ] Denise NON ha il bottone "L'ho visto" (ha la card al suo posto);
+      i suoi contatori contano tutti i nuovi avvisi.
+- [ ] Probe ostile: un genitore non può inserire un visto per un altro
+      utente né su un sondaggio (insert rifiutato dalla RLS).

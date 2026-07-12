@@ -83,6 +83,13 @@ export interface PollVoteRow {
   voted_at: string;
 }
 
+/** "L'ho visto" di un membro su un post (0009_visti.sql, mai sui sondaggi). */
+export interface PostReadRow {
+  post_id: string;
+  user_id: string;
+  read_at: string;
+}
+
 export interface RequestRow {
   id: string;
   class_id: string;

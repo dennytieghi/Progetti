@@ -13,6 +13,7 @@ import {
   deletePost,
   setArchived,
   setPinned,
+  setPostRead,
 } from "@/lib/db/mutations";
 import { voteSchema } from "@/lib/validation/schemas";
 import { it } from "@/lib/i18n/it";
@@ -21,6 +22,25 @@ import type { FormState } from "@/lib/form-state";
 function str(formData: FormData, key: string): string {
   const v = formData.get(key);
   return typeof v === "string" ? v : "";
+}
+
+/**
+ * "L'ho visto": il membro attivo segna (o toglie) il visto su avvisi,
+ * scadenze e materiale. Sui sondaggi non esiste: lì conta il voto.
+ */
+export async function segnaVistoAction(formData: FormData): Promise<void> {
+  const classCode = str(formData, "classCode");
+  const slug = str(formData, "slug");
+  const visto = str(formData, "visto") === "1";
+  const ctx = await requireActiveMembership(classCode);
+
+  const post = await getPostBySlug(ctx.klass.id, slug);
+  if (!post || post.type === "poll") redirect(`/c/${classCode}`);
+
+  await setPostRead({ postId: post.id, userId: ctx.user.id, visto });
+  revalidatePath(`/c/${classCode}/p/${slug}`);
+  revalidatePath(`/c/${classCode}`);
+  redirect(`/c/${classCode}/p/${slug}`);
 }
 
 /** Voto: membro attivo, non silenziato, sondaggio aperto, un voto a testa. */

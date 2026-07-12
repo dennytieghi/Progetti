@@ -337,6 +337,35 @@ export async function deletePost(post: PostRow): Promise<void> {
   }
 }
 
+/**
+ * Mette o toglie il "visto" dell'utente su un post. La RLS impone che
+ * sia il proprio (e mai su un sondaggio); l'upsert ignora i duplicati
+ * così due tap veloci non fanno errore.
+ */
+export async function setPostRead(input: {
+  postId: string;
+  userId: string;
+  visto: boolean;
+}): Promise<void> {
+  const supabase = await supabaseServer();
+  if (input.visto) {
+    const { error } = await supabase
+      .from("post_reads")
+      .upsert(
+        { post_id: input.postId, user_id: input.userId },
+        { onConflict: "post_id,user_id", ignoreDuplicates: true }
+      );
+    if (error) throw new Error(`Segna visto fallito: ${error.message}`);
+  } else {
+    const { error } = await supabase
+      .from("post_reads")
+      .delete()
+      .eq("post_id", input.postId)
+      .eq("user_id", input.userId);
+    if (error) throw new Error(`Togli visto fallito: ${error.message}`);
+  }
+}
+
 export async function setPinned(postId: string, pinned: boolean): Promise<void> {
   const supabase = await supabaseServer();
   await supabase.from("posts").update({ pinned }).eq("id", postId);
