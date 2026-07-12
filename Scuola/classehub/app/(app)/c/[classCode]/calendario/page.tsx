@@ -106,7 +106,7 @@ export default async function CalendarioPage({
           </Link>
           <Link
             href={url({ data: oggi, giorno: null })}
-            className="ml-1 flex min-h-10 items-center rounded-full border border-hairline px-4 text-[15px] font-semibold text-ink-soft hover:border-brand hover:text-ink"
+            className="ml-1 flex min-h-12 items-center rounded-full border border-hairline px-4 text-[15px] font-semibold text-ink-soft hover:border-brand hover:text-ink"
           >
             {it.calendario.oggi}
           </Link>
