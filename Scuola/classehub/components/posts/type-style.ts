@@ -19,6 +19,8 @@ export const POST_TYPE_STYLE: Record<
     pinBox: string;
     pinBadge: string;
     pinText: string;
+    /** pallino pieno 7px: barra statistiche e celle del calendario. */
+    dot: string;
   }
 > = {
   notice: {
@@ -30,6 +32,7 @@ export const POST_TYPE_STYLE: Record<
     pinBox: "bg-avviso-tint",
     pinBadge: "bg-avviso text-avviso-ink",
     pinText: "text-avviso-tint-ink",
+    dot: "bg-avviso",
   },
   deadline: {
     icon: Clock,
@@ -40,6 +43,7 @@ export const POST_TYPE_STYLE: Record<
     pinBox: "bg-scadenza-tint",
     pinBadge: "bg-scadenza text-white",
     pinText: "text-scadenza-tint-ink",
+    dot: "bg-scadenza",
   },
   poll: {
     icon: Vote,
@@ -50,6 +54,7 @@ export const POST_TYPE_STYLE: Record<
     pinBox: "bg-sondaggio-tint",
     pinBadge: "bg-sondaggio text-white",
     pinText: "text-sondaggio-tint-ink",
+    dot: "bg-sondaggio",
   },
   material: {
     icon: Paperclip,
@@ -60,5 +65,6 @@ export const POST_TYPE_STYLE: Record<
     pinBox: "bg-materiale-tint",
     pinBadge: "bg-materiale text-white",
     pinText: "text-materiale-tint-ink",
+    dot: "bg-materiale",
   },
 };

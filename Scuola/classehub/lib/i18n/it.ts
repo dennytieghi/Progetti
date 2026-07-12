@@ -156,6 +156,21 @@ export const it = {
     archiviato: "Archiviato",
   },
 
+  calendario: {
+    titolo: "Calendario",
+    vistaSettimana: "Settimana",
+    vistaMese: "Mese",
+    oggi: "Oggi",
+    periodoPrec: "Periodo precedente",
+    periodoSucc: "Periodo successivo",
+    giorniBrevi: ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"],
+    settimanaDal: "Settimana {dal} – {al}",
+    mostraSettimana: "Mostra tutta la settimana",
+    mostraMese: "Mostra tutto il mese",
+    vuoto: "Niente in calendario in questo periodo.",
+    vuotoGiorno: "Niente in questo giorno.",
+  },
+
   postTypes: {
     notice: "Avviso",
     deadline: "Scadenza",
