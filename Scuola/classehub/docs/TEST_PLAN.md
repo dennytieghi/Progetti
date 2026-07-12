@@ -240,19 +240,19 @@ Usa due browser (normale + incognito) per i due ruoli.
 
 ## 17. Vista calendario
 
-- [ ] Toggle [Annunci | Calendario] nel pannello, da entrambe le
+- [x] Toggle [Annunci | Calendario] nel pannello, da entrambe le
       pagine; "+ Pubblica" invariato e solo rappresentante.
-- [ ] Una scadenza pubblicata oggi con data 20 → compare sul 20, non
+- [x] Una scadenza pubblicata oggi con data 20 → compare sul 20, non
       su oggi; la cella del 20 ha il bordo arancio.
-- [ ] Giorno con avviso + materiale → cella gialla (dominante avviso)
+- [x] Giorno con avviso + materiale → cella gialla (dominante avviso)
       con due pallini (giallo e verde).
-- [ ] Giorno con post in evidenza → pin rosso nell'angolo della cella.
-- [ ] Click su un giorno → sotto compare solo quel giorno con le
+- [x] Giorno con post in evidenza → pin rosso nell'angolo della cella.
+- [x] Click su un giorno → sotto compare solo quel giorno con le
       PostCard normali; "Mostra tutto il mese" torna all'insieme.
-- [ ] Vista Settimana: 7 celle grandi, frecce ◀ ▶ spostano di 7
+- [x] Vista Settimana: 7 celle grandi, frecce ◀ ▶ spostano di 7
       giorni; settimana a cavallo di due mesi corretta.
-- [ ] "Oggi" torna al periodo corrente; oggi ha l'anello indaco.
-- [ ] URL con valori strani (?data=ciao&vista=boh) → default senza
+- [x] "Oggi" torna al periodo corrente; oggi ha l'anello indaco.
+- [x] URL con valori strani (?data=ciao&vista=boh) → default senza
       errori.
-- [ ] Genitore (Laura): vede il calendario coi soli post che vede in
+- [x] Genitore (Laura): vede il calendario coi soli post che vede in
       bacheca; nessun bottone Pubblica.
