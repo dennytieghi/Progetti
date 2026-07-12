@@ -86,6 +86,7 @@ ADR (Architecture Decision Records). Formato breve: contesto, decisione, alterna
 - ripartizione pro-quota di ogni spesa su tutti i versanti: i contanti non hanno il nome sopra, e chi non partecipa a una gita non deve pagarla.
 - registrazione contabile a doppia entrata: over-engineering per una cassa di classe.
 **Revisione se**: i rappresentanti chiedono spese con importi diversi per partecipante (non a testa) → aggiungi importo per quota nella UI, lo schema lo supporta già.
+**Aggiornamento (2026-07-12, feedback e2e)**: il rappresentante inserisce l'importo TOTALE della spesa (lo scontrino) e l'app lo divide pro-quota tra i partecipanti scelti; i centesimi di resto vanno uno a uno ai primi (`lib/cassa/dividi-spesa.ts`), così la somma delle quote è sempre il totale. Le quote possono quindi differire di 1 centesimo; la card mostra "× a testa" solo se sono tutte uguali.
 **Superato in parte da ADR-017** (2026-07-11): vista genitore ristretta.
 
 ## ADR-014 — Stripe Connect Standard, conferma sincrona, produzione rimandata

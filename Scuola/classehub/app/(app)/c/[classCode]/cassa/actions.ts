@@ -24,6 +24,7 @@ import {
   cashExpenseSchema,
   confirmDeclarationSchema,
 } from "@/lib/validation/schemas";
+import { dividiSpesa } from "@/lib/cassa/dividi-spesa";
 import { it } from "@/lib/i18n/it";
 import type { FormState } from "@/lib/form-state";
 
@@ -96,7 +97,7 @@ export async function registraSpesaAction(
 
   const parsed = cashExpenseSchema.safeParse({
     title: formData.get("title"),
-    perHead: formData.get("perHead"),
+    total: formData.get("total"),
     participantIds,
   });
   if (!parsed.success) {
@@ -109,19 +110,22 @@ export async function registraSpesaAction(
     }
   }
 
+  const quote = dividiSpesa(parsed.data.total, parsed.data.participantIds.length);
   await recordCashExpense({
     classId: ctx.klass.id,
     representativeId: ctx.user.id,
     title: parsed.data.title,
-    perHeadCents: parsed.data.perHead,
-    participantIds: parsed.data.participantIds,
+    shares: parsed.data.participantIds.map((userId, i) => ({
+      userId,
+      amountCents: quote[i]!,
+    })),
     method: "contanti",
   });
   finish(classCode);
 }
 
 /**
- * Modifica di una spesa manuale: causale, importo a testa, partecipanti
+ * Modifica di una spesa manuale: causale, importo totale, partecipanti
  * (per il genitore aggiunto all'ultimo o l'importo cambiato).
  */
 export async function modificaSpesaAction(
@@ -142,7 +146,7 @@ export async function modificaSpesaAction(
 
   const parsed = cashExpenseSchema.safeParse({
     title: formData.get("title"),
-    perHead: formData.get("perHead"),
+    total: formData.get("total"),
     participantIds,
   });
   if (!parsed.success) {
@@ -155,11 +159,14 @@ export async function modificaSpesaAction(
     }
   }
 
+  const quote = dividiSpesa(parsed.data.total, parsed.data.participantIds.length);
   await updateCashExpense({
     movementId: movement.id,
     title: parsed.data.title,
-    perHeadCents: parsed.data.perHead,
-    participantIds: parsed.data.participantIds,
+    shares: parsed.data.participantIds.map((userId, i) => ({
+      userId,
+      amountCents: quote[i]!,
+    })),
   });
   revalidatePath(`/c/${classCode}/cassa`);
   redirect(`/c/${classCode}/cassa?modificata=1`);

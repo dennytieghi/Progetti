@@ -473,13 +473,12 @@ export async function recordCashDeposit(input: {
   });
 }
 
-/** Spesa: importo a testa, addebitata solo ai partecipanti scelti. */
+/** Spesa: addebitata solo ai partecipanti scelti, ognuno con la sua quota. */
 export async function recordCashExpense(input: {
   classId: string;
   representativeId: string;
   title: string;
-  perHeadCents: number;
-  participantIds: string[];
+  shares: Array<{ userId: string; amountCents: number }>;
   method: PaymentMethod;
 }): Promise<CashMovementRow> {
   return insertMovementWithShares({
@@ -488,15 +487,12 @@ export async function recordCashExpense(input: {
     kind: "expense",
     title: input.title,
     method: input.method,
-    shares: input.participantIds.map((userId) => ({
-      userId,
-      amountCents: input.perHeadCents,
-    })),
+    shares: input.shares,
   });
 }
 
 /**
- * Modifica di una spesa manuale: causale, importo a testa, partecipanti.
+ * Modifica di una spesa manuale: causale, quote, partecipanti.
  * Le quote vengono sostituite in blocco (delete + insert): più semplice
  * e più sicuro che calcolare le differenze. L'RLS limita tutto al
  * rappresentante e ai movimenti manuali.
@@ -504,11 +500,10 @@ export async function recordCashExpense(input: {
 export async function updateCashExpense(input: {
   movementId: string;
   title: string;
-  perHeadCents: number;
-  participantIds: string[];
+  shares: Array<{ userId: string; amountCents: number }>;
 }): Promise<void> {
   const supabase = await supabaseServer();
-  const total = input.perHeadCents * input.participantIds.length;
+  const total = input.shares.reduce((sum, s) => sum + s.amountCents, 0);
 
   const { error: deleteError } = await supabase
     .from("cash_shares")
@@ -517,10 +512,10 @@ export async function updateCashExpense(input: {
   if (deleteError) throw new Error(`Modifica quote fallita: ${deleteError.message}`);
 
   const { error: insertError } = await supabase.from("cash_shares").insert(
-    input.participantIds.map((userId) => ({
+    input.shares.map((s) => ({
       movement_id: input.movementId,
-      user_id: userId,
-      amount_cents: input.perHeadCents,
+      user_id: s.userId,
+      amount_cents: s.amountCents,
     }))
   );
   if (insertError) throw new Error(`Modifica quote fallita: ${insertError.message}`);

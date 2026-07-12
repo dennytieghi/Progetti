@@ -396,11 +396,15 @@ export const it = {
     causaleVersamentoDefault: "Versamento in cassa",
     causaleSpesaLabel: "Per cosa hai speso?",
     causaleSpesaEsempio: "Es. Regalo per la maestra",
-    importoATestaLabel: "Importo a testa, in euro",
+    importoTotaleSpesaLabel: "Quanto hai speso in tutto, in euro",
     partecipantiLabel: "Chi partecipa a questa spesa?",
     tuttiPartecipanti: "Seleziona tutti",
     nessunPartecipante: "Togli tutti",
-    totaleSpesa: "Totale spesa",
+    spesaDivisa: "Diviso tra {n}: {importo} a testa.",
+    spesaDivisaRestoUno:
+      "Per far tornare il totale, uno di loro paga {importo}.",
+    spesaDivisaRestoTanti:
+      "Per far tornare il totale, {n} di loro pagano {importo}.",
     registra: "Registra",
     registrato: "Movimento registrato.",
     elimina: "Elimina",
@@ -516,6 +520,8 @@ export const it = {
       "Scrivi un importo valido in euro, ad esempio 12,50. Massimo 5.000 euro.",
     erroreCausale: "Scrivi per cosa hai speso: aiuta i genitori a capire.",
     errorePartecipanti: "Scegli almeno un genitore che partecipa alla spesa.",
+    erroreImportoTotalePiccolo:
+      "L'importo è troppo piccolo per dividerlo tra i partecipanti scelti. Controlla il totale.",
 
     // Il rappresentante conferma o rifiuta una segnalazione
     daConfermareTitolo: "Da confermare",

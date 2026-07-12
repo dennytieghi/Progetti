@@ -34,8 +34,6 @@ export default async function ModificaSpesaPage({
     userId: m.membership.user_id,
     name: m.profile?.display_name ?? m.email ?? "?",
   }));
-  const firstShare = shares[0];
-
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div>
@@ -50,7 +48,7 @@ export default async function ModificaSpesaPage({
           spesa={{
             movementId: movement.id,
             title: movement.title,
-            perHeadCents: firstShare?.amount_cents ?? movement.total_cents,
+            totalCents: movement.total_cents,
             participantIds: shares.map((s) => s.user_id),
           }}
         />

@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { SubmitButton } from "@/components/ui/SubmitButton";
 import { initialFormState } from "@/lib/form-state";
+import { dividiSpesa } from "@/lib/cassa/dividi-spesa";
 import { centsToEuroText, formatEuroCents, parseEuroToCents } from "@/lib/euro";
 import { it } from "@/lib/i18n/it";
 import { modificaSpesaAction, registraSpesaAction } from "./actions";
@@ -16,7 +17,7 @@ import type { MemberOption } from "./MovementCard";
 export interface SpesaDaModificare {
   movementId: string;
   title: string;
-  perHeadCents: number;
+  totalCents: number;
   participantIds: string[];
 }
 
@@ -37,12 +38,18 @@ export function SpesaForm({
     new Set(spesa?.participantIds ?? [])
   );
   const [amountText, setAmountText] = useState(
-    spesa ? centsToEuroText(spesa.perHeadCents) : ""
+    spesa ? centsToEuroText(spesa.totalCents) : ""
   );
 
-  const perHeadCents = parseEuroToCents(amountText);
-  const totalCents =
-    perHeadCents !== null && selected.size > 0 ? perHeadCents * selected.size : null;
+  // Anteprima: il totale scritto diviso pro-quota tra i selezionati.
+  const totalCents = parseEuroToCents(amountText);
+  const troppoPiccolo =
+    totalCents !== null && selected.size > 0 && totalCents < selected.size;
+  const quote =
+    totalCents !== null && selected.size > 0 && !troppoPiccolo
+      ? dividiSpesa(totalCents, selected.size)
+      : null;
+  const resto = quote && totalCents !== null ? totalCents % selected.size : 0;
 
   function toggle(userId: string) {
     setSelected((prev) => {
@@ -77,10 +84,10 @@ export function SpesaForm({
       </div>
 
       <div>
-        <Label htmlFor="perHead">{it.cassa.importoATestaLabel}</Label>
+        <Label htmlFor="total">{it.cassa.importoTotaleSpesaLabel}</Label>
         <Input
-          id="perHead"
-          name="perHead"
+          id="total"
+          name="total"
           inputMode="decimal"
           placeholder={it.cassa.importoEsempio}
           value={amountText}
@@ -130,14 +137,25 @@ export function SpesaForm({
         </ul>
       </fieldset>
 
-      {totalCents !== null && (
+      {quote && selected.size > 1 && (
         <p className="text-[17px] font-semibold">
-          {it.cassa.totaleSpesa}: {formatEuroCents(totalCents)}{" "}
-          <span className="font-normal text-ink-soft">
-            ({selected.size}{" "}
-            {selected.size === 1 ? it.cassa.partecipante : it.cassa.partecipanti} ×{" "}
-            {formatEuroCents(perHeadCents ?? 0)} {it.cassa.aTesta})
-          </span>
+          {it.cassa.spesaDivisa
+            .replace("{n}", String(selected.size))
+            .replace("{importo}", formatEuroCents(quote[quote.length - 1] ?? 0))}
+          {resto > 0 && (
+            <span className="font-normal text-ink-soft">
+              {" "}
+              {(resto === 1
+                ? it.cassa.spesaDivisaRestoUno
+                : it.cassa.spesaDivisaRestoTanti.replace("{n}", String(resto))
+              ).replace("{importo}", formatEuroCents((quote[0] ?? 0)))}
+            </span>
+          )}
+        </p>
+      )}
+      {troppoPiccolo && (
+        <p className="text-[15px] text-danger">
+          {it.cassa.erroreImportoTotalePiccolo}
         </p>
       )}
 

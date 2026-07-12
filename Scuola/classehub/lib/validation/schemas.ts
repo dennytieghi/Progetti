@@ -153,18 +153,23 @@ export const cashDepositSchema = z.object({
   method: paymentMethodSchema,
 });
 
-export const cashExpenseSchema = z.object({
-  title: z
-    .string()
-    .trim()
-    .min(2, { message: it.cassa.erroreCausale })
-    .max(120, { message: it.cassa.erroreCausale }),
-  perHead: euroCentsSchema,
-  participantIds: z
-    .array(z.string().uuid())
-    .min(1, { message: it.cassa.errorePartecipanti })
-    .max(200),
-});
+export const cashExpenseSchema = z
+  .object({
+    title: z
+      .string()
+      .trim()
+      .min(2, { message: it.cassa.erroreCausale })
+      .max(120, { message: it.cassa.erroreCausale }),
+    total: euroCentsSchema,
+    participantIds: z
+      .array(z.string().uuid())
+      .min(1, { message: it.cassa.errorePartecipanti })
+      .max(200),
+  })
+  // Ogni quota deve valere almeno 1 centesimo (vincolo del database).
+  .refine((d) => d.total >= d.participantIds.length, {
+    message: it.cassa.erroreImportoTotalePiccolo,
+  });
 
 /** Campo facoltativo: vuoto → null, altrimenti normalizza o errore. */
 function coordSchema(normalizza: (s: string) => string | null, message: string) {

@@ -184,3 +184,21 @@ Usa due browser (normale + incognito) per i due ruoli.
 - [x] Genitore (Laura) apre la cassa → vista INVARIATA: "Quanto ti resta" col
       suo saldo, lista dei soli suoi movimenti, totale di classe in fondo,
       come prima della riorganizzazione.
+
+## 14. Cassa — spesa a importo totale (diviso pro-quota)
+
+- [ ] Spesa che non si divide esattamente: 10,00 € tra 3 partecipanti →
+      l'anteprima dice "Diviso tra 3: 3,33 € a testa. Per far tornare il
+      totale, uno di loro paga 3,34 €." → dopo il salvataggio il movimento
+      in lista vale esattamente 10,00 € e la card mostra "3 partecipanti"
+      senza "× a testa" (le quote non sono uguali).
+- [ ] Spesa che si divide esattamente: 12,00 € tra 4 → anteprima "Diviso
+      tra 4: 3,00 € a testa." senza nota sul resto; la card in lista mostra
+      "4 partecipanti × 3,00 € a testa".
+- [ ] Modifica di una spesa → il form si apre con l'importo TOTALE
+      precompilato (non quello a testa); cambiare i partecipanti ricalcola
+      le quote e il totale resta quello scritto.
+- [ ] Importo troppo piccolo: 0,02 € tra 3 partecipanti → avviso sotto il
+      form e, se si prova a salvare, errore chiaro senza movimento creato.
+- [ ] Genitore: sulla sua riga vede la SUA quota esatta (3,33 € o 3,34 €) e
+      il saldo personale scende di quella cifra.

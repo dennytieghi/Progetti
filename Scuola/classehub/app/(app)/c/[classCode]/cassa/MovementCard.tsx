@@ -54,8 +54,17 @@ export function MovementCard({
       : null;
   const perHead = !isDeposit && firstShare ? firstShare.amount_cents : null;
   // Il genitore riceve solo la propria quota (RLS): i partecipanti si
-  // contano dal totale, non dalle quote visibili.
-  const partecipanti = perHead ? Math.round(movement.total_cents / perHead) : 0;
+  // contano dal totale, non dalle quote visibili. Il rappresentante
+  // le vede tutte: per lui il conteggio è esatto.
+  const partecipanti = isRepresentative
+    ? shares.length
+    : perHead
+      ? Math.round(movement.total_cents / perHead)
+      : 0;
+  // Coi centesimi di resto le quote possono differire di 1 centesimo:
+  // "× a testa" si mostra solo se sono davvero tutte uguali.
+  const quoteUguali =
+    perHead !== null && shares.every((s) => s.amount_cents === perHead);
 
   return (
     <Card className="flex flex-wrap items-start justify-between gap-3">
@@ -70,7 +79,7 @@ export function MovementCard({
           {intestatario ? ` · ${intestatario}` : ""}
           {perHead !== null
             ? isRepresentative
-              ? ` · ${partecipanti} ${partecipanti === 1 ? it.cassa.partecipante : it.cassa.partecipanti} × ${formatEuroCents(perHead)} ${it.cassa.aTesta}`
+              ? ` · ${partecipanti} ${partecipanti === 1 ? it.cassa.partecipante : it.cassa.partecipanti}${quoteUguali ? ` × ${formatEuroCents(perHead)} ${it.cassa.aTesta}` : ""}`
               : ` · ${it.cassa.spesaDiClasse} · ${partecipanti} ${partecipanti === 1 ? it.cassa.partecipante : it.cassa.partecipanti}`
             : ""}
         </p>
