@@ -230,10 +230,10 @@ Usa due browser (normale + incognito) per i due ruoli.
 - [ ] Laura vota un sondaggio aperto → per lei "sondaggi aperti" scende
       di 1; per un altro genitore che non ha votato resta invariato.
 - [ ] Rappresentante (Denise) apre lo stesso avviso → card "Chi l'ha
-      visto" con "1 genitore su N l'ha segnato come visto." e l'elenco
-      di chi manca; quando tutti hanno spuntato compare "L'hanno visto
-      tutti". Sul sondaggio la card NON c'è (voto anonimo).
+      visto" col conteggio in grande ("1 su N"), SENZA nomi. Sul
+      sondaggio la card NON c'è (voto anonimo).
 - [ ] Denise NON ha il bottone "L'ho visto" (ha la card al suo posto);
       i suoi contatori contano tutti i nuovi avvisi.
-- [ ] Probe ostile: un genitore non può inserire un visto per un altro
-      utente né su un sondaggio (insert rifiutato dalla RLS).
+- [x] Probe ostile: un genitore non può inserire un visto per un altro
+      utente né su un sondaggio (insert rifiutato dalla RLS); legge
+      solo i propri visti. (Probe API reale, 12/7/2026.)

@@ -64,8 +64,7 @@ export default async function PostDetailPage({
       : [[], []];
   const vistiSet = new Set(visti.map((v) => v.user_id));
   const genitori = membri.filter((m) => m.membership.role === "parent");
-  const genitoriMancanti = genitori.filter((g) => !vistiSet.has(g.membership.user_id));
-  const nVisto = genitori.length - genitoriMancanti.length;
+  const nVisto = genitori.filter((g) => vistiSet.has(g.membership.user_id)).length;
 
   const poll = post.type === "poll" ? await getPoll(post.id) : null;
   const pollOptions = poll ? await listPollOptions(post.id) : [];
@@ -162,32 +161,18 @@ export default async function PostDetailPage({
       </article>
 
       {conVisto && ctx.isRepresentative && (
-        <Card className="space-y-2">
+        <Card className="space-y-1">
           <h2 className="font-display text-[20px] font-bold">
             {it.dettaglio.vistiTitolo}
           </h2>
-          <p className="text-[16px]">
-            {nVisto === 0
-              ? it.dettaglio.vistiNessuno
-              : (nVisto === 1
-                  ? it.dettaglio.vistiConteggioUno
-                  : it.dettaglio.vistiConteggio.replace("{n}", String(nVisto))
-                ).replace("{tot}", String(genitori.length))}
+          <p className="font-display text-[36px] font-bold leading-tight">
+            {nVisto}
+            <span className="text-[22px] font-semibold text-ink-soft">
+              {" "}
+              {it.dettaglio.vistiSu} {genitori.length}
+            </span>
           </p>
-          {genitoriMancanti.length > 0 ? (
-            <p className="text-[15px] text-ink-soft">
-              {it.dettaglio.vistiMancano}{" "}
-              {genitoriMancanti
-                .map((g) => g.profile?.display_name ?? g.email ?? "?")
-                .join(", ")}
-            </p>
-          ) : (
-            genitori.length > 0 && (
-              <p className="text-[15px] font-semibold text-success">
-                {it.dettaglio.vistiTutti}
-              </p>
-            )
-          )}
+          <p className="text-[15px] text-ink-soft">{it.dettaglio.vistiSpiega}</p>
         </Card>
       )}
 
