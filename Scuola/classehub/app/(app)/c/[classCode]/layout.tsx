@@ -24,15 +24,18 @@ export default async function ClassLayout({
     : 0;
 
   return (
-    <>
+    <div className="md:flex">
       <AppHeader
         classCode={ctx.klass.class_code}
         className={ctx.klass.name}
+        displayName={ctx.profile?.display_name ?? ctx.user.email}
         isRepresentative={ctx.isRepresentative}
         openRequestsCount={openRequestsCount}
         pendingDeclarationsCount={pendingDeclarationsCount}
       />
-      <main className="mx-auto w-full max-w-3xl px-4 py-6">{children}</main>
-    </>
+      <div className="min-w-0 flex-1">
+        <main className="mx-auto w-full max-w-3xl px-4 py-6">{children}</main>
+      </div>
+    </div>
   );
 }
