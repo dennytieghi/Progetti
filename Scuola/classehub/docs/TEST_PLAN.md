@@ -237,3 +237,22 @@ Usa due browser (normale + incognito) per i due ruoli.
 - [x] Probe ostile: un genitore non può inserire un visto per un altro
       utente né su un sondaggio (insert rifiutato dalla RLS); legge
       solo i propri visti. (Probe API reale, 12/7/2026.)
+
+## 17. Vista calendario
+
+- [ ] Toggle [Annunci | Calendario] nel pannello, da entrambe le
+      pagine; "+ Pubblica" invariato e solo rappresentante.
+- [ ] Una scadenza pubblicata oggi con data 20 → compare sul 20, non
+      su oggi; la cella del 20 ha il bordo arancio.
+- [ ] Giorno con avviso + materiale → cella gialla (dominante avviso)
+      con due pallini (giallo e verde).
+- [ ] Giorno con post in evidenza → pin rosso nell'angolo della cella.
+- [ ] Click su un giorno → sotto compare solo quel giorno con le
+      PostCard normali; "Mostra tutto il mese" torna all'insieme.
+- [ ] Vista Settimana: 7 celle grandi, frecce ◀ ▶ spostano di 7
+      giorni; settimana a cavallo di due mesi corretta.
+- [ ] "Oggi" torna al periodo corrente; oggi ha l'anello indaco.
+- [ ] URL con valori strani (?data=ciao&vista=boh) → default senza
+      errori.
+- [ ] Genitore (Laura): vede il calendario coi soli post che vede in
+      bacheca; nessun bottone Pubblica.
