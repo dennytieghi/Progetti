@@ -81,15 +81,15 @@ export default async function BachecaPage({
       <section className="rounded-[22px] border border-hairline bg-paper px-5 pb-1 pt-5">
         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h1 className="font-display text-[22px] font-bold">
+            <h1 className="font-display text-[28px] font-bold">
               {it.bacheca.saluto.replace("{nome}", nome)}
             </h1>
-            <p className="text-[13px] text-ink-soft">{it.bacheca.sottotitolo}</p>
+            <p className="text-[16px] text-ink-soft">{it.bacheca.sottotitolo}</p>
           </div>
           {ctx.isRepresentative && (
             <Link
               href={`/c/${classCode}/nuovo`}
-              className="flex min-h-12 items-center gap-1 whitespace-nowrap rounded-full bg-brand px-4.5 text-[13px] font-bold text-white transition hover:-translate-y-0.5 hover:shadow-[0_6px_14px_rgba(91,79,232,0.3)]"
+              className="flex min-h-12 items-center gap-1 whitespace-nowrap rounded-full bg-brand px-5 text-[16px] font-bold text-white transition hover:-translate-y-0.5 hover:shadow-[0_6px_14px_rgba(91,79,232,0.3)]"
             >
               <Plus className="size-4" aria-hidden /> {it.bacheca.nuovoPost}
             </Link>
@@ -106,11 +106,11 @@ export default async function BachecaPage({
                   aria-hidden
                   className={cn("size-[7px] shrink-0 rounded-full", stat.dot)}
                 />
-                <span className="whitespace-nowrap text-[11px] text-ink-soft">
+                <span className="whitespace-nowrap text-[15px] text-ink-soft">
                   {stat.label}
                 </span>
               </span>
-              <span className="font-display text-[22px] font-bold">{stat.num}</span>
+              <span className="font-display text-[24px] font-bold">{stat.num}</span>
             </div>
           ))}
         </div>
@@ -118,7 +118,7 @@ export default async function BachecaPage({
 
       {/* Separatore: qui iniziano i contenuti */}
       <div className="mb-4 mt-[26px] flex items-center gap-2.5">
-        <span className="whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.07em] text-ink-faint">
+        <span className="whitespace-nowrap text-[15px] font-bold uppercase tracking-[0.07em] text-ink-faint">
           {it.bacheca.titolo}
         </span>
         <span aria-hidden className="h-px flex-1 bg-hairline" />
@@ -137,10 +137,10 @@ export default async function BachecaPage({
             <Pin className="size-4 text-white" />
           </span>
           <span className="min-w-0">
-            <b className="block text-[13.5px] leading-snug text-urgente-ink">
+            <b className="block text-[18px] leading-snug text-urgente-ink">
               {prossimaScadenza.title}
             </b>
-            <span className="text-[12px] text-urgente-ink/85">
+            <span className="text-[15px] text-urgente-ink/85">
               {it.bacheca.entroIl} {formatDateIt(prossimaScadenza.due_date!)}
             </span>
           </span>
@@ -157,7 +157,7 @@ export default async function BachecaPage({
                 : `/c/${classCode}?tipo=${f.key}${showArchived ? "&archiviati=1" : ""}`
             }
             className={cn(
-              "min-h-12 rounded-full border px-4 py-2.5 text-[14px] font-semibold",
+              "min-h-12 rounded-full border px-4 py-2.5 text-[16px] font-semibold",
               f.key === activeFilter.key
                 ? "border-brand bg-brand text-white"
                 : "border-hairline bg-paper text-ink-soft hover:border-brand hover:text-ink"
@@ -176,7 +176,7 @@ export default async function BachecaPage({
                 ? `/c/${classCode}${tipo && tipo !== "tutti" ? `?tipo=${tipo}` : ""}`
                 : `/c/${classCode}?${tipo && tipo !== "tutti" ? `tipo=${tipo}&` : ""}archiviati=1`
             }
-            className="text-[13px] font-semibold text-brand underline underline-offset-4"
+            className="text-[16px] font-semibold text-brand underline underline-offset-4"
           >
             {showArchived ? it.bacheca.soloAttivi : it.bacheca.archiviati}
           </Link>

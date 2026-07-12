@@ -80,27 +80,27 @@ export function PostCard({
         <span className="flex items-center gap-2">
           <span
             className={cn(
-              "rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.03em]",
+              "rounded-full px-2.5 py-0.5 text-[15px] font-bold uppercase tracking-[0.03em]",
               stile.badge
             )}
           >
             {it.postTypes[post.type]}
           </span>
           {post.pinned && (
-            <span className="ml-auto flex items-center gap-1 text-[10.5px] font-bold text-urgente">
-              <Pin className="size-3" aria-hidden /> {it.bacheca.fissato}
+            <span className="ml-auto flex items-center gap-1 text-[15px] font-bold text-urgente">
+              <Pin className="size-4" aria-hidden /> {it.bacheca.fissato}
             </span>
           )}
         </span>
-        <span className="mt-1.5 block font-display text-[14.5px] font-semibold leading-snug">
+        <span className="mt-1.5 block font-display text-[22px] font-semibold leading-snug">
           {post.title}
         </span>
         {post.body && (
-          <span className="mt-0.5 line-clamp-2 block text-[12.5px] leading-relaxed text-ink-soft">
+          <span className="mt-0.5 line-clamp-2 block leading-relaxed text-ink-soft">
             {post.body}
           </span>
         )}
-        <span className="mt-1.5 block text-[11px] text-ink-faint">
+        <span className="mt-1.5 block text-[15px] text-ink-faint">
           {post.type === "deadline" && post.due_date
             ? `${it.bacheca.entroIl} ${formatDateIt(post.due_date)}`
             : formatShortDateIt(post.created_at)}
@@ -111,13 +111,13 @@ export function PostCard({
       <span
         aria-hidden
         className={cn(
-          "flex shrink-0 items-center gap-1 self-center text-[12px] font-bold",
+          "flex shrink-0 items-center gap-1 self-center text-[16px] font-bold",
           "opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100 -translate-x-1",
           stile.action
         )}
       >
         {post.type === "poll" ? it.bacheca.vota : it.bacheca.apri}
-        <ArrowRight className="size-3.5" />
+        <ArrowRight className="size-4" />
       </span>
     </Link>
   );
