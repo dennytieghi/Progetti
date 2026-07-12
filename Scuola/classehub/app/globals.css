@@ -28,6 +28,36 @@
   --color-paper-soft: #f5f5f4;
 }
 
+/*
+  Palette redesign (docs/DESIGN.md): brand indaco + un colore
+  semantico per tipo di contenuto, rosso solo per l'urgenza.
+  Ancora non usata dai componenti: è la base per il restyling
+  schermata per schermata. `static` = le variabili finiscono nel
+  CSS anche se nessuna classe le usa ancora.
+*/
+@theme static {
+  --color-brand: #5b4fe8;
+  --color-brand-tint: #f1f0fe;
+  --color-avviso: #ffc738;
+  --color-avviso-tint: #fff6dc;
+  --color-scadenza: #e8622c;
+  --color-scadenza-tint: #ffe6d9;
+  --color-sondaggio: #2f6fed;
+  --color-sondaggio-tint: #e7f0fe;
+  --color-materiale: #16a672;
+  --color-materiale-tint: #e1f5ec;
+  --color-urgente: #e23b3b;
+  --color-urgente-tint: #fde6e6;
+
+  /*
+    Font del redesign (docs/DESIGN.md), caricati in app/layout.tsx
+    con next/font (variabili --font-space-grotesk / --font-inter
+    definite sul body). Utility generate: font-display e font-body.
+  */
+  --font-display: var(--font-space-grotesk), var(--font-sans);
+  --font-body: var(--font-inter), var(--font-sans);
+}
+
 @layer base {
   html {
     font-family: var(--font-sans);
