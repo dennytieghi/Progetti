@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Pin, Plus } from "lucide-react";
+import { ArrowRight, Pin, Plus } from "lucide-react";
 import { PostCard } from "@/components/posts/PostCard";
 import { POST_TYPE_STYLE } from "@/components/posts/type-style";
 import { Banner } from "@/components/shared/Banner";
@@ -137,8 +137,10 @@ export default async function BachecaPage({
                 <Link
                   href={`/c/${classCode}/p/${post.slug}`}
                   className={cn(
-                    "flex items-center gap-3 rounded-2xl px-4 py-3",
-                    stile.pinBox
+                    "group flex items-center gap-3 rounded-2xl border border-transparent px-4 py-3",
+                    "transition hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(20,20,30,0.08)]",
+                    stile.pinBox,
+                    stile.hover
                   )}
                 >
                   <span
@@ -150,7 +152,7 @@ export default async function BachecaPage({
                   >
                     <Pin className="size-4" />
                   </span>
-                  <span className="min-w-0">
+                  <span className="min-w-0 flex-1">
                     <b
                       className={cn(
                         "block text-[18px] leading-snug",
@@ -164,6 +166,17 @@ export default async function BachecaPage({
                         ? `${it.bacheca.entroIl} ${formatDateIt(post.due_date)}`
                         : formatShortDateIt(post.created_at)}
                     </span>
+                  </span>
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "flex shrink-0 items-center gap-1 self-center text-[16px] font-bold",
+                      "-translate-x-1 opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100",
+                      stile.pinText
+                    )}
+                  >
+                    {post.type === "poll" ? it.bacheca.vota : it.bacheca.apri}
+                    <ArrowRight className="size-4" />
                   </span>
                 </Link>
               </li>
