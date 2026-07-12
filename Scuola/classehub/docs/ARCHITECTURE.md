@@ -17,7 +17,7 @@ app/
 â”‚   â”‚   â”œâ”€â”€ p/[postSlug]/           # dettaglio post pubblico condivisibile
 â”‚   â”‚   â”‚   â””â”€â”€ modifica/           # rappresentante: modifica post pubblicato
 â”‚   â”‚   â”œâ”€â”€ nuovo/                  # rappresentante: crea post
-â”‚   â”‚   â”œâ”€â”€ calendario/              # vista calendario settimana/mese (spec 2026-07-12)
+â”‚   â”‚   â”œâ”€â”€ calendario/             # vista calendario settimana/mese (spec 2026-07-12)
 â”‚   â”‚   â”œâ”€â”€ cassa/                  # cassa di classe (quota personale, movimenti, dichiara â†’ conferma)
 â”‚   â”‚   â”‚   â”œâ”€â”€ esporta/            # route GET: CSV movimenti (RLS decide il contenuto)
 â”‚   â”‚   â”‚   â””â”€â”€ spesa/[movementId]/ # rappresentante: modifica spesa

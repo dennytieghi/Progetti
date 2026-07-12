@@ -25,7 +25,8 @@ export interface DatiBacheca {
 /**
  * Dati e statistiche condivisi tra bacheca e calendario. Statistiche
  * PERSONALI: "nuovo" = ultimi 7 giorni non visti da me; "sondaggi
- * aperti" = dove non ho ancora votato (il voto vale come visto).
+ * aperti" = dove non ho ancora votato (il voto vale come visto e
+ * resta anonimo — ADR-003).
  */
 export async function caricaDatiBacheca(
   ctx: ClassContext,

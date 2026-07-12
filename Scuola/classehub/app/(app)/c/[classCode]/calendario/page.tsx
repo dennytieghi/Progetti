@@ -181,23 +181,26 @@ export default async function CalendarioPage({
             ].map((t) => POST_TYPE_STYLE[t].dot);
             const eSelezionato = cella.data === selezionato;
             const eOggi = cella.data === oggi;
+            const href = cella.nelMese
+              ? url({ giorno: eSelezionato ? null : cella.data })
+              : url({ data: cella.data, giorno: cella.data });
             return (
               <Link
                 key={cella.data}
-                href={url({ giorno: eSelezionato ? null : cella.data })}
-                aria-label={cella.data}
+                href={href}
+                aria-label={giornoLungoIt(cella.data)}
                 className={cn(
-                  "relative flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-[10px] border border-transparent text-[16px]",
+                  "relative flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-[10px] border text-[16px]",
                   vista === "settimana" && "min-h-20",
                   !cella.nelMese && "opacity-40",
                   stile && !eSelezionato && stile.pinBox,
                   stile && !eSelezionato && stile.pinText,
                   stile && !eSelezionato && "font-semibold",
                   !stile && !eSelezionato && "text-ink hover:bg-paper-hover",
-                  haScadenza && !eSelezionato && "border-scadenza",
                   eSelezionato && (stile ? stile.chip : "bg-brand text-white"),
                   eSelezionato && "font-bold",
-                  eOggi && "ring-2 ring-brand ring-offset-1"
+                  eOggi && "ring-2 ring-brand ring-offset-1",
+                  haScadenza && !eSelezionato ? "border-scadenza" : "border-transparent"
                 )}
               >
                 {haPinnato && (
@@ -268,4 +271,13 @@ function giornoBreveIt(ymd: string): string {
   return new Intl.DateTimeFormat("it-IT", { day: "numeric", month: "short" }).format(
     new Date(`${ymd}T12:00:00Z`)
   );
+}
+
+/** "2026-07-06" → "lunedì 6 luglio" (per l'aria-label delle celle). */
+function giornoLungoIt(ymd: string): string {
+  return new Intl.DateTimeFormat("it-IT", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  }).format(new Date(`${ymd}T12:00:00Z`));
 }
