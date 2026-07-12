@@ -6,7 +6,7 @@ import { EmptyState } from "@/components/shared/EmptyState";
 import { buttonClasses } from "@/components/ui/Button";
 import { requireActiveMembership } from "@/lib/auth/require-membership";
 import { listPollVotes, listPosts, listUpcomingDeadlines } from "@/lib/db/queries";
-import { formatDateIt } from "@/lib/format-date";
+import { formatDateIt, formatShortDateIt } from "@/lib/format-date";
 import { it } from "@/lib/i18n/it";
 import { cn } from "@/lib/cn";
 import type { PostType } from "@/lib/db/types";
@@ -67,7 +67,9 @@ export default async function BachecaPage({
   ];
 
   const nome = (ctx.profile?.display_name ?? "").trim().split(/\s+/)[0] ?? "";
-  const prossimaScadenza = deadlines[0];
+  // In evidenza: i pinnati vivono nei box rossi sopra i filtri
+  // (docs/DESIGN.md §Box pinnato) e restano anche nel feed.
+  const pinnati = attivi.filter((p) => p.pinned);
 
   return (
     <div className="font-body">
@@ -124,27 +126,35 @@ export default async function BachecaPage({
         <span aria-hidden className="h-px flex-1 bg-hairline" />
       </div>
 
-      {/* Scadenza più imminente: box rosso in evidenza */}
-      {prossimaScadenza && (
-        <Link
-          href={`/c/${classCode}/p/${prossimaScadenza.slug}`}
-          className="mb-4 flex items-center gap-3 rounded-2xl bg-urgente-tint px-4 py-3"
-        >
-          <span
-            aria-hidden
-            className="flex size-[34px] shrink-0 items-center justify-center rounded-full bg-urgente"
-          >
-            <Pin className="size-4 text-white" />
-          </span>
-          <span className="min-w-0">
-            <b className="block text-[18px] leading-snug text-urgente-ink">
-              {prossimaScadenza.title}
-            </b>
-            <span className="text-[15px] text-urgente-ink/85">
-              {it.bacheca.entroIl} {formatDateIt(prossimaScadenza.due_date!)}
-            </span>
-          </span>
-        </Link>
+      {/* Messaggi in evidenza: box rossi sopra i filtri */}
+      {pinnati.length > 0 && (
+        <ul className="mb-4 space-y-2.5">
+          {pinnati.map((post) => (
+            <li key={post.id}>
+              <Link
+                href={`/c/${classCode}/p/${post.slug}`}
+                className="flex items-center gap-3 rounded-2xl bg-urgente-tint px-4 py-3"
+              >
+                <span
+                  aria-hidden
+                  className="flex size-[34px] shrink-0 items-center justify-center rounded-full bg-urgente"
+                >
+                  <Pin className="size-4 text-white" />
+                </span>
+                <span className="min-w-0">
+                  <b className="block text-[18px] leading-snug text-urgente-ink">
+                    {post.title}
+                  </b>
+                  <span className="text-[15px] text-urgente-ink/85">
+                    {post.type === "deadline" && post.due_date
+                      ? `${it.bacheca.entroIl} ${formatDateIt(post.due_date)}`
+                      : formatShortDateIt(post.created_at)}
+                  </span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
       )}
 
       <div className="mb-4 flex flex-wrap gap-2">
