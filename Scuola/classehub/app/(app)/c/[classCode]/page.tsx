@@ -6,18 +6,12 @@ import { Banner } from "@/components/shared/Banner";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { buttonClasses } from "@/components/ui/Button";
 import { requireActiveMembership } from "@/lib/auth/require-membership";
-import {
-  getPoll,
-  hasVoted,
-  isPollClosed,
-  listMyReadPostIds,
-  listPosts,
-  listUpcomingDeadlines,
-} from "@/lib/db/queries";
 import { formatDateIt, formatShortDateIt } from "@/lib/format-date";
 import { it } from "@/lib/i18n/it";
 import { cn } from "@/lib/cn";
 import type { PostType } from "@/lib/db/types";
+import { caricaDatiBacheca } from "./bacheca-dati";
+import { PannelloBacheca } from "./PannelloBacheca";
 
 export const metadata = { title: `${it.bacheca.titolo} — ${it.app.name}` };
 
@@ -28,8 +22,6 @@ const FILTERS: Array<{ key: string; label: string; type: PostType | null }> = [
   { key: "poll", label: it.postTypes.poll, type: "poll" },
   { key: "material", label: it.postTypes.material, type: "material" },
 ];
-
-const SETTE_GIORNI_MS = 7 * 24 * 60 * 60 * 1000;
 
 /** Home bacheca (docs/DESIGN.md): pannello riepilogo, poi il feed. */
 export default async function BachecaPage({
@@ -51,61 +43,8 @@ export default async function BachecaPage({
   const showArchived = ctx.isRepresentative && archiviati === "1";
   const activeFilter = FILTERS.find((f) => f.key === tipo) ?? FILTERS[0]!;
 
-  const deadlines = await listUpcomingDeadlines(ctx.klass.id);
-  const allPosts = await listPosts(ctx.klass.id, { includeArchived: showArchived });
-
-  // Statistiche del pannello riepilogo, personali: "nuovo" = pubblicato
-  // negli ultimi 7 giorni E non ancora segnato come visto da me.
-  const attivi = allPosts.filter((p) => !p.archived);
-  const evidenzaPosts = attivi.filter((p) => p.pinned);
-  const sogliaNuovi = Date.now() - SETTE_GIORNI_MS;
-  const nuoviCandidati = attivi.filter(
-    (p) => p.type === "notice" && new Date(p.created_at).getTime() >= sogliaNuovi
-  );
-  const vistiMiei = await listMyReadPostIds(
-    ctx.user.id,
-    nuoviCandidati.map((p) => p.id)
-  );
-  const nuoviPosts = nuoviCandidati.filter((p) => !vistiMiei.has(p.id));
-  // Sondaggi ancora aperti al voto E dove non ho ancora votato:
-  // votare vale come "visto" (il voto resta anonimo, ADR-003).
-  const pollPosts = attivi.filter((p) => p.type === "poll");
-  const pollDettagli = await Promise.all(pollPosts.map((p) => getPoll(p.id)));
-  const apertiTutti = pollPosts.filter((_, i) => {
-    const poll = pollDettagli[i];
-    return poll !== null && poll !== undefined && !isPollClosed(poll);
-  });
-  const hoVotato = await Promise.all(apertiTutti.map((p) => hasVoted(p.id)));
-  const sondaggiAperti = apertiTutti.filter((_, i) => !hoVotato[i]);
-
-  // Ogni segmento è cliccabile: filtra il feed (vista) o, con un solo
-  // sondaggio aperto, porta dritto al sondaggio.
-  const base = `/c/${classCode}`;
-  const stats: Array<{ dot: string; label: string; num: number; href: string | null }> = [
-    {
-      dot: "bg-avviso",
-      label: it.bacheca.statAvvisiNuovi,
-      num: nuoviPosts.length,
-      href: nuoviPosts.length > 0 ? `${base}?vista=nuovi` : null,
-    },
-    {
-      dot: "bg-scadenza",
-      label: it.bacheca.statScadenzeAperte,
-      num: deadlines.length,
-      href: deadlines.length > 0 ? `${base}?vista=scadenze` : null,
-    },
-    {
-      dot: "bg-sondaggio",
-      label: it.bacheca.statSondaggiAperti,
-      num: sondaggiAperti.length,
-      href:
-        sondaggiAperti.length === 1
-          ? `${base}/p/${sondaggiAperti[0]!.slug}`
-          : sondaggiAperti.length > 1
-            ? `${base}?vista=sondaggi`
-            : null,
-    },
-  ];
+  const dati = await caricaDatiBacheca(ctx, { includeArchived: showArchived });
+  const { allPosts, evidenzaPosts, nuoviPosts, deadlines, sondaggiAperti } = dati;
 
   // La vista (dal click su un segmento) vince sul filtro per tipo.
   const VISTE: Record<string, { label: string; posts: typeof allPosts }> = {
@@ -130,57 +69,13 @@ export default async function BachecaPage({
       )}
 
       {/* Pannello riepilogo: delimitato, non si confonde col feed */}
-      <section className="rounded-[22px] border border-hairline bg-paper px-5 pb-1 pt-5">
-        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h1 className="font-display text-[28px] font-bold">
-              {it.bacheca.saluto.replace("{nome}", nome)}
-            </h1>
-            <p className="text-[16px] text-ink-soft">{it.bacheca.sottotitolo}</p>
-          </div>
-          {ctx.isRepresentative && (
-            <Link
-              href={`/c/${classCode}/nuovo`}
-              className="flex min-h-12 items-center gap-1 whitespace-nowrap rounded-full bg-brand px-5 text-[16px] font-bold text-white transition hover:-translate-y-0.5 hover:shadow-[0_6px_14px_rgba(91,79,232,0.3)]"
-            >
-              <Plus className="size-4" aria-hidden /> {it.bacheca.nuovoPost}
-            </Link>
-          )}
-        </div>
-        <div className="flex overflow-x-auto border-t border-hairline">
-          {stats.map((stat) => {
-            const contenuto = (
-              <>
-                <span className="flex items-center gap-1.5">
-                  <span
-                    aria-hidden
-                    className={cn("size-[7px] shrink-0 rounded-full", stat.dot)}
-                  />
-                  <span className="whitespace-nowrap text-[15px] text-ink-soft">
-                    {stat.label}
-                  </span>
-                </span>
-                <span className="font-display text-[24px] font-bold">{stat.num}</span>
-              </>
-            );
-            const classi =
-              "flex min-w-24 flex-1 flex-col gap-1 border-l border-hairline px-4 py-3.5 first:border-l-0 first:pl-0.5";
-            return stat.href ? (
-              <Link
-                key={stat.label}
-                href={stat.href}
-                className={cn(classi, "transition-colors hover:bg-paper-hover")}
-              >
-                {contenuto}
-              </Link>
-            ) : (
-              <div key={stat.label} className={classi}>
-                {contenuto}
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      <PannelloBacheca
+        classCode={classCode}
+        nome={nome}
+        isRepresentative={ctx.isRepresentative}
+        dati={dati}
+        attiva="annunci"
+      />
 
       {/* Separatore: qui iniziano i contenuti */}
       <div className="mb-4 mt-[26px] flex items-center gap-2.5">

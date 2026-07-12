@@ -141,6 +141,8 @@ export const it = {
     entroIl: "Entro",
     saluto: "Ciao {nome}",
     sottotitolo: "Ecco cosa serve alla classe questa settimana",
+    toggleAnnunci: "Annunci",
+    toggleCalendario: "Calendario",
     statAvvisiNuovi: "avvisi nuovi",
     statScadenzeAperte: "scadenze aperte",
     statSondaggiAperti: "sondaggi aperti",
