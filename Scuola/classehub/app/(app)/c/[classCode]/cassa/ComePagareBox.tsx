@@ -27,7 +27,12 @@ export function ComePagareBox({ klass }: { klass: ClassRow }) {
               </p>
               <p className="break-all text-[17px] font-semibold">{klass.payment_iban}</p>
             </div>
-            <CopyButton text={klass.payment_iban} />
+            <CopyButton
+              text={klass.payment_iban}
+              label={it.common.copia}
+              variant="secondary"
+              size="md"
+            />
           </li>
         )}
         {klass.payment_paypal && (
@@ -49,7 +54,12 @@ export function ComePagareBox({ klass }: { klass: ClassRow }) {
               <p className="text-[15px] font-semibold text-ink-soft">Satispay</p>
               <p className="text-[17px] font-semibold">{klass.payment_satispay}</p>
             </div>
-            <CopyButton text={klass.payment_satispay} />
+            <CopyButton
+              text={klass.payment_satispay}
+              label={it.common.copia}
+              variant="secondary"
+              size="md"
+            />
           </li>
         )}
       </ul>
