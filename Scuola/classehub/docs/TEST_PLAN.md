@@ -152,35 +152,35 @@ Usa due browser (normale + incognito) per i due ruoli.
 
 ## 13. Cassa — home rappresentante riorganizzata
 
-- [ ] Rappresentante apre `/cassa` → saldo "In cassa adesso" in cima, grande;
+- [x] Rappresentante apre `/cassa` → saldo "In cassa adesso" in cima, grande;
       se ci sono debitori, sotto compare "N genitori devono ancora versare
       X €"; segue "Da confermare (N)" se ci sono dichiarazioni in attesa; due
       pulsanti "Ho ricevuto soldi" / "Ho speso soldi"; "Chi deve versare" con
       solo i saldi negativi e un pulsante "Ha pagato" per ciascuno; accordion
       chiuso "N genitori sono a posto"; "Le ultime entrate e uscite" (ultime
       5, senza Modifica/Elimina).
-- [ ] "Ha pagato" su un debitore → `/cassa/versamento` col genitore già
+- [x] "Ha pagato" su un debitore → `/cassa/versamento` col genitore già
       scelto e l'importo dovuto precompilato → "Registra il versamento" →
       schermata di conferma con "prima: X €" e la lista di chi manca ancora
       → da lì, "Ha pagato" sul debitore successivo senza tornare alla home:
       due versamenti di fila.
-- [ ] Dalla schermata di conferma, "Annulla questo versamento" → "Sì,
+- [x] Dalla schermata di conferma, "Annulla questo versamento" → "Sì,
       annulla" → il saldo torna esattamente com'era prima del versamento.
-- [ ] Versamento in anticipo: in `/cassa/versamento` scegli un genitore
+- [x] Versamento in anticipo: in `/cassa/versamento` scegli un genitore
       "a posto" → la micro-copy sotto l'importo dice "Non deve niente: sta
       versando in anticipo"; il link "ha pagato in un altro modo?" apre il
       selettore dei metodi di pagamento.
-- [ ] "Ho speso soldi" → form spesa su pagina dedicata → dopo il salvataggio,
+- [x] "Ho speso soldi" → form spesa su pagina dedicata → dopo il salvataggio,
       banner di conferma sulla home della cassa.
-- [ ] "Vedi tutti" → `/cassa/movimenti` con lo storico completo: i filtri
+- [x] "Vedi tutti" → `/cassa/movimenti` con lo storico completo: i filtri
       Tutti/Versamenti/Spese e per genitore funzionano, Modifica ed Elimina
       su una riga funzionano come oggi.
-- [ ] "Excel" (da home e da `/cassa/movimenti`) → il CSV scaricato rispetta i
+- [x] "Excel" (da home e da `/cassa/movimenti`) → il CSV scaricato rispetta i
       filtri attivi nella pagina da cui è stato lanciato.
-- [ ] "Ricorda a tutti" → `/cassa/promemoria` col testo WhatsApp che include
+- [x] "Ricorda a tutti" → `/cassa/promemoria` col testo WhatsApp che include
       il nome della classe nel titolo (es. "💰 CASSA DI CLASSE — 5B
       Simulazione — Servono nuovi versamenti"), nessun importo personale nel
       testo, "Copia" funziona.
-- [ ] Genitore (Laura) apre la cassa → vista INVARIATA: "Quanto ti resta" col
+- [x] Genitore (Laura) apre la cassa → vista INVARIATA: "Quanto ti resta" col
       suo saldo, lista dei soli suoi movimenti, totale di classe in fondo,
       come prima della riorganizzazione.
