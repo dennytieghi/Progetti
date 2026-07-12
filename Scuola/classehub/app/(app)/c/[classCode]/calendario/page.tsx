@@ -3,6 +3,8 @@ import { ChevronLeft, ChevronRight, Pin } from "lucide-react";
 import { PannelloBacheca } from "../PannelloBacheca";
 import { caricaDatiBacheca } from "../bacheca-dati";
 import { POST_TYPE_STYLE } from "@/components/posts/type-style";
+import { PostCard } from "@/components/posts/PostCard";
+import { EmptyState } from "@/components/shared/EmptyState";
 import { requireActiveMembership } from "@/lib/auth/require-membership";
 import {
   aggiungiGiorni,
@@ -71,6 +73,29 @@ export default async function CalendarioPage({
       : it.calendario.settimanaDal
           .replace("{dal}", giornoBreveIt(settimane[0]![0]!.data))
           .replace("{al}", giornoBreveIt(settimane[0]![6]!.data));
+
+  // Elenco: il giorno selezionato (se cade nel periodo), altrimenti
+  // tutto il periodo. Primo blocco scadenze+pinnati, poi il resto,
+  // entrambi in ordine di giorno.
+  const giorniPeriodo = settimane
+    .flat()
+    .filter((c) => c.nelMese)
+    .map((c) => c.data);
+  const giorniElenco =
+    selezionato && giorniPeriodo.includes(selezionato) ? [selezionato] : giorniPeriodo;
+  const postPeriodo = giorniElenco.flatMap((g) => perGiorno.get(g) ?? []);
+  const inEvidenza = postPeriodo.filter((p) => p.type === "deadline" || p.pinned);
+  const altri = postPeriodo.filter((p) => !(p.type === "deadline" || p.pinned));
+  const titoloElenco =
+    giorniElenco.length === 1
+      ? capitalizza(
+          new Intl.DateTimeFormat("it-IT", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+          }).format(new Date(`${giorniElenco[0]}T12:00:00Z`))
+        )
+      : titoloPeriodo;
 
   const nome = (ctx.profile?.display_name ?? "").trim().split(/\s+/)[0] ?? "";
 
@@ -197,6 +222,39 @@ export default async function CalendarioPage({
           })}
         </div>
       </div>
+
+      <div className="mb-4 mt-[26px] flex items-center gap-2.5">
+        <span className="whitespace-nowrap text-[15px] font-bold uppercase tracking-[0.07em] text-ink-faint">
+          {titoloElenco}
+        </span>
+        <span aria-hidden className="h-px flex-1 bg-hairline" />
+        {giorniElenco.length === 1 && (
+          <Link
+            href={url({ giorno: null })}
+            className="whitespace-nowrap text-[15px] font-semibold text-brand underline underline-offset-4"
+          >
+            {vista === "mese" ? it.calendario.mostraMese : it.calendario.mostraSettimana}
+          </Link>
+        )}
+      </div>
+
+      {postPeriodo.length === 0 ? (
+        <EmptyState
+          emoji="🗓️"
+          title={
+            giorniElenco.length === 1 ? it.calendario.vuotoGiorno : it.calendario.vuoto
+          }
+          text=""
+        />
+      ) : (
+        <ul className="space-y-2.5">
+          {[...inEvidenza, ...altri].map((post) => (
+            <li key={post.id}>
+              <PostCard post={post} classCode={classCode} />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
