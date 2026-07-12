@@ -220,19 +220,19 @@ Usa due browser (normale + incognito) per i due ruoli.
 
 ## 16. "L'ho visto" (richiede migrazione 0009)
 
-- [ ] Genitore (Laura) apre un avviso → in fondo al testo c'è il bottone
+- [x] Genitore (Laura) apre un avviso → in fondo al testo c'è il bottone
       "L'ho visto"; dopo il tap diventa "Visto — tocca per togliere" e
       il contatore "avvisi nuovi" in bacheca scende di 1. Un secondo tap
       toglie il visto e il contatore risale.
-- [ ] La spunta c'è anche su scadenze e materiale, NON sui sondaggi.
+- [x] La spunta c'è anche su scadenze e materiale, NON sui sondaggi.
       Spuntare una scadenza NON la toglie dal contatore "scadenze
       aperte" (resta finché non passa la data).
-- [ ] Laura vota un sondaggio aperto → per lei "sondaggi aperti" scende
+- [x] Laura vota un sondaggio aperto → per lei "sondaggi aperti" scende
       di 1; per un altro genitore che non ha votato resta invariato.
-- [ ] Rappresentante (Denise) apre lo stesso avviso → card "Chi l'ha
+- [x] Rappresentante (Denise) apre lo stesso avviso → card "Chi l'ha
       visto" col conteggio in grande ("1 su N"), SENZA nomi. Sul
       sondaggio la card NON c'è (voto anonimo).
-- [ ] Denise NON ha il bottone "L'ho visto" (ha la card al suo posto);
+- [x] Denise NON ha il bottone "L'ho visto" (ha la card al suo posto);
       i suoi contatori contano tutti i nuovi avvisi.
 - [x] Probe ostile: un genitore non può inserire un visto per un altro
       utente né su un sondaggio (insert rifiutato dalla RLS); legge

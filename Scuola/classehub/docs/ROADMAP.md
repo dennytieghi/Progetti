@@ -73,6 +73,10 @@
 - [x] Test manuale end-to-end pagamenti semplici su TEST5B (11/7/2026, TEST_PLAN §Cassa — pagamenti semplici).
 - [x] Vista genitore ristretta: solo i propri movimenti, saldo personale in evidenza, totale di classe aggregato (ADR-017). Migrazione 0007 eseguita. Test end-to-end su TEST5B (12/7/2026).
 - [x] Home cassa del rappresentante riorganizzata: saldo in cima, "Chi deve versare" con azione rapida "Ha pagato", form su pagine dedicate, promemoria come pagina (spec 2026-07-12). Test end-to-end su TEST5B (12/7/2026, TEST_PLAN §13, 9 scenari).
+- [x] Spesa a importo totale diviso pro-quota tra i partecipanti (aggiornamento ADR-013). Test e2e su TEST5B (12/7/2026, TEST_PLAN §14).
+- [x] Scorciatoie di pubblicazione: preset a un tap per titolo/testo/opzioni (TEST_PLAN §15).
+- [x] "L'ho visto" sui post con contatori bacheca personali e conteggio visti per il rappresentante (ADR-018). Migrazione 0009 eseguita. Test e2e + probe RLS su TEST5B (12/7/2026, TEST_PLAN §16).
+- [x] Redesign visivo (docs/DESIGN.md): palette e font nel tema, sidebar, bacheca con pannello riepilogo e segmenti cliccabili, scelta tipo post, cassa. Scala font accessibile (CLAUDE.md §6 vince sui mockup).
 
 ## V1.1 — Post-pilota (dopo feedback reale)
 - Notifiche push web (per chi accetta).
