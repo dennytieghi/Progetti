@@ -2,7 +2,6 @@
 
 import { useActionState, useState } from "react";
 import { Banner } from "@/components/shared/Banner";
-import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { SubmitButton } from "@/components/ui/SubmitButton";
@@ -151,7 +150,7 @@ export function VersamentoNuovoForm({
           )}
 
           {importoCents !== null && importoCents > 0 && (
-            <Card className="bg-accent-light">
+            <div className="rounded-2xl border border-line bg-accent-light p-5 shadow-sm">
               <p className="text-[17px]">
                 {it.cassa.riepilogoVersamento
                   .replace("{nome}", scelto.name)
@@ -161,7 +160,7 @@ export function VersamentoNuovoForm({
                     formatEuroCents(saldoCassaCents + importoCents)
                   )}
               </p>
-            </Card>
+            </div>
           )}
 
           <SubmitButton size="lg">{it.cassa.registraVersamentoCta}</SubmitButton>
