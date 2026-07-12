@@ -83,12 +83,6 @@ export default async function BachecaPage({
   const base = `/c/${classCode}`;
   const stats: Array<{ dot: string; label: string; num: number; href: string | null }> = [
     {
-      dot: "bg-urgente",
-      label: it.bacheca.statInEvidenza,
-      num: evidenzaPosts.length,
-      href: evidenzaPosts.length > 0 ? `${base}?vista=evidenza` : null,
-    },
-    {
       dot: "bg-avviso",
       label: it.bacheca.statAvvisiNuovi,
       num: nuoviPosts.length,
@@ -115,7 +109,6 @@ export default async function BachecaPage({
 
   // La vista (dal click su un segmento) vince sul filtro per tipo.
   const VISTE: Record<string, { label: string; posts: typeof allPosts }> = {
-    evidenza: { label: it.bacheca.statInEvidenza, posts: evidenzaPosts },
     nuovi: { label: it.bacheca.statAvvisiNuovi, posts: nuoviPosts },
     scadenze: { label: it.bacheca.statScadenzeAperte, posts: deadlines },
     sondaggi: { label: it.bacheca.statSondaggiAperti, posts: sondaggiAperti },
