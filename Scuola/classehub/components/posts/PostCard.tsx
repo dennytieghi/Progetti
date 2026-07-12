@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, Clock, Megaphone, Paperclip, Pin, Vote } from "lucide-react";
+import { ArrowRight, Pin } from "lucide-react";
+import { POST_TYPE_STYLE } from "@/components/posts/type-style";
 import { it } from "@/lib/i18n/it";
 import { formatDateIt, formatShortDateIt } from "@/lib/format-date";
 import { cn } from "@/lib/cn";
@@ -13,40 +14,6 @@ import type { PostRow } from "@/lib/db/types";
  * blocco di colore sulla card.
  */
 
-const TYPE_STYLE: Record<
-  PostRow["type"],
-  { icon: typeof Megaphone; chip: string; badge: string; hover: string; action: string }
-> = {
-  notice: {
-    icon: Megaphone,
-    chip: "bg-avviso text-avviso-ink",
-    badge: "bg-avviso text-avviso-ink",
-    hover: "hover:border-avviso",
-    action: "text-avviso-ink",
-  },
-  deadline: {
-    icon: Clock,
-    chip: "bg-scadenza text-white",
-    badge: "bg-scadenza text-white",
-    hover: "hover:border-scadenza",
-    action: "text-scadenza",
-  },
-  poll: {
-    icon: Vote,
-    chip: "bg-sondaggio text-white",
-    badge: "bg-sondaggio text-white",
-    hover: "hover:border-sondaggio",
-    action: "text-sondaggio",
-  },
-  material: {
-    icon: Paperclip,
-    chip: "bg-materiale text-white",
-    badge: "bg-materiale text-white",
-    hover: "hover:border-materiale",
-    action: "text-materiale",
-  },
-};
-
 export function PostCard({
   post,
   classCode,
@@ -54,7 +21,7 @@ export function PostCard({
   post: PostRow;
   classCode: string;
 }) {
-  const stile = TYPE_STYLE[post.type];
+  const stile = POST_TYPE_STYLE[post.type];
   const Icona = stile.icon;
 
   return (

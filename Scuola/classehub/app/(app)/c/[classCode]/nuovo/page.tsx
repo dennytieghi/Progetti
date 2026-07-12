@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
+import { POST_TYPE_STYLE } from "@/components/posts/type-style";
 import { requireRepresentative } from "@/lib/auth/require-membership";
 import { getRequestById } from "@/lib/db/queries";
 import { it } from "@/lib/i18n/it";
+import { cn } from "@/lib/cn";
 import type { PostType } from "@/lib/db/types";
 import { NuovoPostForm } from "./NuovoPostForm";
 
@@ -47,22 +49,43 @@ export default async function NuovoPostPage({
   if (!selected) {
     const suffix = requestId ? `&richiesta=${requestId}` : "";
     return (
-      <div className="mx-auto max-w-md">
-        <h1 className="mb-5 text-[28px] font-bold">{it.nuovo.titolo}</h1>
-        <ul className="space-y-3">
-          {TYPES.map((t) => (
-            <li key={t.type}>
-              <Link
-                href={`/c/${classCode}/nuovo?tipo=${t.type}${suffix}`}
-                className="block rounded-2xl border-2 border-line bg-paper p-5 hover:border-accent"
-              >
-                <p className="text-[22px] font-semibold">
-                  <span aria-hidden>{t.emoji}</span> {it.postTypes[t.type]}
-                </p>
-                <p className="mt-1 text-[16px] text-ink-soft">{t.spiega}</p>
-              </Link>
-            </li>
-          ))}
+      <div className="mx-auto max-w-md font-body">
+        <h1 className="mb-5 font-display text-[28px] font-bold">{it.nuovo.titolo}</h1>
+        <ul className="space-y-2.5">
+          {TYPES.map((t) => {
+            const stile = POST_TYPE_STYLE[t.type];
+            const Icona = stile.icon;
+            return (
+              <li key={t.type}>
+                <Link
+                  href={`/c/${classCode}/nuovo?tipo=${t.type}${suffix}`}
+                  className={cn(
+                    "flex items-start gap-3 rounded-2xl border border-hairline bg-paper p-5",
+                    "transition hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(20,20,30,0.08)]",
+                    stile.hover
+                  )}
+                >
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "flex size-[34px] shrink-0 items-center justify-center rounded-[10px]",
+                      stile.chip
+                    )}
+                  >
+                    <Icona className="size-4" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block font-display text-[22px] font-semibold leading-snug">
+                      {it.postTypes[t.type]}
+                    </span>
+                    <span className="mt-1 block text-[16px] leading-relaxed text-ink-soft">
+                      {t.spiega}
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
