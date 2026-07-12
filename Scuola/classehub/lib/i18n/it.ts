@@ -169,6 +169,8 @@ export const it = {
     aggiungiOpzione: "Aggiungi un'opzione",
     rimuoviOpzione: "Togli",
     chiusuraLabel: "Fino a quando si può votare?",
+    scorciatoieTitolo: "Parti da un esempio, poi correggi quello che vuoi:",
+    scrivoIo: "Scrivo io",
     pubblica: "Pubblica",
     erroreTitolo: "Scrivi un titolo: aiuta i genitori a capire subito di cosa si tratta.",
     erroreData: "Scegli una data valida, da oggi in poi.",
@@ -626,3 +628,96 @@ export const it = {
 } as const;
 
 export type It = typeof it;
+
+/**
+ * Scorciatoia di pubblicazione: un tap precompila il form del nuovo
+ * post (ADR-012: solo testo nei campi esistenti, nessuna entità nuova).
+ * `options` solo per i sondaggi. Fuori da `it` (as const) per avere
+ * un tipo uniforme comodo da iterare nel form.
+ */
+export interface Scorciatoia {
+  label: string;
+  title: string;
+  body: string;
+  options?: string[];
+}
+
+export const scorciatoie: Record<
+  "notice" | "deadline" | "poll" | "material",
+  Scorciatoia[]
+> = {
+  notice: [
+    {
+      label: "Uscita anticipata",
+      title: "Uscita anticipata",
+      body: "La classe esce prima del solito.",
+    },
+    {
+      label: "Entrata posticipata",
+      title: "Entrata posticipata",
+      body: "La classe entra più tardi del solito.",
+    },
+    {
+      label: "Sciopero",
+      title: "Sciopero — possibili disagi",
+      body: "Giornata di sciopero: il servizio potrebbe essere ridotto.",
+    },
+    {
+      label: "Assemblea/riunione",
+      title: "Riunione di classe",
+      body: "Ci troviamo per parlare di:",
+    },
+    {
+      label: "Portare domani",
+      title: "Da portare domani",
+      body: "Ricordarsi di portare:",
+    },
+  ],
+  deadline: [
+    { label: "Moduli mensa", title: "Consegna moduli iscrizione mensa", body: "" },
+    { label: "Pagamento gita", title: "Pagamento quota gita", body: "" },
+    { label: "Avviso firmato", title: "Restituire avviso firmato", body: "" },
+    { label: "Foto/documenti", title: "Consegna foto e documenti", body: "" },
+    {
+      label: "Libri in biblioteca",
+      title: "Restituire i libri della biblioteca",
+      body: "",
+    },
+  ],
+  poll: [
+    {
+      label: "Regalo maestra",
+      title: "Che regalo facciamo alla maestra?",
+      body: "",
+    },
+    {
+      label: "Data riunione",
+      title: "Quale data va bene per la riunione?",
+      body: "",
+    },
+    {
+      label: "Adesione gita",
+      title: "Chi partecipa alla gita?",
+      body: "",
+      options: ["Sì, partecipa", "No, non partecipa"],
+    },
+    {
+      label: "Sì / No",
+      title: "",
+      body: "",
+      options: ["Sì", "No"],
+    },
+  ],
+  material: [
+    {
+      label: "Lista per un progetto",
+      title: "Materiale per il progetto",
+      body: "Serve portare:",
+    },
+    {
+      label: "Foto circolare",
+      title: "Circolare della scuola",
+      body: "Ecco la circolare (foto sotto).",
+    },
+  ],
+};

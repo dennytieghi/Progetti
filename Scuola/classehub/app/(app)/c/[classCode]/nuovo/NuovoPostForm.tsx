@@ -8,7 +8,7 @@ import { SubmitButton } from "@/components/ui/SubmitButton";
 import { Button } from "@/components/ui/Button";
 import { Banner } from "@/components/shared/Banner";
 import { initialFormState } from "@/lib/form-state";
-import { it } from "@/lib/i18n/it";
+import { it, scorciatoie, type Scorciatoia } from "@/lib/i18n/it";
 import { ALLOWED_PHOTO_TYPES, MAX_PHOTO_BYTES } from "@/lib/upload-limits";
 import type { PostType } from "@/lib/db/types";
 import {
@@ -37,9 +37,32 @@ export function NuovoPostForm({
   requestId: string;
 }) {
   const [state, formAction] = useActionState(ACTIONS[tipo], initialFormState);
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState(defaultBody);
   const [options, setOptions] = useState<string[]>(["", ""]);
   const [photoError, setPhotoError] = useState<string | null>(null);
   const today = new Date().toISOString().slice(0, 10);
+
+  // Scorciatoie: un tap precompila i campi, che restano modificabili.
+  // Nascoste quando si parte da una richiesta: il testo è già quello
+  // del genitore e non va sovrascritto.
+  const presets = scorciatoie[tipo];
+  const [mostraScorciatoie, setMostraScorciatoie] = useState(
+    requestId === "" && presets.length > 0
+  );
+
+  function applicaScorciatoia(s: Scorciatoia) {
+    setTitle(s.title);
+    setBody(s.body);
+    if (tipo === "poll") setOptions(s.options ? [...s.options] : ["", ""]);
+  }
+
+  function scrivoIo() {
+    setTitle("");
+    setBody("");
+    setOptions(["", ""]);
+    setMostraScorciatoie(false);
+  }
 
   // Controllo subito nel browser: le Server Action rifiutano gli invii
   // troppo grandi con un errore grezzo, quindi un file fuori misura
@@ -74,6 +97,29 @@ export function NuovoPostForm({
       <input type="hidden" name="classCode" value={classCode} />
       <input type="hidden" name="requestId" value={requestId} />
 
+      {mostraScorciatoie && (
+        <div>
+          <p className="mb-2 text-[15px] text-ink-soft">
+            {it.nuovo.scorciatoieTitolo}
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {presets.map((s) => (
+              <Button
+                key={s.label}
+                type="button"
+                variant="secondary"
+                onClick={() => applicaScorciatoia(s)}
+              >
+                {s.label}
+              </Button>
+            ))}
+            <Button type="button" variant="ghost" onClick={scrivoIo}>
+              {it.nuovo.scrivoIo}
+            </Button>
+          </div>
+        </div>
+      )}
+
       <div>
         <Label htmlFor="title">
           {tipo === "poll" ? it.nuovo.domandaLabel : it.nuovo.titoloLabel}
@@ -82,6 +128,8 @@ export function NuovoPostForm({
           id="title"
           name="title"
           placeholder={tipo === "poll" ? it.nuovo.domandaEsempio : it.nuovo.titoloEsempio}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           maxLength={120}
           required
         />
@@ -93,7 +141,8 @@ export function NuovoPostForm({
           id="body"
           name="body"
           placeholder={it.nuovo.testoEsempio}
-          defaultValue={defaultBody}
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
           maxLength={5000}
         />
         {tipo === "material" && (

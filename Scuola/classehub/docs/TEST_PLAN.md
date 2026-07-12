@@ -202,3 +202,18 @@ Usa due browser (normale + incognito) per i due ruoli.
       form e, se si prova a salvare, errore chiaro senza movimento creato.
 - [x] Genitore: sulla sua riga vede la SUA quota esatta (3,33 € o 3,34 €) e
       il saldo personale scende di quella cifra.
+
+## 15. Pubblicazione — scorciatoie
+
+- [ ] Nuovo post → scegli "Avviso" → sopra il form compare la fila di
+      scorciatoie (Uscita anticipata, Entrata posticipata, Sciopero,
+      Assemblea/riunione, Portare domani) + "Scrivo io"; un tap su
+      "Sciopero" riempie titolo e testo, entrambi ancora modificabili.
+- [ ] Sondaggio → tap su "Adesione gita" riempie la domanda e le due
+      opzioni ("Sì, partecipa" / "No, non partecipa"); tap su "Sì / No"
+      lascia la domanda vuota e mette le opzioni Sì/No; il post si
+      pubblica e il messaggio WhatsApp esce corretto senza modifiche.
+- [ ] Tap su una scorciatoia, poi su un'altra → i campi vengono
+      sostituiti; "Scrivo io" → campi svuotati e fila nascosta.
+- [ ] Arrivando da una richiesta genitore ("Trasforma in post") le
+      scorciatoie NON compaiono e il testo della richiesta resta.
