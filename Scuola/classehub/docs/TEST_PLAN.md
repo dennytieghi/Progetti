@@ -263,3 +263,25 @@ Usa due browser (normale + incognito) per i due ruoli.
       errori.
 - [x] Genitore (Laura): vede il calendario coi soli post che vede in
       bacheca; nessun bottone Pubblica.
+
+## 18. Login di rientro e multiclasse (V1.5)
+
+- [ ] Landing → "Sei già registrato? Accedi" → /accedi.
+- [ ] /accedi con email REGISTRATA → banner neutro + riquadro demo col
+      link; il link apre la sessione e smista (Denise, 1 classe → la
+      sua bacheca).
+- [ ] /accedi con email NON registrata → stesso identico banner neutro,
+      NESSUN riquadro demo, nessun account creato.
+- [ ] Utente in DUE classi attive → il login porta a /classi; le card
+      mostrano nome e ruolo giusti; click → bacheca giusta; nella
+      classe dove è genitore NON vede i comandi da rappresentante.
+- [ ] Membership pending in /classi → card "In attesa di approvazione"
+      non cliccabile.
+- [ ] Nome classe nella sidebar (e barra mobile) → porta a /classi.
+- [ ] Da /classi, "Entra in un'altra classe" con un secondo codice →
+      pending creata; "Crea una classe" da utente esistente → funziona.
+- [ ] Google con la STESSA email di un'iscrizione → stesse classi.
+- [ ] Google con email DIVERSA (mai iscritta) → /benvenuto con la
+      spiegazione; nessuna classe visibile.
+- [ ] Probe: /accedi?demo=https://evil.example → il riquadro demo NON
+      compare (accetta solo percorsi /auth/callback).

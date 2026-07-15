@@ -9,6 +9,7 @@ app/
 â”‚   â”œâ”€â”€ crea-classe/                # onboarding rappresentante
 â”‚   â”œâ”€â”€ entra/                      # onboarding genitore
 â”‚   â”œâ”€â”€ in-attesa/                  # schermata membership pending
+â”‚   â”œâ”€â”€ accedi/                     # porta di rientro (V1.5)
 â”‚   â””â”€â”€ auth/                       # magic link callback
 â”œâ”€â”€ (app)/
 â”‚   â”œâ”€â”€ layout.tsx                  # richiede auth + membership active
@@ -27,6 +28,8 @@ app/
 â”‚   â”‚   â”‚   â”œâ”€â”€ approvazioni/       # rappresentante: coda iscrizioni pending
 â”‚   â”‚   â”‚   â””â”€â”€ membri/             # rappresentante: lista membri, mute, remove
 â”‚   â”‚   â””â”€â”€ invia-richiesta/        # genitore: crea richiesta
+â”‚   â”œâ”€â”€ benvenuto/                  # smistamento post-login senza classi attive (V1.5)
+â”‚   â”œâ”€â”€ classi/                     # elenco classi + cambio classe, multiclasse (V1.5)
 â”‚   â””â”€â”€ account/                    # gestione account (logout)
 â”œâ”€â”€ api/
 â”‚   â””â”€â”€ (nessuna route API custom in V1, tutto Server Actions)
@@ -244,6 +247,7 @@ Ogni tabella ha RLS `enable` e policy di questo tipo:
    - `status='active'`, `decided_at=now()`, `decided_by=uid`, `note_for_rep=null`.
    - Invia email transazionale al genitore (Supabase Auth email o Resend).
 7. Genitore clicca il link nell'email â†’ redirect a `/c/{class_code}`.
+8. Rientro (intent=login o Google): smistamento su benvenuto/bacheca/classi in base alle membership attive.
 
 ## Codici human-friendly
 - Alfabeto: `ABCDEFGHJKMNPQRSTUVWXYZ23456789` (no O/0, I/1/l).

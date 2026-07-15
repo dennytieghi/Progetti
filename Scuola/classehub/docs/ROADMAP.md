@@ -47,6 +47,8 @@
       "Esci" o cambia telefono resta chiuso fuori (emerso nel test
       end-to-end del 7/7/2026 — il link è monouso e "Entra" rifiuta chi
       è già membro).
+- [ ] Accedi con Google dietro NEXT_PUBLIC_GOOGLE_LOGIN (spec 2026-07-12).
+- [ ] Multiclasse: pagina "Le mie classi", smistamento post-login, cambio classe dalla sidebar.
 - [ ] Test manuale end-to-end (TEST_PLAN.md).
 - [ ] Test qualitativo su parente 50-60 (UX_PRINCIPLES §finale).
 - [ ] Dominio custom + email transazionale (SPF/DKIM).

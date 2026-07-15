@@ -107,9 +107,12 @@ export function AppHeader({
       {/* Sidebar da md in su */}
       <aside className="no-print sticky top-0 hidden h-screen w-60 shrink-0 flex-col self-start border-r border-hairline bg-paper px-4 py-6 md:flex">
         <p className="font-display text-[20px] font-bold text-brand">{it.app.name}</p>
-        <p className="mb-6 mt-0.5 text-[15px] leading-snug text-ink-faint">
+        <Link
+          href="/classi"
+          className="mb-6 mt-0.5 block text-[15px] leading-snug text-ink-faint underline-offset-4 hover:text-ink hover:underline"
+        >
           {className}
-        </p>
+        </Link>
         <ul className="flex flex-1 flex-col gap-1">
           {items.map((item) => {
             const active = isActive(item.href);
@@ -157,7 +160,11 @@ export function AppHeader({
       <header className="no-print sticky top-0 z-40 border-b border-hairline bg-paper md:hidden">
         <div className="px-4 pt-3">
           <p className="font-display text-[15px] font-bold text-brand">{it.app.name}</p>
-          <h1 className="truncate text-[22px] font-bold leading-tight">{className}</h1>
+          <h1 className="truncate text-[22px] font-bold leading-tight">
+            <Link href="/classi" className="underline-offset-4 hover:underline">
+              {className}
+            </Link>
+          </h1>
         </div>
         <nav className="overflow-x-auto px-2">
           <ul className="flex gap-1 py-1">
