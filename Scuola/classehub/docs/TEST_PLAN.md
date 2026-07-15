@@ -283,5 +283,5 @@ Usa due browser (normale + incognito) per i due ruoli.
 - [ ] Google con la STESSA email di un'iscrizione → stesse classi.
 - [ ] Google con email DIVERSA (mai iscritta) → /benvenuto con la
       spiegazione; nessuna classe visibile.
-- [ ] Probe: /accedi?demo=https://evil.example → il riquadro demo NON
+- [ ] Probe: /accedi?inviato=1&demo=https://evil.example → il riquadro demo NON
       compare (accetta solo percorsi /auth/callback).

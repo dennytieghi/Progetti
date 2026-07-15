@@ -82,6 +82,17 @@ chiave esterna da configurare.
    Redirect URLs sul dominio di produzione.
 5. Deploy. Collega il dominio e configura SPF/DKIM su Resend.
 
+### Link magico su dispositivi diversi (da fare al deploy)
+
+In produzione `signInWithOtp` usa il flusso PKCE: il link funziona solo
+nel browser che lo ha richiesto. Se un genitore chiede il link dal PC e
+apre l'email dal telefono, finisce su /link-non-valido.
+
+Soluzione al deploy: personalizza il template email di Supabase perché
+porti `{{ .TokenHash }}` verso `/auth/callback?token_hash=...` (il
+callback gestisce già `token_hash` con `verifyOtp`), così il link vale
+su qualunque dispositivo.
+
 ## Accedi con Google (facoltativo)
 
 1. console.cloud.google.com → nuovo progetto "classehub" → "API e

@@ -26,6 +26,7 @@ export function AccediForm() {
           name="email"
           type="email"
           placeholder={it.accedi.emailEsempio}
+          autoComplete="email"
           required
         />
       </div>

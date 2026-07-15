@@ -108,7 +108,8 @@ export async function listClassesForUser(
     .from("memberships")
     .select("*")
     .eq("user_id", userId)
-    .in("status", ["active", "pending"]);
+    .in("status", ["active", "pending"])
+    .order("joined_at", { ascending: true });
   if (!memberships || memberships.length === 0) return [];
 
   const classIds = memberships.map((m) => m.class_id);
