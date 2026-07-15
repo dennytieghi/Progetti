@@ -82,6 +82,20 @@ chiave esterna da configurare.
    Redirect URLs sul dominio di produzione.
 5. Deploy. Collega il dominio e configura SPF/DKIM su Resend.
 
+## Accedi con Google (facoltativo)
+
+1. console.cloud.google.com → nuovo progetto "classehub" → "API e
+   servizi" → "Schermata consenso OAuth": tipo External, nome app
+   ClasseHub, la tua email; scope solo email e profile.
+2. "Credenziali" → "Crea credenziali" → "ID client OAuth" → tipo
+   "Applicazione web". URI di reindirizzamento autorizzato:
+   https://oynywafefntvnkunjieh.supabase.co/auth/v1/callback
+3. Supabase → Authentication → Providers → Google: incolla Client ID
+   e Client secret, salva.
+4. Supabase → Authentication → URL Configuration → "Redirect URLs":
+   aggiungi http://localhost:3000/auth/callback
+5. In `.env.local`: NEXT_PUBLIC_GOOGLE_LOGIN=1 e riavvia il dev server.
+
 ## Variabili d'ambiente
 
 | Nome | Dove serve | Note |

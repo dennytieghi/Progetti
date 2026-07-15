@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/Card";
 import { Banner } from "@/components/shared/Banner";
 import { it } from "@/lib/i18n/it";
 import { AccediForm } from "./AccediForm";
+import { GoogleButton } from "./GoogleButton";
 
 export const metadata = { title: `${it.accedi.titolo} — ${it.app.name}` };
 
@@ -43,6 +44,17 @@ export default async function AccediPage({
       <Card>
         <AccediForm />
       </Card>
+
+      {process.env.NEXT_PUBLIC_GOOGLE_LOGIN === "1" && (
+        <>
+          <div className="flex items-center gap-3">
+            <span aria-hidden className="h-px flex-1 bg-hairline" />
+            <span className="text-[15px] text-ink-faint">{it.accedi.oppure}</span>
+            <span aria-hidden className="h-px flex-1 bg-hairline" />
+          </div>
+          <GoogleButton />
+        </>
+      )}
     </div>
   );
 }
