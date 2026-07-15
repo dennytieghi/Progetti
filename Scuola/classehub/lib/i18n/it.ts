@@ -105,6 +105,8 @@ export const it = {
     oppure: "oppure",
     google: "Accedi con Google",
     erroreEmail: "Controlla l'email: sembra scritta in modo non corretto.",
+    erroreGoogle:
+      "Non siamo riusciti ad aprire l'accesso con Google. Riprova tra qualche istante.",
   },
 
   benvenuto: {
