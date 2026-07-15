@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getClassById, getMembership } from "@/lib/db/queries";
+import { getClassById, getMembership, listMyMemberships } from "@/lib/db/queries";
 import {
   createClassWithRepresentative,
   createOneTimeSecret,
@@ -7,6 +7,7 @@ import {
   upsertProfile,
 } from "@/lib/db/mutations";
 import { supabaseServer } from "@/lib/db/supabase";
+import { destinazionePostLogin } from "@/lib/auth/destinazione-login";
 
 /**
  * Callback del magic link (Supabase Auth). Qui l'email è verificata:
@@ -15,7 +16,8 @@ import { supabaseServer } from "@/lib/db/supabase";
  * - create_class: crea classe + membership del rappresentante (active)
  *   + segreto one-time per mostrare il codice di emergenza una volta;
  * - join_class: crea membership 'pending' con nota per il rappresentante;
- * - login: solo sessione, si va sull'account.
+ * - login (o ritorno OAuth senza intent): smistamento su 0/1/N classi
+ *   attive (benvenuto, bacheca o "Le mie classi").
  * Manomettere i parametri non dà privilegi: sono le stesse azioni dei
  * form pubblici, e un pending resta un pending.
  */
@@ -80,5 +82,15 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  return NextResponse.redirect(new URL("/account", request.url));
+  // Rientro (intent=login, dev-login, ritorno OAuth): smistamento
+  // 0 classi → benvenuto, 1 → bacheca, 2+ → Le mie classi (spec V1.5).
+  const memberships = await listMyMemberships(user.id);
+  const conCodice = await Promise.all(
+    memberships.map(async (m) => ({
+      status: m.status,
+      classCode: (await getClassById(m.class_id))?.class_code ?? "",
+    }))
+  );
+  const dest = destinazionePostLogin(conCodice.filter((m) => m.classCode !== ""));
+  return NextResponse.redirect(new URL(dest, request.url));
 }
