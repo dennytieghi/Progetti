@@ -68,7 +68,11 @@ export async function sendLoginLink(input: {
     const link = await admin.auth.admin.generateLink({ type: "magiclink", email });
     if (link.error) {
       // Porta di rientro: email sconosciuta → risposta NEUTRA, nessun link.
-      if (!createUser) return { demoPath: null };
+      if (!createUser) {
+        // Risposta neutra all'utente (anti-enumerazione), ma il server tiene traccia.
+        console.error(`[accedi] generazione link fallita (porta rientro): ${link.error.message}`);
+        return { demoPath: null };
+      }
       throw new Error(`Generazione link fallita: ${link.error.message}`);
     }
 
@@ -89,7 +93,11 @@ export async function sendLoginLink(input: {
   });
   if (error) {
     // Email sconosciuta sulla porta di rientro: silenzio = neutro.
-    if (!createUser) return { demoPath: null };
+    if (!createUser) {
+      // Risposta neutra all'utente (anti-enumerazione), ma il server tiene traccia.
+      console.error(`[accedi] invio link fallito (porta rientro): ${error.message}`);
+      return { demoPath: null };
+    }
     throw new Error(`Invio email fallito: ${error.message}`);
   }
   return { demoPath: null };

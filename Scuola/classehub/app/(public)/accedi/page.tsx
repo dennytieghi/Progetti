@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { buttonClasses } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Banner } from "@/components/shared/Banner";
 import { it } from "@/lib/i18n/it";
@@ -29,12 +31,9 @@ export default async function AccediPage({
                 {it.controllaEmail.demoTitolo}
               </p>
               <p className="text-[15px]">{it.controllaEmail.demoTesto}</p>
-              <a
-                href={demo}
-                className="block break-all text-[15px] font-semibold text-brand underline underline-offset-4"
-              >
+              <Link href={demo} className={buttonClasses("primary", "lg")}>
                 {it.controllaEmail.demoBottone}
-              </a>
+              </Link>
               <p className="text-[15px] text-ink-soft">{it.accedi.linkPersonale}</p>
             </Card>
           )}
