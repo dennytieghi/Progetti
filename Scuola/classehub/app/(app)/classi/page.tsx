@@ -4,7 +4,7 @@ import { Clock } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { buttonClasses } from "@/components/ui/Button";
 import { getCurrentUser } from "@/lib/auth/require-membership";
-import { getClassById, listMyMemberships } from "@/lib/db/queries";
+import { listClassesForUser } from "@/lib/db/queries";
 import { it } from "@/lib/i18n/it";
 import { cn } from "@/lib/cn";
 
@@ -12,24 +12,15 @@ export const metadata = { title: `${it.classi.titolo} — ${it.app.name}` };
 
 /**
  * Le mie classi: una card per iscrizione. I nomi delle classi si
- * leggono con getClassById (admin): un pending non può leggere la
+ * leggono con listClassesForUser (admin): un pending non può leggere la
  * riga della classe via RLS, ma il nome della SUA richiesta sì.
  */
 export default async function ClassiPage() {
   const ctx = await getCurrentUser();
   if (!ctx) redirect("/accedi");
 
-  const memberships = (await listMyMemberships(ctx.user.id)).filter(
-    (m) => m.status === "active" || m.status === "pending"
-  );
-  if (memberships.length === 0) redirect("/benvenuto");
-
-  const cards = await Promise.all(
-    memberships.map(async (m) => ({
-      membership: m,
-      klass: await getClassById(m.class_id),
-    }))
-  );
+  const cards = await listClassesForUser(ctx.user.id);
+  if (cards.length === 0) redirect("/benvenuto");
 
   return (
     <div className="mx-auto max-w-md space-y-6 px-4 py-10 font-body">
