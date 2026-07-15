@@ -43,6 +43,15 @@ export default function LandingPage() {
         </Card>
       </section>
 
+      <p className="text-center">
+        <Link
+          href="/accedi"
+          className="text-[16px] font-semibold text-brand underline underline-offset-4"
+        >
+          {it.landing.accediCta}
+        </Link>
+      </p>
+
       <section>
         <h2 className="mb-4 text-center text-[24px] font-bold">
           {it.landing.comeFunzionaTitolo}

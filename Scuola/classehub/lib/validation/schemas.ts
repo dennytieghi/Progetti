@@ -35,6 +35,10 @@ export const createClassSchema = z.object({
   email: emailSchema,
 });
 
+export const accediSchema = z.object({
+  email: z.string().trim().email({ message: it.accedi.erroreEmail }),
+});
+
 export const joinClassSchema = z.object({
   classCode: z
     .string()

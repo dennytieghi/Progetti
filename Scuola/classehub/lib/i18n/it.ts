@@ -38,6 +38,7 @@ export const it = {
     creaClasseSpiega: "Sei il rappresentante? Parti da qui.",
     entraCta: "Entra in una classe",
     entraSpiega: "Hai ricevuto un codice classe? Entra da qui.",
+    accediCta: "Sei già registrato? Accedi",
     comeFunzionaTitolo: "Come funziona",
     passo1Titolo: "Il rappresentante crea la classe",
     passo1Testo: "Ottiene un codice da dare ai genitori, anche stampato.",
@@ -89,6 +90,21 @@ export const it = {
     giaMembro: "Fai già parte di questa classe. Entra dalla tua bacheca.",
     giaRichiesta:
       "Hai già chiesto di entrare in questa classe. Aspetta che il rappresentante ti approvi: riceverai un'email.",
+  },
+
+  accedi: {
+    titolo: "Bentornato",
+    sottotitolo:
+      "Ti mandiamo un nuovo link d'accesso all'email con cui ti sei registrato. Niente password.",
+    emailLabel: "La tua email",
+    emailEsempio: "Es. giovanni@esempio.it",
+    invia: "Mandami il link",
+    inviato:
+      "Se questa email è registrata, riceve il link tra poco. Controlla anche in spam.",
+    linkPersonale: "Il link è personale: non inoltrarlo a nessuno.",
+    oppure: "oppure",
+    google: "Accedi con Google",
+    erroreEmail: "Controlla l'email: sembra scritta in modo non corretto.",
   },
 
   controllaEmail: {

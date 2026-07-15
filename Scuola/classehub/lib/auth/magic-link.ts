@@ -44,24 +44,31 @@ export async function sendLoginLink(input: {
   email: string;
   displayName: string;
   intent: LoginIntent;
+  /** false = porta di rientro: MAI creare account nuovi (spec V1.5). */
+  createUser?: boolean;
 }): Promise<{ demoPath: string | null }> {
   const email = input.email.trim().toLowerCase();
+  const createUser = input.createUser ?? true;
   const params = intentToParams(input.intent, input.displayName);
 
   if (DEMO_MODE) {
     const admin = supabaseAdmin();
 
-    // L'utente deve esistere per generare il link; se c'è già va bene così.
-    const created = await admin.auth.admin.createUser({
-      email,
-      email_confirm: true,
-    });
-    if (created.error && created.error.code !== "email_exists") {
-      throw new Error(`Creazione utente fallita: ${created.error.message}`);
+    if (createUser) {
+      // L'utente deve esistere per generare il link; se c'è già va bene così.
+      const created = await admin.auth.admin.createUser({
+        email,
+        email_confirm: true,
+      });
+      if (created.error && created.error.code !== "email_exists") {
+        throw new Error(`Creazione utente fallita: ${created.error.message}`);
+      }
     }
 
     const link = await admin.auth.admin.generateLink({ type: "magiclink", email });
     if (link.error) {
+      // Porta di rientro: email sconosciuta → risposta NEUTRA, nessun link.
+      if (!createUser) return { demoPath: null };
       throw new Error(`Generazione link fallita: ${link.error.message}`);
     }
 
@@ -77,9 +84,12 @@ export async function sendLoginLink(input: {
     email,
     options: {
       emailRedirectTo: `${baseUrl}/auth/callback?${params.toString()}`,
+      shouldCreateUser: createUser,
     },
   });
   if (error) {
+    // Email sconosciuta sulla porta di rientro: silenzio = neutro.
+    if (!createUser) return { demoPath: null };
     throw new Error(`Invio email fallito: ${error.message}`);
   }
   return { demoPath: null };
