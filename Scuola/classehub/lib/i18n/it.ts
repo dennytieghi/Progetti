@@ -107,6 +107,24 @@ export const it = {
     erroreEmail: "Controlla l'email: sembra scritta in modo non corretto.",
   },
 
+  benvenuto: {
+    titolo: "Non risulti in nessuna classe",
+    testo:
+      "Questo account non è ancora iscritto a una classe. Puoi entrare con un codice classe o crearne una nuova.",
+    googleDiverso:
+      "Ti eri già iscritto? Forse con un'altra email: esci e accedi con quella che hai usato per iscriverti.",
+    entraCta: "Entra con un codice classe",
+    creaCta: "Crea una classe",
+  },
+
+  classi: {
+    titolo: "Le mie classi",
+    sottotitolo: "Scegli la classe che vuoi aprire.",
+    inAttesa: "In attesa di approvazione",
+    entraAltra: "Entra in un'altra classe",
+    creaAltra: "Crea una classe",
+  },
+
   controllaEmail: {
     titolo: "Controlla la tua email",
     testo:
