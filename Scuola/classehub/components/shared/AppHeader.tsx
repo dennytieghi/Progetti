@@ -107,9 +107,10 @@ export function AppHeader({
       {/* Sidebar da md in su */}
       <aside className="no-print sticky top-0 hidden h-screen w-60 shrink-0 flex-col self-start border-r border-hairline bg-paper px-4 py-6 md:flex">
         <p className="font-display text-[20px] font-bold text-brand">{it.app.name}</p>
+        {/* -my-2 compensa l'altezza extra del target tocco (min-h-12 = 48px), così lo spazio nella sidebar resta quasi invariato */}
         <Link
           href="/classi"
-          className="mb-6 mt-0.5 block text-[15px] leading-snug text-ink-faint underline-offset-4 hover:text-ink hover:underline"
+          className="-my-2 flex min-h-12 items-center text-[15px] leading-snug text-ink-faint underline-offset-4 hover:text-ink hover:underline"
         >
           {className}
         </Link>
@@ -160,9 +161,13 @@ export function AppHeader({
       <header className="no-print sticky top-0 z-40 border-b border-hairline bg-paper md:hidden">
         <div className="px-4 pt-3">
           <p className="font-display text-[15px] font-bold text-brand">{it.app.name}</p>
-          <h1 className="truncate text-[22px] font-bold leading-tight">
-            <Link href="/classi" className="underline-offset-4 hover:underline">
-              {className}
+          <h1 className="text-[22px] font-bold leading-tight">
+            {/* truncate spostato sullo span interno: il Link è flex per il target da 48px, e min-w-0 sullo span permette comunque il taglio con puntini */}
+            <Link
+              href="/classi"
+              className="flex min-h-12 w-full items-center underline-offset-4 hover:underline"
+            >
+              <span className="min-w-0 truncate">{className}</span>
             </Link>
           </h1>
         </div>
