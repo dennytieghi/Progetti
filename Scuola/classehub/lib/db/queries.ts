@@ -85,6 +85,17 @@ export async function getMembershipById(
   return (data as MembershipRow | null) ?? null;
 }
 
+/** Tutte le iscrizioni dell'utente (la RLS mostra sempre le proprie). */
+export async function listMyMemberships(userId: string): Promise<MembershipRow[]> {
+  const supabase = await supabaseServer();
+  const { data } = await supabase
+    .from("memberships")
+    .select("*")
+    .eq("user_id", userId)
+    .order("joined_at", { ascending: true });
+  return (data as MembershipRow[] | null) ?? [];
+}
+
 /**
  * Le classi di un utente (pagina account). Le classi delle membership
  * pending sono nascoste dall'RLS, quindi i nomi si leggono con l'admin.
